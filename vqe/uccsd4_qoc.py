@@ -3,10 +3,8 @@ Unitary Coupled Cluster Single-Double ansatz for 4 qubits.
 This module was adapted from 
 GRAPE-Tensorflow-Examples/paper-examples/Transmon_Transmon_CNOT.ipynb
 """
-
-# TODO: Create 4-qubit drift hamiltonian
-
 import inspect, os, random as rd, sys, time, warnings
+from functools import reduce
 
 # Ignore future warnings (h5py complains) and user warnings (pylab complains).
 warnings.filterwarnings(action="ignore", category=FutureWarning)
@@ -20,7 +18,7 @@ from scipy.special import factorial
 from quantum_optimal_control.helper_functions.grape_functions import *
 from quantum_optimal_control.main_grape.grape import Grape
 
-DATA_PATH = './out/'
+DATA_PATH = '../out/'
 FILE_NAME = 'uccsd4_qoc'
 
 # Define time scales
@@ -43,6 +41,12 @@ ALPHA_2 = 0.225
 FREQ_GE_2 = 3.5
 H0_2 = np.diag(ens(FREQ_GE_2, ALPHA_2))
 
+# Guess?
+ALPHA = 0.225
+FREQ_GE = 3.5
+H0_3 = np.diag(ens(FREQ_GE, ALPHA))
+H0_4 = np.diag(ens(FREQ_GE, ALPHA))
+
 G = 2*np.pi*0.1
 
 Q_x   = np.diag(np.sqrt(np.arange(1,QUBIT_STATE_NUM)),1)+np.diag(np.sqrt(np.arange(1,QUBIT_STATE_NUM)),-1)
@@ -50,13 +54,10 @@ Q_y   = (0+1j)*(np.diag(np.sqrt(np.arange(1,QUBIT_STATE_NUM)),1)-np.diag(np.sqrt
 Q_z   = np.diag(np.arange(0,QUBIT_STATE_NUM))
 Q_I   = np.identity(QUBIT_STATE_NUM)
 
-# print('Q_x\n',Q_x,'\nQ_y\n',Q_y,'\nQ_z\n',Q_z,'\nQ_I\n',Q_I)
-
-H0 = np.kron(H0_1,Q_I) + np.kron(Q_I,H0_2) + G * np.kron(Q_x,Q_x)
+# H0 = np.kron(H0_1,Q_I) + np.kron(Q_I,H0_2) + G * np.kron(Q_x,Q_x)
 # For 4 qubits we expect, by symmetry:
-# H0 = kron_many(H0_1, Q_I, Q_I, Q_I) + kron_many(Q_I, H0_2, Q_I, Q_I) 
-#       + kron_many(Q_I, Q_I, H0_3, Q_I) + kron_many(Q_I, Q_I, Q_I, H0_4)
-#       + G * np.kron(Q_x, Q_x, Q_x, Q_x)
+kron_many = lambda *matrices : reduce(np.kron, matrices)
+H0 = kron_many(H0_1, Q_I, Q_I, Q_I) + kron_many(Q_I, H0_2, Q_I, Q_I) + kron_many(Q_I, Q_I, H0_3, Q_I) + kron_many(Q_I, Q_I, Q_I, H0_4) + G * kron_many(Q_x, Q_x, Q_x, Q_x)
 
 # Define concerned states (starting states)
 psi0 = [0,1,QUBIT_STATE_NUM,QUBIT_STATE_NUM+1] #[gg,ge,eg,ee]
@@ -201,5 +202,5 @@ if __name__ == "__main__":
     uks,U_f =Grape(H0, Hops, Hnames, U, TOTAL_TIME, STEPS, psi0, convergence=convergence, 
                method = 'L-BFGS-B', draw = [states_draw_list,states_draw_names] ,
                maxA = ops_max_amp, use_gpu=False, sparse_H = False, reg_coeffs=reg_coeffs, 
-               unitary_error = 1e-08, show_plots=False, save_plots=True, file_name=FILE_NAME, 
+               unitary_error = 1e-08, save_plots=True, file_name=FILE_NAME, 
                Taylor_terms = [20,0], data_path = DATA_PATH)

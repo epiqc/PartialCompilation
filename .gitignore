@@ -1,9 +1,10 @@
-# Ignore output files
-*.png
-*.h5
+# Ignore output directory and output files
+out/**
+**/*.png
+**/*.h5
 
-# Ignore output directory
-out/*
+# Ignore IDE and editor files
+**/*~
 
-# Ignore IDE files
-*~
+# Ignore binaries
+**/__pycache__

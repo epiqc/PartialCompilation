@@ -17,7 +17,7 @@ from scipy.special import factorial
 from quantum_optimal_control.helper_functions.grape_functions import *
 from quantum_optimal_control.main_grape.grape import Grape
 
-DATA_PATH = './out/'
+DATA_PATH = '../out/'
 FILE_NAME = 'uccsd2_qoc'
 
 # Define time scales
@@ -140,5 +140,5 @@ if __name__ == "__main__":
     uks,U_f =Grape(H0, Hops, Hnames, U, TOTAL_TIME, STEPS, psi0, convergence=convergence, 
                method = 'L-BFGS-B', draw = [states_draw_list,states_draw_names] ,
                maxA = ops_max_amp, use_gpu=False, sparse_H = False, reg_coeffs=reg_coeffs, 
-               unitary_error = 1e-08, show_plots=False, save_plots=True, file_name=FILE_NAME, 
+               unitary_error = 1e-08, save_plots=True, file_name=FILE_NAME, 
                Taylor_terms = [20,0], data_path = DATA_PATH)
