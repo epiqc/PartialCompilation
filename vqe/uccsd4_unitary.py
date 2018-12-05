@@ -1,5 +1,5 @@
 import numpy as np
-from util import kron_many, matprod_many, CNOT, H, ID, RZ, print_matrix
+from quantum_optimal_control.core.util import kron_many, matprod_many, CNOT, H, ID, RZ
 
 I = ID(2)
 
@@ -20,5 +20,7 @@ def unitary(theta):
 
 if __name__ == "__main__":
     THETA = 0
-    print_matrix(unitary(THETA))
+    U = unitary(THETA)
+    print(U)
+    print(U.shape)
 
