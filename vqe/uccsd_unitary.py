@@ -1,18 +1,21 @@
 """ A module for computing the UCCSD ansatz unitary matrix."""
+# TODO: implement unitary for multiple qubit states.
+# This task is dependent on figuring out how to implement 
+# CNOT, H, Y, RZ for multiple qubit states.
+
 from functools import reduce
+
 import numpy as np
 from quantum_optimal_control.core.util import kron_many, matprod_many, CNOT, H, Y, ID, RZ
 
-# TODO: Implement num_qubit_states?
-
-def uccsd_unitary(num_qubits, sqops_str, theta):
+def uccsd_unitary(num_qubits=4, sqops_str="HHHH", theta=0):
     """Build the UCCSD ansatz unitary matrix for the specified inputs.
     
-    num_qubits (int) -- the number of qubits to build the ansatz for, domain?. 
+    num_qubits (int) -- the number of qubits to build the ansatz for. domain?
     sqops_str (str) -- a string specifying the single qubit operations (U1, U2, U3, U4)
                       in the ansatz--see figure 1b: https://arxiv.org/pdf/1805.04340.pdf
                       e.g. \"HHYH\"
-    theta (float) -- the angle in radians of the Z-rotation gate.    
+    theta (float) -- the angle in radians of the Z-rotation gate.
     """
 
     # Constants
@@ -50,8 +53,7 @@ def uccsd_unitary(num_qubits, sqops_str, theta):
     # The number of qubits between the third and fourth qubits acted on by a
     # single qubit operator.
     num_bot_qubits = num_nsqop_qubits - num_top_qubits
-    #print("num_top_qubits", num_top_qubits, "num_bot_qubits", num_bot_qubits)
-
+    
     # Construct the matrices at each step in the ansatz and collect them in 'intermediaries'.
     intermediaries = []
 
@@ -81,8 +83,7 @@ def uccsd_unitary(num_qubits, sqops_str, theta):
     # permutations.
     for permutation in permutations:
         permutation.reverse()
-    intermediaries += [kron_many(*permutation) for permutation in permutations]
-
+        intermediaries.append(kron_many(*permutation))
 
     # Construct the final matrix.
     intermediaries.append(kron_many(sqops[0].H,
@@ -90,6 +91,10 @@ def uccsd_unitary(num_qubits, sqops_str, theta):
                                     sqops[1].H, sqops[2].H,
                                     *[I for qubit in range(num_bot_qubits)],
                                     sqops[3].H))
+
+    # Reverse intermediaries so that multiplication follows
+    # U = (Un * Un-1) * ... * U0
+    intermediaries.reverse()
 
     return matprod_many(*intermediaries)
 

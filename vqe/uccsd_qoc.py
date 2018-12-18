@@ -3,6 +3,10 @@ Unitary Coupled Cluster Single-Double ansatz.
 This module was adapted from 
 GRAPE-Tensorflow-Examples/paper-examples/Transmon_Transmon_CNOT.ipynb
 """
+# TODO: implement for multiple states.
+# This task is mostly dependent on making uccsd_unitary able to 
+# handle multiple states.
+
 from functools import reduce
 import argparse, inspect, os, random as rd, sys, time, warnings
 
@@ -17,20 +21,22 @@ from uccsd_unitary import uccsd_unitary
 
 # Parse CLI and define constants.
 parser = argparse.ArgumentParser()
-parser.add_argument("-s", "--states", type=int, default=2,
-                    help="The number of states each qubit may occupy.")
+parser.add_argument("-i", "--iterations", type=int, default=1000,
+                    help="The maximum number of iterations to perform "
+                         "optimization for.")
 parser.add_argument("-o", "--ops", type=str, default="HHHH",
                     help="The four single qubit operators of the circuit.")
-parser.add_argument("-t", "--theta", type=int, default=0,
-                    help="The angle for the Rz gate in the uccsd circuit.")
 parser.add_argument("-q", "--qubits", type=int, default=4,
                     help="The number of qubits to build the circuit for.")
+parser.add_argument("-t", "--theta", type=int, default=0,
+                    help="The angle for the Rz gate in the uccsd circuit.")
 args = vars(parser.parse_args())
 
-NUM_STATES = args["states"]
+NUM_STATES = 2
+MAX_ITERATIONS = args["iterations"]
 SQOPS = args["ops"]
-THETA = args["theta"]
 NUM_QUBITS = args["qubits"]
+THETA = args["theta"]
 
 DATA_PATH = '../out/'
 FILE_NAME = 'uccsd_qoc'
@@ -76,7 +82,7 @@ states_draw_names = ['00','01','10','11']
 
 
 # Define U (target unitary)
-U = uccsd_unitary(NUM_QUBITS, SQOPS, THETA)
+U = uccsd_unitary(num_qubits=NUM_QUBITS, sqops_str=SQOPS, theta=THETA)
 
 # Define controls
 # We want, by symmetry with examples, Q_xi for i in {1..NUM_QUBITS} and Q_zn 
@@ -96,8 +102,6 @@ Hnames.append('z' + str(NUM_QUBITS))
 ops_max_amp = [np.pi for _ in range(NUM_QUBITS + 1)]
 
 # Define convergence parameters
-# Max iterations originally 1000
-MAX_ITERATIONS = 1000
 DECAY = MAX_ITERATIONS/2
 convergence = {'rate':0.01, 'update_step':10, 'max_iterations':MAX_ITERATIONS,\
                'conv_target':1e-3, 'learning_rate_decay':DECAY}
@@ -147,4 +151,3 @@ if __name__ == "__main__":
                maxA = ops_max_amp, use_gpu=False, sparse_H = False, reg_coeffs=reg_coeffs, 
                unitary_error = 1e-08, save_plots=True, file_name=FILE_NAME, 
                Taylor_terms = [20,0], data_path = DATA_PATH)
-y
