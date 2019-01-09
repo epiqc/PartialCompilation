@@ -1,4 +1,9 @@
-""" A module for computing the UCCSD ansatz unitary matrix."""
+""" A module for computing the UCCSD ansatz unitary matrix.
+    This module was deprecated because the actual UCCSD ansatz is more complicated
+    than throwing some gates together and depends on some chemistry principles that
+    are not taken into account here. Instead we are opting to use Qiskit's UCCSD
+    implementation.
+"""
 # TODO: implement unitary for multiple qubit states.
 # This task is dependent on figuring out how to implement 
 # CNOT, H, Y, RZ for multiple qubit states.

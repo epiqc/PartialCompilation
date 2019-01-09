@@ -3,10 +3,6 @@ Unitary Coupled Cluster Single-Double ansatz.
 This module was adapted from 
 GRAPE-Tensorflow-Examples/paper-examples/Transmon_Transmon_CNOT.ipynb
 """
-# TODO: implement for multiple states.
-# This task is mostly dependent on making uccsd_unitary able to 
-# handle multiple states.
-
 from functools import reduce
 import argparse, inspect, os, random as rd, sys, time, warnings
 
@@ -16,10 +12,12 @@ from IPython import display
 import scipy.linalg as la
 from quantum_optimal_control.helper_functions.grape_functions import *
 from quantum_optimal_control.main_grape.grape import Grape
-from quantum_optimal_control.core.util import kron_many, print_matrix
-from uccsd_unitary import uccsd_unitary
+# FIXME: This module is imported relatively and should be imported absolutley
+# once a setup.py is added to vqe
+from util import kron_many
 
 # Parse CLI and define constants.
+# TODO: add "states" parameter and adapt file to handle qudits.
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--iterations", type=int, default=1000,
                     help="The maximum number of iterations to perform "
@@ -81,8 +79,9 @@ states_draw_list = [0, 1, NUM_STATES, NUM_STATES+1]
 states_draw_names = ['00','01','10','11']
 
 
+# TODO: Implement Qiskit UCCSD Unitary.
 # Define U (target unitary)
-U = uccsd_unitary(num_qubits=NUM_QUBITS, sqops_str=SQOPS, theta=THETA)
+U = np.matrix([[0]])
 
 # Define controls
 # We want, by symmetry with examples, Q_xi for i in {1..NUM_QUBITS} and Q_zn 
