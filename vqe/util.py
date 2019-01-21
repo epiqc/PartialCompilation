@@ -1,4 +1,9 @@
-"""A module for quantum / linear algebra utilities."""
+"""A module for quantum / linear algebra utilities.
+Some of these utilities are implemented in schuster lab's 
+quantum_optimal_control.helper_functions.grape_functions
+but it is hard to tell that their code is doing what we want it to do
+so we implement some helper functions here for clarity.
+"""
 
 from functools import reduce
 
@@ -6,23 +11,28 @@ import numpy as np
 
 # Math
 
-def kron_many(*matrices):
-    """Compute the kronecker product of multiple matrices."""
+def krons(*matrices):
+    """Compute the kronecker product of multiple matrices.
+    matrices :: [np.matrix] - list of matrices to compute the kroenecker product of
+    """
     return reduce(np.kron, matrices)
 
-def matprod_many(*matrices):
-    """Compute the matrix product of multiple matrices."""
+def matprods(*matrices):
+    """Compute the matrix product of multiple matrices.
+    matrices :: [np.matrix] - list of matrices to compute the matrix product of
+    """
     return reduce(np.matmul, matrices)
 
-def extend_gate(gate, level):
-    """Extend the gate to the computational basis of dimension 'levels'.
-    
+#TODO: implement me
+def extend_gate(gate, n):
+    """Extend the gate to the computational basis space with n basis vectors.
+    gate :: np.matrix - a unitary matrix to be extended
+    n :: int >= 2 - the number of rows (and columns) to extend the gate to
     """
     return
 
 # Gates
 
-# 2-qubit CNOT
 CNOT = np.matrix([[1,0,0,0], 
                   [0,1,0,0], 
                   [0,0,0,1], 

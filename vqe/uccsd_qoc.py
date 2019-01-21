@@ -43,6 +43,7 @@ FILE_NAME = 'uccsd_qoc'
 TOTAL_TIME = 10.0
 STEPS = 1000
 
+# TODO: get drift hamiltonian from Pranav's hamiltonian file in q_o_c/core/hamiltonian.py
 # Define H0 (drift hamiltonian)
 ens = lambda freq, alpha: [2*np.pi*ii*(freq - 0.5*(ii-1)*alpha) 
                                for ii in np.arange(NUM_STATES)]
@@ -78,9 +79,8 @@ psi0 = [0,1,NUM_STATES,NUM_STATES+1] #[gg,ge,eg,ee]
 states_draw_list = [0, 1, NUM_STATES, NUM_STATES+1]
 states_draw_names = ['00','01','10','11']
 
-
+# Define Target Uniatry 'U'.
 # TODO: Implement Qiskit UCCSD Unitary.
-# Define U (target unitary)
 U = np.matrix([[0]])
 
 # Define controls
@@ -145,8 +145,9 @@ reg_coeffs = {'amplitude':0.01,'dwdt':0.00007,'d2wdt2':0.0,
 
 
 if __name__ == "__main__":
-    uks,U_f =Grape(H0, Hops, Hnames, U, TOTAL_TIME, STEPS, psi0, convergence=convergence, 
-               method = 'L-BFGS-B', draw = [states_draw_list,states_draw_names] ,
-               maxA = ops_max_amp, use_gpu=False, sparse_H = False, reg_coeffs=reg_coeffs, 
-               unitary_error = 1e-08, save_plots=True, file_name=FILE_NAME, 
-               Taylor_terms = [20,0], data_path = DATA_PATH)
+#     uks,U_f =Grape(H0, Hops, Hnames, U, TOTAL_TIME, STEPS, psi0, convergence=convergence, 
+#                method = 'L-BFGS-B', draw = [states_draw_list,states_draw_names] ,
+#                maxA = ops_max_amp, use_gpu=False, sparse_H = False, reg_coeffs=reg_coeffs, 
+#                unitary_error = 1e-08, save_plots=True, file_name=FILE_NAME, 
+#                Taylor_terms = [20,0], data_path = DATA_PATH)
+    pass
