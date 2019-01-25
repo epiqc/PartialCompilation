@@ -16,7 +16,7 @@ from quantum_optimal_control.core.hamiltonian import (get_H0,
                                                       get_full_states_concerned_list,
                                                       get_H0, get_Hops_and_Hnames)
 
-from uccsd_unitary import get_uccsd_circuit, get_unitary
+from uccsd_unitary import get_uccsd_theta_circuits, get_unitary
 
 # Parse CLI and define constants.
 # TODO: add "states" parameter and adapt file to handle qudits.
@@ -37,7 +37,7 @@ CONNECTED_QUBIT_PAIRS = []
 MAX_ITERATIONS = args["iterations"]
 
 DATA_PATH = '../out/'
-FILE_NAME = 'uccsd_qoc'
+FILE_NAME = 'uccsd_qoc_partial'
 
 # Define time scales
 TOTAL_TIME = 10.0
@@ -45,8 +45,7 @@ STEPS = 1000
 
 # Define target unitary
 theta = [1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7]
-circuti = get_uccsd_circuit(theta)
-U = get_unitary(circuit)
+U_list = [get_unitary(circuit) for circuit in get_uccsd_theta_circuits(theta)]
 
 # Define drift hamiltonian
 H0 = get_H0(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS)
@@ -105,11 +104,12 @@ reg_coeffs = {'amplitude':0.01,'dwdt':0.00007,'d2wdt2':0.0,
               'states_forbidden_list': states_forbidden_list,'forbid_dressed':False}
 
 if __name__ == "__main__":
-    uks,U_f = Grape(H0, Hops, Hnames, U, TOTAL_TIME, STEPS, psi0, 
-                    convergence = convergence, method = 'L-BFGS-B', 
-                    draw = [states_draw_list, states_draw_names] , 
-                    maxA = ops_max_amp, use_gpu = False, sparse_H = False,
-                    reg_coeffs = reg_coeffs, unitary_error = 1e-08, 
-                    save_plots = True, file_name = FILE_NAME, 
-                    Taylor_terms = [20,0], data_path = DATA_PATH)
+    for U in U_list:
+        uks,U_f = Grape(H0, Hops, Hnames, U, TOTAL_TIME, STEPS, psi0, 
+                        convergence = convergence, method = 'L-BFGS-B', 
+                        draw = [states_draw_list, states_draw_names] , 
+                        maxA = ops_max_amp, use_gpu = False, sparse_H = False,
+                        reg_coeffs = reg_coeffs, unitary_error = 1e-08, 
+                        save_plots = True, file_name = FILE_NAME, 
+                        Taylor_terms = [20,0], data_path = DATA_PATH)
 

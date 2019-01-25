@@ -111,14 +111,17 @@ var_form = UCCSD(qubitOp.num_qubits, depth=1,
 
 ### BUILD CIRCUTS AND UNITARIES ###
 
-def get_uccsd_unitary(theta_vector):
-    """Return the unitary matrix for the entire UCCSD circuit.
+def get_unitary(circuit):
+    job = execute(circuit, backend)
+    unitary = job.result().get_unitary(circuit, decimals=10)
+    return unitary
+
+def get_uccsd_circuit(theta_vector):
+    """Produce the full UCCSD circuit.
        
        theta_vector :: array - arguments for the vqe ansatz
     """
-    circuit = var_form.construct_circuit(theta_vector)
-    job = execute(circuit, backend)
-    return job.result().get_unitary(circuit, decimals=10)
+    return var_form.construct_circuit(theta_vector)
 
 # The four gates that comprise the UCCSD circuit are CX, U1, U2, and U3.
 # The latter three gates are dependent on the theta vector.
@@ -156,15 +159,15 @@ def _append_theta_dependent_gate(circuit, register, gate):
 
     return
 
-def get_theta_unitaries(theta_vector):
-    """Return a list of unitaries that comprise the continuous spans
-       of gates in the UCCSD circuit that depend on the values of 
-       the theta_vector.
+def get_uccsd_theta_circuits(theta_vector):
+    """Return a list of circuits that comprise the 
+       continuous spans of gates in the UCCSD circuit
+       that depend on the values of the theta_vector.
        
        theta_vector :: array - arguments for the vqe ansatz
     """
 
-    full_circuit = get_uccsd_unitary(theta_vector)
+    full_circuit = get_uccsd_circuit(theta_vector)
     gates = full_circuit.data
     gate_count = len(gates)
 
@@ -172,7 +175,7 @@ def get_theta_unitaries(theta_vector):
     # for every continuous span of theta dependent gates.
     # Store the unitary of the partial circuit in theta_unitaries.
     i = 0
-    theta_unitaries = list()
+    theta_circuits = list()
     while(i < gate_count):
         # Construct a 4 qubit circuit.
         register = QuantumRegister(4)
@@ -188,12 +191,22 @@ def get_theta_unitaries(theta_vector):
         # in this stretch, grab their circuit.
         # Then, turn the circuit into a unitary.
         if (len(circuit.data) > 0):
-            job = execute(circuit, backend)
-            unitary = job.result().get_unitary(circuit, decimals=6)
-            theta_unitaries.append((circuit, unitary))
+            theta_circuits.append(circuit)
         else:
             i += 1
     
-    return theta_unitaries
+    return theta_circuits
 
 
+def _tests():
+    """A function to run tests on the module"""
+    theta = [1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7]
+    circuits = get_uccsd_theta_circuits(theta)
+    for circuit in circuits:
+        print(circuit)
+
+    return
+
+
+if __name__ == "__main__":
+    _tests()
