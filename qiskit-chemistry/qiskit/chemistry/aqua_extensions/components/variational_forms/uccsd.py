@@ -213,13 +213,14 @@ class UCCSD(VariationalForm):
                          'with symmetries'.format(','.join([str(x) for x in index])))
         return qubit_op
 
-    def construct_circuit(self, parameters, q=None):
+    def construct_circuit(self, parameters, q=None, use_basis_gates=True):
         """
         Construct the variational form, given its parameters.
 
         Args:
             parameters (numpy.ndarray): circuit parameters
             q (QuantumRegister): Quantum Register for the circuit.
+            use_basis_gates (bool): boolean flag for indicating only using basis gates when building circuit.
 
         Returns:
             QuantumCircuit: a quantum circuit with given `parameters`
@@ -244,14 +245,16 @@ class UCCSD(VariationalForm):
                 qubit_op = self._hopping_ops['_'.join([str(x) for x in s_e_qubits])]
                 if qubit_op is not None:
                     circuit.extend(qubit_op.evolve(None, parameters[param_idx] * -1j,
-                                                   'circuit', self._num_time_slices, q))
+                                                   'circuit', self._num_time_slices, q,
+                                                   use_basis_gates=use_basis_gates))
                     param_idx += 1
 
             for d_e_qubits in self._double_excitations:
                 qubit_op = self._hopping_ops['_'.join([str(x) for x in d_e_qubits])]
                 if qubit_op is not None:
                     circuit.extend(qubit_op.evolve(None, parameters[param_idx] * -1j,
-                                                   'circuit', self._num_time_slices, q))
+                                                   'circuit', self._num_time_slices, q,
+                                                   use_basis_gates=use_basis_gates))
                     param_idx += 1
 
         return circuit

@@ -1339,7 +1339,7 @@ class Operator(object):
             return side + middle + side
 
     def evolve(self, state_in, evo_time, evo_mode, num_time_slices, quantum_registers=None,
-               expansion_mode='trotter', expansion_order=1):
+               expansion_mode='trotter', expansion_order=1, use_basis_gates=True):
         """
         Carry out the eoh evolution for the operator under supplied specifications.
 
@@ -1356,6 +1356,7 @@ class Operator(object):
                 and 'suzuki', which corresponds to the discussion in
                 https://arxiv.org/pdf/quant-ph/0508139.pdf
             expansion_order (int): The order for suzuki expansion
+            use_basis_gates (bool): boolean flag for indicating only using basis gates when building circuit.
 
         Returns:
             Depending on the evo_mode specified, either return the matrix vector multiplication result
@@ -1418,7 +1419,7 @@ class Operator(object):
                             expansion_order
                         )
                 return self.construct_evolution_circuit(
-                    slice_pauli_list, evo_time, num_time_slices, quantum_registers
+                    slice_pauli_list, evo_time, num_time_slices, quantum_registers, use_basis_gates=use_basis_gates
                 )
         else:
             raise ValueError('Evolution mode should be either "matrix" or "circuit".')
