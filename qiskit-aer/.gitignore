@@ -1,0 +1,22 @@
+# Ignore editor settings
+
+.vscode
+
+# ignore jupyter notebook checkpoints
+
+*-checkpoint.ipynb
+
+# Ignore make and cython build files
+
+*.o
+out/*
+*.so
+*.pyc
+*_skbuild*
+*.whl
+*.egg*
+build/*
+contrib/standalone/version.hpp
+*.log
+*.env
+*.idea/
