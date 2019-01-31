@@ -67,7 +67,7 @@ CLASSIFIERS = [
     'Programming Language :: Python :: Implementation :: CPython',
     'Topic :: Scientific/Engineering :: Physics',
 ]
-version_file = 'version.py'
+version_file = '_version.py'
 
 
 def write_version(version_file=version_file):

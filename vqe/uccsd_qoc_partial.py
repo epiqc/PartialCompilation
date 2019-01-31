@@ -101,7 +101,8 @@ ops_max_amp = [np.pi for _ in range(len(Hops))]
 # forbid + pulse reg
 reg_coeffs = {'amplitude':0.01,'dwdt':0.00007,'d2wdt2':0.0, 
               'forbidden_coeff_list':[10] * len(states_forbidden_list),
-              'states_forbidden_list': states_forbidden_list,'forbid_dressed':False}
+              'states_forbidden_list': states_forbidden_list,'forbid_dressed':False,
+              'speed_up': 1.0}
 
 if __name__ == "__main__":
     for U in U_list:
