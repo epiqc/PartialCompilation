@@ -9,7 +9,7 @@ import numpy as np
 
 #lib from Qiskit Terra
 from qiskit import BasicAer, QuantumCircuit, ClassicalRegister, QuantumRegister, execute
-from qiskit.extensions.standard.rx import RXGate
+from qiskit.extensions.standard import *
 
 # lib from Qiskit Aqua
 from qiskit.aqua import Operator, QuantumInstance
@@ -21,6 +21,8 @@ from qiskit.chemistry import FermionicOperator
 from qiskit.chemistry.drivers import PySCFDriver, UnitsType
 from qiskit.chemistry.aqua_extensions.components.variational_forms import UCCSD
 from qiskit.chemistry.aqua_extensions.components.initial_states import HartreeFock
+
+from circuitslice import UCCSDSlice
 
 backend = BasicAer.get_backend('unitary_simulator')
 
@@ -106,146 +108,191 @@ var_form = UCCSD(qubitOp.num_qubits, depth=1,
                    initial_state=HF_state, qubit_mapping=map_type, 
                    two_qubit_reduction=qubit_reduction, num_time_slices=1)
 
-print(var_form._depth)
-
-
 ### BUILD CIRCUTS AND UNITARIES ###
 
 def get_unitary(circuit):
+    """Given a qiskit circuit, produce a unitary matrix to represent it.
+    Args:
+    circuit :: qiskit.QuantumCircuit - an arbitrary quantum circuit
+
+    Returns:
+    matrix :: np.matrix - the unitary representing the circuit
+    """
     job = execute(circuit, backend)
     unitary = job.result().get_unitary(circuit, decimals=10)
-    return unitary
+    return np.matrix(unitary)
 
-def get_uccsd_circuit(theta_vector):
+def get_uccsd_circuit(theta_vector, use_basis_gates=False):
     """Produce the full UCCSD circuit.
+    Args:
+    theta_vector :: array - arguments for the vqe ansatz
+    use_basis_gates :: bool - Mike and Ike gates if False, Basis gates if True.
        
-       theta_vector :: array - arguments for the vqe ansatz
+    Returns:
+    circuit :: qiskit.QuantumCircuit - the UCCSD circuit parameterized
+                                       by theta_vector
     """
-    return var_form.construct_circuit(theta_vector, use_basis_gates=True)
+    return var_form.construct_circuit(theta_vector, use_basis_gates=use_basis_gates)
 
-# The four gates that comprise the UCCSD circuit are CX, U1, U2, and U3.
-# The latter three gates are dependent on the theta vector.
+# Note: lists are not hashable in python so I can not think of a better than O(n)
+# way to compare lists for uniqueness.
+def redundant(gates, new_gate):
+    """Determines if new_gate has the same parameters if as those in gates.
+    Args:
+    gates :: [qiskit.QuantumGate] - a list of gates
+    new_gate :: qiskit.QuantumGate - the quantum gate to compare for uniqueness
+    
+    Returns:
+    redundant :: bool - whether or not a gate with the same parameters as new_gate
+                        is already contained in gates
+    """
+    redundant = False
+
+    for gate in gates:
+        if new_gate.params == gate.params:
+            redundant = True
+            break
+
+    return redundant
+
 def _is_theta_dependent(gate):
     """Return ture if a gate is dependent on the theta vector,
     false otherwise.
-    
-        gate :: qiskit.QuantumGate - an arbitrary quantum gate
-    """
-    return (isinstance(gate, U1Gate) 
-            or isinstance(gate, U2Gate) 
-            or isinstance(gate, U3Gate))
+    Note:
+    RZ is the only theta dependent gate in the UCCSD circuit and the only RZ gates
+    in the UCCSD circuit are theta dependent. Therefore, if a gate is RZ then
+    it is theta dependent.
 
-# https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/circuit/instruction.py
-# The syntax will change from `gate.param` to `gate.params` in a future release of
-# qiskit terra
-def _append_theta_gate(circuit, register, gate):
-    """Take a U1, U2, or U3 gate object and append it to a circuit.
-    
-        circuit :: qiskit.QuantumCircuit - the circuit to apply the gate to
-        register :: qiskit.QuantumRegister - the register that defines the circuit
-        gate :: qiskit.QuantumGate - one of the following gates: U1, U2, or U3 
+    Args:
+    gate :: qiskit.QuantumGate - an arbitrary quantum gate
     """
-    # Get the qubit index that the gate should be applied to.
-    qubit = gate.qargs[0][1]
+    return isinstance(gate, RZGate)
 
-    if isinstance(gate, U1Gate):
-        constructor = circuit.u1
-    elif isinstance(gate, U2Gate):
-        constructor = circuit.u2
+def append_gate(circuit, register, gate):
+    """Append a quantum gate to a new circuit.
+    Args:
+    circuit :: qiskit.QuantumCircuit - the circuit the gate should be 
+                                       appended to
+    register :: qiskit.QuantumRegister - the register associated with
+                                         the circuit to be appended to
+    gate :: qiskit.QuantumGate - the gate to append to the circuit
+
+    Returns: nothing
+    """
+    # Get the qubit indices that the gate should be applied to.
+    qubits = list()
+    for arg in gate.qargs:
+        index = arg[1]
+        qubits.append(register[index])
+
+    num_qubits = len(qubits)
+    
+    # Single qubit gates.
+    if num_qubits == 1:
+        if isinstance(gate, U1Gate):
+            constructor = circuit.u1
+        elif isinstance(gate, U2Gate):
+            constructor = circuit.u2
+        elif isinstance(gate, U3Gate):
+            constructor = circuit.u3
+        elif isinstance(gate, HGate):
+            constructor = circuit.h
+        elif isinstance(gate, RXGate):
+            constructor = circuit.rx
+        elif isinstance(gate, RZGate):
+            constructor = circuit.rz
+        else:
+            raise ValueError("append_gate() did not recognize single qubit gate")
+
+        constructor(*gate.params, *qubits)
+    # Two qubit gates.
+    elif num_qubits == 2:
+        if isinstance(gate, CnotGate):
+            circuit.cx(*qubits)
+        else:
+            raise ValueError("append_gate() did not recognize two qubit gate")
     else:
-        constructor = circuit.u3
-
-    constructor(*gate.param, register[qubit])
+        raise ValueError("append_gate() did not recognize mutltiple qubit gate")
 
     return
 
-def theta_single_gate_is_unique(theta_circuits, gate):
-    for circuit in theta_circuits:
-        if circuit.data[0].param == gate.param:
-            return False
-
-    return True
-
-def get_uccsd_theta_circuits(theta_vector):
-    """Return a list of circuits that comprise the 
-       continuous spans of gates in the UCCSD circuit
-       that depend on the values of the theta_vector.
-       
-       theta_vector :: array - arguments for the vqe ansatz
+def slice_uccsd(theta_vector):
+    """Return a list of the decomposition of the full UCCSD circuit
+    parameterized by theta_vector into theta-dependent and non-theta-dependent
+    slices
+    Args:
+    theta_vector :: array - arguments for the vqe ansatz
+    
+    Returns:
+    slice list :: [Slice] - a list of slice objects that contain
+                            spans of partial circuits that are either
+                            theta dependent or not theta dependent
     """
-
     full_circuit = get_uccsd_circuit(theta_vector)
+    # The circuit width is the number of registers, i.e. qubits.
+    full_circuit_width = full_circuit.width()
     gates = full_circuit.data
     gate_count = len(gates)
+    slices = list()
 
-    # Walk the list of gates and make a new quantum circuit
-    # for every continuous span of theta dependent gates.
-    # Store the unitary of the partial circuit in theta_unitaries.
-    i = 0
-    theta_circuits = list()
-    while(i < gate_count):
-        # Construct a 4 qubit circuit.
-        register = QuantumRegister(4)
+    # Walk the list of gates and make a new quantum circuit for every continuous
+    # span of theta dependent or not theta dependent gates.
+    gates_encountered = 0
+    while gates_encountered < gate_count:
+        # Construct a new circuit for the span.
+        register = QuantumRegister(full_circuit_width)
         circuit = QuantumCircuit(register)
 
-        # Add the continuous span of gates
-        # to the partial circuit.
-        while(i < gate_count and _is_theta_dependent(gates[i])):
-            _append_theta_gate(circuit, register, gates[i])
-            i += 1
+        # Traverse the gate list and construct a circuit that
+        # is either a continuous span of theta-dependent gates or
+        # not theta_dependent gates
+        gate_is_theta_dependent = False
+        last_gate_was_theta_dependent = False
+        first_gate = True
+        for gate in gates[gates_encountered:]:
+            gate_is_theta_dependent = _is_theta_dependent(gate)
 
-        # If there were theta depedent gates found 
-        # in this stretch, grab their circuit.
-        # Then, turn the circuit into a unitary.
-        if (len(circuit.data) > 0):
-            theta_circuits.append(circuit)
-        else:
-            i += 1
-    
-    return theta_circuits
+            if (gate_is_theta_dependent and
+                    (last_gate_was_theta_dependent or first_gate)):
+                last_gate_was_theta_dependent = True
+                gates_encountered += 1
 
-def redundant(gates, new_gate):
-    for gate in gates:
-        if new_gate.param == gate.param:
-            return False
+            elif (not gate_is_theta_dependent and
+                    (not last_gate_was_theta_dependent or first_gate)):
+                last_gate_was_theta_dependent = False
+                gates_encountered += 1
 
-    return True
+            else:
+                break
+            
+            append_gate(circuit, register, gate)
+            
+            if first_gate:
+                first_gate = False
+        
+        # Construct a slice from the partial circuit.
+        slices.append(UCCSDSlice(circuit, 
+                                 theta_dependent=last_gate_was_theta_dependent))
+        #ENDFOR
 
-def get_uccsd_theta_circuits_single(theta_vector):
-    """Return a list of single qubit circuits that comprise the 
-       continuous spans of gates in the UCCSD circuit
-       that depend on the values of the theta_vector.
-       
-       theta_vector :: array - arguments for the vqe ansatz
-    """
+    #ENDWHILE
 
-    full_circuit = get_uccsd_circuit(theta_vector)
-    gates = full_circuit.data
-    theta_gates = list()
-    theta_circuits = list()
-    
-    for gate in gates:
-        if isinstance(gate, RXGate) and not redundant(theta_gates, gate):
-            # Construct a 1 qubit circuit with the single gate.
-            register = QuantumRegister(1)
-            circuit = QuantumCircuit(register)            
-            circuit.rx(*gate.param, register[0])
-            theta_circuits.append(circuit)
-
-    return theta_circuits
-
-
+    return slices
 
 def _tests():
     """A function to run tests on the module"""
-    # theta = [1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7]
-    # circuits = get_uccsd_theta_circuits_single(theta)
-    # for circuit in circuits:
-    #     print(circuit)
-    #     print(get_unitary(circuit))
+    theta = [np.random.random() * 2 * np.pi for _ in range(8)]
+    slices = slice_uccsd(theta)
 
-    return
-
+    # Check for redundant Rz gates.
+    # for uccsdslice in slices:
+    #     if uccsdslice.theta_dependent:
+    #         gate = uccsdslice.circuit.gate()
+            
+    for uccsdslice in slices:
+        print("theta dependent: {}, redundant: {}"
+              "".format(uccsdslice.theta_dependent, uccsdslice.redundant))
+        print(uccsdslice.circuit)
 
 if __name__ == "__main__":
     _tests()
