@@ -284,10 +284,23 @@ def _tests():
     theta = [np.random.random() * 2 * np.pi for _ in range(8)]
     slices = slice_uccsd(theta)
 
-    # Check for redundant Rz gates.
-    # for uccsdslice in slices:
-    #     if uccsdslice.theta_dependent:
-    #         gate = uccsdslice.circuit.gate()
+    # Clean slices
+    for uccsdslice in slices:
+        # Collapse theta circuits.
+        if uccsdslice.theta_dependent:
+            gate = uccsdslice.circuit.data[0]
+            register = QuantumRegister(1)
+            circuit = QuantumCircuit(register)
+            circuit.rx(*gate.params, register[0])
+            uccsdslice.circuit = circuit
+
+        # Check for redundant gates.
+        if uccsdslice.theta_dependent:
+            params = uccsdslice.circuit.data[0].params
+            for uccsdslice2 in slices:
+                if uccsdslice2.circuit.data[0].params == params:
+                    uccsdslice.redundant = True
+                    break
             
     for uccsdslice in slices:
         print("theta dependent: {}, redundant: {}"

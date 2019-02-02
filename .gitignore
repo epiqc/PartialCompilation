@@ -16,3 +16,6 @@ out/**
 
 # Ignore metadata
 qiskit-aer/pip-wheel-metadata/*
+
+# Ignore package installations
+**/*.egg-info
