@@ -10,14 +10,16 @@ class Slice(object):
     and any attributes that should be noted about the circuit.
     """
     
-    def __init__(self, circuit):
+    def __init__(self, circuit, unitary=None):
         """
         Args:
         circuit :: qiskit.QuantumCircuit - the partial circuit the slice
                                            represents
+        unitary :: numpy.matrix - the unitary for the partial circuit
         """
         super().__init__()
         self.circuit = circuit
+        self.unitary = unitary
 
 class UCCSDSlice(Slice):
     """
@@ -26,10 +28,13 @@ class UCCSDSlice(Slice):
     do not.
     """
     
-    def __init__(self, circuit, theta_dependent=False, redundant=False):
+    def __init__(self, circuit, unitary=None, theta_dependent=False,
+                 redundant=False):
         """
         Args:
-        circuit :: qiskit.QuantumCircuit - the partial circuit
+        circuit :: qiskit.QuantumCircuit - the partial circuit the slice
+                                           represents
+        unitary :: numpy.matrix = the unitary for the partial circuit
         theta_dependent :: bool - whether or not the partical circuit
                                   is parameterized by the theta vector
         redundant :: bool - whether this theta dependent circuit has
@@ -41,7 +46,7 @@ class UCCSDSlice(Slice):
         some set of other theta dependent gates. We should note this 
         redundancy for brevity's sake.
         """
-        super().__init__(circuit)
+        super().__init__(circuit, unitary)
         self.theta_dependent = theta_dependent
         self.redundant = redundant
         
