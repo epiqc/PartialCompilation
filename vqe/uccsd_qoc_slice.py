@@ -6,34 +6,34 @@ GRAPE-Tensorflow-Examples/paper-examples/Transmon_Transmon_CNOT.ipynb
 import argparse, os, time
 
 import numpy as np
-from IPython import display
-import scipy.linalg as la
-from quantum_optimal_control.helper_functions.grape_functions import *
 from quantum_optimal_control.main_grape.grape import Grape
 from quantum_optimal_control.core.hamiltonian import (get_H0,
                                                       get_full_states_concerned_list,
                                                       get_H0, get_Hops_and_Hnames)
-
 from uccsd_unitary import get_uccsd_slices
 
 # Parse CLI and define constants.
-# TODO: add "states" parameter and adapt file to handle qudits.
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--iterations", type=int, default=1000,
                     help="The maximum number of iterations to perform "
                          "optimization for.")
+parser.add_argument("-s", "--states", type=int, default=2,
+                    help="The number of qubit states to perform "
+                         "optimization for.")
 args = vars(parser.parse_args())
 
 # TODO: What connected qubit pairs do we want?
-# An empty list will return a zero matrix for the dirft hamiltonian.
+# An empty connected_qubit_pairs list will return a zero matrix
+# for the dirft hamiltonian.
 CONNECTED_QUBIT_PAIRS = []
 MAX_ITERATIONS = args["iterations"]
-NUM_STATES = 2
+NUM_STATES = args["states"]
+FILE_NAME = 'slice_pulse'
 
 def main():
     # Create output directory.
     # https://stackoverflow.com/questions/12517451/automatically-creating-directories-with-file-output
-    FILE_NAME = 'slice_pulse'
+
     time_stamp = int(time.time())
     DATA_PATH = '../out/uccsd_qoc_slice_{}/'.format(time_stamp)
     if not os.path.exists(DATA_PATH):
@@ -53,8 +53,6 @@ def main():
         # Skip redundant slices.
         if uccsdslice.redundant:
             continue
-        
-        print("\nyo\n")
 
         # Define qubit parameters
         NUM_QUBITS = uccsdslice.circuit.width()
