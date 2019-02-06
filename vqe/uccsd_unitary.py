@@ -136,6 +136,7 @@ def get_uccsd_circuit(theta_vector, use_basis_gates=False):
 
 # Note: lists are not hashable in python so I can not think of a better than O(n)
 # way to compare lists for uniqueness.
+# Suggestion: Tuples are hashable.
 def redundant(gates, new_gate):
     """Determines if new_gate has the same parameters if as those in gates.
     Args:
@@ -168,7 +169,49 @@ def _is_theta_dependent(gate):
     """
     return isinstance(gate, RZGate)
 
-def append_gate(circuit, register, gate):
+def squash_circuit(circuit):
+    """For a given circuit, return a new circuit that has the minimum number
+    of registers possible. If a branch of the circuit does not have any gates
+    that act on it, i.e. a qubit is not acted on, that branch will not appear
+    in the new circuit.
+    Args:
+    circuit :: qiskit.QuantumCircuit - the circuit to squash
+    
+    Returns:
+    new_circuit :: qiskit.QuantumCircuit - the squashed form of the circuit
+    """
+    # Hash the index of each qubit that is acted on in the circuit.
+    gates = circuit.data
+    qubit_indices = set()
+    for gate in gates:
+        for arg in gate.qargs:
+            qubit_index = arg[1]
+            qubit_indices.add(qubit_index)
+    
+    # Transform qubit_indices into a list to define an accessible ordering on 
+    # the new indices.
+    qubit_indices = list(qubit_indices)
+    num_qubits = len(qubit_indices)
+
+    # If all qubits are acted on, there is nothing to squash.
+    if circuit.width() == num_qubits:
+        return circuit
+
+    # Otherwise, construct the new circuit.
+    register = QuantumRegister(num_qubits)
+    new_circuit = QuantumCircuit(register)
+    
+    # Append the gates from the circuit to the new circuit.
+    # The index of the qubit index of the gate in qubit_indices is the gate's
+    # qubit index in the new circuit. DOC: is this confusing?
+    for gate in gates:
+        gate_qubit_indices = [qubit_indices.index(arg[1]) for arg in gate.qargs]
+        append_gate(new_circuit, register, gate, gate_qubit_indices)        
+
+    return new_circuit
+
+
+def append_gate(circuit, register, gate, indices=None):
     """Append a quantum gate to a new circuit.
     Args:
     circuit :: qiskit.QuantumCircuit - the circuit the gate should be 
@@ -176,43 +219,48 @@ def append_gate(circuit, register, gate):
     register :: qiskit.QuantumRegister - the register associated with
                                          the circuit to be appended to
     gate :: qiskit.QuantumGate - the gate to append to the circuit
+    indices :: [int] - the qubit indices the gate should act on. If no
+                       indices are specified, the gate will act on
+                       the qubit indices it did in the circuit that constructed
+                       it.
 
     Returns: nothing
     """
-    # Get the qubit indices that the gate should be applied to.
+    # num_qubits corresponds to how many qubits the gate acts on.
+    num_qubits = len(gate.qargs)
+
+    # Get the qubits the gate should act on from the register.
     qubits = list()
-    for arg in gate.qargs:
-        index = arg[1]
-        qubits.append(register[index])
-
-    num_qubits = len(qubits)
-    
-    # Single qubit gates.
-    if num_qubits == 1:
-        if isinstance(gate, U1Gate):
-            constructor = circuit.u1
-        elif isinstance(gate, U2Gate):
-            constructor = circuit.u2
-        elif isinstance(gate, U3Gate):
-            constructor = circuit.u3
-        elif isinstance(gate, HGate):
-            constructor = circuit.h
-        elif isinstance(gate, RXGate):
-            constructor = circuit.rx
-        elif isinstance(gate, RZGate):
-            constructor = circuit.rz
-        else:
-            raise ValueError("append_gate() did not recognize single qubit gate")
-
-        constructor(*gate.params, *qubits)
-    # Two qubit gates.
-    elif num_qubits == 2:
-        if isinstance(gate, CnotGate):
-            circuit.cx(*qubits)
-        else:
-            raise ValueError("append_gate() did not recognize two qubit gate")
+    # If indices were specified, snag 'em.
+    if indices is not None:
+        qubits = [register[index] for index in indices]
+    # If indices were not specified, the gate should act on
+    # the same qubit indices it previously did.
     else:
-        raise ValueError("append_gate() did not recognize mutltiple qubit gate")
+        for arg in gate.qargs:
+            qubit_index = arg[1]
+            qubits.append(register[qubit_index])
+        
+    # Switch on the type of gate and append it.
+    if isinstance(gate, U1Gate):
+        constructor = circuit.u1
+    elif isinstance(gate, U2Gate):
+        constructor = circuit.u2
+    elif isinstance(gate, U3Gate):
+        constructor = circuit.u3
+    elif isinstance(gate, HGate):
+        constructor = circuit.h
+    elif isinstance(gate, RXGate):
+        constructor = circuit.rx
+    elif isinstance(gate, RZGate):
+        constructor = circuit.rz
+    elif isinstance(gate, CnotGate):
+        constructor = circuit.cx
+    # TODO: extend to all gates?
+    else:
+        raise ValueError("append_gate() did not recognize gate")
+
+    constructor(*gate.params, *qubits)
 
     return
 
@@ -272,21 +320,12 @@ def get_uccsd_slices(theta_vector):
                 first_gate = False
         
         # Construct a slice from the partial circuit.
-        # Clean up theta gates. Both collapsing and redundancy checking
-        # assume that theta dependent gates are single qubit operators
-        # and do not appear in sequence. Collapsing the circuit assumes that
-        # the theta-dependent gates is an Rz gate.
+        # Check that the theta gate is not redundant.
         if last_gate_was_theta_dependent:
-            # Collapse theta circuits to single qubit circuits.
             params = circuit.data[0].params
-            register = QuantumRegister(1)
-            circuit = QuantumCircuit(register)
-            circuit.rz(*params, register[0])
-            # Check for redundancy on theta gates.
-            theta_gate = circuit.data[0]
             for uccsdslice in slices:
                 if (uccsdslice.theta_dependent
-                  and uccsdslice.circuit.data[0].params == theta_gate.params):
+                      and uccsdslice.circuit.data[0].params == params):
                     redundant = True
                     break
                     
@@ -307,9 +346,17 @@ def _tests():
     slices = get_uccsd_slices(theta)
 
     for uccsdslice in slices:
-        print("theta_dependent: {}, redundant: {}"
-              "".format(uccsdslice.theta_dependent, uccsdslice.redundant))
+        squashed_circuit = squash_circuit(uccsdslice.circuit)
+        squashable = False
+        if squashed_circuit.width() < uccsdslice.circuit.width():
+            squashable = True
+        print("theta_dependent: {}, redundant: {}, squashable: {}"
+              "".format(uccsdslice.theta_dependent, uccsdslice.redundant,
+                        squashable))
         print(uccsdslice.circuit)
+        if squashable:
+            print("squashed circuit:")
+            print(squashed_circuit)
 
 if __name__ == "__main__":
     _tests()
