@@ -22,12 +22,12 @@ def _get_single_qudit_terms(N, d, omega=OMEGA_DEFAULT, alpha=ALPHA_DEFAULT):
     for j in range(N):
         # qudit frequency (omega) terms:
         matrices = [np.eye(d)] * N
-        matrices[j] = get_adagger(d) @ get_a(d)
+        matrices[j] = get_adagger(d).dot(get_a(d))
         H += omega * krons(matrices)
 
         # anharmonicity (alpha) terms:
         matrices = [np.eye(d)] * N
-        matrices[j] = get_adagger(d) @ get_a(d) @ (get_adagger(d) @ get_a(d) - np.eye(d))
+        matrices[j] = get_adagger(d).dot(get_a(d).dot(get_adagger(d).dot(get_a(d)) - np.eye(d)))
         H += alpha / 2.0 * krons(matrices)
     return H
 
@@ -63,7 +63,7 @@ def get_Hops_and_Hnames(N, d):
         names.append("qubit %s charge drive" % j)
 
         matrices = [np.eye(d)] * N
-        matrices[j] = get_adagger(d) @ get_a(d)
+        matrices[j] = get_adagger(d).dot(get_a(d))
         hamiltonians.append(krons(matrices))
         names.append("qubit %s flux drive" % j)
 
@@ -84,7 +84,7 @@ def get_adagger(d):
 
 def get_number_operator(d):
     """Returns the matrix for the number operator, a^\dagger * a, truncated to d-levels"""
-    return get_adagger(d) @ get_a(d)
+    return get_adagger(d).dot(get_a(d))
 
 
 def krons(matrices):
