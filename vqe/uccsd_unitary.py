@@ -6,6 +6,8 @@ uccsd_unitary.py - A module for generating unitary matrices
 from math import pi
 
 import numpy as np
+import pickle
+
 
 #lib from Qiskit Terra
 from qiskit import BasicAer, QuantumCircuit, ClassicalRegister, QuantumRegister, execute
@@ -339,6 +341,23 @@ def get_uccsd_slices(theta_vector):
     #ENDWHILE
 
     return slices
+
+def save_uccsd_slices(theta_vector, file_name):
+    """Save the UCCSD slices (and their squashed versions, if they exist) to a binary file in *.npz format
+    Args:
+    theta_vector :: array - arguments for the vqe ansatz
+    file_nmae :: string - the filepath to save to
+
+    """
+    slices = get_uccsd_slices(theta_vector)
+
+
+    # In the data file map something of the form UN_M to the Nth circuit that has a circuit depth of M
+    file_data = [(get_unitary(squash_circuit(uccsdslice.circuit)), uccsdslice.circuit.depth()) for uccsdslice in slices]
+
+    # Save the matrices jto the specified filepath
+    with open(file_name, 'wb') as f:
+        pickle.dump(file_data, f, protocol=2, fix_imports=True)
 
 def _tests():
     """A function to run tests on the module"""
