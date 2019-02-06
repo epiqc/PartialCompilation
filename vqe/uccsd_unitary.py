@@ -340,6 +340,20 @@ def get_uccsd_slices(theta_vector):
 
     return slices
 
+def save_uccsd_slices(theta_vector, file_name):
+    """Save the UCCSD slices (and their squashed versions, if they exist) to a binary file in *.npz format
+    Args:
+    theta_vector :: array - arguments for the vqe ansatz
+    file_nmae :: string - the filepath to save to
+    
+    """
+    slices = get_uccsd_slices(theta_vector)
+    file_data = {"U{}".format(i): get_unitary(squash_circuit(uccsdslice.circuit)) for i, uccsdslice in enumerate(slices)}
+    
+    # Save the matrices to the specified filepath
+    np.savez(file_name, **file_data)
+    
+
 def _tests():
     """A function to run tests on the module"""
     theta = [np.random.random() * 2 * np.pi for _ in range(8)]
