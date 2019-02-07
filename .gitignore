@@ -19,3 +19,6 @@ qiskit-aer/pip-wheel-metadata/*
 
 # Ignore package installations
 **/*.egg-info
+
+# Ignore pyc
+*.pyc
