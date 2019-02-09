@@ -26,6 +26,9 @@ from qiskit.chemistry.aqua_extensions.components.initial_states import HartreeFo
 
 from circuitslice import UCCSDSlice
 
+# See Gate_Times.ipnyb for determination of these pulse times
+GATE_TO_PULSE_TIME = {'h': 2.1, 'cx': 7.1, 'rz': 0.3, 'rx': 4.2, 'x': 4.2}
+
 backend = BasicAer.get_backend('unitary_simulator')
 
 ### BUILD THE UCCSD VARIATIONAL FORM ###
@@ -135,6 +138,21 @@ def get_uccsd_circuit(theta_vector, use_basis_gates=False):
                                        by theta_vector
     """
     return var_form.construct_circuit(theta_vector, use_basis_gates=use_basis_gates)
+
+
+def get_max_pulse_time(circuit):
+    """Returns the maximum possible pulse duration (in ns) for this circuit.
+
+    This value is based on the pulse times in GATE_TO_PULSE_TIME. In principle,
+    applying optimal control to the full circuit unitary should allow shorter
+    pulses than this maximum duration.
+
+    """
+    total_time = 0.0
+    for gate in circuit.data:
+        total_time += GATE_TO_PULSE_TIME[gate.name]
+    return total_time
+
 
 # Note: lists are not hashable in python so I can not think of a better than O(n)
 # way to compare lists for uniqueness.
