@@ -12,6 +12,7 @@ import pickle
 #lib from Qiskit Terra
 from qiskit import BasicAer, QuantumCircuit, ClassicalRegister, QuantumRegister, execute
 from qiskit.extensions.standard import *
+from qiskit.converters import circuit_to_dag, dag_to_circuit
 
 # lib from Qiskit Aqua
 from qiskit.aqua import Operator, QuantumInstance
@@ -149,8 +150,14 @@ def get_max_pulse_time(circuit):
 
     """
     total_time = 0.0
-    for gate in circuit.data:
-        total_time += GATE_TO_PULSE_TIME[gate.name]
+
+    dag = circuit_to_dag(circuit)
+    for layer in dag.layers():
+        slice_circuit = dag_to_circuit(layer['graph'])
+        gates = slice_circuit.data
+        layer_time = max([GATE_TO_PULSE_TIME[gate.name] for gate in gates])
+        total_time += layer_time
+
     return total_time
 
 
