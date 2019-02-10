@@ -277,6 +277,8 @@ def append_gate(circuit, register, gate, indices=None):
         constructor = circuit.u3
     elif isinstance(gate, HGate):
         constructor = circuit.h
+    elif isinstance(gate, XGate):
+        constructor = circuit.x
     elif isinstance(gate, RXGate):
         constructor = circuit.rx
     elif isinstance(gate, RZGate):
@@ -285,7 +287,7 @@ def append_gate(circuit, register, gate, indices=None):
         constructor = circuit.cx
     # TODO: extend to all gates?
     else:
-        raise ValueError("append_gate() did not recognize gate")
+        raise ValueError("append_gate() did not recognize gate %s" % gate)
 
     constructor(*gate.params, *qubits)
 
