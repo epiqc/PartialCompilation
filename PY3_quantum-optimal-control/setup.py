@@ -75,9 +75,8 @@ def write_version(version_file=version_file):
     with open(version_file, 'w+') as v:
 
         v.write("""
-			version = {0}
-
-			""".format(VERSION))
+version = "{0}"
+""".format(VERSION))
 
 
 write_version()
