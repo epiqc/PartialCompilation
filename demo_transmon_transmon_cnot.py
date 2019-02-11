@@ -6,8 +6,9 @@ import h5py
 import random as rd
 import time
 from IPython import display
+import config
 
-data_path = '../pulses/output_pulses/'
+data_path = config.DATA_PATH
 
 from quantum_optimal_control.helper_functions.grape_functions import *
 from quantum_optimal_control.main_grape.grape import Grape

@@ -6,8 +6,9 @@ import h5py
 import random as rd
 import time
 from IPython import display
+import config
 
-data_path = 'out/output_pulses/'
+data_path = config.DATA_PATH
 
 print("Importing Grape...", flush=True)
 
