@@ -234,7 +234,7 @@ class UCCSD(VariationalForm):
         if q is None:
             q = QuantumRegister(self._num_qubits, name='q')
         if self._initial_state is not None:
-            circuit = self._initial_state.construct_circuit('circuit', q)
+            circuit = self._initial_state.construct_circuit('circuit', q, use_basis_gates=use_basis_gates)
         else:
             circuit = QuantumCircuit(q)
 

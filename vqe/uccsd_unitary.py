@@ -8,10 +8,11 @@ from math import pi
 import numpy as np
 import pickle
 
-
 #lib from Qiskit Terra
 from qiskit import BasicAer, QuantumCircuit, ClassicalRegister, QuantumRegister, execute
 from qiskit.extensions.standard import *
+from qiskit.mapper import CouplingMap, swap_mapper
+from qiskit.converters import circuit_to_dag, dag_to_circuit
 
 # lib from Qiskit Aqua
 from qiskit.aqua import Operator, QuantumInstance
@@ -25,6 +26,9 @@ from qiskit.chemistry.aqua_extensions.components.variational_forms import UCCSD
 from qiskit.chemistry.aqua_extensions.components.initial_states import HartreeFock
 
 from circuitslice import UCCSDSlice
+
+# See Gate_Times.ipnyb for determination of these pulse times
+GATE_TO_PULSE_TIME = {'h': 2.1, 'cx': 7.1, 'rz': 0.3, 'rx': 4.2, 'x': 4.2}
 
 backend = BasicAer.get_backend('unitary_simulator')
 
@@ -135,6 +139,42 @@ def get_uccsd_circuit(theta_vector, use_basis_gates=False):
                                        by theta_vector
     """
     return var_form.construct_circuit(theta_vector, use_basis_gates=use_basis_gates)
+
+def impose_swap_coupling(circuit, coupling_list):
+    """Impose a qubit topology on the given circuit using swap gates.
+    Args:
+    circuit :: qiskit.QuantumCircuit - the circuit to impose a topology upon.
+    coupling_list :: [(int, int)] - the list of connected qubit pairs
+
+    Returns:
+    coupled_circuit :: qiskit.QuantumCircuit - the circuit equivalent to the
+    original that abides by the qubit mapping via swap gates
+    """
+    dag = circuit_to_dag(circuit)
+    map = CouplingMap(coupling_list)
+    coupled_dag = swap_mapper(dag, map)[0]
+    coupled_circuit = dag_to_circuit(coupled_dag)
+    return coupled_circuit
+
+def get_max_pulse_time(circuit):
+    """Returns the maximum possible pulse duration (in ns) for this circuit.
+
+    This value is based on the pulse times in GATE_TO_PULSE_TIME. In principle,
+    applying optimal control to the full circuit unitary should allow shorter
+    pulses than this maximum duration.
+
+    """
+    total_time = 0.0
+
+    dag = circuit_to_dag(circuit)
+    for layer in dag.layers():
+        slice_circuit = dag_to_circuit(layer['graph'])
+        gates = slice_circuit.data
+        layer_time = max([GATE_TO_PULSE_TIME[gate.name] for gate in gates])
+        total_time += layer_time
+
+    return total_time
+
 
 # Note: lists are not hashable in python so I can not think of a better than O(n)
 # way to compare lists for uniqueness.
@@ -252,6 +292,8 @@ def append_gate(circuit, register, gate, indices=None):
         constructor = circuit.u3
     elif isinstance(gate, HGate):
         constructor = circuit.h
+    elif isinstance(gate, XGate):
+        constructor = circuit.x
     elif isinstance(gate, RXGate):
         constructor = circuit.rx
     elif isinstance(gate, RZGate):
@@ -260,7 +302,7 @@ def append_gate(circuit, register, gate, indices=None):
         constructor = circuit.cx
     # TODO: extend to all gates?
     else:
-        raise ValueError("append_gate() did not recognize gate")
+        raise ValueError("append_gate() did not recognize gate %s" % gate)
 
     constructor(*gate.params, *qubits)
 

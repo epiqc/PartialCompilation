@@ -2,6 +2,7 @@
 out/**
 **/*.png
 **/*.h5
+**/*.out
 
 # Ignore IDE and editor files
 **/*~
@@ -20,3 +21,6 @@ qiskit-aer/pip-wheel-metadata/*
 
 # Ignore package installations
 **/*.egg-info
+
+# Ignore pyc
+*.pyc
