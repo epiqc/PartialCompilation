@@ -1,4 +1,4 @@
-"""A module for running quantum optimal control on arbitrary unitaries"""
+"""A module for running quantum optimal control on unitaries."""
 import argparse, os, pickle
 
 import numpy as np
@@ -14,6 +14,9 @@ def main(args):
     NUM_STATES = args["states"]
     CONNECTED_QUBIT_PAIRS = []
     OUTPUT_FILE_NAME = "pulse"
+    TAYLOR_TERMS = (20, 0)
+    UNITARY_ERROR = 1e-8
+    CONV_TARGET = 1e-3
     
     # Load unitaries.
     unitaries = list()
@@ -22,7 +25,7 @@ def main(args):
 
     for U, CIRCUIT_DEPTH in unitaries:
         # Display information about the unitary.
-        NUM_QUBITS = np.log2(U.shape()[0])
+        NUM_QUBITS = int(np.log2(U.shape[0]))
         print("UNITARY", U)
         print("CIRCUIT_DEPTH", CIRCUIT_DEPTH)
         print("NUM_QUBITS", NUM_QUBITS)
@@ -45,64 +48,14 @@ def main(args):
         convergence = {'rate':0.01, 'update_step':10, 'max_iterations':MAX_ITERATIONS, \
                        'conv_target':1e-3, 'learning_rate_decay':MAX_ITERATIONS/2}
 
-        # Define states to include in the drawing of occupation
-        # TODO: Unsure what the correct states_draw_list is, but
-        # the NUM_QUBITS > 1 branch does not work for NUM_QUBITS == 1.
-        if (NUM_QUBITS > 1):
-            states_draw_list = [0, 1, NUM_STATES, NUM_STATES+1]
-            states_draw_names = ['00','01','10','11']
-        else:
-            states_draw_list = [0, 1]
-            states_draw_names = ['0', '1']
-
-        # Define reg coeffs
-        # TODO: Unsure what the correct states_forbidden_list is, but
-        # the NUM_QUBITS > 1 branch does not work for NUM_QUBITS == 1.
-        states_forbidden_list = []
-        if (NUM_QUBITS > 1):
-            for ii in range(NUM_STATES):
-                forbid_state = (NUM_STATES-1)*NUM_STATES+ii
-                if not forbid_state in states_forbidden_list:
-                    states_forbidden_list.append(forbid_state)
-
-                forbid_state = (NUM_STATES-2)*NUM_STATES+ii
-                if not forbid_state in states_forbidden_list:
-                    states_forbidden_list.append(forbid_state)
-
-
-            for ii in range(NUM_STATES):
-                forbid_state = ii*NUM_STATES + (NUM_STATES-1)
-                if not forbid_state in states_forbidden_list:
-                    states_forbidden_list.append(forbid_state)
-
-                forbid_state = ii*NUM_STATES + (NUM_STATES-2)
-                if not forbid_state in states_forbidden_list:
-                    states_forbidden_list.append(forbid_state)
-
-        # Define penalties
-        ops_max_amp = [np.pi] * len(Hops)
-
-        # nothing
-        #reg_coeffs = {'envelope' : 0.0, 'dwdt':0.0,'d2wdt2':0.0,'forbidden':0.0,
-        #             'states_forbidden_list': states_forbidden_list,'forbid_dressed':False}
-
-        # forbid
-        #reg_coeffs = {'envelope' : 0.0, 'dwdt':0.0,'d2wdt2':0.0, 'forbidden':50.0,
-        #              'states_forbidden_list': states_forbidden_list,'forbid_dressed':False}
-
-        # forbid + pulse reg + speedup
-        reg_coeffs = {'amplitude':0.01,'dwdt':0.00007,'d2wdt2':0.0, 
-                      'forbidden_coeff_list':[10] * len(states_forbidden_list),
-                      'states_forbidden_list': states_forbidden_list,'forbid_dressed':False,
-                      'speed_up': 1.0}
+        reg_coeffs = {'speed_up': 1.0}
 
         uks,U_f = Grape(H0, Hops, Hnames, U, TOTAL_TIME, STEPS, psi0, 
                         convergence = convergence, method = 'L-BFGS-B', 
-                        draw = [states_draw_list, states_draw_names] , 
-                        maxA = ops_max_amp, use_gpu = False, sparse_H = False,
-                        reg_coeffs = reg_coeffs, unitary_error = 1e-08, 
-                        save_plots = False, file_name = FILE_NAME, 
-                        Taylor_terms = [20, 0], data_path = DATA_PATH)
+                        maxA = [np.pi] * len(Hops), use_gpu = False, sparse_H = False,
+                        reg_coeffs = reg_coeffs, unitary_error = UNITARY_ERROR,
+                        save_plots = False, file_name = OUTPUT_FILE_NAME,
+                        Taylor_terms = TAYLOR_TERMS, data_path = DATA_PATH)
     return
 
 if __name__ == "__main__":
