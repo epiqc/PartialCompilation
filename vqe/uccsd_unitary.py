@@ -8,10 +8,10 @@ from math import pi
 import numpy as np
 import pickle
 
-
 #lib from Qiskit Terra
 from qiskit import BasicAer, QuantumCircuit, ClassicalRegister, QuantumRegister, execute
 from qiskit.extensions.standard import *
+from qiskit.mapper import CouplingMap, swap_mapper
 from qiskit.converters import circuit_to_dag, dag_to_circuit
 
 # lib from Qiskit Aqua
@@ -140,6 +140,21 @@ def get_uccsd_circuit(theta_vector, use_basis_gates=False):
     """
     return var_form.construct_circuit(theta_vector, use_basis_gates=use_basis_gates)
 
+def impose_swap_coupling(circuit, coupling_list):
+    """Impose a qubit topology on the given circuit using swap gates.
+    Args:
+    circuit :: qiskit.QuantumCircuit - the circuit to impose a topology upon.
+    coupling_list :: [(int, int)] - the list of connected qubit pairs
+
+    Returns:
+    coupled_circuit :: qiskit.QuantumCircuit - the circuit equivalent to the
+    original that abides by the qubit mapping via swap gates
+    """
+    dag = circuit_to_dag(circuit)
+    map = CouplingMap(coupling_list)
+    coupled_dag = swap_mapper(dag, map)[0]
+    coupled_circuit = dag_to_circuit(coupled_dag)
+    return coupled_circuit
 
 def get_max_pulse_time(circuit):
     """Returns the maximum possible pulse duration (in ns) for this circuit.
