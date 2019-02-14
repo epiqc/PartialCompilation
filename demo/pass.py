@@ -10,9 +10,8 @@ from qiskit.transpiler import PassManager, transpile
 from qiskit.transpiler.passes import (BasicSwap, CXCancellation,
                                       CommutationTransformation, Optimize1qGates,
                                       Unroller)
-from qiskit.extensions.standard import *
 
-from uccsd_unitary import get_uccsd_circuit
+from fqc.uccsd import get_uccsd_circuit
 
 backend = Aer.get_backend('statevector_simulator')
 
