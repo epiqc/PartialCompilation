@@ -15,7 +15,7 @@ yes | pip install pyscf
 
 echo "Installing Qiskit packages..."
 yes | pip install qiskit-ibmq-provider
-cd qiskit-terra/
+cd /qiskit-terra/
 yes | pip install -r requirements.txt
 yes | pip install -r requirements-dev.txt
 yes | pip install -e .

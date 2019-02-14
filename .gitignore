@@ -1,9 +1,3 @@
-# Ignore output directory and output files
-out/**
-**/*.png
-**/*.h5
-**/*.out
-
 # Ignore IDE and editor files
 **/*~
 **/*#
@@ -12,15 +6,17 @@ out/**
 *.pyc
 **/__pycache__
 *.DS_Store
+**/*.png
+**/*.h5
+**/*.out
 
-# Ignore ipnyb checkpoints
+# Ignore ipnyb checkpoints.
 .ipynb_checkpoints/
 
-# Ignore metadata
+# Ignore metadata.
 qiskit-aer/pip-wheel-metadata/*
 
-# Ignore package installations
+# Ignore distribution and installation files.
 **/*.egg-info
-
-# Ignore pyc
-*.pyc
+MANIFEST
+dist/*

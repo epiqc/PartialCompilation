@@ -55,7 +55,7 @@ def ID(n):
 
 def RZ(theta):
     """Return the unitary matrix that rotates blocsphere by \'theta\' in the 
-    z-direction.
+  z-direction.
 
     theta :: number -- rotation argument in radians
     """

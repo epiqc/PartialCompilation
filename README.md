@@ -1,2 +1,2 @@
-# vqe
-A repository for compiling variational quantum eigensolver circuits
+# FQC
+A repository for flexible quantum compilation.
