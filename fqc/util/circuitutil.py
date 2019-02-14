@@ -4,17 +4,21 @@ circuitutil.py - A module for extending Qiskit circuit functionality.
 
 import numpy as np
 import pickle
-from qiskit import BasicAer, QuantumCircuit, QuantumRegister, execute
+from qiskit import Aer, BasicAer, QuantumCircuit, QuantumRegister, execute
 from qiskit.extensions.standard import *
 from qiskit.mapper import CouplingMap, swap_mapper
 from qiskit.converters import circuit_to_dag, dag_to_circuit
+from qiskit.transpiler import PassManager, transpile
+from qiskit.transpiler.passes import (BasicSwap, CXCancellation,
+                                      CommutationTransformation, Optimize1qGates)
 
 ### CONSTANTS ###
 
 # See Gate_Times.ipnyb for determination of these pulse times
 GATE_TO_PULSE_TIME = {'h': 2.1, 'cx': 7.1, 'rz': 0.3, 'rx': 4.2, 'x': 4.2}
 
-backend = BasicAer.get_backend('unitary_simulator')
+unitary_backend = BasicAer.get_backend('unitary_simulator')
+state_backend = Aer.get_backend('statevector_simulator')
 
 ### FUNCTIONS ###
 
@@ -26,7 +30,7 @@ def get_unitary(circuit):
     Returns:
     matrix :: np.matrix - the unitary representing the circuit
     """
-    job = execute(circuit, backend)
+    job = execute(circuit, unitary_backend)
     unitary = job.result().get_unitary(circuit, decimals=10)
     return np.matrix(unitary)
 
@@ -45,6 +49,32 @@ def impose_swap_coupling(circuit, coupling_list):
     coupled_dag = swap_mapper(dag, coupling_map)[0]
     coupled_circuit = dag_to_circuit(coupled_dag)
     return coupled_circuit
+
+# TOOD: Implement circuit optimization for clifford gates.
+def optimize_circuit(circuit, coupling_list):
+    """Use the qiskit transpiler module to perform a suite of optimizations on
+    the given circuit. NOTE: Circuit must be comprised of basis gates
+    (U1, U2, U3, CX, etc.).
+    Args:
+    circuit :: qiskit.QuantumCircuit - the circuit to optimize
+    coupling_list :: [(int, int)] - the list of connected qubit pairs
+
+    Returns:
+    optimized_circuit :: qiskit.QuantumCircuit - the optimized circuit
+    """
+    coupling_map = CouplingMap(coupling_list)
+    
+    pass_manager = PassManager()
+    pass_manager.append(Optimize1qGates())
+    pass_manager.append(CXCancellation())
+    pass_manager.append(CommutationTransformation())
+    pass_manager.append(BasicSwap(coupling_map))
+
+    optimized_circuit = transpile(circuit, backend=state_backend,
+                                  coupling_map=coupling_list,
+                                  pass_manager=pass_manager)
+
+    return optimized_circuit
 
 def get_max_pulse_time(circuit):
     """Returns the maximum possible pulse duration (in ns) for this circuit.

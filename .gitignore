@@ -1,8 +1,8 @@
-# Ignore IDE and editor files
+# Ignore IDE and editor files.
 **/*~
 **/*#
 
-# Ignore binaries
+# Ignore binaries.
 *.pyc
 **/__pycache__
 *.DS_Store
@@ -20,3 +20,7 @@ qiskit-aer/pip-wheel-metadata/*
 **/*.egg-info
 MANIFEST
 dist/*
+
+# Ignore user specific files.
+config.py
+_test/*
