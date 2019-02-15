@@ -14,7 +14,7 @@ from quantum_optimal_control.helper_functions.data_management import H5File
 import os
 
 
-def Grape(H0, Hops, Hnames, U, total_time, steps, states_concerned_list, convergence=None, U0=None, reg_coeffs=None, dressed_info=None, maxA=None, use_gpu=True, sparse_H=True, sparse_U=False, sparse_K=False, draw=None, initial_guess=None, show_plots=True, unitary_error=1e-4, method='Adam', state_transfer=False, no_scaling=False, freq_unit='GHz', file_name=None, save=True, data_path=None, Taylor_terms=None, use_inter_vecs=True, return_converged=True):
+def Grape(H0, Hops, Hnames, U, total_time, steps, states_concerned_list, convergence=None, U0=None, reg_coeffs=None, dressed_info=None, maxA=None, use_gpu=True, sparse_H=True, sparse_U=False, sparse_K=False, draw=None, initial_guess=None, show_plots=True, unitary_error=1e-4, method='Adam', state_transfer=False, no_scaling=False, freq_unit='GHz', file_name=None, save=True, data_path=None, Taylor_terms=None, use_inter_vecs=True, return_converged=False):
 
     # start time
     grape_start_time = time.time()
