@@ -12,7 +12,7 @@ from qiskit.converters import circuit_to_dag, dag_to_circuit
 ### CONSTANTS ###
 
 # See Gate_Times.ipnyb for determination of these pulse times
-GATE_TO_PULSE_TIME = {'h': 2.1, 'cx': 7.1, 'rz': 0.3, 'rx': 4.2, 'x': 4.2}
+GATE_TO_PULSE_TIME = {'h': 2.1, 'cx': 7.1, 'rz': 0.3, 'rx': 4.2, 'x': 4.2, 'swap': 7.4}
 
 backend = BasicAer.get_backend('unitary_simulator')
 
