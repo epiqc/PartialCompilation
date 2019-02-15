@@ -5,10 +5,12 @@ Right now only implements Hamiltonian for SchusterLab transmon qubit.
 
 import numpy as np
 
-# Frequencies are in GHz:
+# All of these frequencies below are in GHz:
 OMEGA_DEFAULT = 2 * np.pi * 5
 ALPHA_DEFAULT = 2 * np.pi * -0.2
 G_DEFAULT = 2 * np.pi * 0.05
+CHARGE_DRIVE_MAXA = 2 * np.pi * 0.1
+FLUX_DRIVE_MAXA = 2 * np.pi * 1.5
 
 
 def get_H0(N, d, connected_qubit_pairs, omega=OMEGA_DEFAULT, alpha=ALPHA_DEFAULT, g=G_DEFAULT):
@@ -68,6 +70,15 @@ def get_Hops_and_Hnames(N, d):
 
         
     return hamiltonians, names
+
+
+def get_maxA(N, d):
+    """Returns the maximium amplitudes of the control pulses corresponding to Hops/Hnames."""
+    maxA = []
+    for j in range(N):
+        maxA.append(CHARGE_DRIVE_MAXA)  # max amp for charge drive on jth qubit
+        maxA.append(FLUX_DRIVE_MAXA)  # max amp for flux drive on jth qubit
+    return maxA
 
 
 def get_a(d):
