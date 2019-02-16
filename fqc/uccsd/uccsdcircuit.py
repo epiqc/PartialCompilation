@@ -15,7 +15,6 @@ from qiskit.converters import circuit_to_dag, dag_to_circuit
 # lib from Qiskit Aqua
 from qiskit.aqua import Operator, QuantumInstance
 from qiskit.aqua.algorithms import VQE, ExactEigensolver
-from qiskit.aqua.components.optimizers import COBYLA
 
 # lib from Qiskit Aqua Chemistry
 from qiskit.chemistry import FermionicOperator
@@ -88,16 +87,6 @@ qubitOp.chop(10**-10)
 
 #print(qubitOp.print_operators())
 #print(qubitOp)
-
-# Using exact eigensolver to get the smallest eigenvalue
-exact_eigensolver = ExactEigensolver(qubitOp, k=1)
-ret = exact_eigensolver.run()
-#print('The computed energy is: {:.12f}'.format(ret['eigvals'][0].real))
-#print('The total ground state energy is: {:.12f}'.format(ret['eigvals'][0].real + energy_shift + nuclear_repulsion_energy))
-
-# setup COBYLA optimizer
-max_eval = 200
-cobyla = COBYLA(maxiter=max_eval)
 
 # setup HartreeFock state
 HF_state = HartreeFock(qubitOp.num_qubits, num_spin_orbitals, num_particles, map_type, 
