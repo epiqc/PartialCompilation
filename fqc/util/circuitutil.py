@@ -242,6 +242,34 @@ def append_gate(circuit, register, gate, indices=None):
 
     constructor(*gate.params, *qubits)
 
+
+
+def get_nearest_neighbor_coupling_list(width, height):
+    """Returns a bidirectional coupling list for nearest neighbor (rectilinear grid) architecture.
+
+    Qubits are numbered in row-major order with 0 at the top left and
+    (width*height - 1) at the bottom right.
+    """
+    coupling_list = []
+
+    def _qubit_number(row, col):
+        return row * width + col
+
+    # horizontal edges
+    for row in range(height):
+        for col in range(width - 1):
+            coupling_list.append([_qubit_number(row, col), _qubit_number(row, col + 1)])
+            coupling_list.append([_qubit_number(row, col + 1), _qubit_number(row, col)])
+
+    # vertical edges
+    for col in range(width):
+        for row in range(height - 1):
+            coupling_list.append([_qubit_number(row, col), _qubit_number(row + 1, col)])
+            coupling_list.append([_qubit_number(row + 1, col), _qubit_number(row, col)])
+
+    return coupling_list
+
+
 def _tests():
     """A function to run tests on the module"""
     pass
