@@ -130,6 +130,65 @@ def squash_circuit(circuit):
     return new_circuit
 
 
+PAULI_GATE_TO_ROTATION_GATE = {qiskit.extensions.standard.XGate: qiskit.extensions.standard.RXGate,
+                               qiskit.extensions.standard.YGate: qiskit.extensions.standard.RYGate,
+                               qiskit.extensions.standard.ZGate: qiskit.extensions.standard.RZGate}
+
+
+def _convert_pauli_gates_into_rotation_gates(circuit):
+    """Mutates the circuit by transforming X into RX(PI) and similar for Y & Z."""
+
+    new_gates = []
+
+    for gate in circuit.data:
+        rotation_gate = PAULI_GATE_TO_ROTATION_GATE.get(type(gate))
+        if rotation_gate is not None:
+            new_gates.append(rotation_gate(np.pi, gate.qargs[0]))
+        else:
+            new_gates.append(gate)
+
+    circuit.data = new_gates
+
+
+def _is_rotation_gate(gate):
+    return type(gate) in PAULI_GATE_TO_ROTATION_GATE.values()
+
+
+def merge_rotation_gates(circuit):
+    """Mutates the circuit by merging consecutive RX (or RY or RZ) gates on the same qubit.
+
+    NB it would be more efficient to operate directly via DAG."""
+
+    _convert_pauli_gates_into_rotation_gates(circuit)
+
+    new_gates = []
+
+    for i, gate in enumerate(circuit.data):
+        if type(gate) in PAULI_GATE_TO_ROTATION_GATE.values():
+            if gate.params[0] == 0:  # skip 0-degree rotations
+                continue
+
+            target_qubit = gate.qargs[0]
+            j = i + 1
+            while j < len(circuit.data):
+                if target_qubit in circuit.data[j].qargs:
+                    if type(circuit.data[j]) == type(gate):
+                        # add the rotation angle to the current gate and 0 the j+1'th gate's angle
+                        gate.params[0] = (gate.params[0] + circuit.data[j].params[0]) % (2 * np.pi)
+                        circuit.data[j].params[0] = 0
+                    else:
+                        break
+                j += 1
+
+            if gate.params[0] != 0:
+                new_gates.append(gate)
+
+        else:
+            new_gates.append(gate)
+
+    circuit.data = new_gates
+
+
 def append_gate(circuit, register, gate, indices=None):
     """Append a quantum gate to a new circuit.
     Args:
