@@ -130,9 +130,9 @@ def squash_circuit(circuit):
     return new_circuit
 
 
-PAULI_GATE_TO_ROTATION_GATE = {qiskit.extensions.standard.XGate: qiskit.extensions.standard.RXGate,
-                               qiskit.extensions.standard.YGate: qiskit.extensions.standard.RYGate,
-                               qiskit.extensions.standard.ZGate: qiskit.extensions.standard.RZGate}
+PAULI_GATE_TO_ROTATION_GATE = {XGate: RXGate,
+                               YGate: RYGate,
+                               ZGate: RZGate}
 
 
 def _convert_pauli_gates_into_rotation_gates(circuit):
