@@ -173,7 +173,7 @@ def merge_rotation_gates(circuit):
             while j < len(circuit.data):
                 if target_qubit in circuit.data[j].qargs:
                     if type(circuit.data[j]) == type(gate):
-                        # add the rotation angle to the current gate and 0 the j+1'th gate's angle
+                        # add the rotation angle to the current gate and 0 the jth gate's angle
                         gate.params[0] = (gate.params[0] + circuit.data[j].params[0]) % (2 * np.pi)
                         circuit.data[j].params[0] = 0
                     else:
