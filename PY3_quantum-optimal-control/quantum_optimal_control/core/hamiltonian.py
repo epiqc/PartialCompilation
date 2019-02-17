@@ -49,7 +49,7 @@ def _validate_connectivity(N, connected_qubit_pairs):
     for (j, k) in connected_qubit_pairs:
         assert 0 <= j < N
         assert 0 <= k < N
-        assert j < k
+        assert j != k
         assert connected_qubit_pairs.count((j, k)) == 1
         assert connected_qubit_pairs.count((k, j)) == 0
         

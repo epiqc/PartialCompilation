@@ -244,11 +244,13 @@ def append_gate(circuit, register, gate, indices=None):
 
 
 
-def get_nearest_neighbor_coupling_list(width, height):
-    """Returns a bidirectional coupling list for nearest neighbor (rectilinear grid) architecture.
+def get_nearest_neighbor_coupling_list(width, height, directed=True):
+    """Returns a coupling list for nearest neighbor (rectilinear grid) architecture.
 
     Qubits are numbered in row-major order with 0 at the top left and
     (width*height - 1) at the bottom right.
+
+    If directed is True, the coupling list includes both  [a, b] and [b, a] for each edge.
     """
     coupling_list = []
 
@@ -258,14 +260,16 @@ def get_nearest_neighbor_coupling_list(width, height):
     # horizontal edges
     for row in range(height):
         for col in range(width - 1):
-            coupling_list.append([_qubit_number(row, col), _qubit_number(row, col + 1)])
-            coupling_list.append([_qubit_number(row, col + 1), _qubit_number(row, col)])
+            coupling_list.append((_qubit_number(row, col), _qubit_number(row, col + 1)))
+            if directed:
+                coupling_list.append((_qubit_number(row, col + 1), _qubit_number(row, col)))
 
     # vertical edges
     for col in range(width):
         for row in range(height - 1):
-            coupling_list.append([_qubit_number(row, col), _qubit_number(row + 1, col)])
-            coupling_list.append([_qubit_number(row + 1, col), _qubit_number(row, col)])
+            coupling_list.append((_qubit_number(row, col), _qubit_number(row + 1, col)))
+            if directed:
+                coupling_list.append((_qubit_number(row + 1, col), _qubit_number(row, col)))
 
     return coupling_list
 
