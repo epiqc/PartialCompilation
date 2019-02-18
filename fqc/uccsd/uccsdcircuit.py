@@ -6,10 +6,8 @@ import numpy as np
 import pickle
 
 #lib from Qiskit Terra
-from qiskit import BasicAer, QuantumCircuit, ClassicalRegister, QuantumRegister, execute
+from qiskit import QuantumCircuit, QuantumRegister
 from qiskit.extensions.standard import *
-from qiskit.mapper import CouplingMap, swap_mapper
-from qiskit.converters import circuit_to_dag, dag_to_circuit
 
 # lib from Qiskit Aqua Chemistry
 from qiskit.chemistry.drivers import PySCFDriver
@@ -19,8 +17,6 @@ from qiskit.chemistry.core import Hamiltonian, QubitMappingType
 
 from fqc.models import UCCSDSlice
 from fqc.util import get_unitary, squash_circuit, append_gate, redundant
-
-backend = BasicAer.get_backend('unitary_simulator')
 
 
 ### BUILD CIRCUTS AND UNITARIES ###
