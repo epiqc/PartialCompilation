@@ -12,94 +12,20 @@ from qiskit.extensions.standard import *
 from qiskit.mapper import CouplingMap, swap_mapper
 from qiskit.converters import circuit_to_dag, dag_to_circuit
 
-# lib from Qiskit Aqua
-from qiskit.aqua import Operator, QuantumInstance
-from qiskit.aqua.algorithms import VQE, ExactEigensolver
-
 # lib from Qiskit Aqua Chemistry
-from qiskit.chemistry import FermionicOperator
-from qiskit.chemistry.drivers import PySCFDriver, UnitsType
+from qiskit.chemistry.drivers import PySCFDriver
 from qiskit.chemistry.aqua_extensions.components.variational_forms import UCCSD
 from qiskit.chemistry.aqua_extensions.components.initial_states import HartreeFock
+from qiskit.chemistry.core import Hamiltonian, QubitMappingType
 
 from fqc.models import UCCSDSlice
 from fqc.util import get_unitary, squash_circuit, append_gate, redundant
 
 backend = BasicAer.get_backend('unitary_simulator')
 
-### BUILD THE UCCSD VARIATIONAL FORM ###
-
-# This section follows:
-# https://github.com/Qiskit/qiskit-terra/blob/master/qiskit/circuit/instruction.py
-
-# TODO: This section is not wrapped in a funciton because we
-# want the variational form to be precompiled in the python binary.
-# When we begin to work with different variational forms we should
-# then modulate it.
-
-# using driver to get fermionic Hamiltonian
-# PySCF example
-driver = PySCFDriver(atom='Li .0 .0 .0; H .0 .0 1.6', unit=UnitsType.ANGSTROM,
-                     charge=0, spin=0, basis='sto3g')
-molecule = driver.run()
-
-# please be aware that the idx here with respective to original idx
-freeze_list = [0]
-remove_list = [-3, -2] # negative number denotes the reverse order
-map_type = 'parity'
-
-h1 = molecule.one_body_integrals
-h2 = molecule.two_body_integrals
-nuclear_repulsion_energy = molecule.nuclear_repulsion_energy
-
-num_particles = molecule.num_alpha + molecule.num_beta
-num_spin_orbitals = molecule.num_orbitals * 2
-#print("HF energy: {}".format(molecule.hf_energy - molecule.nuclear_repulsion_energy))
-#print("# of electrons: {}".format(num_particles))
-#print("# of spin orbitals: {}".format(num_spin_orbitals))
-
-# prepare full idx of freeze_list and remove_list
-# convert all negative idx to positive
-remove_list = [x % molecule.num_orbitals for x in remove_list]
-freeze_list = [x % molecule.num_orbitals for x in freeze_list]
-# update the idx in remove_list of the idx after frozen, since the idx of orbitals are changed after freezing
-remove_list = [x - len(freeze_list) for x in remove_list]
-remove_list += [x + molecule.num_orbitals - len(freeze_list)  for x in remove_list]
-freeze_list += [x + molecule.num_orbitals for x in freeze_list]
-
-# prepare fermionic hamiltonian with orbital freezing and eliminating, and then map to qubit hamiltonian
-# and if PARITY mapping is selected, reduction qubits
-energy_shift = 0.0
-qubit_reduction = True if map_type == 'parity' else False
-
-ferOp = FermionicOperator(h1=h1, h2=h2)
-if len(freeze_list) > 0:
-    ferOp, energy_shift = ferOp.fermion_mode_freezing(freeze_list)
-    num_spin_orbitals -= len(freeze_list)
-    num_particles -= len(freeze_list)
-if len(remove_list) > 0:
-    ferOp = ferOp.fermion_mode_elimination(remove_list)
-    num_spin_orbitals -= len(remove_list)
-
-qubitOp = ferOp.mapping(map_type=map_type, threshold=0.00000001)
-qubitOp = qubitOp.two_qubit_reduced_operator(num_particles) if qubit_reduction else qubitOp
-qubitOp.chop(10**-10)
-
-#print(qubitOp.print_operators())
-#print(qubitOp)
-
-# setup HartreeFock state
-HF_state = HartreeFock(qubitOp.num_qubits, num_spin_orbitals, num_particles, map_type, 
-                       qubit_reduction)
-
-# setup UCCSD variational form
-var_form = UCCSD(qubitOp.num_qubits, depth=1, 
-                   num_orbitals=num_spin_orbitals, num_particles=num_particles, 
-                   active_occupied=[0], active_unoccupied=[0, 1],
-                   initial_state=HF_state, qubit_mapping=map_type, 
-                   two_qubit_reduction=qubit_reduction, num_time_slices=1)
 
 ### BUILD CIRCUTS AND UNITARIES ###
+
 
 def get_uccsd_circuit(theta_vector, use_basis_gates=False):
     """Produce the full UCCSD circuit.
@@ -111,7 +37,28 @@ def get_uccsd_circuit(theta_vector, use_basis_gates=False):
     circuit :: qiskit.QuantumCircuit - the UCCSD circuit parameterized
                                        by theta_vector
     """
+    driver = PySCFDriver(atom='Li .0 .0 .0; H .0 .0 1.6', basis='sto3g')
+    qmolecule = driver.run()
+    hamiltonian = Hamiltonian(qubit_mapping=QubitMappingType.PARITY, two_qubit_reduction=True,
+                              freeze_core=True, orbital_reduction=[-3, -2])
+
+    energy_input = hamiltonian.run(qmolecule)
+    qubit_op = energy_input.qubit_op
+    num_spin_orbitals = hamiltonian.molecule_info['num_orbitals']
+    num_particles = hamiltonian.molecule_info['num_particles']
+    map_type = hamiltonian._qubit_mapping
+    qubit_reduction = hamiltonian.molecule_info['two_qubit_reduction']
+
+    HF_state = HartreeFock(qubit_op.num_qubits, num_spin_orbitals, num_particles, map_type,
+                           qubit_reduction)
+    var_form = UCCSD(qubit_op.num_qubits, depth=1,
+                     num_orbitals=num_spin_orbitals, num_particles=num_particles,
+                     active_occupied=[0], active_unoccupied=[0, 1],
+                     initial_state=HF_state, qubit_mapping=map_type,
+                     two_qubit_reduction=qubit_reduction, num_time_slices=1)
+
     return var_form.construct_circuit(theta_vector, use_basis_gates=use_basis_gates)
+
 
 def _is_theta_dependent(gate):
     """Return ture if a gate is dependent on the theta vector,
