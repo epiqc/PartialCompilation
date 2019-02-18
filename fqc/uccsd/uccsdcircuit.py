@@ -1,6 +1,5 @@
 """
-uccsd_unitary.py - A module for generating unitary matrices
-                   that represent UCCSD operator circuits.
+uccsdcircuit.py -  Functions for generating circuit for UCCSD for various molecules
 """
 
 import numpy as np
