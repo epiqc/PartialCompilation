@@ -15,7 +15,7 @@ from qiskit.transpiler.passes import (BasicSwap, CXCancellation,
 ### CONSTANTS ###
 
 # See Gate_Times.ipnyb for determination of these pulse times
-GATE_TO_PULSE_TIME = {'h': 2.1, 'cx': 7.1, 'rz': 0.3, 'rx': 4.2, 'x': 4.2}
+GATE_TO_PULSE_TIME = {'h': 2.1, 'cx': 7.1, 'rz': 0.3, 'rx': 4.2, 'x': 4.2, 'swap': 7.4}
 
 unitary_backend = BasicAer.get_backend('unitary_simulator')
 state_backend = Aer.get_backend('statevector_simulator')
@@ -160,6 +160,65 @@ def squash_circuit(circuit):
     return new_circuit
 
 
+PAULI_GATE_TO_ROTATION_GATE = {XGate: RXGate,
+                               YGate: RYGate,
+                               ZGate: RZGate}
+
+
+def _convert_pauli_gates_into_rotation_gates(circuit):
+    """Mutates the circuit by transforming X into RX(PI) and similar for Y & Z."""
+
+    new_gates = []
+
+    for gate in circuit.data:
+        rotation_gate = PAULI_GATE_TO_ROTATION_GATE.get(type(gate))
+        if rotation_gate is not None:
+            new_gates.append(rotation_gate(np.pi, gate.qargs[0]))
+        else:
+            new_gates.append(gate)
+
+    circuit.data = new_gates
+
+
+def _is_rotation_gate(gate):
+    return type(gate) in PAULI_GATE_TO_ROTATION_GATE.values()
+
+
+def merge_rotation_gates(circuit):
+    """Mutates the circuit by merging consecutive RX (or RY or RZ) gates on the same qubit.
+
+    NB it would be more efficient to operate directly via DAG."""
+
+    _convert_pauli_gates_into_rotation_gates(circuit)
+
+    new_gates = []
+
+    for i, gate in enumerate(circuit.data):
+        if type(gate) in PAULI_GATE_TO_ROTATION_GATE.values():
+            if gate.params[0] == 0:  # skip 0-degree rotations
+                continue
+
+            target_qubit = gate.qargs[0]
+            j = i + 1
+            while j < len(circuit.data):
+                if target_qubit in circuit.data[j].qargs:
+                    if type(circuit.data[j]) == type(gate):
+                        # add the rotation angle to the current gate and 0 the jth gate's angle
+                        gate.params[0] = (gate.params[0] + circuit.data[j].params[0]) % (2 * np.pi)
+                        circuit.data[j].params[0] = 0
+                    else:
+                        break
+                j += 1
+
+            if gate.params[0] != 0:
+                new_gates.append(gate)
+
+        else:
+            new_gates.append(gate)
+
+    circuit.data = new_gates
+
+
 def append_gate(circuit, register, gate, indices=None):
     """Append a quantum gate to a new circuit.
     Args:
@@ -212,6 +271,38 @@ def append_gate(circuit, register, gate, indices=None):
         raise ValueError("append_gate() did not recognize gate %s" % gate)
 
     constructor(*gate.params, *qubits)
+
+
+
+def get_nearest_neighbor_coupling_list(width, height, directed=True):
+    """Returns a coupling list for nearest neighbor (rectilinear grid) architecture.
+
+    Qubits are numbered in row-major order with 0 at the top left and
+    (width*height - 1) at the bottom right.
+
+    If directed is True, the coupling list includes both  [a, b] and [b, a] for each edge.
+    """
+    coupling_list = []
+
+    def _qubit_number(row, col):
+        return row * width + col
+
+    # horizontal edges
+    for row in range(height):
+        for col in range(width - 1):
+            coupling_list.append((_qubit_number(row, col), _qubit_number(row, col + 1)))
+            if directed:
+                coupling_list.append((_qubit_number(row, col + 1), _qubit_number(row, col)))
+
+    # vertical edges
+    for col in range(width):
+        for row in range(height - 1):
+            coupling_list.append((_qubit_number(row, col), _qubit_number(row + 1, col)))
+            if directed:
+                coupling_list.append((_qubit_number(row + 1, col), _qubit_number(row, col)))
+
+    return coupling_list
+
 
 def _tests():
     """A function to run tests on the module"""

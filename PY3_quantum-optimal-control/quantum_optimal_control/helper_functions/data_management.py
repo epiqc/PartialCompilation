@@ -197,12 +197,12 @@ class H5File(h5py.File):
     def save_dict(self, dict, group='/'):
         if group not in self:
             self.create_group(group)
-        for k in list(dict.keys()):
+        for k in dict.keys():
             self[group].attrs[k] = dict[k]
 
     def get_dict(self, group='/'):
         d = {}
-        for k in list(self[group].attrs.keys()):
+        for k in self[group].attrs.keys():
             d[k] = self[group].attrs[k]
         return d
 
@@ -216,7 +216,7 @@ class H5File(h5py.File):
         return self.get_dict(group)
 
     def load_config(self):
-        if 'config' in list(self.attrs.keys()):
+        if 'config' in self.attrs.keys():
             return AttrDict(json.loads(self.attrs['config']))
         else:
             return None

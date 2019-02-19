@@ -72,17 +72,17 @@ def Grape(H0, Hops, Hnames, U, total_time, steps, states_concerned_list, converg
             hf.add('method', method.encode('utf8'))
 
             g1 = hf.create_group('convergence')
-            for k, v in list(convergence.items()):
+            for k, v in convergence.items():
                 g1.create_dataset(k, data=v)
 
             if not reg_coeffs is None:
                 g2 = hf.create_group('reg_coeffs')
-                for k, v in list(reg_coeffs.items()):
+                for k, v in reg_coeffs.items():
                     g2.create_dataset(k, data=v)
 
             if not dressed_info is None:
                 g3 = hf.create_group('dressed_info')
-                for k, v in list(dressed_info.items()):
+                for k, v in dressed_info.items():
                     g3.create_dataset(k, data=v)
 
     if U0 is None:
