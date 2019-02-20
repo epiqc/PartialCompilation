@@ -9,7 +9,7 @@ from qiskit.extensions.standard import *
 from qiskit.mapper import CouplingMap, swap_mapper
 from qiskit.converters import circuit_to_dag, dag_to_circuit
 from qiskit.transpiler import PassManager, transpile
-from qiskit.transpiler.passes import (BasicSwap, CXCancellation,
+from qiskit.transpiler.passes import (BasicSwap, CXCancellation, HCancellation,
                                       CommutationTransformation, Optimize1qGates)
 
 ### CONSTANTS ###
@@ -50,11 +50,9 @@ def impose_swap_coupling(circuit, coupling_list):
     coupled_circuit = dag_to_circuit(coupled_dag)
     return coupled_circuit
 
-# TOOD: Implement circuit optimization for clifford gates.
 def optimize_circuit(circuit, coupling_list):
     """Use the qiskit transpiler module to perform a suite of optimizations on
-    the given circuit. NOTE: Circuit must be comprised of basis gates
-    (U1, U2, U3, CX, etc.).
+    the given circuit, including imposing swap coupling.
     Args:
     circuit :: qiskit.QuantumCircuit - the circuit to optimize
     coupling_list :: [(int, int)] - the list of connected qubit pairs
@@ -62,12 +60,14 @@ def optimize_circuit(circuit, coupling_list):
     Returns:
     optimized_circuit :: qiskit.QuantumCircuit - the optimized circuit
     """
+    # TODO: implement rotation merge for clifford gates as pass.
+    merge_rotation_gates(circuit)
+
     coupling_map = CouplingMap(coupling_list)
     
     pass_manager = PassManager()
-    pass_manager.append(Optimize1qGates())
+    pass_manager.append(HCancellation())
     pass_manager.append(CXCancellation())
-    pass_manager.append(CommutationTransformation())
     pass_manager.append(BasicSwap(coupling_map))
 
     optimized_circuit = transpile(circuit, backend=state_backend,
@@ -94,29 +94,6 @@ def get_max_pulse_time(circuit):
         total_time += layer_time
 
     return total_time
-
-
-# Note: lists are not hashable in python so I can not think of a better than O(n)
-# way to compare lists for uniqueness.
-# Suggestion: Tuples are hashable.
-def redundant(gates, new_gate):
-    """Determines if new_gate has the same parameters if as those in gates.
-    Args:
-    gates :: [qiskit.QuantumGate] - a list of gates
-    new_gate :: qiskit.QuantumGate - the quantum gate to compare for uniqueness
-    
-    Returns:
-    redundant :: bool - whether or not a gate with the same parameters as new_gate
-                        is already contained in gates
-    """
-    redundant = False
-
-    for gate in gates:
-        if new_gate.params == gate.params:
-            redundant = True
-            break
-
-    return redundant
 
 def squash_circuit(circuit):
     """For a given circuit, return a new circuit that has the minimum number
@@ -159,11 +136,9 @@ def squash_circuit(circuit):
 
     return new_circuit
 
-
 PAULI_GATE_TO_ROTATION_GATE = {XGate: RXGate,
                                YGate: RYGate,
                                ZGate: RZGate}
-
 
 def _convert_pauli_gates_into_rotation_gates(circuit):
     """Mutates the circuit by transforming X into RX(PI) and similar for Y & Z."""
@@ -218,6 +193,42 @@ def merge_rotation_gates(circuit):
 
     circuit.data = new_gates
 
+def h_cancellation(circuit):
+    """Mutates the circuit by removing neighboring hadamard gate pairs, 
+    as these pairs correspond to the identity.
+    Args:
+    circuit :: qiskit.QuantumCircuit - the circuit to optimize
+    Returns: nothing
+    """
+    new_gates = list()
+    gate_count = len(circuit.data)
+    # Traverse the gate list and remove neighboring hadamards.
+    i = 0
+    while i < gate_count:
+        print(i)
+        # Do not check for a neighboring H on the last gate.
+        if i == gate_count - 1:
+            break
+        
+        # Remove two consecutive gates if they are both hadamards
+        # and act on the same wire.
+        gate = circuit.data[i]
+        next_gate = circuit.data[i + 1]
+        gate_is_hadamard = isinstance(gate, HGate)
+        print("gate_is_hadamard", gate_is_hadamard)
+        next_gate_is_hadamard = isinstance(next_gate, HGate)
+        print("next_gate_is_hadamard", next_gate_is_hadamard)
+        same_wire = gate.qargs[0][1] == next_gate.qargs[0][1]
+        print("same_wire", same_wire)
+        if (gate_is_hadamard and next_gate_is_hadamard and same_wire):
+            print("removing {} and {}".format(gate.qargs, next_gate.qargs))
+            circuit.data.remove(gate)
+            circuit.data.remove(next_gate)
+            gate_count -= 2
+
+        i += 1
+
+    # ENDWHILE
 
 def append_gate(circuit, register, gate, indices=None):
     """Append a quantum gate to a new circuit.
@@ -266,6 +277,8 @@ def append_gate(circuit, register, gate, indices=None):
         constructor = circuit.rz
     elif isinstance(gate, CnotGate):
         constructor = circuit.cx
+    elif isinstance(gate, SwapGate):
+        constructor = circuit.swap
     # TODO: extend to all gates?
     else:
         raise ValueError("append_gate() did not recognize gate %s" % gate)
@@ -303,10 +316,10 @@ def get_nearest_neighbor_coupling_list(width, height, directed=True):
 
     return coupling_list
 
-
 def _tests():
     """A function to run tests on the module"""
     pass
 
 if __name__ == "__main__":
     _tests()
+

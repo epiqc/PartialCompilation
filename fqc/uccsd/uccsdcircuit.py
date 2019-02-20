@@ -15,12 +15,9 @@ from qiskit.chemistry.aqua_extensions.components.variational_forms import UCCSD
 from qiskit.chemistry.aqua_extensions.components.initial_states import HartreeFock
 from qiskit.chemistry.core import Hamiltonian, QubitMappingType
 
-from fqc.models import UCCSDSlice
-from fqc.util import get_unitary, squash_circuit, append_gate, redundant
-
+from fqc.util import get_unitary
 
 ### BUILD CIRCUTS AND UNITARIES ###
-
 
 class MoleculeInfo(object):
     def __init__(self, atomic_string, orbital_reduction, active_occupied=[], active_unoccupied=[]):
@@ -61,7 +58,7 @@ def get_uccsd_circuit(molecule, theta_vector=None, use_basis_gates=False):
        
     Returns:
     circuit :: qiskit.QuantumCircuit - the UCCSD circuit parameterized
-                                       by theta_vector
+                                       by theta_vector, unoptimized
     """
     molecule_info = MOLECULE_TO_INFO[molecule]
     driver = PySCFDriver(atom=molecule_info.atomic_string, basis='sto3g')
@@ -90,95 +87,7 @@ def get_uccsd_circuit(molecule, theta_vector=None, use_basis_gates=False):
 
     return var_form.construct_circuit(theta_vector, use_basis_gates=use_basis_gates)
 
-
-def _is_theta_dependent(gate):
-    """Return ture if a gate is dependent on the theta vector,
-    false otherwise.
-    Note:
-    RZ is the only theta dependent gate in the UCCSD circuit and the only RZ gates
-    in the UCCSD circuit are theta dependent. Therefore, if a gate is RZ then
-    it is theta dependent.
-
-    Args:
-    gate :: qiskit.QuantumGate - an arbitrary quantum gate
-    """
-    return isinstance(gate, RZGate)
-
-def get_uccsd_slices(theta_vector):
-    """Return a list of the decomposition of the full UCCSD circuit
-    parameterized by theta_vector into theta-dependent and non-theta-dependent
-    slices
-    Args:
-    theta_vector :: array - arguments for the vqe ansatz
-    
-    Returns:
-    slice list :: [Slice] - a list of slice objects that contain
-                            spans of partial circuits that are either
-                            theta dependent or not theta dependent
-    """
-    full_circuit = get_uccsd_circuit(theta_vector)
-    # The circuit width is the number of registers, i.e. qubits.
-    full_circuit_width = full_circuit.width()
-    gates = full_circuit.data
-    gate_count = len(gates)
-    slices = list()
-
-    # Walk the list of gates and make a new quantum circuit for every continuous
-    # span of theta dependent or not theta dependent gates.
-    gates_encountered = 0
-    while gates_encountered < gate_count:
-        # Construct a new circuit for the span.
-        register = QuantumRegister(full_circuit_width)
-        circuit = QuantumCircuit(register)
-
-        # Traverse the gate list and construct a circuit that
-        # is either a continuous span of theta-dependent gates or
-        # not theta_dependent gates
-        redundant = False
-        gate_is_theta_dependent = False
-        last_gate_was_theta_dependent = False
-        first_gate = True
-        for gate in gates[gates_encountered:]:
-            gate_is_theta_dependent = _is_theta_dependent(gate)
-
-            if (gate_is_theta_dependent and
-                    (last_gate_was_theta_dependent or first_gate)):
-                last_gate_was_theta_dependent = True
-                gates_encountered += 1
-
-            elif (not gate_is_theta_dependent and
-                    (not last_gate_was_theta_dependent or first_gate)):
-                last_gate_was_theta_dependent = False
-                gates_encountered += 1
-
-            else:
-                break
-            
-            append_gate(circuit, register, gate)
-            
-            if first_gate:
-                first_gate = False
-        
-        # Construct a slice from the partial circuit.
-        # Check that the theta gate is not redundant.
-        if last_gate_was_theta_dependent:
-            params = circuit.data[0].params
-            for uccsdslice in slices:
-                if (uccsdslice.theta_dependent
-                      and uccsdslice.circuit.data[0].params == params):
-                    redundant = True
-                    break
-                    
-        # Get the unitary of the circuit.
-        slices.append(UCCSDSlice(circuit,
-                                 theta_dependent=last_gate_was_theta_dependent,
-                                 redundant=redundant))
-        #ENDFOR
-
-    #ENDWHILE
-
-    return slices
-
+#TODO: deprecated
 def save_uccsd_slices(theta_vector, file_name):
     """Save the UCCSD slices (and their squashed versions, if they exist) to a binary file in *.npz format
     Args:
@@ -198,21 +107,7 @@ def save_uccsd_slices(theta_vector, file_name):
 
 def _tests():
     """A function to run tests on the module"""
-    theta = [np.random.random() * 2 * np.pi for _ in range(8)]
-    slices = get_uccsd_slices(theta)
-
-    for uccsdslice in slices:
-        squashed_circuit = squash_circuit(uccsdslice.circuit)
-        squashable = False
-        if squashed_circuit.width() < uccsdslice.circuit.width():
-            squashable = True
-        print("theta_dependent: {}, redundant: {}, squashable: {}"
-              "".format(uccsdslice.theta_dependent, uccsdslice.redundant,
-                        squashable))
-        print(uccsdslice.circuit)
-        if squashable:
-            print("squashed circuit:")
-            print(squashed_circuit)
+    pass
 
 if __name__ == "__main__":
     _tests()

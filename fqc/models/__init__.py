@@ -1,6 +1,5 @@
 """Data Models"""
 
-from .circuitslice import CircuitSlice
-from .uccsdslice import UCCSDSlice
+from .circuitslice import CircuitSlice, get_slices
 
-__all__ = ['CircuitSlice', 'UCCSDSlice']
+__all__ = ['CircuitSlice', 'get_slices']

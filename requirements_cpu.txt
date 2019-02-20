@@ -7,7 +7,7 @@ attrs==18.2.0
 Babel==2.6.0
 backcall==0.1.0
 better-apidoc==0.2.0
-bleach==3.1.0
+bleach==1.5.0
 certifi==2018.11.29
 cffi==1.11.5
 chardet==3.0.4
@@ -26,11 +26,12 @@ docutils==0.14
 entrypoints==0.3
 extras==1.0.0
 fixtures==3.0.0
--e git+git@github.com:tpr0p/vqe.git@b42a15d03df24e1be2625fca8f03fd5dff740846#egg=fqc
+-e git+git@github.com:tpr0p/fqc.git@1e1001bcd4aa7ebc90b0395ae42a11f0473664b3#egg=fqc
 future==0.17.1
 gast==0.2.2
 grpcio==1.18.0
 h5py==2.9.0
+html5lib==0.9999999
 idna==2.8
 imagesize==1.1.0
 ipykernel==5.1.0
@@ -97,12 +98,12 @@ PyYAML==3.13
 pyzmq==17.1.2
 qiskit==0.7.2
 qiskit-aer==0.1.1
--e git+git@github.com:tpr0p/vqe.git@b42a15d03df24e1be2625fca8f03fd5dff740846#egg=qiskit_aqua&subdirectory=qiskit-aqua
--e git+git@github.com:tpr0p/vqe.git@b42a15d03df24e1be2625fca8f03fd5dff740846#egg=qiskit_chemistry&subdirectory=qiskit-chemistry
+-e git+git@github.com:tpr0p/fqc.git@1e1001bcd4aa7ebc90b0395ae42a11f0473664b3#egg=qiskit_aqua&subdirectory=qiskit-aqua
+-e git+git@github.com:tpr0p/fqc.git@1e1001bcd4aa7ebc90b0395ae42a11f0473664b3#egg=qiskit_chemistry&subdirectory=qiskit-chemistry
 qiskit-ibmq-provider==0.1rc1
--e git+git@github.com:tpr0p/vqe.git@b42a15d03df24e1be2625fca8f03fd5dff740846#egg=qiskit_terra&subdirectory=qiskit-terra
+-e git+git@github.com:tpr0p/fqc.git@1e1001bcd4aa7ebc90b0395ae42a11f0473664b3#egg=qiskit_terra&subdirectory=qiskit-terra
 qtconsole==4.4.3
--e git+git@github.com:tpr0p/vqe.git@b42a15d03df24e1be2625fca8f03fd5dff740846#egg=quantum_optimal_control&subdirectory=PY3_quantum-optimal-control
+-e git+git@github.com:tpr0p/fqc.git@1e1001bcd4aa7ebc90b0395ae42a11f0473664b3#egg=quantum_optimal_control&subdirectory=PY3_quantum-optimal-control
 qutip==4.3.1
 requests==2.21.0
 requests-ntlm==1.1.0
@@ -120,7 +121,7 @@ stevedore==1.30.0
 sympy==1.3
 tensorboard==1.12.2
 tensorflow==1.3.0
-tensorflow-gpu==1.12.0
+tensorflow-tensorboard==0.1.8
 termcolor==1.1.0
 terminado==0.8.1
 testpath==0.4.2
