@@ -1,11 +1,16 @@
 """
 uccsdslice.py - A  module for defining uccsd circuit slice classes and methods.
 """
+import numpy as np
 from qiskit import QuantumRegister, QuantumCircuit
 from qiskit.extensions.standard import RZGate
 
 from fqc.models import CircuitSlice
-from fqc.util import append_gate
+from fqc.uccsd import get_uccsd_circuit
+from fqc.util import (append_gate, optimize_circuit,
+                      get_nearest_neighbor_coupling_list)
+
+### CLASS DEFINITIONS ###
 
 class UCCSDSlice(CircuitSlice):
     """
@@ -15,25 +20,78 @@ class UCCSDSlice(CircuitSlice):
     Fields:
     circuit :: qiskit.QuantumCircuit - the partial circuit the slice
                                        represents
+    register :: qiskit.QuantumRegister - the register of the circuit
     unitary :: np.matrix - the unitary matrix that represents the circuit
-    theta_dependent :: bool - whether or not the partical circuit
+    parameterized :: bool - whether or not the partical circuit
                               is parameterized by the theta vector
-    thetas :: [float] - the parameterized theta values in the slice
-                        that correspond to the RZGates sequentially
-                        contained in the slice
+    angles :: [float] - the parameterized values in the slice
+                        that correspond to the angle of the RZGates
+                        sequentially contained in the slice
+    _parameterized_gates :: [qiskit.QuantumGate] - list of gates that depend 
+                                                   on circuit parameteriation
     """
     
-    def __init__(self, circuit, theta_dependent, thetas=None,
-                 redundant=False):
+    def __init__(self, circuit, register, parameterized):
         """
         Args:
         circuit :: qiskit.QuantumCircuit - see class fields
-        theta_dependent :: bool - see class fields
-        thetas :: [float] - see class fields
+        register :: qiskit.QuantumRegister - see class fields
+        parameterized :: bool - see class fields
         """
-        super().__init__(circuit)
-        self.theta_dependent = theta_dependent
-        self.thetas = thetas
+        super().__init__(circuit, register)
+        self.parameterized = parameterized
+
+        # Get each of the the parameterized gates in the circuit,
+        # as well as their rotation angle value.
+        self._parameterized_gates = list()
+        self.angles = list()
+        for gate in circuit.data:
+            if _is_theta_dependent(gate):
+                self._parameterized_gates.append(gate)
+                self.angles.append(gate.params[0])
+                
+    
+    def __add__(self, right):
+        """
+        Concatenate two slices without modifying the original slices.
+        Args:
+        right :: fqc.models.UCCSDSlice - the slice to concatenate to self
+        
+        Returns:
+        new_slice :: fqc.models.UCCSDSlice - the slice that is the concatenation
+                                             of each of the slices
+        """
+        if not self.circuit.width() == right.circuit.width():
+            raise ValueError("Incompatible qubit circuits with different"
+                             " qubit counts")
+        # Concatenate right to the right side of this circuit.
+        register = QuantumRegister(self.circuit.width())
+        circuit = QuantumCircuit(register)
+        for gate in self.circuit.data:
+            append_gate(circuit, register, gate)
+        for gate in right.circuit.data:
+            append_gate(circuit, register, gate)
+        parameterized = self.parameterized or right.parameterized
+
+        return UCCSDSlice(circuit, register, parameterized)
+
+
+    def update_angles(self, angles):
+        """
+        Update the value of each of the parameterized gates and the
+        corresponding class field.
+        Args:
+        angles :: [float] - a list of new values to store in each of the
+                            parameterized gates
+        
+        Returns: nothing
+        """
+        self.angles = angles
+        for i, gate in enumerate(self._parameterized_gates):
+            gate.params = [angles[i]]
+
+
+### HELPER METHODS ###
 
 def _is_theta_dependent(gate):
     """Return ture if a gate is dependent on the theta vector,
@@ -48,6 +106,7 @@ def _is_theta_dependent(gate):
     """
     return isinstance(gate, RZGate)
 
+### PUBLIC METHODS ###
 
 def get_uccsd_slices(circuit):
     """Greedily slice a UCCSD circuit into continuous runs of theta dependent
@@ -100,15 +159,8 @@ def get_uccsd_slices(circuit):
                 first_gate = False
             
         #ENDFOR
-        # Collect theta values if the slice is theta dependent.
-        thetas = None
-        if last_gate_had_attribute:
-            thetas = list()
-            for gate in circuit.data:
-                if _is_theta_dependent(gate):
-                    thetas.append(gate.params)
 
-        slices.append(UCCSDSlice(circuit, last_gate_had_attribute, thetas))
+        slices.append(UCCSDSlice(circuit, register, last_gate_had_attribute))
 
     #ENDWHILE
 
@@ -117,12 +169,12 @@ def get_uccsd_slices(circuit):
 def _tests():
     """Run tests on the module.
     """
-    import numpy as np
-    from fqc.uccsd import get_uccsd_circuit
+    coupling_list = get_nearest_neighbor_coupling_list(2, 2)
     theta = [np.random.random() for _ in range(8)]
-    circuit = get_uccsd_circuit('LiH', theta)
+    circuit = optimize_circuit(get_uccsd_circuit('LiH', theta), coupling_list)
     slices = get_uccsd_slices(circuit)
     for uccsdslice in slices:
+        print(uccsdslice.angles)
         print(uccsdslice.circuit)
 
 if __name__ == "__main__":

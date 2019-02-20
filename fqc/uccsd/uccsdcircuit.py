@@ -1,23 +1,13 @@
 """
 uccsdcircuit.py -  Functions for generating circuit for UCCSD for various molecules
 """
-
-import numpy as np
-import pickle
-
-#lib from Qiskit Terra
 from qiskit import QuantumCircuit, QuantumRegister
-from qiskit.extensions.standard import *
-
-# lib from Qiskit Aqua Chemistry
 from qiskit.chemistry.drivers import PySCFDriver
 from qiskit.chemistry.aqua_extensions.components.variational_forms import UCCSD
 from qiskit.chemistry.aqua_extensions.components.initial_states import HartreeFock
 from qiskit.chemistry.core import Hamiltonian, QubitMappingType
 
 from fqc.util import get_unitary
-
-### BUILD CIRCUTS AND UNITARIES ###
 
 class MoleculeInfo(object):
     def __init__(self, atomic_string, orbital_reduction, active_occupied=[], active_unoccupied=[]):
@@ -49,7 +39,7 @@ MOLECULE_TO_INFO = {
     }
 
 
-def get_uccsd_circuit(molecule, theta_vector=None, use_basis_gates=False):
+def get_uccsd_circuit(molecule, theta_vector, use_basis_gates=False):
     """Produce the full UCCSD circuit.
     Args:
     molecule :: string - must be a key of MOLECULE_TO_INFO
@@ -82,28 +72,7 @@ def get_uccsd_circuit(molecule, theta_vector=None, use_basis_gates=False):
                      initial_state=HF_state, qubit_mapping=map_type,
                      two_qubit_reduction=qubit_reduction, num_time_slices=1)
 
-    if theta_vector is None:
-        theta_vector = [np.random.random() * 2 * np.pi for _ in range(var_form._num_parameters)]
-
     return var_form.construct_circuit(theta_vector, use_basis_gates=use_basis_gates)
-
-#TODO: deprecated
-def save_uccsd_slices(theta_vector, file_name):
-    """Save the UCCSD slices (and their squashed versions, if they exist) to a binary file in *.npz format
-    Args:
-    theta_vector :: array - arguments for the vqe ansatz
-    file_nmae :: string - the filepath to save to
-
-    """
-    slices = get_uccsd_slices(theta_vector)
-
-
-    # In the data file map something of the form UN_M to the Nth circuit that has a circuit depth of M
-    file_data = [(get_unitary(squash_circuit(uccsdslice.circuit)), uccsdslice.circuit.depth()) for uccsdslice in slices]
-
-    # Save the matrices jto the specified filepath
-    with open(file_name, 'wb') as f:
-        pickle.dump(file_data, f, protocol=2, fix_imports=True)
 
 def _tests():
     """A function to run tests on the module"""

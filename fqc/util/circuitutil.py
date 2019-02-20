@@ -9,8 +9,7 @@ from qiskit.extensions.standard import *
 from qiskit.mapper import CouplingMap, swap_mapper
 from qiskit.converters import circuit_to_dag, dag_to_circuit
 from qiskit.transpiler import PassManager, transpile
-from qiskit.transpiler.passes import (BasicSwap, CXCancellation, HCancellation,
-                                      CommutationTransformation, Optimize1qGates)
+from qiskit.transpiler.passes import (BasicSwap, CXCancellation, HCancellation)
 
 ### CONSTANTS ###
 
@@ -65,9 +64,13 @@ def optimize_circuit(circuit, coupling_list):
     merge_rotation_gates(circuit)
 
     coupling_map = CouplingMap(coupling_list)
-    
+
     pass_manager = PassManager()
     pass_manager.append(HCancellation())
+    pass_manager.append(CXCancellation())
+    # Some CNOT identities are interleaved between others,
+    # for this reason a second pass is required. More passes
+    # may be required for other circuits.
     pass_manager.append(CXCancellation())
     pass_manager.append(BasicSwap(coupling_map))
 
