@@ -16,7 +16,6 @@ class HCancellation(TransformationPass):
         """
         h_runs = dag.collect_runs(["h"])
         for h_run in h_runs:
-            print("{} - {}".format(h_run, len(h_run)))
             # Partition the h_run into chunks that are on the same wire.
             partition = list()
             chunk = list()

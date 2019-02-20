@@ -34,6 +34,7 @@ def get_unitary(circuit):
     unitary = job.result().get_unitary(circuit, decimals=10)
     return np.matrix(unitary)
 
+# TODO: deprecated, use optimize_circuit
 def impose_swap_coupling(circuit, coupling_list):
     """Impose a qubit topology on the given circuit using swap gates.
     Args:
@@ -136,6 +137,7 @@ def squash_circuit(circuit):
 
     return new_circuit
 
+
 PAULI_GATE_TO_ROTATION_GATE = {XGate: RXGate,
                                YGate: RYGate,
                                ZGate: RZGate}
@@ -193,42 +195,6 @@ def merge_rotation_gates(circuit):
 
     circuit.data = new_gates
 
-def h_cancellation(circuit):
-    """Mutates the circuit by removing neighboring hadamard gate pairs, 
-    as these pairs correspond to the identity.
-    Args:
-    circuit :: qiskit.QuantumCircuit - the circuit to optimize
-    Returns: nothing
-    """
-    new_gates = list()
-    gate_count = len(circuit.data)
-    # Traverse the gate list and remove neighboring hadamards.
-    i = 0
-    while i < gate_count:
-        print(i)
-        # Do not check for a neighboring H on the last gate.
-        if i == gate_count - 1:
-            break
-        
-        # Remove two consecutive gates if they are both hadamards
-        # and act on the same wire.
-        gate = circuit.data[i]
-        next_gate = circuit.data[i + 1]
-        gate_is_hadamard = isinstance(gate, HGate)
-        print("gate_is_hadamard", gate_is_hadamard)
-        next_gate_is_hadamard = isinstance(next_gate, HGate)
-        print("next_gate_is_hadamard", next_gate_is_hadamard)
-        same_wire = gate.qargs[0][1] == next_gate.qargs[0][1]
-        print("same_wire", same_wire)
-        if (gate_is_hadamard and next_gate_is_hadamard and same_wire):
-            print("removing {} and {}".format(gate.qargs, next_gate.qargs))
-            circuit.data.remove(gate)
-            circuit.data.remove(next_gate)
-            gate_count -= 2
-
-        i += 1
-
-    # ENDWHILE
 
 def append_gate(circuit, register, gate, indices=None):
     """Append a quantum gate to a new circuit.
@@ -286,7 +252,6 @@ def append_gate(circuit, register, gate, indices=None):
     constructor(*gate.params, *qubits)
 
 
-
 def get_nearest_neighbor_coupling_list(width, height, directed=True):
     """Returns a coupling list for nearest neighbor (rectilinear grid) architecture.
 
@@ -315,6 +280,7 @@ def get_nearest_neighbor_coupling_list(width, height, directed=True):
                 coupling_list.append((_qubit_number(row + 1, col), _qubit_number(row, col)))
 
     return coupling_list
+
 
 def _tests():
     """A function to run tests on the module"""
