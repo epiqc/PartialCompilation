@@ -21,7 +21,6 @@ class UCCSDSlice(CircuitSlice):
     circuit :: qiskit.QuantumCircuit - the partial circuit the slice
                                        represents
     register :: qiskit.QuantumRegister - the register of the circuit
-    unitary :: np.matrix - the unitary matrix that represents the circuit
     parameterized :: bool - whether or not the partical circuit
                               is parameterized by the theta vector
     angles :: [float] - the parameterized values in the slice
@@ -108,11 +107,17 @@ def _is_theta_dependent(gate):
 
 ### PUBLIC METHODS ###
 
-def get_uccsd_slices(circuit):
+def get_uccsd_slices(circuit, granularity=1):
     """Greedily slice a UCCSD circuit into continuous runs of theta dependent
     gates and non-theta-dependent gates.
     Args:
     circuit :: qiskit.QuantumCircuit - the UCCSD circuit to slice
+    granularity :: int > 0 - the base set of slices (granularity = 1) are
+    the sequential theta-dependent and non-theta-dependent slice. Specifying
+    a granularity greater than 1 concatenates these base slices. For instance,
+    granularity = 2 will concatenate every two slices in the base slice list,
+    resulting in a theta-dependent and non theta-dependent slice being
+    concatenated together. 
 
     Returns:
     slices :: [fqc.models.UCCSDSlice] - the slices of the circuit
@@ -157,14 +162,40 @@ def get_uccsd_slices(circuit):
             
             if first_gate:
                 first_gate = False
-            
         #ENDFOR
-
         slices.append(UCCSDSlice(circuit, register, last_gate_had_attribute))
-
     #ENDWHILE
 
-    return slices
+    if granularity == 1:
+        return slices
+    elif granularity > 1:
+        # Walk the list of slices and concatenate granularity number of
+        # gates together.
+        i = 0
+        slice_count = len(slices)
+        new_slices = list()
+        while i < slice_count:
+            new_slice = slices[i]
+            # Concatenate granularity - 1 slices to the current slice.
+            for j in range(i + 1, i + granularity):
+                # If the end of the slices list has been reached, pull out.
+                if j > slice_count - 1:
+                    break
+                new_slice += slices[j]
+            # ENDFOR
+            # Append the last unparameterized base slice to the final new slice
+            # if it is the lone last slice.
+            if slice_count % granularity == 1 and i + granularity == slice_count - 1:
+                new_slice += slices[-1]
+                i += 1
+            new_slices.append(new_slice)
+            i += granularity
+        #ENDWHILE
+        return new_slices
+    else:
+        raise ValueError("granularity must be greater than 0 but got {}"
+                         "".format(granularity))
+
 
 def _tests():
     """Run tests on the module.

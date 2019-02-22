@@ -15,18 +15,25 @@ class CircuitSlice(object):
     Fields:
     circuit :: qiskit.QuantumCircuit - the partial circuit the slice represents
     register :: qiskit.QuantumRegister - the register for the circuit
-    unitary :: np.matrix - the unitary for the partial circuit
     """
     
     def __init__(self, circuit, register):
         """
         Args:
         circuit :: qiskit.QuantumCircuit - see class fields
+        register :: qiskit.QuantumRegister - see class fields
         """
         super().__init__()
         self.circuit = circuit
         self.register = register
-        self.unitary = get_unitary(circuit)
+
+    def unitary(self):
+        """Return the unitary corresponding to the slice's circuit.
+        Returns: unitary :: np.matrix - the unitary corresponding to the
+                                        slice's circuit
+        """
+        return get_unitary(self.circuit)
+
 
 def get_slices(circuit):
     """Greedily slice a circuit into continuous runs of gates with

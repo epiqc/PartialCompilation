@@ -60,6 +60,7 @@ def optimize_circuit(circuit, coupling_list):
     Returns:
     optimized_circuit :: qiskit.QuantumCircuit - the optimized circuit
     """
+    # TODO: optimize until gates count stays stagnant.
     # TODO: implement rotation merge for clifford gates as pass.
     merge_rotation_gates(circuit)
 
