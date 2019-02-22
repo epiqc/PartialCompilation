@@ -8,6 +8,7 @@ import numpy as np
 # All of these frequencies below are in GHz:
 OMEGA_DEFAULT = 2 * np.pi * 5
 ALPHA_DEFAULT = 2 * np.pi * -0.2
+#G_DEFAULT = 0
 G_DEFAULT = 2 * np.pi * 0.05
 CHARGE_DRIVE_MAXA = 2 * np.pi * 0.1
 FLUX_DRIVE_MAXA = 2 * np.pi * 1.5

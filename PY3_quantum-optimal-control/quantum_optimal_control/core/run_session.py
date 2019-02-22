@@ -143,6 +143,7 @@ class run_session:
         if self.show_plots:
             self.conv.update_plot_summary(self.l, self.rl, self.anly)
         else:
+            self.elapsed = time.time() - self.start_time
             print('Error = :%1.2e; Runtime: %.1fs; Iterations = %d, grads =  %10.3e, unitary_metric = %.5f' % (self.l, self.elapsed, self.iterations, self.g_squared, self.metric), flush=True)
 
     def minimize_opt_fun(self, x):
