@@ -50,12 +50,13 @@ def impose_swap_coupling(circuit, coupling_list):
     coupled_circuit = dag_to_circuit(coupled_dag)
     return coupled_circuit
 
-def optimize_circuit(circuit, coupling_list):
+def optimize_circuit(circuit, coupling_list=None):
     """Use the qiskit transpiler module to perform a suite of optimizations on
     the given circuit, including imposing swap coupling.
     Args:
     circuit :: qiskit.QuantumCircuit - the circuit to optimize
     coupling_list :: [(int, int)] - the list of connected qubit pairs
+                     if None is passed in, will not perform mapping
 
     Returns:
     optimized_circuit :: qiskit.QuantumCircuit - the optimized circuit
@@ -63,7 +64,7 @@ def optimize_circuit(circuit, coupling_list):
     # TODO: implement rotation merge for clifford gates as pass.
     merge_rotation_gates(circuit)
 
-    coupling_map = CouplingMap(coupling_list)
+    coupling_map = None if coupling_list is None else CouplingMap(coupling_list)
 
     pass_manager = PassManager()
     pass_manager.append(HCancellation())
@@ -72,7 +73,8 @@ def optimize_circuit(circuit, coupling_list):
     # for this reason a second pass is required. More passes
     # may be required for other circuits.
     pass_manager.append(CXCancellation())
-    pass_manager.append(BasicSwap(coupling_map))
+    if coupling_map is not None:
+        pass_manager.append(BasicSwap(coupling_map))
 
     optimized_circuit = transpile(circuit, backend=state_backend,
                                   coupling_map=coupling_list,
