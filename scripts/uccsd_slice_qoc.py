@@ -46,7 +46,9 @@ def main():
     max_iterations = 1000
     decay = max_iterations / 2
     convergence = {'rate':0.01, 'conv_target': 1e-3,
-                   'max_iterations': max_iterations, 'learning_rate_decay':decay}
+                   'max_iterations': max_iterations, 'learning_rate_decay':decay,
+                   'min_grads': 1e-5}
+    reg_coeffs = {'dwdt': 0.001, 'envelope': 0.01}
     use_gpu = False
     sparse_H = False
     show_plots = False
@@ -66,25 +68,29 @@ def main():
     pool = Pool(BROADWELL_CORE_COUNT)
 
     for i, uccsdslice in enumerate(slices):
+        # Temporary break for debugging purposes.
+        if i > 0:
+            break
         angle_lists = get_angle_lists(len(uccsdslice.angles), angle_step)
         for j, angle_list in enumerate(angle_lists):
+            # Temporary break for debugging purposes.
+            if j > 0:
+                break
             print("slice {}, angle list {}".format(i, j))
-            process_init(uccsdslice, angle_list, i, j, angle_step, H0, Hops,
-                         Hnames, total_time, steps, states_concerned_list,
-                         convergence, method, maxA, use_gpu, sparse_H,
-                         show_plots, data_path)
-            exit()
-            # pool.apply_async(process_init,
-            #                  (uccsdslice, angle_list, i, j, angle_step, H0, Hops,
-            #                   Hnames, total_time, steps, states_concerned_list,
-            #                   convergence, method, maxA, use_gpu, sparse_H,
-            #                   show_plots, data_path))
+            pool.apply_async(process_init,
+                             (uccsdslice, angle_list, i, j, angle_step, H0, Hops,
+                              Hnames, total_time, steps, states_concerned_list,
+                              convergence, reg_coeffs, method, maxA, use_gpu,
+                              sparse_H, show_plots, data_path))
+        # END FOR
+    # END FOR
     pool.close()
     pool.join()
 
 def process_init(uccsdslice, angle_list, i, j, angle_step, H0, Hops, Hnames,
-                 total_time, steps, states_concerned_list, convergence, method,
-                 maxA, use_gpu, sparse_H, show_plots, data_path):
+                 total_time, steps, states_concerned_list, convergence,
+                 reg_coeffs, method, maxA, use_gpu, sparse_H, show_plots,
+                 data_path):
     """Do all necessary process specific tasks before running grape.
     Args: ugly
     Returns: nothing
@@ -92,24 +98,25 @@ def process_init(uccsdslice, angle_list, i, j, angle_step, H0, Hops, Hnames,
     file_name = "pulse_s{}_{}".format(i, j * angle_step)
     log_file = file_name + '.log'
     log_file_path = os.path.join(data_path, log_file)
-    # with open(log_file_path, "w") as log:
-    #     # Redirect everything to a log file.
-    #     sys.stdout = sys.stderr = log
-        # log.write("PID={}\nTIME={}\n".format(os.getpid(), time.time()))
+    with open(log_file_path, "w") as log:
+        # Redirect everything to a log file.
+        # sys.stdout = log
+        # sys.stderr = log
+        log.write("PID={}\nTIME={}\n".format(os.getpid(), time.time()))
         
-    # Display angles, updated circuit, and get unitary.
-    print(angle_list)
-    uccsdslice.update_angles(angle_list)
-    print(uccsdslice.circuit)
-    U = uccsdslice.unitary()
-
-
-    # Run grape.
-    uks, U_f = Grape(H0, Hops, Hnames, U, total_time, steps,
-                     states_concerned_list, convergence = convergence,
-                     method = method, maxA = maxA, use_gpu = use_gpu,
-                     sparse_H = sparse_H, show_plots = show_plots, 
-                     file_name=file_name, data_path = data_path)
+        # Display angles, updated circuit, and get unitary.
+        print(angle_list)
+        uccsdslice.update_angles(angle_list)
+        print(uccsdslice.circuit)
+        U = uccsdslice.unitary()
+        print("got unitary")
+        # Run grape.
+        uks, U_f = Grape(H0, Hops, Hnames, U, total_time, steps,
+                         states_concerned_list, convergence = convergence,
+                         reg_coeffs = reg_coeffs, method = method, maxA = maxA,
+                         use_gpu = use_gpu, sparse_H = sparse_H,
+                         show_plots = show_plots, file_name=file_name,
+                         data_path = data_path)
 
 
 def get_angle_lists(parameterized_gate_count, angle_step):

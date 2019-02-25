@@ -15,9 +15,15 @@ import matplotlib.pyplot as plt
 import re, math
 from datetime import datetime
 
-import config
+# Either define a file named config and append the directory
+# in which it sits to your python path, or define an environment
+# variable that points to an output directory.
+try:
+    import config
+    data_path = config.DATA_PATH
+except ImportError:
+    data_path = os.environ['FQC_DATA_PATH']
 
-data_path = config.DATA_PATH
 file_name = datetime.today().strftime('%h%d')
 
 from quantum_optimal_control.helper_functions.grape_functions import *
