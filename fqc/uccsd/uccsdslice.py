@@ -107,7 +107,7 @@ def _is_theta_dependent(gate):
 
 ### PUBLIC METHODS ###
 
-def get_uccsd_slices(circuit, granularity=1):
+def get_uccsd_slices(circuit, granularity=1, dependence_grouping=False):
     """Greedily slice a UCCSD circuit into continuous runs of theta dependent
     gates and non-theta-dependent gates.
     Args:
@@ -118,6 +118,9 @@ def get_uccsd_slices(circuit, granularity=1):
     granularity = 2 will concatenate every two slices in the base slice list,
     resulting in a theta-dependent and non theta-dependent slice being
     concatenated together. 
+    dependence_grouping :: bool - whether or not consecutive theta dependent
+                                  gates who share the same theta dependence will
+                                  be grouped into the same slice
 
     Returns:
     slices :: [fqc.models.UCCSDSlice] - the slices of the circuit
@@ -166,9 +169,7 @@ def get_uccsd_slices(circuit, granularity=1):
         slices.append(UCCSDSlice(circuit, register, last_gate_had_attribute))
     #ENDWHILE
 
-    if granularity == 1:
-        return slices
-    elif granularity > 1:
+    if granularity > 1:
         # Walk the list of slices and concatenate granularity number of
         # gates together.
         i = 0
@@ -191,11 +192,46 @@ def get_uccsd_slices(circuit, granularity=1):
             new_slices.append(new_slice)
             i += granularity
         #ENDWHILE
-        return new_slices
-    else:
+        slices = new_slices
+    elif granularity != 1:
         raise ValueError("granularity must be greater than 0 but got {}"
                          "".format(granularity))
 
+    # # Concatenate neighboring slices that have the same theta dependence.
+    if dependence_grouping:
+        i = 0
+        slice_count = len(slices)
+        new_slices = list()
+        # Consider each slice.
+        while i < slice_count:
+            new_slice = slices[i]
+            cur_angles = np.array(new_slice.angles)
+            num_concatenated = 0
+            # Consider all slices after the current slice.
+            for j in range(i + 1, slice_count):
+                # Do not consider the next slice if it is out of bounds.
+                if j > slice_count - 1:
+                    break
+                next_slice = slices[j]
+                next_angles = np.array(next_slice.angles)
+                # Concatenate the next slice to the current slice, if it has
+                # the same theta dependence.
+                if cur_angles.all() == next_angles.all():
+                    new_slice += next_slice
+                    num_concatenated += 1
+                else:
+                    break
+            # END FOR
+            # Add the new slice to the list.
+            new_slices.append(new_slice)
+            # Next, in the outer loop, consider the slice after
+            # the last slice concatenated to `new_slice`.
+            i += 1 + num_concatenated
+        # END WHILE
+        slices = new_slices
+    # END IF
+    return slices
+        
 
 def _tests():
     """Run tests on the module.
@@ -203,10 +239,19 @@ def _tests():
     coupling_list = get_nearest_neighbor_coupling_list(2, 2)
     theta = [np.random.random() for _ in range(8)]
     circuit = optimize_circuit(get_uccsd_circuit('LiH', theta), coupling_list)
-    slices = get_uccsd_slices(circuit)
-    for uccsdslice in slices:
+    slices = get_uccsd_slices(circuit, granularity=2)
+    grouped_slices = get_uccsd_slices(circuit, granularity=2,
+                                      dependence_grouping=True)
+    angle_count = 0
+    for uccsdslice in grouped_slices:
         print(uccsdslice.angles)
         print(uccsdslice.circuit)
+        for angle in uccsdslice.angles:
+            assert angle == slices[angle_count].angles[0]
+            angle_count += 1
+
+    print("grouped_slices_count: {}".format(len(grouped_slices)))
+    assert angle_count == 40
 
 if __name__ == "__main__":
     _tests()
