@@ -14,7 +14,7 @@ from qiskit.transpiler.passes import (BasicSwap, CXCancellation, HCancellation)
 ### CONSTANTS ###
 
 # See Gate_Times.ipnyb for determination of these pulse times
-GATE_TO_PULSE_TIME = {'h': 2.1, 'cx': 7.1, 'rz': 0.3, 'rx': 4.2, 'x': 4.2, 'swap': 7.4}
+GATE_TO_PULSE_TIME = {'h': 5.1, 'cx': 14.4, 'rz': 0.4, 'rx': 7.0, 'x': 7.0, 'swap': 19.5}
 
 unitary_backend = BasicAer.get_backend('unitary_simulator')
 state_backend = Aer.get_backend('statevector_simulator')
