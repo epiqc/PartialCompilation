@@ -3,10 +3,10 @@ uccsd_slice_qoc.py - A module for running quantum optimal control on
                      UCCSD slices.
 """
 from itertools import product
-from multiprocessing import Pool
 import os
 import sys
 import time
+import argparse
 
 from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices
 from fqc.util import (optimize_circuit, get_unitary,
@@ -24,10 +24,35 @@ from quantum_optimal_control.core.hamiltonian import (get_H0,
 BROADWELL_CORE_COUNT = 14
 
 def main():
+    # Handle CLI
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--angle-start", type=float, default=0.0, help="the "
+                        "inclusive lower bound of angles to optimize the "
+                        "slice for (units in degrees, behaves like np.arange)")
+    parser.add_argument("--angle-stop", type=float, default=1.0, help="the "
+                        "exclusive upper bound of angles to optimize the "
+                        "slice for (units in degrees, behaves like np.arange)")
+    parser.add_argument("--angle-step", type=float, default=5.0, help="the step size "
+                        "between angle values (units in degrees, behaves "
+                        "like np.arange)")
+    parser.add_argument("--slice-start", type=int, default=0, help="the "
+                        "inclusive lower bound of slice indices to include "
+                        "(0-22)")
+    parser.add_argument("--slice-stop", type=int, default=0, help="the "
+                        "inclusive upper bound of slice indices to include "
+                        "(0-22)")
+    args = vars(parser.parse_args())
+    angle_start = args["angle_start"]
+    angle_stop = args["angle_stop"]
+    angle_step = args["angle_step"]
+    slice_start = args["slice_start"]
+    slice_stop = args["slice_stop"]
+
     # Pair each theta dependent slice with a non-theta dependent slice.
     slice_granularity = 2
-    # Run QOC for every angle in {0, 10, 20, ..., 350}
-    angle_step = 10
+    # For granularity = 2, we assume each slice is only dependent
+    # on one angle.
+    angles_per_slice = 1
 
     # Define output_path
     data_path = ("/project/ftchong/qoc/thomas/uccsd_slice_qoc_g{}"
@@ -62,32 +87,26 @@ def main():
     theta = [np.random.random() for _ in range(8)]
     circuit = optimize_circuit(get_uccsd_circuit('LiH', theta),
                                connected_qubit_pairs)
-    slices = get_uccsd_slices(circuit, granularity=slice_granularity)
-
+    slices = get_uccsd_slices(circuit, granularity=slice_granularity,
+                              dependence_grouping=True)
+    slices = slices[slice_start:slice_stop + 1]
     # Run QOC for every slice on every angle_list.
-    pool = Pool(BROADWELL_CORE_COUNT)
-
     for i, uccsdslice in enumerate(slices):
-        # Temporary break for debugging purposes.
-        if i > 0:
-            break
-        angle_lists = get_angle_lists(len(uccsdslice.angles), angle_step)
+        slice_index = i + slice_start
+        angle_lists = get_angle_lists(angles_per_slice, angle_start,
+                                      angle_stop, angle_step)
         for j, angle_list in enumerate(angle_lists):
-            # Temporary break for debugging purposes.
-            if j > 0:
-                break
-            print("slice {}, angle list {}".format(i, j))
-            pool.apply_async(process_init,
-                             (uccsdslice, angle_list, i, j, angle_step, H0, Hops,
-                              Hnames, total_time, steps, states_concerned_list,
-                              convergence, reg_coeffs, method, maxA, use_gpu,
-                              sparse_H, show_plots, data_path))
+            angle = j * angle_step + angle_start
+            file_name = "pulse_s{}_{}".format(slice_index, angle)
+            process_init(uccsdslice, i, angle, file_name, H0, Hops,
+                         Hnames, total_time, steps, states_concerned_list,
+                         convergence, reg_coeffs, method, maxA, use_gpu,
+                         sparse_H, show_plots, data_path)
         # END FOR
     # END FOR
-    pool.close()
-    pool.join()
 
-def process_init(uccsdslice, angle_list, i, j, angle_step, H0, Hops, Hnames,
+
+def process_init(uccsdslice, i, angle, file_name, H0, Hops, Hnames,
                  total_time, steps, states_concerned_list, convergence,
                  reg_coeffs, method, maxA, use_gpu, sparse_H, show_plots,
                  data_path):
@@ -95,43 +114,50 @@ def process_init(uccsdslice, angle_list, i, j, angle_step, H0, Hops, Hnames,
     Args: ugly
     Returns: nothing
     """
-    file_name = "pulse_s{}_{}".format(i, j * angle_step)
     log_file = file_name + '.log'
     log_file_path = os.path.join(data_path, log_file)
     with open(log_file_path, "w") as log:
         # Redirect everything to a log file.
-        # sys.stdout = log
-        # sys.stderr = log
+        sys.stdout = log
+        sys.stderr = log
         log.write("PID={}\nTIME={}\n".format(os.getpid(), time.time()))
         
         # Display angles, updated circuit, and get unitary.
-        print(angle_list)
-        uccsdslice.update_angles(angle_list)
+        print("SLICE_ID={}\n".format(i))
+        print("ANGLE={}\n".format(angle))
+        uccsdslice.update_angles([angle] * len(uccsdslice.angles))
         print(uccsdslice.circuit)
         U = uccsdslice.unitary()
-        print("got unitary")
+
         # Run grape.
+        log.write("GRAPE_START_TIME={}\n".format(time.time()))
         uks, U_f = Grape(H0, Hops, Hnames, U, total_time, steps,
                          states_concerned_list, convergence = convergence,
                          reg_coeffs = reg_coeffs, method = method, maxA = maxA,
                          use_gpu = use_gpu, sparse_H = sparse_H,
                          show_plots = show_plots, file_name=file_name,
                          data_path = data_path)
+        log.write("GRAPE_END_TIME={}\n".format(time.time()))
 
 
-def get_angle_lists(parameterized_gate_count, angle_step):
+def get_angle_lists(parameterized_gate_count, angle_start, angle_stop,
+                    angle_step):
     """
     Return all possible angle combinations for the parameterized gates.
     Args:
     parameterized_gate_count :: int - the number of gates parameterized by
                                       an angle in the circuit.
+    angle_start :: int - the inclusive lower bound of angles to generate
+    angle_stop :: int - the exclusive upper bound of angles to generate
     angle_step :: int - the step size between angles
 
     Returns:
     angle_lists :: [[float]] - a list of lists of floats with angles to
                                update angles in the slices
     """
-    angle_space = list(np.deg2rad(np.arange(0, 360, angle_step)))
+    angle_space = list(np.deg2rad(np.arange(angle_start,
+                                            angle_stop,
+                                            angle_step)))
     angle_spaces = [angle_space for _ in range(parameterized_gate_count)]
     angle_lists = list(product(*angle_spaces))
     return angle_lists

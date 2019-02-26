@@ -1,6 +1,7 @@
 """
 uccsdcircuit.py -  Functions for generating circuit for UCCSD for various molecules
 """
+import numpy as np
 from qiskit import QuantumCircuit, QuantumRegister
 from qiskit.chemistry.drivers import PySCFDriver
 from qiskit.chemistry.aqua_extensions.components.variational_forms import UCCSD
@@ -76,7 +77,9 @@ def get_uccsd_circuit(molecule, theta_vector, use_basis_gates=False):
 
 def _tests():
     """A function to run tests on the module"""
-    pass
+    theta = [np.random.random() for _ in range(8)]
+    circuit = get_uccsd_circuit('LiH', theta)
+    print(circuit)
 
 if __name__ == "__main__":
     _tests()
