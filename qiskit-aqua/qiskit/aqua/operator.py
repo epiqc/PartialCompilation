@@ -1228,7 +1228,14 @@ class Operator(object):
                     if use_basis_gates:
                         qc_slice.u1(lam, state_registers[top_XYZ_pauli_indices[pauli_idx]])
                     else:
-                        qc_slice.rz(lam, state_registers[top_XYZ_pauli_indices[pauli_idx]])
+                        if lam > 0:
+                            qc_slice.rz(lam, state_registers[top_XYZ_pauli_indices[pauli_idx]])
+                        else:
+                            # use Rz(-theta) = X * Rz(theta) * X
+                            qc_slice.x(state_registers[top_XYZ_pauli_indices[pauli_idx]])
+                            qc_slice.rz(-lam, state_registers[top_XYZ_pauli_indices[pauli_idx]])
+                            qc_slice.x(state_registers[top_XYZ_pauli_indices[pauli_idx]])
+
                 else:
                     unitary_power = (2 ** ctl_idx) if unitary_power is None else unitary_power
                     lam = (2.0 * pauli[0] * evo_time / num_time_slices * unitary_power).real
