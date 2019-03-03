@@ -11,6 +11,7 @@ import argparse
 from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices
 from fqc.util import (optimize_circuit, get_unitary,
                       get_nearest_neighbor_coupling_list)
+from mpi4py.futures import MPIPoolExecutor
 import numpy as np
 from quantum_optimal_control.main_grape.grape import Grape
 from quantum_optimal_control.core.hamiltonian import (get_H0,
@@ -18,11 +19,8 @@ from quantum_optimal_control.core.hamiltonian import (get_H0,
                                                       get_full_states_concerned_list,
                                                       get_maxA)
 
-# TODO: CLI
-
 # https://ark.intel.com/products/91754/Intel-Xeon-Processor-E5-2680-v4-35M-Cache-2-40-GHz-
 BROADWELL_CORE_COUNT = 14
-
 def main():
     # Handle CLI
     parser = argparse.ArgumentParser()
@@ -47,16 +45,14 @@ def main():
     angle_step = args["angle_step"]
     slice_start = args["slice_start"]
     slice_stop = args["slice_stop"]
-
-    # Pair each theta dependent slice with a non-theta dependent slice.
+    slice_count = slice_stop - slice_start + 1
+    
+    # We will work with g2 slices which each have 1 unique angle per slice.
     slice_granularity = 2
-    # For granularity = 2, we assume each slice is only dependent
-    # on one angle.
     angles_per_slice = 1
 
-    # Define output_path
-    data_path = ("/project/ftchong/qoc/thomas/uccsd_slice_qoc_g{}"
-                 "".format(slice_granularity))
+    # Grape args.
+    data_path = "/project/ftchong/qoc/thomas/uccsd_slice_qoc/g2_s8/"
 
     # Define hardware specific parameters.
     num_qubits = 4
@@ -89,24 +85,50 @@ def main():
                                connected_qubit_pairs)
     slices = get_uccsd_slices(circuit, granularity=slice_granularity,
                               dependence_grouping=True)
+    # Trim slices to only include start thru stop
     slices = slices[slice_start:slice_stop + 1]
-    # Run QOC for every slice on every angle_list.
-    for i, uccsdslice in enumerate(slices):
-        slice_index = i + slice_start
-        angle_lists = get_angle_lists(angles_per_slice, angle_start,
-                                      angle_stop, angle_step)
-        for j, angle_list in enumerate(angle_lists):
+    angle_list = list(np.deg2rad(np.arange(angle_start, angle_stop, angle_step)))
+    
+    # Build argument iterators to map to each process.
+    angle_count = len(angle_list)
+    job_count = slice_count * angle_count
+    uccsdslice_iter = list()
+    slice_index_iter = list()
+    angle_iter = angle_list * job_count
+    file_name_iter = list()
+    for slice_index, uccsdslice in enumerate(slices):
+        uccsdslice_iter += [uccsdslice] * angle_count
+        slice_index_iter += [slice_index] * angle_count
+        for j in range(angle_count):
             angle = j * angle_step + angle_start
-            file_name = "pulse_s{}_{}".format(slice_index, angle)
-            process_init(uccsdslice, i, angle, file_name, H0, Hops,
-                         Hnames, total_time, steps, states_concerned_list,
-                         convergence, reg_coeffs, method, maxA, use_gpu,
-                         sparse_H, show_plots, data_path)
-        # END FOR
-    # END FOR
+            file_name_iter.append("pulse_s{}_{}".format(slice_index,
+                                                        angle))
+    H0_iter = [H0] * job_count
+    Hops_iter = [Hops] * job_count
+    Hnames_iter = [Hnames] * job_count
+    total_time_iter = [total_time] * job_count
+    steps_iter = [steps] * job_count
+    states_concerned_list_iter = [states_concerned_list] * job_count
+    convergence_iter = [convergence] * job_count
+    reg_coeffs_iter = [reg_coeffs] * job_count
+    method_iter = [method] * job_count
+    maxA_iter = [maxA] * job_count
+    use_gpu_iter = [use_gpu] * job_count
+    sparse_H_iter = [sparse_H] * job_count
+    show_plots_iter = [show_plots] * job_count
+    data_path_iter = [data_path] * job_count
+
+    # Run QOC for each slice on each angle list.
+    with MPIPoolExecutor(1) as executor:
+        executor.map(process_init, uccsdslice_iter, slice_index_iter,
+                     angle_iter, file_name_iter, H0_iter, Hops_iter, 
+                     Hnames_iter, total_time_iter, steps_iter,
+                     states_concerned_list_iter, convergence_iter,
+                     reg_coeffs_iter, method_iter, maxA_iter, use_gpu_iter,
+                     sparse_H_iter, show_plots_iter, data_path_iter)
 
 
-def process_init(uccsdslice, i, angle, file_name, H0, Hops, Hnames,
+def process_init(uccsdslice, slice_index, angle, file_name, H0, Hops, Hnames,
                  total_time, steps, states_concerned_list, convergence,
                  reg_coeffs, method, maxA, use_gpu, sparse_H, show_plots,
                  data_path):
@@ -123,7 +145,7 @@ def process_init(uccsdslice, i, angle, file_name, H0, Hops, Hnames,
         log.write("PID={}\nTIME={}\n".format(os.getpid(), time.time()))
         
         # Display angles, updated circuit, and get unitary.
-        print("SLICE_ID={}\n".format(i))
+        print("SLICE_ID={}\n".format(slice_index))
         print("ANGLE={}\n".format(angle))
         uccsdslice.update_angles([angle] * len(uccsdslice.angles))
         print(uccsdslice.circuit)
