@@ -96,7 +96,8 @@ def main():
     slice_index_iter = list()
     angle_iter = angle_list * job_count
     file_name_iter = list()
-    for slice_index, uccsdslice in enumerate(slices):
+    for i, uccsdslice in enumerate(slices):
+        slice_index = slice_start + i
         uccsdslice_iter += [uccsdslice] * angle_count
         slice_index_iter += [slice_index] * angle_count
         for j in range(angle_count):
@@ -117,9 +118,10 @@ def main():
     sparse_H_iter = [sparse_H] * job_count
     show_plots_iter = [show_plots] * job_count
     data_path_iter = [data_path] * job_count
-
+    
+  
     # Run QOC for each slice on each angle list.
-    with MPIPoolExecutor(1) as executor:
+    with MPIPoolExecutor(14) as executor:
         executor.map(process_init, uccsdslice_iter, slice_index_iter,
                      angle_iter, file_name_iter, H0_iter, Hops_iter, 
                      Hnames_iter, total_time_iter, steps_iter,
