@@ -6,43 +6,14 @@ Right now only implements Hamiltonian for SchusterLab transmon qubit.
 import numpy as np
 
 # All of these frequencies below are in GHz:
-OMEGA_DEFAULT = 2 * np.pi * 5
-ALPHA_DEFAULT = 2 * np.pi * -0.2
-#G_DEFAULT = 0
-G_DEFAULT = 2 * np.pi * 0.05
+G_MAXA = 2 * np.pi * 0.05
 CHARGE_DRIVE_MAXA = 2 * np.pi * 0.1
 FLUX_DRIVE_MAXA = 2 * np.pi * 1.5
 
 
-def get_H0(N, d, connected_qubit_pairs, omega=OMEGA_DEFAULT, alpha=ALPHA_DEFAULT, g=G_DEFAULT):
+def get_H0(N, d):
     """Returns the drift Hamiltonian, H0."""
-    return _get_single_qudit_terms(N, d, omega, alpha) + _get_coupling_terms(N, d, connected_qubit_pairs, g)
-
-
-def _get_single_qudit_terms(N, d, omega=OMEGA_DEFAULT, alpha=ALPHA_DEFAULT):
-    H = np.zeros((d ** N, d ** N))
-    for j in range(N):
-        # qudit frequency (omega) terms:
-        matrices = [np.eye(d)] * N
-        matrices[j] = get_adagger(d) @ get_a(d)
-        H += omega * krons(matrices)
-
-        # anharmonicity (alpha) terms:
-        matrices = [np.eye(d)] * N
-        matrices[j] = get_adagger(d) @ get_a(d) @ (get_adagger(d) @ get_a(d) - np.eye(d))
-        H += alpha / 2.0 * krons(matrices)
-    return H
-
-
-def _get_coupling_terms(N, d, connected_qubit_pairs, g=G_DEFAULT):
-    _validate_connectivity(N, connected_qubit_pairs)
-    H = np.zeros((d ** N, d ** N))
-    for (j, k) in connected_qubit_pairs:
-        matrices = [np.eye(d)] * N
-        matrices[j] = get_adagger(d) + get_a(d)
-        matrices[k] = get_adagger(d) + get_a(d)
-        H += g * krons(matrices)
-    return H
+    return np.eye(d ** N)
 
 
 def _validate_connectivity(N, connected_qubit_pairs):
@@ -55,7 +26,7 @@ def _validate_connectivity(N, connected_qubit_pairs):
         assert connected_qubit_pairs.count((k, j)) == 0
         
 
-def get_Hops_and_Hnames(N, d):
+def get_Hops_and_Hnames(N, d, connected_qubit_pairs):
     """Returns the control Hamiltonian matrices and their labels."""
     hamiltonians, names = [], []
     for j in range(N):
@@ -69,16 +40,27 @@ def get_Hops_and_Hnames(N, d):
         hamiltonians.append(krons(matrices))
         names.append("qubit %s flux drive" % j)
 
-        
+    _validate_connectivity(N, connected_qubit_pairs)
+    for (j, k) in connected_qubit_pairs:
+        matrices = [np.eye(d)] * N
+        matrices[j] = get_adagger(d) + get_a(d)
+        matrices[k] = get_adagger(d) + get_a(d)
+        hamiltonians.append(krons(matrices))
+        names.append("qubit %s-%s coupling" % (j, k))
+
     return hamiltonians, names
 
 
-def get_maxA(N, d):
+def get_maxA(N, d, connected_qubit_pairs):
     """Returns the maximium amplitudes of the control pulses corresponding to Hops/Hnames."""
     maxA = []
     for j in range(N):
         maxA.append(CHARGE_DRIVE_MAXA)  # max amp for charge drive on jth qubit
         maxA.append(FLUX_DRIVE_MAXA)  # max amp for flux drive on jth qubit
+
+    for (j, k) in connected_qubit_pairs:
+        maxA.append(G_MAXA)  # max amp for coupling between qubits j and k
+
     return maxA
 
 
