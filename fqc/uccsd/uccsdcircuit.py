@@ -40,7 +40,7 @@ MOLECULE_TO_INFO = {
     }
 
 
-def get_uccsd_circuit(molecule, theta_vector, use_basis_gates=False):
+def get_uccsd_circuit(molecule, theta_vector=None, use_basis_gates=False):
     """Produce the full UCCSD circuit.
     Args:
     molecule :: string - must be a key of MOLECULE_TO_INFO
@@ -72,6 +72,9 @@ def get_uccsd_circuit(molecule, theta_vector, use_basis_gates=False):
                      active_unoccupied=molecule_info.active_unoccupied,
                      initial_state=HF_state, qubit_mapping=map_type,
                      two_qubit_reduction=qubit_reduction, num_time_slices=1)
+
+    if theta_vector is None:
+        theta_vector = [np.random.rand() * 2 * np.pi for _ in range(var_form._num_parameters)]
 
     return var_form.construct_circuit(theta_vector, use_basis_gates=use_basis_gates)
 
