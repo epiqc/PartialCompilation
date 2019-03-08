@@ -125,11 +125,13 @@ def Grape(H0, Hops, Hnames, U, total_time, steps, states_concerned_list, converg
             with H5File(file_path) as hf:
                 hf.add('wall_clock_time', data=np.array(wall_clock_time))
             print("data saved at: " + str(file_path))
-
-        if return_converged:
-            return SS.uks, SS.Uf, SS.l < SS.conv.conv_target
-        else:
-            return SS.uks, SS.Uf
+            return SS, wall_clock_time
+    
+        return SS
+        #if return_converged:
+        #    return SS.uks, SS.Uf, SS.l < SS.conv.conv_target
+        #else:
+        #    return SS.uks, SS.Uf
 
     except KeyboardInterrupt:
 

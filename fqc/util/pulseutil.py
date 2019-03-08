@@ -35,15 +35,16 @@ from fqc.models import Pulse
 def evol_pulse(pulse, U=None, save=True, out_file=file_name, out_path=data_path):
     """
     """
-    if (U == None):
+    if (U is None):
         U = pulse.U
-    res = Grape(pulse.H0, pulse.Hops, pulse.Hnames, U, 
+    
+    SS = Grape(pulse.H0, pulse.Hops, pulse.Hnames, U, 
                 pulse.total_time, pulse.steps, pulse.states_concerned_list,
                 {}, initial_guess=pulse.uks, reg_coeffs={}, 
                 use_gpu=False, sparse_H=False, method='EVOLVE', 
                 maxA=pulse.maxA, show_plots=False, 
                 save=save, file_name=out_file, data_path=out_path)
-    return res
+    return SS
 
 
 def evol_pulse_from_file(filename, U=None, save=True, out_file=file_name, out_path=data_path):

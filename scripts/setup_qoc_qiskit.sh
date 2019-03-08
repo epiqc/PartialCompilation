@@ -7,6 +7,7 @@ conda create -y -n QOC_qiskit
 source activate QOC_qiskit
 python -V
 conda install -y tensorflow
+yes | pip install cython
 yes | pip install qutip
 yes | pip install ipython
 yes | pip install jupyter

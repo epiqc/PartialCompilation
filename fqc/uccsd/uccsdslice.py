@@ -87,7 +87,8 @@ class UCCSDSlice(CircuitSlice):
         """
         self.angles = angles
         for i, gate in enumerate(self._parameterized_gates):
-            gate.params = [angles[i]]
+            if _is_theta_dependent(gate):
+                gate.params = [angles[i]]
 
 
 ### HELPER METHODS ###
@@ -232,6 +233,50 @@ def get_uccsd_slices(circuit, granularity=1, dependence_grouping=False):
     # END IF
     return slices
         
+
+def get_uccsd_runs(circuit):
+    """Greedily slice a UCCSD circuit into continuous runs of theta dependent
+    gate collections.
+    Args:
+    circuit :: qiskit.QuantumCircuit - the UCCSD circuit to slice
+
+    Returns:
+    slices :: [fqc.models.UCCSDSlice] - the slices of the circuit
+    """
+    slices = list()
+    # The circuit width is the number of registers, i.e. qubits.
+    circuit_width = circuit.width()
+    gates = circuit.data
+    gate_count = len(gates)
+
+    # Walk the list of gates and make a new quantum circuit for every continuous
+    # span of gates that have attribute or do not have attribute.
+    gates_encountered = 0
+    while gates_encountered < gate_count:
+        # Construct a new circuit for the span.
+        register = circuit.qregs[0]
+        circuit = QuantumCircuit(register)
+
+        # Traverse the gate list and construct a circuit that is either
+        # a continuous span of attribute gates or non-attribute gates.
+        redundant = False
+        gate_has_attribute = False
+        for gate in gates[gates_encountered:]:
+            gate_has_attribute = _is_theta_dependent(gate)
+            
+            gates_encountered += 1
+            append_gate(circuit, register, gate)
+            
+            if gate_has_attribute:
+                break
+            
+        #ENDFOR
+
+        slices.append(UCCSDSlice(circuit, register, True))
+
+    #ENDWHILE
+
+    return slices
 
 def _tests():
     """Run tests on the module.
