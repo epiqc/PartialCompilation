@@ -1,14 +1,15 @@
 """
-uccsd_slice_time.py - A script for computing the appropriate run_time's for
-                      each UCCSD slice.
+uccsd_full_time.py - A module for computing the pulse time of the full
+                     uccsd circuits.
 """
 import os
 import sys
 import time
 
-from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices
+from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices, MOLECULE_TO_INFO
 from fqc.util import (optimize_circuit, get_unitary,
-                      get_nearest_neighbor_coupling_list, get_max_pulse_time)
+                      get_nearest_neighbor_coupling_list, get_max_pulse_time,
+                      merge_rotation_gates)
 from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
 from mpi4py.futures import MPIPoolExecutor
 import numpy as np
@@ -16,37 +17,39 @@ from quantum_optimal_control.main_grape.grape import Grape
 from quantum_optimal_control.core.hamiltonian import (get_H0, 
         get_Hops_and_Hnames, get_full_states_concerned_list, get_maxA)
 
+molecule_strings = list(MOLECULE_TO_INFO.keys())
+molecule_count = len(molecule_strings)
+
 def main():
-    # Get all UCCSD slices with trivial theta-dependent gates.
-    slice_granularity = 2
-    connected_qubit_pairs = get_nearest_neighbor_coupling_list(2, 2, directed=False)
-    circuit = optimize_circuit(get_uccsd_circuit('LiH'),
-                               connected_qubit_pairs)
-    slices = get_uccsd_slices(circuit, granularity=slice_granularity,
-                              dependence_grouping=True)
-    for uccsdslice in slices:
-        uccsdslice.update_angles([0]* len(uccsdslice.angles))
+    # Get all UCCSD circuits.
+    circuits = list()
+    connected_qubit_pairs_list = list()
+    # Connected qubit pairs currently not implemented for larger ansatze,
+    # so we only run time optimization on the first molecule lih.
+    for i, molecule_string in enumerate(molecule_strings):
+        if i > 0:
+            break
+        # Some circuits are trivial without Rz gates, so we cannot
+        # set them to zero. Instead we use a random theta.
+        circuit = get_uccsd_circuit(molecule_string)
+        num_qubits = circuit.width()
+        # TOOD: Implement connected_qubit_pairs based on number of qubits.
+        connected_qubit_pairs = get_nearest_neighbor_coupling_list(2, 2, directed=False)
+        optimized_circuit = optimize_circuit(circuit, connected_qubit_pairs)
+        connected_qubit_pairs_list.append(connected_qubit_pairs)
+        circuits.append(optimized_circuit)
     
-    # Run time optimizer for each slice.
-    uccsdslice_iter = slices
-    connected_qubit_pairs_iter = [connected_qubit_pairs] * 8
-    slice_index_iter = range(8)
-    with MPIPoolExecutor(8) as executor:
-        executor.map(process_init, uccsdslice_iter, connected_qubit_pairs_iter,
-                     slice_index_iter)
+    # Run time optimizer for each circuit.
+    with MPIPoolExecutor(molecule_count) as executor:
+        executor.map(process_init, circuits, molecule_strings,
+                     connected_qubit_pairs_list)
 
 
-def process_init(uccsdslice, connected_qubit_pairs, slice_index):
-    """Initialize a time optimization loop for a single slice.
-    Args:
-    uccsdslice :: fqc.UCCSDSlice  - the slice to perform time optimization on
-    connected_qubit_pairs :: [(int, int)] - connected qubit list
-    slice_index :: int - the index of the slice in the sequence of slices
-
-    Returns: nothing
+def process_init(circuit, molecule_string, connected_qubit_pairs):
+    """Initialize a time optimization loop for a single circuit.
     """
-    file_name = "s{}".format(slice_index)
-    data_path = "/project/ftchong/qoc/thomas/uccsd_slice_time/"
+    file_name = "uccsd_{}".format(molecule_string.lower())
+    data_path = "/project/ftchong/qoc/thomas/uccsd_full_time/"
     log_file = file_name + '.log'
     log_file_path = os.path.join(data_path, log_file)
     with open(log_file_path, "w") as log:
@@ -56,30 +59,31 @@ def process_init(uccsdslice, connected_qubit_pairs, slice_index):
         print("PID={}\nTIME={}\n".format(os.getpid(), time.time()))
 
         # Display slice.
-        print("SLICE_INDEX={}".format(slice_index))
-        print(uccsdslice.circuit)
+        print("MOLECULE={}".format(molecule_string))
+        print(circuit)
 
         # Define search space.
-        max_pulse_time = get_max_pulse_time(uccsdslice.circuit)
+        max_pulse_time = get_max_pulse_time(circuit)
         min_steps = 0
         max_steps = max_pulse_time * 20.0
         print("MAX_PULSE_TIME={}\nMIN_STEPS={}\nMAX_STEPS={}"
               "".format(max_pulse_time, min_steps, max_steps))
-        res = binary_search_for_shortest_pulse_time(uccsdslice,
+        res = binary_search_for_shortest_pulse_time(circuit,
                                                     connected_qubit_pairs,
                                                     file_name, data_path,
                                                     min_steps, max_steps)
         print("RES={}".format(res))
 
-def binary_search_for_shortest_pulse_time(uccsdslice, connected_qubit_pairs,
+
+def binary_search_for_shortest_pulse_time(circuit, connected_qubit_pairs,
                                           file_name, data_path, min_steps,
                                           max_steps):
     """Search between [min_steps, max_steps] (inclusive)."""
     # Get unitary.
-    U = uccsdslice.unitary()
+    U = get_unitary(circuit)
 
     # Define hardware specific parameters.
-    num_qubits = 4
+    num_qubits = circuit.width()
     num_states = 2
     H0 = get_H0(num_qubits, num_states)
     Hops, Hnames = get_Hops_and_Hnames(num_qubits, num_states, connected_qubit_pairs)
@@ -105,10 +109,12 @@ def binary_search_for_shortest_pulse_time(uccsdslice, connected_qubit_pairs,
         total_time = mid_steps / 20.0
         print("MID_STEPS={}".format(mid_steps))
         print("TRIAL_TOTAL_TIME={}".format(total_time))
+        print("GRAPE_START_TIME={}".format(time.time()))
         SS = Grape(H0, Hops, Hnames, U, total_time, mid_steps,
                    states_concerned_list, convergence, reg_coeffs=reg_coeffs,
                    use_gpu=False, sparse_H=False, method='ADAM', maxA=maxA,
                    show_plots=False, file_name=file_name, data_path=data_path)
+        print("GRAPE_END_TIME={}".format(time.time()))
         converged = SS.l < SS.conv.conv_target
         print("CONVERGED={}".format(converged))
         if converged:

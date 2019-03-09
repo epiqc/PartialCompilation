@@ -8,7 +8,8 @@ from qiskit.extensions.standard import RZGate
 from fqc.models import CircuitSlice
 from fqc.uccsd import get_uccsd_circuit
 from fqc.util import (append_gate, optimize_circuit,
-                      get_nearest_neighbor_coupling_list)
+                      get_nearest_neighbor_coupling_list,
+                      GATE_TO_PULSE_TIME)
 
 ### CLASS DEFINITIONS ###
 
@@ -89,6 +90,17 @@ class UCCSDSlice(CircuitSlice):
         for i, gate in enumerate(self._parameterized_gates):
             if _is_theta_dependent(gate):
                 gate.params = [angles[i]]
+
+
+# Each index of the list corresponds to the slice index to which it corresponds.
+# Times are given in nanosceonds. Times were computed with Rz(0) in
+# /projects/ftchong/qoc/thomas/uccsd_slice_time/
+# The times computed there were then added to by the number of Rz gates times
+# the maximum time required to execute one Rz gate. These times are for the g2_s8
+# class of circuits.
+rz = GATE_TO_PULSE_TIME['rz']
+UCCSD_LIH_SLICE_TIMES = [1.05 + rz * 2, 3.35 + rz * 2, 3.55 + rz * 2, 3.1 + rz * 2,
+                         8.95 + rz * 8, 6.25 + rz * 8, 8.9 + rz * 8, 5.25 + rz * 8]
 
 
 ### HELPER METHODS ###

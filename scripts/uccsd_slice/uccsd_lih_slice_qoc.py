@@ -52,7 +52,7 @@ def main():
     angles_per_slice = 1
 
     # Grape args.
-    data_path = "/project/ftchong/qoc/thomas/uccsd_slice_qoc/g2_s8/"
+    data_path = "/project/ftchong/qoc/thomas/uccsd_slice_qoc/"
 
     # Define hardware specific parameters.
     num_qubits = 4
@@ -62,7 +62,7 @@ def main():
     Hops, Hnames = get_Hops_and_Hnames(num_qubits, num_states)
     states_concerned_list = get_full_states_concerned_list(num_qubits, num_states)
     maxA = get_maxA(num_qubits, num_states)
-
+    
     # Define convergence parameters and penalties.
     max_iterations = 1000
     decay = max_iterations / 2
@@ -74,10 +74,6 @@ def main():
     sparse_H = False
     show_plots = False
     method = 'ADAM'
-
-    # Define time scale in nanoseconds.
-    total_time = 50
-    steps = total_time * 100
 
     # Get slices to perform qoc on. Initial theta does not matter.
     theta = [np.random.random() for _ in range(8)]
@@ -102,7 +98,7 @@ def main():
         slice_index_iter += [slice_index] * angle_count
         for j in range(angle_count):
             angle = j * angle_step + angle_start
-            file_name_iter.append("pulse_s{}_{}".format(slice_index,
+            file_name_iter.append("uccsd_lih_s{}_{}".format(slice_index,
                                                         angle))
     H0_iter = [H0] * job_count
     Hops_iter = [Hops] * job_count
