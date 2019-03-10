@@ -2,6 +2,14 @@
 uccsd_slice_time.py - A script for computing the appropriate run_time's for
                       each UCCSD slice.
 """
+# Set random seeds for reasonable reproducability.
+import random
+random.seed(0)
+import numpy as np
+np.random.seed(1)
+import tensorflow as tf
+tf.set_random_seed(2)
+
 import os
 import sys
 import time
@@ -9,9 +17,9 @@ import time
 from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices
 from fqc.util import (optimize_circuit, get_unitary,
                       get_nearest_neighbor_coupling_list, get_max_pulse_time)
+from fqc.data import UCCSD_LIH_THETA
 from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
 from mpi4py.futures import MPIPoolExecutor
-import numpy as np
 from quantum_optimal_control.main_grape.grape import Grape
 from quantum_optimal_control.core.hamiltonian import (get_H0, 
         get_Hops_and_Hnames, get_full_states_concerned_list, get_maxA)
@@ -20,19 +28,18 @@ def main():
     # Get all UCCSD slices with trivial theta-dependent gates.
     slice_granularity = 2
     connected_qubit_pairs = get_nearest_neighbor_coupling_list(2, 2, directed=False)
-    circuit = optimize_circuit(get_uccsd_circuit('LiH'),
+    # The same randomly generated theta is used for computing slice and full time.
+    theta = UCCSD_LIH_THETA
+    circuit = optimize_circuit(get_uccsd_circuit('LiH', theta),
                                connected_qubit_pairs)
     slices = get_uccsd_slices(circuit, granularity=slice_granularity,
                               dependence_grouping=True)
-    for uccsdslice in slices:
-        uccsdslice.update_angles([0]* len(uccsdslice.angles))
     
     # Run time optimizer for each slice.
-    uccsdslice_iter = slices
     connected_qubit_pairs_iter = [connected_qubit_pairs] * 8
     slice_index_iter = range(8)
     with MPIPoolExecutor(8) as executor:
-        executor.map(process_init, uccsdslice_iter, connected_qubit_pairs_iter,
+        executor.map(process_init, slices, connected_qubit_pairs_iter,
                      slice_index_iter)
 
 

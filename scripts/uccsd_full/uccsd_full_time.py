@@ -2,17 +2,25 @@
 uccsd_full_time.py - A module for computing the pulse time of the full
                      uccsd circuits.
 """
+# Set random seeds for reasonable reproducability.
+import random
+random.seed(0)
+import numpy as np
+np.random.seed(1)
+import tensorflow as tf
+tf.set_random_seed(2)
+
 import os
 import sys
 import time
 
+from fqc.data import UCCSD_LIH_THETA
 from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices, MOLECULE_TO_INFO
 from fqc.util import (optimize_circuit, get_unitary,
                       get_nearest_neighbor_coupling_list, get_max_pulse_time,
                       merge_rotation_gates)
 from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
 from mpi4py.futures import MPIPoolExecutor
-import numpy as np
 from quantum_optimal_control.main_grape.grape import Grape
 from quantum_optimal_control.core.hamiltonian import (get_H0, 
         get_Hops_and_Hnames, get_full_states_concerned_list, get_maxA)
@@ -30,8 +38,10 @@ def main():
         if i > 0:
             break
         # Some circuits are trivial without Rz gates, so we cannot
-        # set them to zero. Instead we use a random theta.
-        circuit = get_uccsd_circuit(molecule_string)
+        # set them to zero. Instead we use a random theta for each circuit.
+        # TODO: implement a random theta for each molecule.
+        theta = UCCSD_LIH_THETA
+        circuit = get_uccsd_circuit(molecule_string, theta)
         num_qubits = circuit.width()
         # TOOD: Implement connected_qubit_pairs based on number of qubits.
         connected_qubit_pairs = get_nearest_neighbor_coupling_list(2, 2, directed=False)
@@ -40,7 +50,8 @@ def main():
         circuits.append(optimized_circuit)
     
     # Run time optimizer for each circuit.
-    with MPIPoolExecutor(molecule_count) as executor:
+    # with MPIPoolExecutor(molecule_count) as executor:
+    with MPIPoolExecutor(1) as executor:
         executor.map(process_init, circuits, molecule_strings,
                      connected_qubit_pairs_list)
 
