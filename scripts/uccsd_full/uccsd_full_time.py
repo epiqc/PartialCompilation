@@ -60,7 +60,8 @@ def process_init(circuit, molecule_string, connected_qubit_pairs):
     """Initialize a time optimization loop for a single circuit.
     """
     file_name = "uccsd_{}".format(molecule_string.lower())
-    data_path = "/project/ftchong/qoc/thomas/uccsd_full_time/"
+    data_path = "/project/ftchong/qoc/thomas/uccsd_full_time/{}/"
+                "".format(molecule_string.lower())
     log_file = file_name + '.log'
     log_file_path = os.path.join(data_path, log_file)
     with open(log_file_path, "w") as log:

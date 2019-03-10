@@ -13,6 +13,9 @@ from qiskit.transpiler.passes import (BasicSwap, CXCancellation, HCancellation)
 
 ### CONSTANTS ###
 
+# NOTICE: GATE_TO_PULSE_TIME is kept here for dependency reasons, but all
+# future references to this dict and any other experimental constants
+# should be kept in fqc/data/data.py.
 # See Gate_Times.ipnyb for determination of these pulse times
 GATE_TO_PULSE_TIME = {'h': 1.6, 'cx': 4.1, 'rz': 0.4, 'rx': 2.6, 'x': 2.6, 'swap': 7.8}
 

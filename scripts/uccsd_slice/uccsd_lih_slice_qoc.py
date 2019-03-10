@@ -2,17 +2,25 @@
 uccsd_slice_qoc.py - A module for running quantum optimal control on
                      UCCSD slices.
 """
+# Set random seeds for reasonable reproducibility.
+import random
+random.seed(0)
+import numpy as np
+np.random.seed(1)
+import tensorflow as tf
+tf.set_random_seed(2)
+
 from itertools import product
 import os
 import sys
 import time
 import argparse
 
+from fqc.data import UCCSD_LIH_THETA, UCCSD_LIH_SLICE_TIMES
 from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices
 from fqc.util import (optimize_circuit, get_unitary,
                       get_nearest_neighbor_coupling_list)
 from mpi4py.futures import MPIPoolExecutor
-import numpy as np
 from quantum_optimal_control.main_grape.grape import Grape
 from quantum_optimal_control.core.hamiltonian import (get_H0,
                                                       get_Hops_and_Hnames,
@@ -52,16 +60,17 @@ def main():
     angles_per_slice = 1
 
     # Grape args.
-    data_path = "/project/ftchong/qoc/thomas/uccsd_slice_qoc/"
+    data_path = "/project/ftchong/qoc/thomas/uccsd_slice_qoc/lih/"
 
     # Define hardware specific parameters.
     num_qubits = 4
     num_states = 2
     connected_qubit_pairs = get_nearest_neighbor_coupling_list(2, 2, directed=False)
-    H0 = get_H0(num_qubits, num_states, connected_qubit_pairs)
-    Hops, Hnames = get_Hops_and_Hnames(num_qubits, num_states)
+    H0 = get_H0(num_qubits, num_states)
+    Hops, Hnames = get_Hops_and_Hnames(num_qubits, num_states,
+                                       connected_qubit_pairs)
     states_concerned_list = get_full_states_concerned_list(num_qubits, num_states)
-    maxA = get_maxA(num_qubits, num_states)
+    maxA = get_maxA(num_qubits, num_states, connected_qubit_pairs)
     
     # Define convergence parameters and penalties.
     max_iterations = 1000
@@ -75,8 +84,9 @@ def main():
     show_plots = False
     method = 'ADAM'
 
-    # Get slices to perform qoc on. Initial theta does not matter.
-    theta = [np.random.random() for _ in range(8)]
+    # Get slices to perform qoc on. The initial angle of each RZ
+    # gate does not matter.
+    theta = UCCSD_LIH_THETA
     circuit = optimize_circuit(get_uccsd_circuit('LiH', theta),
                                connected_qubit_pairs)
     slices = get_uccsd_slices(circuit, granularity=slice_granularity,
@@ -92,10 +102,15 @@ def main():
     slice_index_iter = list()
     angle_iter = angle_list * job_count
     file_name_iter = list()
+    total_time_iter = list()
+    steps_iter = list()
     for i, uccsdslice in enumerate(slices):
         slice_index = slice_start + i
         uccsdslice_iter += [uccsdslice] * angle_count
         slice_index_iter += [slice_index] * angle_count
+        pulse_time = UCCSD_LIH_SLICE_TIMES[slice_index]
+        total_time_iter += [pulse_time] * angle_count
+        steps_iter += [int(pulse_time * 100)] * angle_count
         for j in range(angle_count):
             angle = j * angle_step + angle_start
             file_name_iter.append("uccsd_lih_s{}_{}".format(slice_index,
@@ -103,8 +118,6 @@ def main():
     H0_iter = [H0] * job_count
     Hops_iter = [Hops] * job_count
     Hnames_iter = [Hnames] * job_count
-    total_time_iter = [total_time] * job_count
-    steps_iter = [steps] * job_count
     states_concerned_list_iter = [states_concerned_list] * job_count
     convergence_iter = [convergence] * job_count
     reg_coeffs_iter = [reg_coeffs] * job_count
@@ -115,9 +128,8 @@ def main():
     show_plots_iter = [show_plots] * job_count
     data_path_iter = [data_path] * job_count
     
-  
     # Run QOC for each slice on each angle list.
-    with MPIPoolExecutor(14) as executor:
+    with MPIPoolExecutor(BROADWELL_CORE_COUNT) as executor:
         executor.map(process_init, uccsdslice_iter, slice_index_iter,
                      angle_iter, file_name_iter, H0_iter, Hops_iter, 
                      Hnames_iter, total_time_iter, steps_iter,
@@ -140,24 +152,24 @@ def process_init(uccsdslice, slice_index, angle, file_name, H0, Hops, Hnames,
         # Redirect everything to a log file.
         sys.stdout = log
         sys.stderr = log
-        log.write("PID={}\nTIME={}\n".format(os.getpid(), time.time()))
-        
+        print("PID={}\nTIME={}".format(os.getpid(), time.time()))
+
         # Display angles, updated circuit, and get unitary.
-        print("SLICE_ID={}\n".format(slice_index))
-        print("ANGLE={}\n".format(angle))
+        print("SLICE_ID={}".format(slice_index))
+        print("ANGLE={}".format(angle))
         uccsdslice.update_angles([angle] * len(uccsdslice.angles))
         print(uccsdslice.circuit)
         U = uccsdslice.unitary()
 
         # Run grape.
-        log.write("GRAPE_START_TIME={}\n".format(time.time()))
-        uks, U_f = Grape(H0, Hops, Hnames, U, total_time, steps,
-                         states_concerned_list, convergence = convergence,
-                         reg_coeffs = reg_coeffs, method = method, maxA = maxA,
-                         use_gpu = use_gpu, sparse_H = sparse_H,
-                         show_plots = show_plots, file_name=file_name,
-                         data_path = data_path)
-        log.write("GRAPE_END_TIME={}\n".format(time.time()))
+        print("GRAPE_START_TIME={}".format(time.time()))
+        SS = Grape(H0, Hops, Hnames, U, total_time, steps,
+                   states_concerned_list, convergence = convergence,
+                   reg_coeffs = reg_coeffs, method = method, maxA = maxA,
+                   use_gpu = use_gpu, sparse_H = sparse_H,
+                   show_plots = show_plots, file_name=file_name,
+                   data_path = data_path)
+        print("GRAPE_END_TIME={}".format(time.time()))
 
 
 def get_angle_lists(parameterized_gate_count, angle_start, angle_stop,

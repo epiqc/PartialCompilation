@@ -112,10 +112,12 @@ def binary_search_for_shortest_pulse_time(uccsdslice, connected_qubit_pairs,
         total_time = mid_steps / 20.0
         print("MID_STEPS={}".format(mid_steps))
         print("TRIAL_TOTAL_TIME={}".format(total_time))
+        print("GRAPE_START_TIME={}".format(time.time()))
         SS = Grape(H0, Hops, Hnames, U, total_time, mid_steps,
                    states_concerned_list, convergence, reg_coeffs=reg_coeffs,
                    use_gpu=False, sparse_H=False, method='ADAM', maxA=maxA,
                    show_plots=False, file_name=file_name, data_path=data_path)
+        print("GRAPE_END_TIME={}".format(time.time()))
         converged = SS.l < SS.conv.conv_target
         print("CONVERGED={}".format(converged))
         if converged:
