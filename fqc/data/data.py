@@ -9,7 +9,7 @@ Notes:
 ### GENERAL ###
 
 # See Gate_Times.ipynb for determination of these pulse times.
-GATE_TIMES = {'h': 1.6, 'cx': 4.1, 'rz': 0.4, 'rx': 2.6, 'x': 2.6, 'swap': 7.8}
+GATE_TIMES = {'h': 1.4, 'cx': 3.8, 'rz': 0.4, 'rx': 2.5, 'x': 2.5, 'swap': 7.4}
 
 ### UCCSD - LiH ###
 
