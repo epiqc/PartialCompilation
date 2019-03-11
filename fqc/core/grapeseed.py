@@ -63,7 +63,7 @@ def get_opt_pulses(seeds, convergence, reg_coeffs={}, method='ADAM'):
               reg_coeffs=reg_coeffs, use_gpu=False, sparse_H=False, 
               method=method, maxA=s.maxA, show_plots=False, save=False)
         opt_pulse = Pulse(s.N, s.d, s.qubits, 
-                 uks=res[0], total_time=s.total_time, steps=s.steps, 
+                 uks=res.uks, total_time=s.total_time, steps=s.steps, 
                  H0=s.H0, Hops=s.Hops, Hnames=s.Hnames, 
                  U=s.U, error=s.error, 
                  states_concerned_list=s.states_concerned_list, maxA=s.maxA)
@@ -97,25 +97,27 @@ def _ops_all_equal(Hops1, Hops2):
 
 def concat_and_evol(N, d, pulses, U, file_name=file_name, data_path=data_path):
     """
-    Assume each pulse has the same dt interval, same complete Hops?
+    Assume each pulse has the same dt interval, same complete Hops!
     """
     total_time = 0.0
     steps = 0
     uks = []
     maxA = []
-    Hops, Hnames = hamiltonian.get_Hops_and_Hnames(N, d)
+    #Hops, Hnames = hamiltonian.get_Hops_and_Hnames(N, d)
     for (i, p) in enumerate(pulses):
         p = _extend_uks(p, N, d)
         if (i==0):
             H0 = p.H0
-            assert(_ops_all_equal(Hops, p.Hops)) 
-            #assert(Hnames == p.Hnames)
+            Hops = p.Hops
+            Hnames = p.Hnames
             states_concerned_list = p.states_concerned_list
             uks = p.uks
             maxA = p.maxA
         else:
             assert(len(uks) == len(p.uks))
             assert(len(maxA) == len(p.maxA))
+            assert(_ops_all_equal(Hops, p.Hops)) 
+            #assert(Hnames == p.Hnames)
             uks = [np.concatenate((uks[ll],p.uks[ll]), axis=0) for ll in range(len(p.uks))]
             maxA = [max(maxA[ll], p.maxA[ll]) for ll in range(len(p.maxA))]
         total_time += p.total_time

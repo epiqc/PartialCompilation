@@ -14,11 +14,12 @@ from qiskit.extensions.standard import *
 
 ### BUILD CIRCUTS AND UNITARIES ###
 
-def get_qaoa_circuit(n, p=1, theta_vector=None):
+def get_qaoa_circuit(n, p=1, g='3Reg', theta_vector=None):
     """Produce the full UCCSD circuit.
     Args:
     n :: int - number of vertices, also the number of qubits in circuit
     p :: int - number of repetitions of QAOA iterations
+    g :: string - type of random graphs: '3Reg', 'ErdosRenyi'
     theta_vector :: array - [gamma_1, beta_1, gamma_2, beta_2, ..., gamma_p, beta_p]
                             If not provided, random angles are set.
 
@@ -34,7 +35,10 @@ def get_qaoa_circuit(n, p=1, theta_vector=None):
             beta = np.random.random() * np.pi
             theta_vector.extend([gamma, beta])
 
-    graph = nx.generators.random_graphs.random_regular_graph(d=3, n=n)
+    if (g == '3Reg'):
+        graph = nx.generators.random_graphs.random_regular_graph(d=3, n=n)
+    elif (g == 'ErdosRenyi'):
+        graph = nx.erdos_renyi_graph(n, 0.5) # edge creation prob is 0.5
     q = QuantumRegister(n, 'q')
     circuit = QuantumCircuit(q)
 
