@@ -176,7 +176,7 @@ class run_session:
         self.start_time = time.time()
 
         x0 = self.sys_para.ops_weight_base
-        options = {'maxfun': self.conv.max_iterations,
+        options = {'maxfun': self.conv.max_iterations, 'ftol': 1e-12, 'maxiter': 1e6,
                    'gtol': self.conv.min_grad, 'disp': False, 'maxls': 40}
 
         res = minimize(self.minimize_opt_fun, x0,
