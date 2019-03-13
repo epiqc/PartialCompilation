@@ -13,7 +13,7 @@ FLUX_DRIVE_MAXA = 2 * np.pi * 1.5
 
 def get_H0(N, d):
     """Returns the drift Hamiltonian, H0."""
-    return np.eye(d ** N)
+    return np.zeros((d ** N, d ** N))
 
 
 def _validate_connectivity(N, connected_qubit_pairs):
