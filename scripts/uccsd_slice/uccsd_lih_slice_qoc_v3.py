@@ -10,17 +10,15 @@ np.random.seed(1)
 import tensorflow as tf
 tf.set_random_seed(2)
 
-from itertools import product
 import os
 import sys
 import time
 import argparse
 
-from fqc.data import UCCSD_LIH_THETA, UCCSD_LIH_SLICE_TIMES
+from fqc.data import UCCSD_LIH_THETA
 from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices
-from fqc.util import (optimize_circuit, get_unitary,
-                      get_nearest_neighbor_coupling_list,
-                      get_max_pulse_time)
+from fqc.util import (optimize_circuit, get_max_pulse_time,
+                      get_nearest_neighbor_coupling_list)
 from mpi4py.futures import MPIPoolExecutor
 from quantum_optimal_control.main_grape.grape import Grape
 from quantum_optimal_control.core.hamiltonian import (get_H0,
@@ -40,7 +38,7 @@ BACKOFF = 1.2
 BNS_GRANULARITY = 10
 
 # Grape args.
-DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_slice_qoc/lih_v2"
+DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_slice_qoc/lih_v3"
 
 # Define hardware specific parameters.
 num_qubits = 4
@@ -58,7 +56,7 @@ decay = max_iterations / 2
 convergence = {'rate':0.01, 'conv_target': 1e-3,
                'max_iterations': max_iterations, 'learning_rate_decay':decay,
                'min_grads': 1e-5}
-reg_coeffs = {'dwdt': 0.001, 'envelope': 0.01}
+reg_coeffs = {}
 use_gpu = False
 sparse_H = False
 show_plots = False
@@ -72,8 +70,8 @@ nps = 1 / spn
 theta = UCCSD_LIH_THETA
 circuit = optimize_circuit(get_uccsd_circuit('LiH', theta),
                            connected_qubit_pairs)
-slices = get_uccsd_slices(circuit, granularity=SLICE_GRANULARITY,
-                          dependence_grouping=True)
+uccsd_slices = get_uccsd_slices(circuit, granularity=SLICE_GRANULARITY,
+                                dependence_grouping=True)
 
 # https://ark.intel.com/products/91754/Intel-Xeon-Processor-E5-2680-v4-35M-Cache-2-40-GHz-
 BROADWELL_CORE_COUNT = 14
@@ -108,16 +106,16 @@ def main():
     slice_count = slice_stop - slice_start + 1
     
     # Trim slices to only include start thru stop.
-    slices = slices[slice_start:slice_stop + 1]
+    slices = uccsd_slices[slice_start:slice_stop + 1]
 
     # Get a list of the angles that each slice should be compiled for.
-    angle_list_deg = np.arange(angle_start, angle_stop, angle_step)
+    angle_list_deg = list(np.arange(angle_start, angle_stop, angle_step))
     angle_list = list(np.deg2rad(angle_list_deg))
     
     # Build argument iterators to map to each process.
     job_count = slice_count
     slice_index_iter = range(slice_count)
-    angle_iter = [angle_list] * job_count
+    angles_iter = [angle_list] * job_count
     file_names_iter = list()
     for slice_index in slice_index_iter:
         file_names = list()
@@ -126,12 +124,15 @@ def main():
         file_names_iter.append(file_names)
     
     # Run QOC for each slice on each angle list.
+    process_init(slices[0], slice_index_iter[0], angles_iter[0],
+                 file_names_iter[0])
+    exit()
     with MPIPoolExecutor(job_count) as executor:
         executor.map(process_init, slices, slice_index_iter,
-                     angle_iter, file_names_iter)
+                     angles_iter, file_names_iter)
 
 
-def process_init(uccsdslice, slice_index, angles, max_time,
+def process_init(uccsdslice, slice_index, angles,
                  file_names):
     """Do all necessary process specific tasks before running grape.
     Args: ugly
@@ -141,7 +142,7 @@ def process_init(uccsdslice, slice_index, angles, max_time,
     log_file = "s{}.log".format(slice_index)
     log_file_path = os.path.join(DATA_PATH, log_file)
     with open(log_file_path, "w") as log:
-        sys.stdout = sys.stderr = log
+        # sys.stdout = sys.stderr = log
 
         # Display pid, time, slice id, and circuit.
         print("PID={}\nTIME={}\nSLICE_ID={}"
@@ -159,7 +160,12 @@ def process_init(uccsdslice, slice_index, angles, max_time,
         min_steps = 0
         max_steps = time_upper_bound * spn
         mid_steps = int((min_steps + max_steps) / 2)
-        prev_mid_steps = mid_steps
+        prev_converged_min_steps = None
+        prev_converged_max_steps = None
+        prev_converged_mid_steps = None
+        prev_converged_sess = None
+        initial_guess = None
+
         # We begin with no initial guess.
         grape_sess = None
         
@@ -169,62 +175,63 @@ def process_init(uccsdslice, slice_index, angles, max_time,
             file_name = file_names[i]
             uccsdslice.update_angles([angle] * len(uccsdslice.angles))
             U = uccsdslice.unitary()
-            # Initial guess is the previous run's pulse.
-            initial_guess = None if grape_sess is None else grape_sess.uks
             search_converged = False
+            # We run the first trial for the same pulse time that the
+            # last angle converged to.
+            if prev_converged_mid_steps is not None:
+                min_steps = prev_converged_min_steps
+                max_steps = prev_converged_max_steps
+                mid_steps = prev_converged_mid_steps
+                initial_guess = prev_converged_sess.uks
             
             # Binary search for the minimum pulse time on the current angle.
             while not search_converged:
-                print("MAX_STEPS={}\nMIN_STEPS={}\nMID_STEPS={}"
-                      "".format(max_steps, min_steps, mid_steps))
-                
+                # Search in the search space until we have a convergence window
+                # of BNS_GRANULARITY
                 while min_steps + BNS_GRANULARITY < max_steps:
                     total_time = mid_steps * nps
-                    print("\nMID_STEPS={}\nTIME={}\n".format(mid_steps, total_time))
-                    trial_converged = S.l <= SS.conv.conv_target
+                    print("\nMAX_STEPS={}\nMIN_STEPS={}\nMID_STEPS={}\nTIME={}"
+                          "\nGRAPE_START_TIME={}"
+                          "".format(max_steps, min_steps, mid_steps, total_time,
+                                    time.time()))
+                    grape_sess = Grape(H0, Hops, Hnames, U, total_time, mid_steps,
+                                  convergence = convergence, reg_coeffs = reg_coeffs,
+                                  use_gpu = use_gpu, sparse_H = sparse_H,
+                                  method = method, maxA = maxA,
+                                  states_concerned_list = states_concerned_list,
+                                  show_plots = show_plots, file_name = file_name,
+                                  data_path = DATA_PATH ,
+                                  initial_guess = initial_guess)
+                    print("GRAPE_END_TIME={}".format(time.time()))
+                    # If the trial converged, lower the upper bound.
+                    # If the tiral did not converge, raise the lower bound.
+                    trial_converged = grape_sess.l <= grape_sess.conv.conv_target
+                    print("TRIAL_CONVERGED={}".format(trial_converged))
                     if trial_converged:
+                        search_converged = True
+                        prev_converged_mid_steps = mid_steps
+                        prev_converged_max_steps = max_steps
+                        prev_converged_min_steps = min_steps
+                        prev_converged_sess = grape_sess
                         max_steps = mid_steps
                     else:
                         min_steps = mid_steps
-                    prev_mid_steps = mid_steps
+                    # Update mid_steps to run for the next trial.
                     mid_steps = int((max_steps + min_steps) / 2)
-                
+                # ENDWHILE
                 # If binary search did not converge, then the pulse time is
                 # too short and should be backed off.
-                max_steps *= BACKOFF
-                mid_steps = int((max_steps + min_steps) / 2)
+                print("SEARCH_CONVERGED={}".format(search_converged))
+                if not search_converged:
+                    max_steps *= BACKOFF
+                    mid_steps = int((max_steps + min_steps) / 2)
+            # ENDWHILE
+            print("CONVERGED_STEPS={}\nCONVERGED_TIME={}"
+                  "".format(prev_converged_mid_steps,
+                            prev_converged_mid_steps * nps))
+        # ENDFOR
 
 
-
-if __name__ == "__main__":
-    main()
-
-
-def binary_search_for_shortest_pulse_time(unitary, file_name, min_steps,
-                                          max_steps, initial_guess=None):
-    """Search between [min_steps, max_steps] (inclusive)."""
-
-    while min_steps + 10 < max_steps:  # just estimate to +/- 0.5ns
-        print("\n")
-        mid_steps = int((min_steps + max_steps) / 2)
-        total_time = mid_steps / 20.0
-        print("MID_STEPS={}".format(mid_steps))
-        print("TRIAL_TOTAL_TIME={}".format(total_time))
-        print("GRAPE_START_TIME={}".format(time.time()))
-        SS = Grape(H0, Hops, Hnames, U, total_time, mid_steps,
-                   states_concerned_list, convergence, reg_coeffs=reg_coeffs,
-                   use_gpu=False, sparse_H=False, method='ADAM', maxA=maxA,
-                   show_plots=False, file_name=file_name, data_path=DATA_PATH)
-        print("GRAPE_END_TIME={}".format(time.time()))
-        converged = SS.l < SS.conv.conv_target
-        print("CONVERGED={}".format(converged))
-        if converged:
-            max_steps = mid_steps
-        else:
-            min_steps = mid_steps
-        print("MAX_STEPS={}\nMIN_STEPS={}".format(max_steps,min_steps))
-
-    return mid_steps / 20.0
 
 
 if __name__ == "__main__":
