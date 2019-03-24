@@ -189,6 +189,8 @@ def process_init(uccsdslice, slice_index, angles,
                 # Search in the search space until we have a convergence window
                 # of BNS_GRANULARITY
                 while min_steps + BNS_GRANULARITY < max_steps:
+                    if initial_guess is not None:
+                        initial_guess = resize_uks(initial_guess, mid_steps)
                     total_time = mid_steps * nps
                     print("\nMAX_STEPS={}\nMIN_STEPS={}\nMID_STEPS={}\nTIME={}"
                           "\nGRAPE_START_TIME={}"
@@ -232,7 +234,40 @@ def process_init(uccsdslice, slice_index, angles,
         # ENDFOR
 
 
+def resize_uks(uks, num_steps):
+    """
+    Truncate or extend the length of each array in a 2D numpy.ndarray.
+    If the arrays are extended, fill them with zeros.
+    Args:
+    uks :: numpy.ndarray - the pulses to be resized
+    num_steps :: int - the number of steps the pulses should be
+                       extended or truncated to
+    Returns:
+    new_uks :: numpy.ndarray - the resized pulses
+    """
+    array_len = uks.shape[1]
+    # If the array length is equal to the number of steps,
+    # do nothing.
+    if array_len == num_steps:
+        return uks
+    # If the array is longer than the number of steps,
+    # take the first num_step elements from the array.
+    elif array_len > num_steps:
+        mod = lambda array: array.tolist()[:num_steps]
+    # If the array is shorter than the number of steps,
+    # extend the array with zeros by the difference.
+    else:
+        diff = num_steps - array_len
+        print("diff={}".format(diff))
+        mod = lambda array: array.tolist() + [0] * diff
+
+    return np.array([mod(array) for array in uks])
 
 
 if __name__ == "__main__":
     main()
+
+
+if __name__ == "__main__":
+    main()
+
