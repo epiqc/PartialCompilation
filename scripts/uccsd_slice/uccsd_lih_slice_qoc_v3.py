@@ -124,9 +124,6 @@ def main():
         file_names_iter.append(file_names)
     
     # Run QOC for each slice on each angle list.
-    process_init(slices[0], slice_index_iter[0], angles_iter[0],
-                 file_names_iter[0])
-    exit()
     with MPIPoolExecutor(job_count) as executor:
         executor.map(process_init, slices, slice_index_iter,
                      angles_iter, file_names_iter)
