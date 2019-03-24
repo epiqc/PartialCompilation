@@ -1,6 +1,9 @@
 """
-uccsd_slice_qoc.py - A module for running quantum optimal control on
-                     UCCSD slices.
+uccsd_slice_qoc_v3.py - A module for running quantum optimal control on
+                        UCCSD slices. This version implements a continuous
+                        binary search on the pulse time where the current
+                        optimization is seeded with the converged pulse of
+                        the last one.
 """
 # Set random seeds for reasonable reproducibility.
 import random
@@ -259,11 +262,6 @@ def resize_uks(uks, num_steps):
         mod = lambda array: array.tolist() + [0] * diff
 
     return np.array([mod(array) for array in uks])
-
-
-if __name__ == "__main__":
-    main()
-
 
 if __name__ == "__main__":
     main()

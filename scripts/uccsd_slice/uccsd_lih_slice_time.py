@@ -1,6 +1,6 @@
 """
-uccsd_slice_time.py - A script for computing the appropriate run_time's for
-                      each UCCSD slice.
+uccsd_lih_slice_time.py - A script for computing the appropriate pulse_times for
+                          each UCCSD slice via binary search.
 """
 # Set random seeds for reasonable reproducability.
 import random
