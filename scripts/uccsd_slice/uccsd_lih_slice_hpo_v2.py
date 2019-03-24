@@ -164,7 +164,7 @@ def main():
     for i, uccsdslice in enumerate(slices):
         for angle_deg in angle_deg_list:
             for pulse_time in pulse_time_list:
-                state_iter.append(OptimizationState(uccsdslice, i, angle_deg, pulse_time))
+                state_iter.append(OptimizationState(uccsdslice, i + slice_start, angle_deg, pulse_time))
 
     # Run optimization on the slices.
     with MPIPoolExecutor(BROADWELL_CORE_COUNT) as executor:
