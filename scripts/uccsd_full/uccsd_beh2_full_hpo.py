@@ -36,13 +36,12 @@ DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_full_hpo/beh2"
 NUM_QUBITS = 6
 NUM_STATES = 2
 CONNECTED_QUBIT_PAIRS = get_nearest_neighbor_coupling_list(3, 2, directed=False)
-H0 = get_H0(NUM_QUBITS, NUM_STATES)
+H0 = np.zeros((NUM_STATES ** NUM_QUBITS, NUM_STATES ** NUM_QUBITS))
 Hops, Hnames = get_Hops_and_Hnames(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS)
 STATES_CONCERNED_LIST = get_full_states_concerned_list(NUM_QUBITS, NUM_STATES)
 MAX_AMPLITUDE = get_maxA(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS)
 METHOD = 'ADAM'
 MAX_GRAPE_ITERATIONS = 1000
-MIN_GRADS = 1e-12
 REG_COEFFS = {}
 USE_GPU = False
 SPARSE_H = False
@@ -191,8 +190,7 @@ def objective(state, params):
     U = get_unitary(state.circuit)
     convergence = {'rate': params['lr'],
                    'max_iterations': MAX_GRAPE_ITERATIONS,
-                   'learning_rate_decay': params['decay'],
-                   'min_grads': MIN_GRADS}
+                   'learning_rate_decay': params['decay']}
     pulse_time = state.pulse_time
     steps = int(pulse_time * STEPS_PER_NANOSECOND)
     

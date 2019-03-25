@@ -66,19 +66,16 @@ def main():
     num_qubits = 4
     num_states = 2
     connected_qubit_pairs = get_nearest_neighbor_coupling_list(2, 2, directed=False)
-    H0 = get_H0(num_qubits, num_states)
+    H0 = np.zeros((num_states ** num_qubits, num_states ** num_qubits))
     Hops, Hnames = get_Hops_and_Hnames(num_qubits, num_states,
                                        connected_qubit_pairs)
     states_concerned_list = get_full_states_concerned_list(num_qubits, num_states)
     maxA = get_maxA(num_qubits, num_states, connected_qubit_pairs)
     
     # Define convergence parameters and penalties.
-    max_iterations = 1000
-    decay = max_iterations / 2
-    convergence = {'rate':0.01, 'conv_target': 1e-3,
-                   'max_iterations': max_iterations, 'learning_rate_decay':decay,
-                   'min_grads': 1e-5}
-    reg_coeffs = {'dwdt': 0.001, 'envelope': 0.01}
+    convergence = {'rate': 2e-2, 'conv_target': 1e-3,
+                   'max_iterations': 1e3, 'learning_rate_decay': 1e3}
+    reg_coeffs = {}
     use_gpu = False
     sparse_H = False
     show_plots = False
