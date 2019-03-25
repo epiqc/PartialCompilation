@@ -1,5 +1,6 @@
 """
-uccsd_optimized_qoc.py - A script for running QOC on the optimized UCCSD circuit.
+uccsd_lih_full_qoc.py - A script for running QOC on the full
+                        UCCSD LIH circuit.
 """
 
 import numpy as np
@@ -8,7 +9,7 @@ from quantum_optimal_control.core.hamiltonian import (get_H0,
                                                       get_Hops_and_Hnames,
                                                       get_full_states_concerned_list,
                                                       get_maxA)
-from fqc.uccsd import get_uccsd_circuit
+from fqc.uccsd import get_uccsd_circuit, UCCSD_LIH_THETA
 from fqc.util import (optimize_circuit, get_unitary,
                       get_nearest_neighbor_coupling_list)
 
@@ -27,9 +28,8 @@ def main():
     maxA = get_maxA(num_qubits, num_states)
 
     # Define unitary.
-    theta = [np.random.random() for _ in range(8)]
-    circuit = get_uccsd_circuit('LiH', theta)
-    optimized_circuit = optimize_circuit(circuit, connected_qubit_pairs)
+    circuit = optimize_circuit(get_uccsd_circuit('LiH', UCCSD_LIH_THETA),
+                               connected_qubit_pairs)
     U = get_unitary(circuit)
 
     # Define convergence parameters and penalties.

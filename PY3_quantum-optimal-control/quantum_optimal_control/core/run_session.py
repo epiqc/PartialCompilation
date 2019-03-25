@@ -1,15 +1,27 @@
-import numpy as np
-import tensorflow as tf
-from .analysis import Analysis
+"""
+run_session.py - This module contains the main logic for running a grape session.
+"""
+
 import os
 import time
-from scipy.optimize import minimize
 
+import numpy as np
+from scipy.optimize import minimize
+import tensorflow as tf
+
+from .analysis import Analysis
 from quantum_optimal_control.helper_functions.data_management import H5File
 
 
+# TODO: Fields documentation is incomplete.
 class run_session:
-    def __init__(self, tfs, graph, conv, sys_para, method, show_plots=True, single_simulation=False, use_gpu=True):
+    """A class to encapsulate a grape session.
+    Fields:
+    tfs_save_path :: string - The path to the saved tensorflow state that
+                              is captured after initilization
+    """
+    def __init__(self, tfs, graph, conv, sys_para, method,
+                 show_plots=True, single_simulation=False, use_gpu=True):
         self.tfs = tfs
         self.graph = graph
         self.conv = conv
@@ -23,26 +35,30 @@ class run_session:
             config = tf.ConfigProto(device_count={'GPU': 0})
         else:
             config = None
-
+        self.tfs_save_path = ("/tmp/grape{}.cpkt"
+                              "".format(int(np.random.random() * 1e5)))
+        
         with tf.Session(graph=graph, config=config) as self.session:
-
             tf.global_variables_initializer().run()
-
             print("Initialized", flush=True)
-
+            
+            # Save the tensorflow state after intialization to reuse.
+            self.tfs_save_path = self.tfs.saver.save(self.session,
+                                                     self.tfs_save_path)
+            print("Saved model at: {}".format(self.tfs_save_path))
+            
+            # Run the desired optimization based on the specified method.
             if self.method == 'EVOLVE':
                 self.start_time = time.time()
                 x0 = self.sys_para.ops_weight_base
                 self.l, self.rl, self.grads, self.metric, self.g_squared = self.get_error(
                     x0)
                 self.get_end_results()
-
+            elif self.method == 'ADAM':
+                self.start_adam_optimizer()
             else:
-                if self.method != 'ADAM':  # Any BFGS scheme
-                    self.bfgs_optimize(method=self.method)
+                self.bfgs_optimize(method=self.method)
 
-                if self.method == 'ADAM':
-                    self.start_adam_optimizer()
 
     def start_adam_optimizer(self):
         # adam optimizer
@@ -70,10 +86,9 @@ class run_session:
             _ = self.session.run([self.tfs.optimizer],
                                  feed_dict=self.feed_dict)
 
+
     def update_and_save(self):
-
         if not self.end:
-
             if (self.iterations % self.conv.update_step == 0):
                 self.anly = Analysis(self.sys_para, self.tfs.final_state, self.tfs.ops_weight, self.tfs.unitary_scale,
                                      self.tfs.inter_vecs)
@@ -81,13 +96,15 @@ class run_session:
                 self.display()
             if (self.iterations % self.conv.evol_save_step == 0):
                 if not (self.sys_para.show_plots == True and (self.iterations % self.conv.update_step == 0)):
-                    self.anly = Analysis(self.sys_para, self.tfs.final_state, self.tfs.ops_weight, self.tfs.unitary_scale,
+                    self.anly = Analysis(self.sys_para, self.tfs.final_state,
+                                         self.tfs.ops_weight, self.tfs.unitary_scale,
                                          self.tfs.inter_vecs)
                     if not (self.iterations % self.conv.update_step == 0):
                         self.save_data()
                     self.conv.save_evol(self.anly)
 
             self.iterations += 1
+
 
     def get_end_results(self):
         # get optimized pulse and propagation
@@ -107,12 +124,14 @@ class run_session:
         else:
             self.Uf = []
 
+
     def Get_uks(self):
         # to get the pulse amplitudes
         uks = self.anly.get_ops_weight()
         for ii in range(len(uks)):
             uks[ii] = self.sys_para.ops_max_amp[ii]*uks[ii]
         return uks
+
 
     def get_error(self, uks):
         # get error and gradient for scipy bfgs:
@@ -126,6 +145,7 @@ class run_session:
 
         return l, rl, final_g, metric, g_squared
 
+
     def save_data(self):
         if self.sys_para.save:
             self.elapsed = time.time() - self.start_time
@@ -137,6 +157,7 @@ class run_session:
                 hf.append('run_time', np.array(self.elapsed))
                 hf.append('unitary_scale', np.array(self.metric))
 
+
     def display(self):
         # display of simulation results
 
@@ -145,6 +166,7 @@ class run_session:
         else:
             self.elapsed = time.time() - self.start_time
             print('Error = :%1.2e; Runtime: %.1fs; Iterations = %d, grads =  %10.3e, unitary_metric = %.5f' % (self.l, self.elapsed, self.iterations, self.g_squared, self.metric), flush=True)
+
 
     def minimize_opt_fun(self, x):
         # minimization function called by scipy in each iteration
@@ -164,6 +186,7 @@ class run_session:
             return np.float64(self.rl), np.float64(np.transpose(self.grads))
         else:
             return self.rl, np.reshape(np.transpose(self.grads), [len(np.transpose(self.grads))])
+
 
     def bfgs_optimize(self, method='L-BFGS-B', jac=True, options=None):
         # scipy optimizer
