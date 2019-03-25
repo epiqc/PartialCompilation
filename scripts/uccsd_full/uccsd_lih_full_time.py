@@ -1,6 +1,6 @@
 """
-uccsd_lih_slice_time.py - A script for computing the appropriate pulse_times for
-                          each UCCSD slice via binary search.
+uccsd_lih_full_time.py - A script for computing the appropriate pulse_time for
+                         the full UCCSD LIH circuit.
 """
 # Set random seeds for reasonable reproducability.
 import random
@@ -27,7 +27,9 @@ from quantum_optimal_control.core.hamiltonian import (get_H0,
 
 ### CONSTANTS ###
 
-DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_slice_time/lih_v1-2/"
+
+DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_full_time/lih"
+FILE_NAME = "uccsd_lih_full"
 # Define GRAPE parameters.
 NUM_QUBITS = 4
 NUM_STATES = 2
@@ -54,95 +56,45 @@ SPN = 20.0
 # nanoseconds per step
 NPS = 1 / SPN
 
-# Get UCCSD LIH slices such that each slice is dependent on one
-# theta value but may have multiple gates dependent on that value.
-SLICE_GRANULARITY = 2
-# We use the pregenerated theta value UCCSD_LIH_THETA
-# for experimental consistency.
+# Constrcut the circuit.
+# We use a pregenerated theta for experimental consistency.
 UCCSD_LIH_FULL_CIRCUIT = optimize_circuit(get_uccsd_circuit('LiH', UCCSD_LIH_THETA),
                                           CONNECTED_QUBIT_PAIRS)
-UCCSD_LIH_SLICES = get_uccsd_slices(UCCSD_LIH_FULL_CIRCUIT,
-                                    granularity=SLICE_GRANULARITY,
-                                    dependence_grouping=True)
-
-# Parallelize by giving each core a slice.
-PROCESS_COUNT = len(UCCSD_LIH_SLICES)
-
-
-### ADTs ###
-
-
-class ProcessState(object):
-    """A class to encapsulate the state of one process.
-    Fields:
-    uccsdslice :: fqc.uccsd.uccsdslice.UCCSDSlice - the slice that is
-                                                    being binary searched on
-    slice_index :: int - the index of the uccsdslice
-    file_name :: string - a unique identifier for the slice
-    """
-    
-    def __init__(self, uccsdslice, slice_index):
-        """
-        See class fields for parameter definitions.
-        """
-        super()
-        self.uccsdslice = uccsdslice
-        self.slice_index = slice_index
-        self.file_name = "s{}".format(slice_index)
+# Get target unitary.
+U = get_unitary(UCCSD_LIH_FULL_CIRCUIT)
 
 
 ### MAIN METHODS ###
 
 
 def main():
-    # Binary search for the optimal time on each slice.
-    state_iter = [ProcessState(uccsdslice, slice_index)
-                  for slice_index, uccsdslice in enumerate(UCCSD_LIH_SLICES)]
-    with MPIPoolExecutor(PROCESS_COUNT) as executor:
-        executor.map(process_init, state_iter)
-
-
-def process_init(state):
-    """Initialize a time optimization loop for a single slice.
-    Args:
-    state :: ProcessState - the state encapsulating the slice
-                            to binary search on
-
-    Returns: nothing
-    """
-
-    log_file = state.file_name + '.log'
+    log_file = FILE_NAME + '.log'
     log_file_path = os.path.join(DATA_PATH, log_file)
     with open(log_file_path, "w") as log:
         # Redirect everything to a log file.
         sys.stdout = sys.stderr = log
 
         # Display pid, time, slice, circuit.
-        print("PID={}\nWALL_TIME={}\nSLICE_INDEX={}"
-              "".format(os.getpid(), time.time(), state.slice_index))
+        print("PID={}\nWALL_TIME={}"
+              "".format(os.getpid(), time.time()))
 
         # Define search space.
-        max_pulse_time = get_max_pulse_time(state.uccsdslice.circuit)
+        max_pulse_time = get_max_pulse_time(UCCSD_LIH_FULL_CIRCUIT)
         min_steps = 0
         max_steps = int(max_pulse_time * SPN)
         print("MAX_PULSE_TIME={}\nMIN_STEPS={}\nMAX_STEPS={}"
               "".format(max_pulse_time, min_steps, max_steps))
 
         # Run binary search.
-        binary_search_for_shortest_pulse_time(state, min_steps, max_steps)
+        binary_search_for_shortest_pulse_time(min_steps, max_steps)
 
 
-def binary_search_for_shortest_pulse_time(state, min_steps, max_steps):
+def binary_search_for_shortest_pulse_time(min_steps, max_steps):
     """Search between [min_steps, max_steps] (inclusive).
     Args:
-    state :: ProcessState - the state encapsulating the slice to
-                            binary search on
     min_steps :: int - the minimum number of steps to consider
     max_steps :: int - the maximum number of steps to consider
     """
-    # Get target unitary.
-    U = state.uccsdslice.unitary()
-    
     # mid_steps is the number of steps we try for the pulse on each
     # iteration of binary search. It is in the "middle" of max_steps
     # and min_steps.
@@ -161,7 +113,7 @@ def binary_search_for_shortest_pulse_time(state, min_steps, max_steps):
         SS = Grape(H0, Hops, Hnames, U, pulse_time, mid_steps,
                    STATES_CONCERNED_LIST, CONVERGENCE, reg_coeffs=REG_COEFFS,
                    use_gpu=USE_GPU, sparse_H=SPARSE_H, method=METHOD, maxA=MAX_PULSE_AMPLITUDE,
-                   show_plots=SHOW_PLOTS, file_name=state.file_name, data_path=DATA_PATH)
+                   show_plots=SHOW_PLOTS, file_name=FILE_NAME, data_path=DATA_PATH)
         print("GRAPE_END_TIME={}".format(time.time()))
         converged = SS.l < SS.conv.conv_target
         print("CONVERGED={}".format(converged))

@@ -60,8 +60,14 @@ UCCSD_LIH_SLICES = get_uccsd_slices(UCCSD_LIH_FULL_CIRCUIT,
                                     granularity = SLICE_GRANULARITY,
                                     dependence_grouping=True)
 
-# Hyperparmeter optimization constants.
-MAX_HPO_ITERATIONS = 50
+# Hyperparmeter optimization constants and search space.
+MAX_HPO_ITERATIONS = 75
+LR_LB = 1e-5
+LR_UB = 1
+# Previous experiments have shown that decay less than or on the order
+# of 1 perform poorly, so we set the decay lower bound to this.
+DECAY_LB = 1
+DECAY_UB = 1e4
 
 BROADWELL_CORE_COUNT = 14
 
@@ -193,15 +199,11 @@ def process_init(state):
 
         # Define the search space on the parameters: learning rate,
         # and learning rate decay.
-        lr_lb = 1e-5
-        lr_ub = 1
-        decay_lb = 1e-5
-        decay_ub = 1e5
         print("LR_LB={}, LR_UB={}, DECAY_LB={}, DECAY_UB={}"
-              "".format(lr_lb, lr_ub, decay_lb, decay_ub))
+              "".format(LR_LB, LR_UB, DECAY_LB, DECAY_UB))
         space = {
-            'lr': hp.loguniform('lr', np.log(lr_lb), np.log(lr_ub)),
-            'decay': hp.loguniform('decay', np.log(decay_lb), np.log(decay_ub)),
+            'lr': hp.loguniform('lr', np.log(LR_LB), np.log(LR_UB)),
+            'decay': hp.loguniform('decay', np.log(DECAY_LB), np.log(DECAY_UB)),
         }
 
         # Run optimization.

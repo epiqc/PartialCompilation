@@ -47,6 +47,8 @@ REG_COEFFS = {}
 USE_GPU = False
 SPARSE_H = False
 SHOW_PLOTS = False
+# Optimization granularity.
+STEPS_PER_NANOSECOND = 20
 
 # Construct the circuit.
 UCCSD_BEH2_FULL_CIRCUIT = optimize_circuit(get_uccsd_circuit('BeH2', UCCSD_BEH2_THETA),
@@ -54,9 +56,13 @@ UCCSD_BEH2_FULL_CIRCUIT = optimize_circuit(get_uccsd_circuit('BeH2', UCCSD_BEH2_
 
 # Hyperparmeter optimization constants.
 MAX_HPO_ITERATIONS = 100
-
+LR_LB = 1e-5
+LR_UB = 1
+DECAY_LB = 1
+DECAY_UB = 1e5
 # How many cores are we running on?
 BROADWELL_CORE_COUNT = 14
+TMP_CORE_COUNT = 1
 
 
 ### OBJECTS ###
@@ -124,7 +130,7 @@ def main():
     # Run optimization on the slices.
     process_init(state_iter[0])
     exit()
-    with MPIPoolExecutor(BROADWELL_CORE_COUNT) as executor:
+    with MPIPoolExecutor(TMP_CORE_COUNT) as executor:
         executor.map(process_init, state_iter)
 
 
@@ -140,24 +146,20 @@ def process_init(state):
     log_file = state.file_name + ".log"
     log_file_path = os.path.join(DATA_PATH, log_file)
     with open(log_file_path, "w") as log:
-        # sys.stdout = sys.stderr = log
+        sys.stdout = sys.stderr = log
 
         # Display pid, time, slice.
         print("PID={}\nTIME={}\nPULSE_TIME={}"
               "".format(os.getpid(), time.time(), state.pulse_time))
-        print(state.circuit)
+        # print(state.circuit)
 
         # Define the search space on the parameters: learning rate,
         # and learning rate decay.
-        lr_lb = 1e-5
-        lr_ub = 1
-        decay_lb = 1e-5
-        decay_ub = 1e5
         print("LR_LB={}, LR_UB={}, DECAY_LB={}, DECAY_UB={}"
-              "".format(lr_lb, lr_ub, decay_lb, decay_ub))
+              "".format(LR_LB, LR_UB, DECAY_LB, DECAY_UB))
         space = {
-            'lr': hp.loguniform('lr', np.log(lr_lb), np.log(lr_ub)),
-            'decay': hp.loguniform('decay', np.log(decay_lb), np.log(decay_ub)),
+            'lr': hp.loguniform('lr', np.log(LR_LB), np.log(LR_UB)),
+            'decay': hp.loguniform('decay', np.log(DECAY_LB), np.log(DECAY_UB)),
         }
 
         # Run optimization.
@@ -192,7 +194,7 @@ def objective(state, params):
                    'learning_rate_decay': params['decay'],
                    'min_grads': MIN_GRADS}
     pulse_time = state.pulse_time
-    steps = int(pulse_time * 100)
+    steps = int(pulse_time * STEPS_PER_NANOSECOND)
     
     # Run grape.
     grape_start_time = time.time()
