@@ -42,6 +42,7 @@ STATES_CONCERNED_LIST = get_full_states_concerned_list(NUM_QUBITS, NUM_STATES)
 MAX_AMPLITUDE = get_maxA(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS)
 METHOD = 'ADAM'
 MAX_GRAPE_ITERATIONS = 1000
+DECAY = MAX_GRAPE_ITERATIONS
 REG_COEFFS = {}
 USE_GPU = False
 SPARSE_H = False
@@ -57,11 +58,6 @@ UCCSD_BEH2_FULL_CIRCUIT = optimize_circuit(get_uccsd_circuit('BeH2', UCCSD_BEH2_
 MAX_HPO_ITERATIONS = 100
 LR_LB = 1e-5
 LR_UB = 1
-DECAY_LB = 1
-DECAY_UB = 1e5
-# How many cores are we running on?
-BROADWELL_CORE_COUNT = 14
-TMP_CORE_COUNT = 1
 
 
 ### OBJECTS ###
@@ -127,9 +123,7 @@ def main():
         state_iter.append(OptimizationState(UCCSD_BEH2_FULL_CIRCUIT, pulse_time))
 
     # Run optimization on the slices.
-    process_init(state_iter[0])
-    exit()
-    with MPIPoolExecutor(TMP_CORE_COUNT) as executor:
+    with MPIPoolExecutor(BROADWELL_CORE_COUNT) as executor:
         executor.map(process_init, state_iter)
 
 
@@ -152,13 +146,11 @@ def process_init(state):
               "".format(os.getpid(), time.time(), state.pulse_time))
         # print(state.circuit)
 
-        # Define the search space on the parameters: learning rate,
-        # and learning rate decay.
-        print("LR_LB={}, LR_UB={}, DECAY_LB={}, DECAY_UB={}"
-              "".format(LR_LB, LR_UB, DECAY_LB, DECAY_UB))
+        # Define the search space on the parameters: learning rate.
+        print("LR_LB={}, LR_UB={}"
+              "".format(LR_LB, LR_UB))
         space = {
             'lr': hp.loguniform('lr', np.log(LR_LB), np.log(LR_UB)),
-            'decay': hp.loguniform('decay', np.log(DECAY_LB), np.log(DECAY_UB)),
         }
 
         # Run optimization.
@@ -182,15 +174,14 @@ def objective(state, params):
     """
     # Grab and log parameters.
     lr = params['lr']
-    decay = params['decay']
-    print("\nITERATION={}\nLEARNING_RATE={}\nDECAY={}"
-          "".format(state.iteration_count, lr, decay))
+    print("\nITERATION={}\nLEARNING_RATE={}"
+          "".format(state.iteration_count, lr))
 
     # Build necessary grape arguments using parameters.
     U = get_unitary(state.circuit)
     convergence = {'rate': params['lr'],
                    'max_iterations': MAX_GRAPE_ITERATIONS,
-                   'learning_rate_decay': params['decay']}
+                   'learning_rate_decay': DECAY}
     pulse_time = state.pulse_time
     steps = int(pulse_time * STEPS_PER_NANOSECOND)
     
@@ -212,7 +203,6 @@ def objective(state, params):
     trial = {
         'iter': state.iteration_count,
         'lr': lr,
-        'decay': decay,
         'loss': grape_sess.l,
         'wall_run_time': grape_end_time - grape_start_time,
     }

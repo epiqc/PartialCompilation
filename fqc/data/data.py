@@ -28,13 +28,14 @@ UCCSD_BEH2_THETA = [1.910655366933038, 3.0380262019523134, 1.767835033803264,
 
 # The pulse times for each of the uccsd lih slices. These times correspond
 # to those found by binary search at
-# /project/ftchong/qoc/thomas/uccsd_slice_time/lih/
+# /project/ftchong/qoc/thomas/uccsd_slice_time/lih_v1-2/ for slice 0-3
+# /project/ftchon/qoc/thomas/uccsd_slice_time/lih/ for slice 4-7
 # plus the maximum pulse time for an RZ gate times the number of RZ gates
 # in the slice. These slices are the granularity 2, depedence grouping = True
 # slices.
 _rz = GATE_TIMES['rz']
-UCCSD_LIH_SLICE_TIMES = [7.6 + _rz * 2, 2.75 + _rz * 2, 3.55 + _rz * 2,
-                         3.1 + _rz * 2, 29.1 + _rz * 8, 39.25 + _rz * 8,
+UCCSD_LIH_SLICE_TIMES = [5.1 + _rz * 2, 2.85 + _rz * 2, 3.6 + _rz * 2,
+                         3.4 + _rz * 2, 29.1 + _rz * 8, 39.25 + _rz * 8,
                          56.4 + _rz * 8, 25.55 + _rz * 8]
 
 # This pulse time for the full uccsd lih circuit. This time corresponds

@@ -2,7 +2,7 @@
 uccsd_slice_hpo_v2.py - A script for computing the appropriate hyperparameters
                         for GRAPE on a UCCSD slice. This time we do not optimize
                         over time and instead look at the effects of learning rate
-                        and decay choices for different times on the same slice.
+                        choice for different times on the same slice.
 """
 # Set random seeds for reasonable reproducibility.
 import random
@@ -45,7 +45,8 @@ Hops, Hnames = get_Hops_and_Hnames(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS
 STATES_CONCERNED_LIST = get_full_states_concerned_list(NUM_QUBITS, NUM_STATES)
 MAX_AMPLITUDE = get_maxA(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS)
 METHOD = 'ADAM'
-MAX_GRAPE_ITERATIONS = 1000
+MAX_GRAPE_ITERATIONS = 1e3
+DECAY = 1e3
 REG_COEFFS = {}
 USE_GPU = False
 SPARSE_H = False
@@ -63,10 +64,6 @@ UCCSD_LIH_SLICES = get_uccsd_slices(UCCSD_LIH_FULL_CIRCUIT,
 MAX_HPO_ITERATIONS = 75
 LR_LB = 1e-5
 LR_UB = 1
-# Previous experiments have shown that decay less than or on the order
-# of 1 perform poorly, so we set the decay lower bound to this.
-DECAY_LB = 1
-DECAY_UB = 1e4
 
 BROADWELL_CORE_COUNT = 14
 
@@ -194,15 +191,12 @@ def process_init(state):
         print("PID={}\nTIME={}\nSLICE_INDEX={}\nANGLE={}\nPULSE_TIME={}"
               "".format(os.getpid(), time.time(), state.slice_index,
                         state.angle, state.pulse_time))
-        print(state.uccsdslice.circuit)
 
-        # Define the search space on the parameters: learning rate,
-        # and learning rate decay.
-        print("LR_LB={}, LR_UB={}, DECAY_LB={}, DECAY_UB={}"
-              "".format(LR_LB, LR_UB, DECAY_LB, DECAY_UB))
+        # Define the search space on the parameters: learning rate.
+        print("LR_LB={}, LR_UB={}"
+              "".format(LR_LB, LR_UB))
         space = {
             'lr': hp.loguniform('lr', np.log(LR_LB), np.log(LR_UB)),
-            'decay': hp.loguniform('decay', np.log(DECAY_LB), np.log(DECAY_UB)),
         }
 
         # Run optimization.
@@ -226,15 +220,14 @@ def objective(state, params):
     """
     # Grab and log parameters.
     lr = params['lr']
-    decay = params['decay']
-    print("\nITERATION={}\nLEARNING_RATE={}\nDECAY={}"
-          "".format(state.iteration_count, lr, decay))
+    print("\nITERATION={}\nLEARNING_RATE={}"
+          "".format(state.iteration_count, lr))
 
     # Build necessary grape arguments using parameters.
     U = state.uccsdslice.unitary()
     convergence = {'rate': params['lr'],
                    'max_iterations': MAX_GRAPE_ITERATIONS,
-                   'learning_rate_decay': params['decay']}
+                   'learning_rate_decay': DECAY}
     pulse_time = state.pulse_time
     steps = int(pulse_time * 100)
     
@@ -256,7 +249,6 @@ def objective(state, params):
     trial = {
         'iter': state.iteration_count,
         'lr': lr,
-        'decay': decay,
         'loss': grape_sess.l,
         'wall_run_time': grape_end_time - grape_start_time,
     }
