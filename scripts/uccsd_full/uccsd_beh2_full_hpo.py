@@ -19,7 +19,7 @@ from fqc.data import UCCSD_BEH2_THETA
 from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices, MOLECULE_TO_INFO
 from fqc.util import (optimize_circuit, get_unitary,
                       get_nearest_neighbor_coupling_list, get_max_pulse_time,
-                      merge_rotation_gates)
+                      merge_rotation_gates, CustomJSONEncoder)
 from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
 from mpi4py.futures import MPIPoolExecutor
 from quantum_optimal_control.main_grape.grape import Grape
@@ -123,6 +123,8 @@ def main():
         state_iter.append(OptimizationState(UCCSD_BEH2_FULL_CIRCUIT, pulse_time))
 
     # Run optimization on the slices.
+    process_init(state_iter[0])
+    exit()
     with MPIPoolExecutor(BROADWELL_CORE_COUNT) as executor:
         executor.map(process_init, state_iter)
 
@@ -139,7 +141,7 @@ def process_init(state):
     log_file = state.file_name + ".log"
     log_file_path = os.path.join(DATA_PATH, log_file)
     with open(log_file_path, "w") as log:
-        sys.stdout = sys.stderr = log
+        # sys.stdout = sys.stderr = log
 
         # Display pid, time, slice.
         print("PID={}\nTIME={}\nPULSE_TIME={}"
@@ -221,8 +223,8 @@ def objective(state, params):
     }
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 
 
 

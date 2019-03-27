@@ -1,8 +1,7 @@
 """
-uccsd_slice_hpo.py - A script for computing the appropriate hyperparameters
-                     for GRAPE on a UCCSD slice. We optimize over learning rate
-                     and learning rate decay for different time steps and 
-                     angles on each slice.
+uccsd_slice_hpo_v2.py - A script for computing the appropriate hyperparameters
+                        for GRAPE on a UCCSD slice. We optimize over learning rate
+                        and decay for a fixed time and fixed angle on one slice.
 """
 # Set random seeds for reasonable reproducibility.
 import random
@@ -35,7 +34,7 @@ from quantum_optimal_control.core.hamiltonian import (get_H0,
 
 
 # Grape constants.
-DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_slice_hpo/lih"
+DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_slice_hpo/lih_v2"
 # Define hardware specific parameters.
 NUM_QUBITS = 4
 NUM_STATES = 2
@@ -61,22 +60,22 @@ UCCSD_LIH_SLICES = get_uccsd_slices(UCCSD_LIH_FULL_CIRCUIT,
                                     dependence_grouping=True)
 
 # Hyperparmeter optimization constants and search space.
-MAX_HPO_ITERATIONS = 100
+MAX_HPO_ITERATIONS = 50
 LR_LB = 1e-5
 LR_UB = 1
 DECAY_LB = 1
 DECAY_UB = 1e5
 
 BROADWELL_CORE_COUNT = 14
+TMP_CORE_COUNT = 8
+
 
 ### OBJECTS ###
 
 
-class OptimizationState(object):
+class ProcessState(object):
     """A class to track the state of an optimization loop.
     Fields:
-    angle :: float - the angle to parameterize the theta dependent gates
-                     of the slice (in radians)
     file_name :: string - the identifier of the optimization
     iteration_count :: int - tracks how many iterations the optimization
                              has performed
@@ -88,22 +87,15 @@ class OptimizationState(object):
                                                     is being optimized
     """
 
-    def __init__(self, uccsdslice, slice_index, angle_deg, pulse_time):
+    def __init__(self, uccsdslice, slice_index, pulse_time):
+        """See corresponding class field declarations above for other arguments.
         """
-        Args:
-        angle_deg :: float - the angle to parameterize the theta dependent gates
-                     of the slice (in degrees)
-        See corresponding class field declarations above for other arguments.
-        """
-        super(OptimizationState, self).__init__()
+        super(ProcessState, self).__init__()
         self.uccsdslice = uccsdslice
         self.slice_index = slice_index
-        angle_rad = np.deg2rad(angle_deg)
-        self.angle = angle_rad
-        self.uccsdslice.update_angles([angle_rad] * len(uccsdslice.angles))
         self.pulse_time = pulse_time
-        self.file_name = ("s{}_{}_t{}"
-                          "".format(slice_index, angle_deg, pulse_time))
+        self.file_name = ("s{}_t{}"
+                          "".format(slice_index, int(pulse_time)))
         self.trials = list()
         self.iteration_count = 0
 
@@ -114,71 +106,39 @@ class OptimizationState(object):
 def main():
     # Handle CLI.
     parser = argparse.ArgumentParser()
-    parser.add_argument("--angle-start", type=float, default=0.0, help="the "
-                        "inclusive lower bound of angles to optimize the "
-                        "slice for (units in degrees, behaves like np.arange)")
-    parser.add_argument("--angle-stop", type=float, default=1.0, help="the "
-                        "exclusive upper bound of angles to optimize the "
-                        "slice for (units in degrees, behaves like np.arange)")
-    parser.add_argument("--angle-step", type=float, default=5.0, help="the step size "
-                        "between angle values (units in degrees, behaves "
-                        "like np.arange)")
     parser.add_argument("--slice-start", type=int, default=0, help="the "
                         "inclusive lower bound of slice indices to include "
                         "(0-7)")
     parser.add_argument("--slice-stop", type=int, default=0, help="the "
                         "inclusive upper bound of slice indices to include "
                         "(0-7)")
-    parser.add_argument("--time-start", type=float, default=0.0, help="the "
-                        "inclusive lower bound of time steps to optimize the "
-                        "slice for (units in nanoseconds, behaves like "
-                        "np.arange)")
-    parser.add_argument("--time-stop", type=float, default=1.0, help="the "
-                        "exclusive upper bound of time steps to optimize the "
-                        "slice for (units in nanoseconds, behaves like "
-                        "np.arange)")
-    parser.add_argument("--time-step", type=float, default=0.5, help="the step size "
-                        "between time values (units in nanoseconds, behaves "
-                        "like np.arange)")
     args = vars(parser.parse_args())
-    angle_start = args["angle_start"]
-    angle_stop = args["angle_stop"]
-    angle_step = args["angle_step"]
     slice_start = args["slice_start"]
     slice_stop = args["slice_stop"]
-    time_start = args["time_start"]
-    time_stop = args["time_stop"]
-    time_step = args["time_step"]
 
     # Trim slices to only include start thru stop.
     slices = UCCSD_LIH_SLICES[slice_start:slice_stop + 1]
     slice_count = len(slices)
 
-    # Get a list of the angles that each slice should be compiled for.
-    angle_deg_list = list(np.arange(angle_start, angle_stop, angle_step))
-    angle_count = len(angle_deg_list)
-
-    # Get a list of time steps.
-    pulse_time_list = list(np.arange(time_start, time_stop, time_step))
-    pulse_time_count = len(pulse_time_list)
-
-    # Generate the state objects to encapsulate the optimization of each slice.
-    job_count = slice_count * angle_count * pulse_time_count
+    # Generate the state objects to encapsulate the optimization for each slice.
+    # We will run one hpo for the slice at 10% of its gate-based time
+    # and one for the slice at 20% of its gate-based time.
     state_iter = list()
     for i, uccsdslice in enumerate(slices):
-        for angle_deg in angle_deg_list:
-            for pulse_time in pulse_time_list:
-                state_iter.append(OptimizationState(uccsdslice, i + slice_start, angle_deg, pulse_time))
+        slice_index = i + slice_start
+        max_pulse_time = get_max_pulse_time(uccsdslice.circuit)
+        state_iter.append(ProcessState(uccsdslice, slice_index, max_pulse_time * 0.1))
+        state_iter.append(ProcessState(uccsdslice, slice_index, max_pulse_time * 0.2))
 
     # Run optimization on the slices.
-    with MPIPoolExecutor(BROADWELL_CORE_COUNT) as executor:
+    with MPIPoolExecutor(TMP_CORE_COUNT) as executor:
         executor.map(process_init, state_iter)
 
 
 def process_init(state):
     """Initialize a hyperparameter optimization loop.
     Args:
-    state :: OptimizationState - the state that encapsulates the pending
+    state :: ProcessState - the state that encapsulates the pending
                                  optimization
 
     Returns: nothing
@@ -190,9 +150,9 @@ def process_init(state):
         sys.stdout = sys.stderr = log
 
         # Display pid, time, slice.
-        print("PID={}\nTIME={}\nSLICE_INDEX={}\nANGLE={}\nPULSE_TIME={}"
+        print("PID={}\nTIME={}\nSLICE_INDEX={}\nPULSE_TIME={}"
               "".format(os.getpid(), time.time(), state.slice_index,
-                        state.angle, state.pulse_time))
+                        state.pulse_time))
 
         # Define the search space on the parameters: learning rate.
         print("LR_LB={}, LR_UB={}, DECAY_LB={}, DECAY_UB={}"
@@ -216,7 +176,7 @@ def process_init(state):
 def objective(state, params):
     """This is the function to minimize.
     Args:
-    state :: OptimizationState - the state that encapsulates the optimization
+    state :: ProcessState - the state that encapsulates the optimization
     params :: dict - the new parameters to run the objective for
 
     Returns: results :: dict - a results dictionary interpretable by hyperopt
@@ -224,7 +184,7 @@ def objective(state, params):
     # Grab and log parameters.
     lr = params['lr']
     decay = params['decay']
-    print("\nITERATION={}\nLEARNING_RATE={}, DECAY={}"
+    print("\nITERATION={}\nLEARNING_RATE={}\nDECAY={}"
           "".format(state.iteration_count, lr, decay))
 
     # Build necessary grape arguments using parameters.

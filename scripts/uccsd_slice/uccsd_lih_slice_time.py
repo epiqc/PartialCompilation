@@ -10,6 +10,7 @@ np.random.seed(1)
 import tensorflow as tf
 tf.set_random_seed(2)
 
+import argparse
 import os
 import sys
 import time
@@ -17,15 +18,18 @@ import time
 from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices
 from fqc.util import (optimize_circuit, get_unitary,
                       get_nearest_neighbor_coupling_list, get_max_pulse_time)
-from fqc.data import UCCSD_LIH_THETA
+from fqc.data import UCCSD_LIH_THETA, UCCSD_LIH_SLICE_HYPERPARAMETERS
 from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
 from mpi4py.futures import MPIPoolExecutor
 from quantum_optimal_control.main_grape.grape import Grape
-from quantum_optimal_control.core.hamiltonian import (get_H0, 
-        get_Hops_and_Hnames, get_full_states_concerned_list, get_maxA)
+from quantum_optimal_control.core.hamiltonian import (get_H0,
+                                                      get_Hops_and_Hnames,
+                                                      get_full_states_concerned_list,
+                                                      get_maxA)
 
 
 ### CONSTANTS ###
+
 
 DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_slice_time/lih_v1-2/"
 # Define GRAPE parameters.
@@ -37,9 +41,8 @@ Hops, Hnames = get_Hops_and_Hnames(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS
 STATES_CONCERNED_LIST = get_full_states_concerned_list(NUM_QUBITS, NUM_STATES)
 MAX_PULSE_AMPLITUDE = get_maxA(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS)
 # Define convergence parameters and penalties.
-CONVERGENCE = {'rate': 2e-2, 'conv_target': 1e-5,
-               'max_iterations': 1e3,
-               'learning_rate_decay': 1e3}
+CONVERGENCE = {'conv_target': 1e-5,
+               'max_iterations': 1e3}
 REG_COEFFS = {}
 USE_GPU = False
 SPARSE_H = False
@@ -48,9 +51,9 @@ METHOD = 'ADAM'
 
 # Define binary search parameters.
 # binary search granularity, how many nanoseconds of precision do you need?
-BSG = 10.0 
+BSG = 10.0
 # steps per nanosecond
-SPN = 20.0 
+SPN = 20.0
 # nanoseconds per step
 NPS = 1 / SPN
 
@@ -65,9 +68,6 @@ UCCSD_LIH_SLICES = get_uccsd_slices(UCCSD_LIH_FULL_CIRCUIT,
                                     granularity=SLICE_GRANULARITY,
                                     dependence_grouping=True)
 
-# Parallelize by giving each core a slice.
-PROCESS_COUNT = len(UCCSD_LIH_SLICES)
-
 
 ### ADTs ###
 
@@ -79,8 +79,10 @@ class ProcessState(object):
                                                     being binary searched on
     slice_index :: int - the index of the uccsdslice
     file_name :: string - a unique identifier for the slice
+    lr :: float - the learning rate to use for the optimization
+    decay :: float - the learning rate decay to use for the optimization
     """
-    
+
     def __init__(self, uccsdslice, slice_index):
         """
         See class fields for parameter definitions.
@@ -89,16 +91,34 @@ class ProcessState(object):
         self.uccsdslice = uccsdslice
         self.slice_index = slice_index
         self.file_name = "s{}".format(slice_index)
+        self.lr = UCCSD_LIH_SLICE_HYPERPARAMETERS[slice_index]['lr']
+        self.decay = UCCSD_LIH_SLICE_HYPERPARAMETERS[slice_index]['decay']
 
 
 ### MAIN METHODS ###
 
 
 def main():
-    # Binary search for the optimal time on each slice.
-    state_iter = [ProcessState(uccsdslice, slice_index)
-                  for slice_index, uccsdslice in enumerate(UCCSD_LIH_SLICES)]
-    with MPIPoolExecutor(PROCESS_COUNT) as executor:
+    # Handle CLI.
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--slice-start", type=int, default=0, help="the "
+                        "inclusive lower bound of slice indices to include "
+                        "(0-7)")
+    parser.add_argument("--slice-stop", type=int, default=0, help="the "
+                        "inclusive upper bound of slice indices to include "
+                        "(0-7)")
+    args = vars(parser.parse_args())
+    slice_start = args["slice_start"]
+    slice_stop = args["slice_stop"]
+
+    # Trim the slices to match those specified.
+    slices = UCCSD_LIH_SLICES[slice_start:slice_stop + 1]
+    slice_count = len(slices)
+
+    # Binary search for the optimal time on each slice specified.
+    state_iter = [ProcessState(uccsdslice, i + slice_start)
+                  for i, uccsdslice in enumerate(slices)]
+    with MPIPoolExecutor(slice_count) as executor:
         executor.map(process_init, state_iter)
 
 
@@ -140,8 +160,13 @@ def binary_search_for_shortest_pulse_time(state, min_steps, max_steps):
     min_steps :: int - the minimum number of steps to consider
     max_steps :: int - the maximum number of steps to consider
     """
-    # Get target unitary.
+    # Get grape arguments.
     U = state.uccsdslice.unitary()
+    convergence = CONVERGENCE
+    convergence.update({
+        'rate': state.lr,
+        'learning_rate_decay': state.decay,
+    })
     
     # mid_steps is the number of steps we try for the pulse on each
     # iteration of binary search. It is in the "middle" of max_steps
@@ -158,12 +183,15 @@ def binary_search_for_shortest_pulse_time(state, min_steps, max_steps):
               "\nGRAPE_START_TIME={}"
               "".format(max_steps, min_steps, mid_steps, pulse_time,
                         time.time()))
-        SS = Grape(H0, Hops, Hnames, U, pulse_time, mid_steps,
-                   STATES_CONCERNED_LIST, CONVERGENCE, reg_coeffs=REG_COEFFS,
-                   use_gpu=USE_GPU, sparse_H=SPARSE_H, method=METHOD, maxA=MAX_PULSE_AMPLITUDE,
-                   show_plots=SHOW_PLOTS, file_name=state.file_name, data_path=DATA_PATH)
+        sess = Grape(H0, Hops, Hnames, U, pulse_time, mid_steps,
+                     STATES_CONCERNED_LIST, convergence, reg_coeffs = REG_COEFFS,
+                     use_gpu = USE_GPU, sparse_H = SPARSE_H, method = METHOD,
+                     maxA = MAX_PULSE_AMPLITUDE,
+                     show_plots = SHOW_PLOTS,
+                     file_name = state.file_name,
+                     data_path = DATA_PATH)
         print("GRAPE_END_TIME={}".format(time.time()))
-        converged = SS.l < SS.conv.conv_target
+        converged = sess.l < sess.conv.conv_target
         print("CONVERGED={}".format(converged))
         # If the tiral converged, lower the ceiling.
         # If the tiral did not converge, raise the floor.
