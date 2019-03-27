@@ -67,7 +67,7 @@ DECAY_LB = 1
 DECAY_UB = 1e5
 
 BROADWELL_CORE_COUNT = 14
-TMP_CORE_COUNT = 8
+TMP_CORE_COUNT = 12
 
 
 ### OBJECTS ###
@@ -128,6 +128,7 @@ def main():
         slice_index = i + slice_start
         max_pulse_time = get_max_pulse_time(uccsdslice.circuit)
         state_iter.append(ProcessState(uccsdslice, slice_index, max_pulse_time * 0.1))
+        state_iter.append(ProcessState(uccsdslice, slice_index, max_pulse_time * 0.15))
         state_iter.append(ProcessState(uccsdslice, slice_index, max_pulse_time * 0.2))
 
     # Run optimization on the slices.
