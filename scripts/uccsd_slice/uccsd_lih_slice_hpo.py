@@ -11,11 +11,12 @@ import numpy as np
 np.random.seed(1)
 import tensorflow as tf
 tf.set_random_seed(2)
+import os
+os.environ["HYPEROPT_FMIN_SEED"] = 23
 
 import argparse
 from itertools import product
 import json
-import os
 import sys
 import time
 
