@@ -31,7 +31,7 @@ from quantum_optimal_control.core.hamiltonian import (get_H0,
 ### CONSTANTS ###
 
 
-DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_slice_time/lih_v1-2/"
+DATA_PATH = ""
 # Define GRAPE parameters.
 NUM_QUBITS = 4
 NUM_STATES = 2

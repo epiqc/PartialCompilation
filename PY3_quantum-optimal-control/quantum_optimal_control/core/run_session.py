@@ -17,8 +17,6 @@ from quantum_optimal_control.helper_functions.data_management import H5File
 class run_session:
     """A class to encapsulate a grape session.
     Fields:
-    tfs_save_path :: string - The path to the saved tensorflow state that
-                              is captured after initilization
     """
     def __init__(self, tfs, graph, conv, sys_para, method,
                  show_plots=True, single_simulation=False, use_gpu=True):
@@ -35,17 +33,10 @@ class run_session:
             config = tf.ConfigProto(device_count={'GPU': 0})
         else:
             config = None
-        self.tfs_save_path = ("/tmp/grape{}.cpkt"
-                              "".format(int(np.random.random() * 1e5)))
         
         with tf.Session(graph=graph, config=config) as self.session:
             tf.global_variables_initializer().run()
             print("Initialized", flush=True)
-            
-            # Save the tensorflow state after intialization to reuse.
-            self.tfs_save_path = self.tfs.saver.save(self.session,
-                                                     self.tfs_save_path)
-            print("Saved model at: {}".format(self.tfs_save_path))
             
             # Run the desired optimization based on the specified method.
             if self.method == 'EVOLVE':

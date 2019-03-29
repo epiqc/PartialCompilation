@@ -1,9 +1,16 @@
 """
-uccsd_slice_qoc_v3.py - A module for running quantum optimal control on
-                        UCCSD slices. This version implements a continuous
-                        binary search on the pulse time where the current
-                        optimization is seeded with the converged pulse of
-                        the last one.
+uccsd_lih_slice_qoc_backoff.py - A module for running quantum optimal control on
+UCCSD slices. This version implements a continuous
+binary search on the pulse time where the current
+optimization is seeded with the converged pulse of
+the last one. This module also implements a time backoff
+where a pulse that is not converging to the desired
+error incrementally increases its pulse time
+until it reaches the desired error.
+
+Notes:
+This method was found to perform poorly. Use uccsd_lih_slice_qoc.py
+and pick your hyperparameters well.
 """
 # Set random seeds for reasonable reproducibility.
 import random
@@ -41,7 +48,7 @@ BACKOFF = 1.2
 BNS_GRANULARITY = 10
 
 # Grape args.
-DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_slice_qoc/lih_v3"
+DATA_PATH = ""
 
 # Define hardware specific parameters.
 num_qubits = 4

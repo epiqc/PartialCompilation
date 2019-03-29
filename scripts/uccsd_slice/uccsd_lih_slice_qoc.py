@@ -32,7 +32,7 @@ from quantum_optimal_control.core.hamiltonian import (get_H0,
 ### CONSTANTS ###
 
 
-DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_slice_qoc/lih"
+DATA_PATH = ""
 
 # Define Grape parameters.
 NUM_QUBITS = 4

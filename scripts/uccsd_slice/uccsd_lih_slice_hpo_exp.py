@@ -38,7 +38,7 @@ from quantum_optimal_control.core.hamiltonian import (get_H0,
 ### CONSTANTS ###
 
 
-DATA_PATH = "/project/ftchong/qoc/thomas/uccsd_slice_hpo/lih_exp"
+DATA_PATH = ""
 ANGLES = [90, 180, 270]
 ANGLE_CONSTANT = 180
 TIME_MULTIPLIERS = [0.25, 0.5, 0.75]
