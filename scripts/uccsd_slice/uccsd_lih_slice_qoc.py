@@ -17,7 +17,8 @@ import sys
 import time
 import argparse
 
-from fqc.data import UCCSD_LIH_THETA, UCCSD_LIH_SLICE_TIMES
+from fqc.data import (UCCSD_LIH_THETA, UCCSD_LIH_SLICE_TIMES,
+                      UCCSD_LIH_HYPERPARAMETERS)
 from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices
 from fqc.util import (optimize_circuit, get_unitary,
                       get_nearest_neighbor_coupling_list)
@@ -43,13 +44,31 @@ Hops, Hnames = get_Hops_and_Hnames(NUM_QUBITS, NUM_STATES,
                                    CONNECTED_QUBIT_PAIRS)
 STATES_CONCERNED_LIST = get_full_states_concerned_list(NUM_QUBITS, NUM_STATES)
 MAX_PULSE_AMPLITUDE = get_maxA(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS)
-CONVERGENCE = {'rate': 2e-2, 'conv_target': 1e-3,
-               'max_iterations': 1e3, 'learning_rate_decay': 1e3}
+MAX_ITERATIONS = 1e3
+CONV_TARGET = 1e-3
+CONVERGENCE = {'conv_target': CONV_TARGET,
+               'max_iterations': MAX_ITERATIONS,
+}
 REG_COEFFS = {}
 USE_GPU = False
 SPARSE_H = False
 SHOW_PLOTS = False
-METHOD = 'ADAM'
+METHOD = "ADAM"
+SAVE = True
+GRAPE_CONFIG = {
+    "H0": H0,
+    "Hops": Hops,
+    "Hnames": Hnames,
+    "states_concerned_list": STATES_CONCERNED_LIST,
+    "reg_coeffs": REG_COEFFS,
+    "maxA": MAX_PULSE_AMPLITUDE,
+    "use_gpu": USE_GPU,
+    "sparse_H": SPARSE_H,
+    "show_plots": SHOW_PLOTS,
+    "method": METHOD,
+    "data_path": DATA_PATH,
+    "save": SAVE,
+}
 # Pulse granularity (steps per nanosecond)
 SPN = 20.0 
 
@@ -76,26 +95,28 @@ class ProcessState(object):
     slice_index :: int - the index of the slice
     angle :: float - the angle of the theta dependent gates in the slice
     angle_deg :: float - the angle of the theta dependent gates in the slice
-                         in radians
-    file_name :: a unique identifier for the slice
+                         in degrees
+    file_name :: str - a unique identifier for the slice
     pulse_time :: float - the time length to optimize the pulse for
+    lr :: float - the learning rate to specify to grape for the slice
+    decay :: float - the learning rate decay to specify to grape for the slice
     """
     
-    def __init__(self, uccsdslice, slice_index, angle_deg, pulse_time):
-        """See class fields for other argument definitions.
-        Args:
-        angle_deg :: float - the angle of that should be the value
-                             of all of the theta dependent gates in the slice
-                             in degrees
+    def __init__(self, uccsdslice, slice_index, angle_deg):
+        """See class fields for argument definitions.
         """
         super()
+        # IMPLEMENTATION NOTE: This probably doesn't need to be a deepcopy since
+        # the state is passed to seperate processes.
         self.uccsdslice = deepcopy(uccsdslice)
         self.slice_index = slice_index
         self.angle_deg = angle_deg
         self.angle = np.deg2rad(angle_deg)
         self.uccsdslice.update_angles([self.angle] * len(self.uccsdslice.angles))
-        self.file_name = "s{}_{}".format(slice_index, angle_deg)
-        self.pulse_time = pulse_time
+        self.file_name = "s{}_a{}".format(slice_index, angle_deg)
+        self.pulse_time = UCCSD_LIH_SLICE_TIMES[slice_index]
+        self.lr = UCCSD_LIH_HYPERPARAMETERS[slice_index]["lr"]
+        self.decay = UCCSD_LIH_HYPERPARAMETERS[slice_index]["decay"]
         
 
 ### MAIN METHODS ###
@@ -113,34 +134,23 @@ def main():
     parser.add_argument("--angle-step", type=float, default=5.0, help="the step size "
                         "between angle values (units in degrees, behaves "
                         "like np.arange)")
-    parser.add_argument("--slice-start", type=int, default=0, help="the "
-                        "inclusive lower bound of slice indices to include "
-                        "(0-7)")
-    parser.add_argument("--slice-stop", type=int, default=0, help="the "
-                        "inclusive upper bound of slice indices to include "
-                        "(0-7)")
+    parser.add_argument("--slice-index", type=int, default=0, help="the "
+                        "slice to perform QOC on (0-7)")
     args = vars(parser.parse_args())
     angle_start = args["angle_start"]
     angle_stop = args["angle_stop"]
     angle_step = args["angle_step"]
-    slice_start = args["slice_start"]
-    slice_stop = args["slice_stop"]
-    slice_count = slice_stop - slice_start + 1
+    slice_index = args["slice_index"]
 
     # Trim slices to only include start thru stop.
-    slices = UCCSD_LIH_SLICES[slice_start:slice_stop + 1]
+    uccsdslice = UCCSD_LIH_SLICES[slice_index]
     # Get the angles to optimize for.
     angle_deg_list = list(np.arange(angle_start, angle_stop, angle_step))
     
-    # Construct a state for each job.
-    state_iter = list()
-    for i, uccsdslice in enumerate(slices):
-        slice_index = i + slice_start
-        uccsdslice = UCCSD_LIH_SLICES[slice_index]
-        pulse_time = UCCSD_LIH_SLICE_TIMES[slice_index]
-        for angle_deg in angle_deg_list:
-            state_iter.append(ProcessState(uccsdslice, slice_index,
-                                           angle_deg, pulse_time))
+    # Construct a state for each job. I.e. each angle from the angle
+    # list on the slice specified.
+    state_iter = [ProcessState(uccsdslice, slice_index, angle_deg)
+                  for angle_deg in angle_deg_list]
     
     # Run QOC for each process state.
     with MPIPoolExecutor(BROADWELL_CORE_COUNT) as executor:
@@ -164,18 +174,21 @@ def process_init(state):
         print("PID={}\nWALL_TIME={}\nSLICE_ID={}\nANGLE={}\n{}"
               "".format(os.getpid(), time.time(), state.slice_index,
                         state.angle, state.uccsdslice.circuit))
+        
+        # Gather necessary grape parameters.
+        U = state.uccsdslice.unitary()
+        pulse_time = state.pulse_time
+        steps = int(pulse_time * SPN)
+        convergence = CONVERGENCE
+        convergence.update({
+            "rate": state.lr,
+            "learning_rate_decay": state.decay,
+        })
 
         # Run grape.
-        U = state.uccsdslice.unitary()
-        steps = int(state.pulse_time * SPN)
         print("GRAPE_START_TIME={}".format(time.time()))
-        grape_sess = Grape(H0, Hops, Hnames, U, state.pulse_time, steps,
-                           STATES_CONCERNED_LIST, convergence = CONVERGENCE,
-                           reg_coeffs = REG_COEFFS, method = METHOD,
-                           maxA = MAX_PULSE_AMPLITUDE,
-                           use_gpu = USE_GPU, sparse_H = SPARSE_H,
-                           show_plots = SHOW_PLOTS, file_name = state.file_name,
-                           data_path = DATA_PATH)
+        grape_sess = Grape(U=U, total_time=pulse_time, steps=steps,
+                           convergence=convergence, **GRAPE_CONFIG)
         print("GRAPE_END_TIME={}".format(time.time()))
 
 if __name__ == "__main__":

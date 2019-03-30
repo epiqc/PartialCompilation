@@ -12,6 +12,8 @@ import numpy as np
 np.random.seed(1)
 import tensorflow as tf
 tf.set_random_seed(2)
+# IMPLEMENTATION NOTE: Unsure if, while using ray, hyperopt fmin seed
+# is used.
 import os
 os.environ["HYPEROPT_FMIN_SEED"] = "23"
 
@@ -20,7 +22,7 @@ import json
 import sys
 import time
 
-from fqc.data import UCCSD_LIH_THETA
+from fqc.data import UCCSD_DATA
 from fqc.uccsd import get_uccsd_circuit, get_uccsd_slices
 from fqc.util import (optimize_circuit, get_unitary,
                       get_nearest_neighbor_coupling_list,
@@ -31,6 +33,7 @@ from quantum_optimal_control.core.hamiltonian import (get_H0,
         get_Hops_and_Hnames, get_full_states_concerned_list, get_maxA)
 import ray
 import ray.tune
+
 
 ### CONSTANTS ###
 
@@ -46,7 +49,7 @@ H0 = np.zeros((NUM_STATES ** NUM_QUBITS, NUM_STATES ** NUM_QUBITS))
 Hops, Hnames = get_Hops_and_Hnames(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS)
 STATES_CONCERNED_LIST = get_full_states_concerned_list(NUM_QUBITS, NUM_STATES)
 MAX_AMPLITUDE = get_maxA(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS)
-METHOD = 'ADAM'
+METHOD = "ADAM"
 MAX_GRAPE_ITERATIONS = 1e3
 REG_COEFFS = {}
 USE_GPU = False
@@ -107,10 +110,11 @@ class ProcessState(object):
                                                     is being optimized
     """
 
-    def __init__(self, uccsdslice, slice_index, pulse_time):
+    def __init__(self, molecule, slice_index, pulse_time):
         """See corresponding class field declarations above for other arguments.
         """
         super()
+        self.molecule = molecule
         self.uccsdslice = uccsdslice
         self.slice_index = slice_index
         self.pulse_time = pulse_time

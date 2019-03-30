@@ -1,6 +1,6 @@
 """
 uccsd_lih_slice_time.py - A script for computing the appropriate pulse_times for
-                          each UCCSD slice via binary search.
+                          UCCSD slices via binary search.
 """
 # Set random seeds for reasonable reproducability.
 import random
@@ -20,7 +20,6 @@ from fqc.util import (optimize_circuit, get_unitary,
                       get_nearest_neighbor_coupling_list, get_max_pulse_time)
 from fqc.data import UCCSD_LIH_THETA, UCCSD_LIH_SLICE_HYPERPARAMETERS
 from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
-from mpi4py.futures import MPIPoolExecutor
 from quantum_optimal_control.main_grape.grape import Grape
 from quantum_optimal_control.core.hamiltonian import (get_H0,
                                                       get_Hops_and_Hnames,
@@ -40,14 +39,30 @@ H0 = np.zeros((NUM_STATES ** NUM_QUBITS, NUM_STATES ** NUM_QUBITS))
 Hops, Hnames = get_Hops_and_Hnames(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS)
 STATES_CONCERNED_LIST = get_full_states_concerned_list(NUM_QUBITS, NUM_STATES)
 MAX_PULSE_AMPLITUDE = get_maxA(NUM_QUBITS, NUM_STATES, CONNECTED_QUBIT_PAIRS)
-# Define convergence parameters and penalties.
-CONVERGENCE = {'conv_target': 1e-5,
-               'max_iterations': 1e3}
+MAX_ITERATIONS = 1e3
+CONV_TARGET = 1e-5
+CONVERGENCE = {'conv_target': CONV_TARGET,
+               'max_iterations': MAX_ITERATIONS}
 REG_COEFFS = {}
 USE_GPU = False
 SPARSE_H = False
 SHOW_PLOTS = False
-METHOD = 'ADAM'
+METHOD = "ADAM"
+SAVE = True
+GRAPE_CONFIG = {
+    "H0": H0,
+    "Hops": Hops,
+    "Hnames": Hnames,
+    "states_concerned_list": STATES_CONCERNED_LIST,
+    "reg_coeffs": REG_COEFFS,
+    "maxA": MAX_PULSE_AMPLITUDE,
+    "use_gpu": USE_GPU,
+    "sparse_H": SPARSE_H,
+    "show_plots": SHOW_PLOTS,
+    "method": METHOD,
+    "data_path": DATA_PATH,
+    "save": SAVE,
+}
 
 # Define binary search parameters.
 # binary search granularity, how many nanoseconds of precision do you need?
@@ -98,28 +113,27 @@ class ProcessState(object):
 ### MAIN METHODS ###
 
 
+# IMPLEMENTATION NOTE: The binary search for a single slice could be
+# one function. However, the process_init modularity allows for
+# parallelization if necessary. We assume
+# that the slices will have different run times
+# for the search and it is best to create a seperate job
+# for each slice.
+
 def main():
+    """Binary search for the optimal slice time for a single slice.
+    """
     # Handle CLI.
     parser = argparse.ArgumentParser()
-    parser.add_argument("--slice-start", type=int, default=0, help="the "
-                        "inclusive lower bound of slice indices to include "
-                        "(0-7)")
-    parser.add_argument("--slice-stop", type=int, default=0, help="the "
-                        "inclusive upper bound of slice indices to include "
-                        "(0-7)")
+    parser.add_argument("--slice-index", type=int, default=0, help="the "
+                        "slice to search for optimal pulse time on (0-7)")
     args = vars(parser.parse_args())
-    slice_start = args["slice_start"]
-    slice_stop = args["slice_stop"]
+    slice_index = args["slice_index"]
 
-    # Trim the slices to match those specified.
-    slices = UCCSD_LIH_SLICES[slice_start:slice_stop + 1]
-    slice_count = len(slices)
-
-    # Binary search for the optimal time on each slice specified.
-    state_iter = [ProcessState(uccsdslice, i + slice_start)
-                  for i, uccsdslice in enumerate(slices)]
-    with MPIPoolExecutor(slice_count) as executor:
-        executor.map(process_init, state_iter)
+    # Binary search for the optimal time for the slice specified.
+    uccsdslice = UCCSD_LIH_SLICES[slice_index]
+    state = ProcessState(uccsdslice, slice_index)
+    process_init(state)
 
 
 def process_init(state):
@@ -183,13 +197,9 @@ def binary_search_for_shortest_pulse_time(state, min_steps, max_steps):
               "\nGRAPE_START_TIME={}"
               "".format(max_steps, min_steps, mid_steps, pulse_time,
                         time.time()))
-        sess = Grape(H0, Hops, Hnames, U, pulse_time, mid_steps,
-                     STATES_CONCERNED_LIST, convergence, reg_coeffs = REG_COEFFS,
-                     use_gpu = USE_GPU, sparse_H = SPARSE_H, method = METHOD,
-                     maxA = MAX_PULSE_AMPLITUDE,
-                     show_plots = SHOW_PLOTS,
-                     file_name = state.file_name,
-                     data_path = DATA_PATH)
+        sess = Grape(U=U, total_time=pulse_time, steps=mid_steps,
+                     convergence=convergence, file_name = state.file_name,
+                     **GRAPE_CONFIG)
         print("GRAPE_END_TIME={}".format(time.time()))
         converged = sess.l < sess.conv.conv_target
         print("CONVERGED={}".format(converged))
