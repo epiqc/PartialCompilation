@@ -132,7 +132,7 @@ UCCSD_BEH2_FULL_CIRCUIT = optimize_circuit(get_uccsd_circuit("BeH2", UCCSD_BEH2_
 # tmp_beh2_circuit = deepcopy(UCCSD_BEH2_FULL_CIRCUIT)
 # tmp_beh2_circuit.data = (tmp_beh2_circuit.data[:1965] + tmp_beh2_circuit.data[1999:]
 #                          + tmp_beh2_circuit.data[1965:1999])
-UCCSD_BEH2_SLICES = get_uccsd_slices(tmp_beh2_circuit,
+UCCSD_BEH2_SLICES = get_uccsd_slices(UCCSD_BEH2_FULL_CIRCUIT,
                                      granularity=SLICE_GRANULARITY,
                                      dependence_grouping=SLICE_DEPENDENCE_GROUPING)
 
