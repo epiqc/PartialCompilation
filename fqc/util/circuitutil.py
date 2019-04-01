@@ -250,6 +250,8 @@ def append_gate(circuit, register, gate, indices=None):
         constructor = circuit.rx
     elif isinstance(gate, RZGate):
         constructor = circuit.rz
+    elif isinstance(gate, IdGate):
+        constructor = circuit.iden
     elif isinstance(gate, CnotGate):
         constructor = circuit.cx
     elif isinstance(gate, SwapGate):
@@ -289,6 +291,15 @@ def get_nearest_neighbor_coupling_list(width, height, directed=True):
                 coupling_list.append((_qubit_number(row + 1, col), _qubit_number(row, col)))
 
     return coupling_list
+
+
+def get_two_qubit_gate_freq(circuit):
+    two_qubit_gates = [gate for gate in circuit.data if len(gate.qargs) == 2]
+    pairs = [frozenset([gate.qargs[0][1], gate.qargs[1][1]]) for gate in two_qubit_gates]
+    freq = {pair: 0 for pair in pairs}
+    for pair in pairs:
+        freq[pair] += 1
+    return list(sorted(freq.items(), key=lambda freq: freq[1]))
 
 
 def _tests():

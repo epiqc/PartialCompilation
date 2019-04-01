@@ -3,8 +3,8 @@
 #SBATCH --job-name=BeH2
 #SBATCH --output=arrayJob_%A_%a.out
 #SBATCH --error=arrayJob_%A_%a.err
-#SBATCH --array=9-353
-#SBATCH --time=08:00:00
+#SBATCH --array=0-243
+#SBATCH --time=09:00:00
 #SBATCH --partition=broadwl
 #SBATCH --ntasks=1
 #SBATCH --mem-per-cpu=16000
