@@ -76,7 +76,10 @@ def get_uccsd_circuit(molecule, theta_vector=None, use_basis_gates=False):
     if theta_vector is None:
         theta_vector = [np.random.rand() * 2 * np.pi for _ in range(var_form._num_parameters)]
 
-    return var_form.construct_circuit(theta_vector, use_basis_gates=use_basis_gates)
+    circuit = var_form.construct_circuit(theta_vector, use_basis_gates=use_basis_gates)
+    
+    return circuit
+
 
 def _tests():
     """A function to run tests on the module"""

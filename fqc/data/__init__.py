@@ -1,9 +1,6 @@
 """Experimental Data and Constants"""
 
-from .data import (GATE_TIMES, UCCSD_LIH_THETA, UCCSD_BEH2_THETA,
-                   UCCSD_LIH_SLICE_TIMES, UCCSD_LIH_FULL_TIME,
-                   UCCSD_LIH_SLICE_HYPERPARAMETERS)
+from .data import (GATE_TIMES, UCCSD_DATA, SPN)
 
-__all__ = ['GATE_TIMES', 'UCCSD_LIH_THETA', 'UCCSD_BEH2_THETA', 
-           'UCCSD_LIH_SLICE_TIMES', 'UCCSD_LIH_FULL_TIME',
-           'UCCSD_LIH_SLICE_HYPERPARAMETERS']
+__all__ = ["GATE_TIMES", "UCCSD_DATA", "SPN"]
+

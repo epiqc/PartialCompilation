@@ -8,8 +8,7 @@ from qiskit.extensions.standard import RZGate
 from fqc.models import CircuitSlice
 from fqc.uccsd import get_uccsd_circuit
 from fqc.util import (append_gate, optimize_circuit,
-                      get_nearest_neighbor_coupling_list,
-                      GATE_TO_PULSE_TIME)
+                      get_nearest_neighbor_coupling_list)
 
 ### CLASS DEFINITIONS ###
 
@@ -92,17 +91,6 @@ class UCCSDSlice(CircuitSlice):
                 gate.params = [angles[i]]
 
 
-# Each index of the list corresponds to the slice index to which it corresponds.
-# Times are given in nanosceonds. Times were computed with Rz(0) in
-# /projects/ftchong/qoc/thomas/uccsd_slice_time/
-# The times computed there were then added to by the number of Rz gates times
-# the maximum time required to execute one Rz gate. These times are for the g2_s8
-# class of circuits.
-rz = GATE_TO_PULSE_TIME['rz']
-UCCSD_LIH_SLICE_TIMES = [1.05 + rz * 2, 3.35 + rz * 2, 3.55 + rz * 2, 3.1 + rz * 2,
-                         8.95 + rz * 8, 6.25 + rz * 8, 8.9 + rz * 8, 5.25 + rz * 8]
-
-
 ### HELPER METHODS ###
 
 def _is_theta_dependent(gate):
@@ -143,7 +131,7 @@ def get_uccsd_slices(circuit, granularity=1, dependence_grouping=False):
     circuit_width = circuit.width()
     gates = circuit.data
     gate_count = len(gates)
-
+    
     # Walk the list of gates and make a new quantum circuit for every continuous
     # span of gates that have attribute or do not have attribute.
     gates_encountered = 0
@@ -154,7 +142,6 @@ def get_uccsd_slices(circuit, granularity=1, dependence_grouping=False):
 
         # Traverse the gate list and construct a circuit that is either
         # a continuous span of attribute gates or non-attribute gates.
-        redundant = False
         gate_has_attribute = False
         last_gate_had_attribute = False
         first_gate = True
@@ -208,8 +195,8 @@ def get_uccsd_slices(circuit, granularity=1, dependence_grouping=False):
     elif granularity != 1:
         raise ValueError("granularity must be greater than 0 but got {}"
                          "".format(granularity))
-
-    # # Concatenate neighboring slices that have the same theta dependence.
+    
+    # Concatenate neighboring slices that have the same theta dependence.
     if dependence_grouping:
         i = 0
         slice_count = len(slices)
