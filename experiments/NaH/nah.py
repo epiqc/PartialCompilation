@@ -130,6 +130,7 @@ while len(gates) > 0:
     gates = remaining_gates
     blockings_index = (blockings_index + 1) % len(blockings)
 
+
 slice_circuits, blocking = slice_circuits_list[int(sys.argv[1])]
 
 # HACK ALERT: to preserve all qubits, I add a dummy identity on each qubit, then squash
