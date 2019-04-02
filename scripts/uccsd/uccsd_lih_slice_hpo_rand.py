@@ -172,6 +172,12 @@ def process_init(state):
     # Redirect everything to a log file.
     with open(state.log_file_path, "w+") as log:
         sys.stdout = sys.stderr = log
+        
+        print("PID={}\nWALL_TIME={}\nSLICE_INDEX={}\nPULSE_TIME={}\nANGLE={}"
+              "\nLR={}\nDECAY={}\n{}"
+              "".format(os.getpid(), time.time(), state.slice_index,
+                        state.pulse_time, state.angle, state.lr, state.decay,
+                        state.uccsdslice.circuit))
 
         # Build necessary grape arguments using parameters.
         U = state.uccsdslice.unitary()
