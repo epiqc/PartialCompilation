@@ -51,6 +51,8 @@ GRAPE_TASK_CONFIG = {
     "show_plots": SHOW_PLOTS,
     "save": SAVE,
 }
+GRAPE_CONFIG = UCCSD_DATA["LiH"]["GRAPE_CONFIG"]
+GRAPE_CONFIG.update(GRAPE_TASK_CONFIG)
 
 # Hyperparmeter optimization constants and search space.
 # We use a loguniform distribution on learning rate
@@ -83,8 +85,8 @@ class ProcessState(object):
     pulse_time :: float - the pulse time to optimize the circuit for
     lr :: float - the learning rate to use for the optimization
     decay :: float - the learning rate decay to use for the optimization
-    log_file_path :: string - where all output of the optimization will be stored
-    trial_file_name :: string - where the results of the optimization will be stored,
+    log_file_name/path :: string - where all output of the optimization will be stored
+    trial_file_name/path :: string - where the results of the optimization will be stored,
                                 this file is shared by multiple processes
     data_path :: string - the output directory
     """
@@ -103,13 +105,14 @@ class ProcessState(object):
         self.lr = lr
         self.decay = decay
         self.data_path = data_path
-        log_file_name = ("s{}_a{:.2f}_t{:.2f}_l{:.4f}_d{:.4f}"
-                         "".format(self.slice_index, self.angle,
-                                   self.pulse_time, self.lr, self.decay))
-        self.log_file_path = os.path.join(data_path, log_file_name)
-        trial_file_name = ("s{}_a{:.2f}_t{:.2f}"
-                           "".format(self.slice_index,
-                                     self.angle, self.pulse_time))
+        self.log_file_name = ("s{}_a{:.2f}_t{:.2f}_l{:.4f}_d{:.4f}.log"
+                              "".format(self.slice_index, self.angle,
+                                        self.pulse_time, self.lr, self.decay))
+        self.log_file_path = os.path.join(data_path, self.log_file_name)
+        self.trial_file_name = ("s{}_a{:.2f}_t{:.2f}.json"
+                                "".format(self.slice_index,
+                                          self.angle, self.pulse_time))
+        self.trial_file_path = os.path.join(data_path, self.trial_file_name)
 
 
 ### MAIN METHODS ###
@@ -120,13 +123,30 @@ def main():
     """
     # Handle CLI.
     parser = argparse.ArgumentParser()
-    paser.add_argument("--slice-index", type=int, default=0, help="the "
+    parser.add_argument("--slice-index", type=int, default=0, help="the "
                        "slice to search on.")
+    parser.add_argument("--core-count", type=int, default=0, help="the "
+                       "number of cores available for computation.")
     args = vars(parser.parse_args())
     slice_index = args["slice_index"]
     core_count = args["core_count"]
 
-    # Generate states for search.                                                                                      
+    # Log run characteristics.
+    run_entry = ("PID={}\nWALL_TIME={}\nCORE_COUNT={}\nSLICE_INDEX={}\n"
+                 "PULSE_TIME_MULTIPLIERS={}\nANGLES_DEG={}\nLR_SAMPLES={}"
+                 "\nDECAY_SAMPLES={}"
+                 "".format(os.getpid(), time.time(), core_count, slice_index,
+                           PULSE_TIME_MULTIPLIERS, ANGLES_DEG, LR_SAMPLES,
+                           DECAY_SAMPLES))
+    data_path = os.path.join(BASE_DATA_PATH, "s{}".format(slice_index))
+    # TODO: We assume BASE_DATA_PATH exists.
+    if not os.path.exists(data_path):
+        os.mkdir(data_path)
+    run_log_path = os.path.join(data_path, "run.log")
+    with open(run_log_path, "w+") as f:
+        f.write(run_entry)
+
+    # Generate states for search.
     uccsdslice = UCCSD_DATA["LiH"]["SLICES"][slice_index]
     state_iter = list()
     # We traverse pulse time in the middle because we would rather have a complete set on a few
@@ -136,8 +156,9 @@ def main():
             for lr, decay in HP_SAMPLES:
                 state_iter.append(ProcessState(uccsdslice, slice_index,
                                                angle_deg, pulse_time_multiplier,
-                                               lr, decay))
-
+                                               lr, decay, data_path))
+    
+    # Run search.
     with MPIPoolExecutor(core_count) as executor:
         executor.map(process_init, state_iter)
 
@@ -149,39 +170,37 @@ def process_init(state):
     Returns: nothing
     """
     # Redirect everything to a log file.
-    with open(state.log_file_path) as log:
+    with open(state.log_file_path, "w+") as log:
         sys.stdout = sys.stderr = log
 
-    # Build necessary grape arguments using parameters.
-    U = state.unitary
-    convergence = {'rate': state.lr,
-                   'max_iterations': GRAPE_MAX_ITERATIONS,
-                   'learning_rate_decay': state.decay}
-    pulse_time = state.pulse_time
-    steps = int(pulse_time * SPN)
-    
-    # Run grape.
-    print("GRAPE_START_TIME={}".format(time.time()))
-    grape_sess = Grape(U=U, total_time=pulse_time, steps=steps,
-                       convergence=convergence, file_name=state.file_name,
-                       data_path=state.data_path, **state.grape_config)
-    print("GRAPE_END_TIME={}".format(time.time()))
+        # Build necessary grape arguments using parameters.
+        U = state.uccsdslice.unitary()
+        convergence = {'rate': state.lr,
+                       'max_iterations': GRAPE_MAX_ITERATIONS,
+                       'learning_rate_decay': state.decay}
+        pulse_time = state.pulse_time
+        steps = int(pulse_time * SPN)
 
-    # Log results.
-    loss = grape_sess.l
-    print("LOSS={}".format(loss))
-    trial_entry = {
-        "loss": loss,
-        ""
-    }
-    with open(state.trial_file_path, "a+") as f:
-        fcntl.flock(f, fcntl.LOCK_UN)
-        
-        trial_file.write(json.dumps(trial, cls=CustomJSONEncoder)
-                         + "\n")
-    
-    # Report results.
-    reporter(neg_loss=-loss, done=True)
+        # Run grape.
+        print("GRAPE_START_TIME={}".format(time.time()))
+        grape_sess = Grape(U=U, total_time=pulse_time, steps=steps,
+                           convergence=convergence, file_name=state.log_file_name,
+                           data_path=state.data_path, **GRAPE_CONFIG)
+        print("GRAPE_END_TIME={}".format(time.time()))
+
+        # Log results.
+        loss = grape_sess.l
+        print("LOSS={}".format(loss))
+        trial_entry = {
+            "loss": loss,
+            "lr": state.lr,
+            "decay": state.decay,
+        }
+        with open(state.trial_file_path, "a+") as f:
+            fcntl.flock(f, fcntl.LOCK_EX)
+            f.write(json.dumps(trial_entry, cls=CustomJSONEncoder)
+                             + "\n")
+            fcntl.flock(f, fcntl.LOCK_UN)
 
 
 if __name__ == "__main__":
