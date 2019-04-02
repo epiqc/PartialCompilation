@@ -5,7 +5,7 @@
 #SBATCH --error=arrayJob_%A_%a.err
 
 # there are 3232 slices
-#SBATCH --array=100-299
+#SBATCH --array=300-398
 
 #SBATCH --time=16:00:00
 #SBATCH --partition=broadwl
