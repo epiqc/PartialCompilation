@@ -1,10 +1,11 @@
 """
-uccsd_hpo_blocking.py - A script for running hyperparameter optimization
-                        for GRAPE on the (BeH2, NaH, and H2O) molecules.
-                        We block the circuits into 4 and 2-qubit chunks.
-                        We optimize over learning rate and decay for a fixed angle and time.
-                        Pulse time is set to 25% of the circuit's max pulse time.
-                        Angle is randomly generated. We do HPO in parallel using ray.
+qaoa_hpo.py - A script for running hyperparameter optimization
+              for GRAPE on our qaoa benchmarks.
+              We block the circuits into 4 and 2-qubit chunks.
+              We optimize over learning rate and decay for a fixed angle and time.
+              Pulse time is set to 25% of the circuit's max pulse time if it's
+              depth is greater than 10 gates on the critical path and 50% otherwise.
+              Angle is randomly generated. We do HPO in parallel using ray.
 """
 import random
 random.seed(0)
@@ -90,9 +91,9 @@ REDIS_MAX_MEMORY = int(1e8)
 class ProcessState(object):
     """An object to encapsulate the HPO of a circuit.
     Fields:
-    molecule :: string - identifies the uccsd molecule
-    slice_index :: int - identifies the circuit in the list of
-                         get_<molecule>_circuits_to_compile
+    qaoa_id :: str - identifies the benchmark
+    slice_index :: str - the circuit indexed into all circuits of the qaoa_id circuits
+    rz_index :: str - the circuit indexed into the rz containing circuits of the qaoa_id circuits
     circuit :: qiskit.QuantumCircuit - the circuit being optimized
     connected_qubit_pairs :: list((int, int)) - represents physical
                                                 constraints of qubits
@@ -103,12 +104,13 @@ class ProcessState(object):
     data_path :: string - output directory
     """
 
-    def __init__(self, molecule, slice_index, circuit, connected_qubit_pairs):
+    def __init__(self, qaoa_id, slice_index, rz_index, circuit, connected_qubit_pairs):
         """See corresponding class field declarations above for other arguments.
         """
         super()
-        self.molecule = molecule
+        self.qaoa_id = qaoa_id
         self.slice_index = slice_index
+        self.rz_index = rz_index
         self.circuit = circuit
         self.connected_qubit_pairs = connected_qubit_pairs
         self.unitary = get_unitary(self.circuit)
@@ -118,7 +120,7 @@ class ProcessState(object):
             self.pulse_time = get_max_pulse_time(self.circuit) * REDUCED_PULSE_TIME_MULTIPLIER
         self.file_name = "s{}".format(self.slice_index)
         self.data_path = os.path.join(BASE_DATA_PATH,
-                                      "uccsd_{}".format(molecule.lower()))
+                                      "qaoa_{}".format(qaoa_id.lower()))
         # TODO: We assume BASE_DATA_PATH exists.
         if not os.path.exists(self.data_path):
             os.mkdir(self.data_path)
@@ -148,27 +150,31 @@ def main():
     """
     # Handle CLI.
     parser = argparse.ArgumentParser()
-    parser.add_argument("--molecule", type=str, default="H2", help="the "
-                        "UCCSD molecule to perform HPO on")
+    parser.add_argument("--id", type=str, default="n6e", help="the "
+                        "id of the qaoa benchmark")
+    parser.add_argument("-p", type=int, default=1, help="the p value "
+                        "of the qaoa benchmark")
     parser.add_argument("--index", type=int, default=0, help="the "
                         "index-th theta-dependent circuit")
     parser.add_argument("--core-count", type=int, default=1, help="the "
                         "number of cpu cores this run may use")
     args = vars(parser.parse_args())
-    molecule = args["molecule"]
-    index = args["index"]
+    q_id = args["id"]
+    rz_index = args["index"]
+    p = args["p"]
     core_count = args["core_count"]
     
     # Grab appropriate circuit based on molecule and slice index.
-    circuit_file = "{}_circuits.pickle".format(molecule.lower())
+    circuit_file = "{}_circuits.pickle".format(q_id.lower())
     circuit_file_path = os.path.join(BASE_DATA_PATH, circuit_file)
     with open(circuit_file_path, "rb") as f:
-        rz_indices, circuits = pickle.load(f)
-    slice_index = rz_indices[index]
+        rz_indices, circuits = pickle.load(f)[p - 1]
+    slice_index = rz_indices[rz_index]
     circuit, connected_qubit_pairs = circuits[slice_index]
 
     # Generate the state object that encapsulates the optimization for the circuit.
-    state = ProcessState(molecule, slice_index, circuit, connected_qubit_pairs)
+    qaoa_id = "{}_p{}".format(q_id, p)
+    state = ProcessState(qaoa_id, slice_index, rz_index, circuit, connected_qubit_pairs)
 
     # Redirect everything the central process puts out to a log file.
     # By default, ray redirects the stdout of each worker process
@@ -176,13 +182,14 @@ def main():
     log_file = "{}.log".format(state.file_name)
     log_file_path = os.path.join(state.data_path, log_file)
     with open(log_file_path, "a+") as log:
-        sys.stdout = sys.stderr = log
+        # sys.stdout = sys.stderr = log
 
         # Display run characteristics.
-        print("PID={}\nWALL_TIME={}\nSLICE_INDEX={}\nPULSE_TIME={}\n"
+        print("PID={}\nWALL_TIME={}\nSLICE_INDEX={}\nRZ_INDEX={}\nPULSE_TIME={}\n"
               "(LR_LB, LR_UB)=({}, {})\n(DECAY_LB, DECAY_UB)=({}, {})\n"
               "CORE_COUNT={}\n{}"
               "".format(os.getpid(), time.time(), state.slice_index,
+                        state.rz_index,
                         state.pulse_time, LR_LB, LR_UB, DECAY_LB, DECAY_UB, 
                         core_count, state.circuit))
 
@@ -213,6 +220,7 @@ def main():
                                                                reporter)
         
         # Start ray and run HPO.
+        exit()
         ray.init(num_cpus=core_count, object_store_memory=OBJECT_STORE_MEMORY,
                  redis_max_memory=REDIS_MAX_MEMORY)
         ray.tune.register_trainable("lambda_id", objective_wrapper)

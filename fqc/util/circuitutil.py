@@ -17,7 +17,7 @@ from qiskit.transpiler.passes import (BasicSwap, CXCancellation, HCancellation)
 # future references to this dict and any other experimental constants
 # should be kept in fqc/data/data.py.
 # See Gate_Times.ipnyb for determination of these pulse times
-GATE_TO_PULSE_TIME = {'h': 1.4, 'cx': 3.8, 'rz': 0.4, 'rx': 2.5, 'x': 2.5, 'swap': 7.4}
+GATE_TO_PULSE_TIME = {'h': 1.4, 'cx': 3.8, 'rz': 0.4, 'rx': 2.5, 'x': 2.5, 'swap': 7.4, 'id': 0}
 
 unitary_backend = BasicAer.get_backend('unitary_simulator')
 state_backend = Aer.get_backend('statevector_simulator')
