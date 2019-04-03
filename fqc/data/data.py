@@ -5,7 +5,7 @@ Notes:
 - If you want to use one of the configuration dictionaries defined
   herein but want to change a parameter, use the dict.update() method
   in your own code.
-- GRAPE_CONFIG does not include all necessary arguments.
+- GRAPE_CONFIG does not include all necessary arguments to run grape.
 - All times are in nanoseconds.
 - All uccsd slices are assumed to be those such that slice_granularity = 2,
   dependence_grouping = True.
@@ -21,8 +21,11 @@ Notes:
   in which it is defined, an external constant is created.
 """
 
+from copy import deepcopy
+
 import numpy as np
-from fqc.util import (get_nearest_neighbor_coupling_list)
+from fqc.uccsd import (get_uccsd_circuit, get_uccsd_slices)
+from fqc.util import (get_nearest_neighbor_coupling_list, optimize_circuit)
 from quantum_optimal_control.core.hamiltonian import (get_Hops_and_Hnames,
     get_full_states_concerned_list, get_maxA)
 
@@ -44,46 +47,51 @@ NPS = 1 / SPN
 GATE_TIMES = {'h': 1.4, 'cx': 3.8, 'rz': 0.4, 'rx': 2.5, 'x': 2.5, 'swap': 7.4}
 _RZ = GATE_TIMES['rz']
 
-2QUBIT_CQP = get_nearest_neighbor_coupling_list(1, 2, directed=False)
-2QUBIT_H0 = np.zeros((NUM_STATES ** 2, NUM_STATES ** 2))
-2QUBIT_HOPS, 2QUBIT_HNAMES = get_Hops_and_Hnames(2, NUM_STATES, 2QUBIT_CQP)
-2QUBIT_SCL = get_full_states_concerned_list(2, NUM_STATES)
-2QUBIT_MPA = get_maxA(2, NUM_STATES, 2QUBIT_CQP)
-GRAPE_2QUBIT_CONFIG = {
-    "H0": 2QUBIT_H0,
-    "Hops": 2QUBTI_HOPS,
-    "Hnames": 2QUBIT_HNAMES,
-    "states_concerned_list": 2QUBIT_SCL,
+
+### GRAPE CONSTANTS ###
+
+REG_COEFFS = {}
+
+QUBIT2_CQP = get_nearest_neighbor_coupling_list(1, 2, directed=False)
+QUBIT2_H0 = np.zeros((NUM_STATES ** 2, NUM_STATES ** 2))
+QUBIT2_HOPS, QUBIT2_HNAMES = get_Hops_and_Hnames(2, NUM_STATES, QUBIT2_CQP)
+QUBIT2_SCL = get_full_states_concerned_list(2, NUM_STATES)
+QUBIT2_MPA = get_maxA(2, NUM_STATES, QUBIT2_CQP)
+GRAPE_QUBIT2_CONFIG = {
+    "H0": QUBIT2_H0,
+    "Hops": QUBIT2_HOPS,
+    "Hnames": QUBIT2_HNAMES,
+    "states_concerned_list": QUBIT2_SCL,
     "reg_coeffs": REG_COEFFS,
-    "maxA": 2QUBIT_MPA,
+    "maxA": QUBIT2_MPA,
 }
 
-4QUBIT_CQP = get_nearest_neighbor_coupling_list(2, 2, directed=False)
-4QUBIT_H0 = np.zeros((NUM_STATES ** 4, NUM_STATES ** 4))
-4QUBIT_HOPS, 4QUBIT_HNAMES = get_Hops_and_Hnames(4, NUM_STATES, 4QUBIT_CQP)
-4QUBIT_SCL = get_full_states_concerned_list(4, NUM_STATES)
-4QUBIT_MPA = get_maxA(4, NUM_STATES, 4QUBIT_CQP)
-GRAPE_4QUBIT_CONFIG = {
-    "H0": 4QUBIT_H0,
-    "Hops": 4QUBIT_HOPS,
-    "Hnames": 4QUBIT_HNAMES,
-    "states_concerned_list": 4QUBIT_SCL,
+QUBIT4_CQP = get_nearest_neighbor_coupling_list(2, 2, directed=False)
+QUBIT4_H0 = np.zeros((NUM_STATES ** 4, NUM_STATES ** 4))
+QUBIT4_HOPS, QUBIT4_HNAMES = get_Hops_and_Hnames(4, NUM_STATES, QUBIT4_CQP)
+QUBIT4_SCL = get_full_states_concerned_list(4, NUM_STATES)
+QUBIT4_MPA = get_maxA(4, NUM_STATES, QUBIT4_CQP)
+GRAPE_QUBIT4_CONFIG = {
+    "H0": QUBIT4_H0,
+    "Hops": QUBIT4_HOPS,
+    "Hnames": QUBIT4_HNAMES,
+    "states_concerned_list": QUBIT4_SCL,
     "reg_coeffs": REG_COEFFS,
-    "maxA": 4QUBIT_MPA,
+    "maxA": QUBIT4_MPA,
 }
 
-6QUBIT_CQP = get_nearest_neighbor_coupling_list(2, 3, directed=False)
-6QUBIT_H0 = np.zeros((NUM_STATES ** 6, NUM_STATES ** 6))
-6QUBIT_HOPS, 6QUBIT_HNAMES = get_Hops_and_hnames(6, NUM_STATES, 6QUBIT_CQP)
-6QUBIT_SCL = get_full_states_concerned_list(6, NUM_STATES)
-6QUBIT_MPA = get_maxA(6, NUM_STATES, 6QUBIT_CQP)
-GRAPE_6QUBIT_CONFIG = {
-    "H0": 6QUBIT_H0,
-    "Hops": 6QUBIT_HOPS,
-    "Hnames": 6QUBIT_HNAMES,
-    "states_concerned_list": 6QUBIT_SCL,
+QUBIT6_CQP = get_nearest_neighbor_coupling_list(2, 3, directed=False)
+QUBIT6_H0 = np.zeros((NUM_STATES ** 6, NUM_STATES ** 6))
+QUBIT6_HOPS, QUBIT6_HNAMES = get_Hops_and_Hnames(6, NUM_STATES, QUBIT6_CQP)
+QUBIT6_SCL = get_full_states_concerned_list(6, NUM_STATES)
+QUBIT6_MPA = get_maxA(6, NUM_STATES, QUBIT6_CQP)
+GRAPE_QUBIT6_CONFIG = {
+    "H0": QUBIT6_H0,
+    "Hops": QUBIT6_HOPS,
+    "Hnames": QUBIT6_HNAMES,
+    "states_concerned_list": QUBIT6_SCL,
     "reg_coeffs": REG_COEFFS,
-    "maxA": 6QUBIT_MPA,
+    "maxA": QUBIT6_MPA,
 }
 
 
@@ -92,14 +100,17 @@ GRAPE_6QUBIT_CONFIG = {
 # H2
 UCCSD_H2_THETA = [5.239368082827368, 1.5290813407594008, 4.701843728963671]
 UCCSD_H2_FULL_CIRCUIT = optimize_circuit(get_uccsd_circuit("H2", UCCSD_H2_THETA),
-                                         2QUBIT_CQP)
+                                         QUBIT2_CQP)
+UCCSD_H2_SLICES = get_uccsd_slices(UCCSD_H2_FULL_CIRCUIT,
+                                   granularity=SLICE_GRANULARITY,
+                                   dependence_grouping=SLICE_DEPENDENCE_GROUPING)
 
 # LiH
 UCCSD_LIH_THETA = [0.86203, 3.8037, 3.3223, 1.766, 1.0846, 1.4558, 1.0592,
                    0.091974
 ]
 UCCSD_LIH_FULL_CIRCUIT = optimize_circuit(get_uccsd_circuit("LiH", UCCSD_LIH_THETA),
-                                          4QUBIT_CQP)
+                                          QUBIT4_CQP)
 UCCSD_LIH_SLICES = get_uccsd_slices(UCCSD_LIH_FULL_CIRCUIT,
                                     granularity=SLICE_GRANULARITY,
                                     dependence_grouping=SLICE_DEPENDENCE_GROUPING)
@@ -116,7 +127,11 @@ UCCSD_BEH2_THETA = [1.910655366933038, 3.0380262019523134, 1.767835033803264,
                     1.4588597139977681, 1.3356770159523395
 ]
 UCCSD_BEH2_FULL_CIRCUIT = optimize_circuit(get_uccsd_circuit("BeH2", UCCSD_BEH2_THETA),
-                                           6QUBIT_CQP)
+                                           QUBIT6_CQP)
+# TODO: See github issue #6.
+# tmp_beh2_circuit = deepcopy(UCCSD_BEH2_FULL_CIRCUIT)
+# tmp_beh2_circuit.data = (tmp_beh2_circuit.data[:1965] + tmp_beh2_circuit.data[1999:]
+#                          + tmp_beh2_circuit.data[1965:1999])
 UCCSD_BEH2_SLICES = get_uccsd_slices(UCCSD_BEH2_FULL_CIRCUIT,
                                      granularity=SLICE_GRANULARITY,
                                      dependence_grouping=SLICE_DEPENDENCE_GROUPING)
@@ -131,13 +146,24 @@ UCCSD_DATA = {
             "NUM_SLICES": 3,
         },
         "THETA": [],
-        "GRAPE_CONFIG": GRAPE_2QUBIT_CONFIG,
+        "GRAPE_CONFIG": GRAPE_QUBIT2_CONFIG,
         "CIRCUIT": UCCSD_H2_FULL_CIRCUIT,
         "SLICES": UCCSD_H2_SLICES,
-        # TODO: full hpo, time, qoc
-        "FULL_DATA": {},
+        # TODO: full time, qoc
+        "FULL_DATA": {
+            "HP": {
+                "lr": 0.2675,
+                "decay": 233,
+            },
+        },
         # TODO: slice hpo, time, qoc
-        "SLICE_DATA": {},
+        "SLICE_DATA": {
+            "HP": [
+                # {"lr":, "decay":},
+                # {"lr":, "decay":},
+                {"lr": 0.147, "decay": 103},
+            ]
+        },
     },
     "LiH": {
         "INFO": {
@@ -145,14 +171,22 @@ UCCSD_DATA = {
             "NUM_SLICES": 8,
         },
         "THETA": UCCSD_LIH_THETA,
-        "GRAPE_CONFIG": GRAPE_4QUBIT_CONFIG,
+        "GRAPE_CONFIG": GRAPE_QUBIT4_CONFIG,
         "CIRCUIT": UCCSD_LIH_FULL_CIRCUIT,
         "SLICES": UCCSD_LIH_SLICES,
-        # TODO: full hpo, time, qoc
-        "FULL_DATA": {},
-        # TODO: update slice time s4-s7
+        # TODO: full qoc
+        "FULL_DATA": {
+            # /project/ftchong/qoc/thomas/hpo/uccsd_lih/full
+            "HP": {
+                "lr": 0.264,
+                "decay": 400
+            },
+            # /project/ftchong/qoc/thomas/hpo/uccsd_lih/full
+            "TIME": 93.15 * _RZ * 40
+        },
+        # TODO: hpo, time, qoc s4-s7
         "SLICE_DATA": {
-            # /project/ftchong/qoc/thomas/hpo/uccsd_lih_slice_hpo
+            # /project/ftchong/qoc/thomas/hpo/uccsd_lih/s*
             "HP": [
                 {'lr': 2e-2, 'decay': 1e3},
                 {'lr': 2e-2, 'decay': 1e3},
@@ -163,7 +197,7 @@ UCCSD_DATA = {
                 {'lr': 1.2e-2, 'decay': 3e3},
                 {'lr': 1.1e-3, 'decay': 3e3},
             ],
-            # /project/ftchong/qoc/thomas/time/uccsd_lih_slice_time
+            # /project/ftchong/qoc/thomas/time/uccsd_lih/s*
             "TIME": [5.1 + _RZ * 2, 2.85 + _RZ * 2, 3.6 + _RZ * 2,
                      3.4 + _RZ * 2, 29.1 + _RZ * 8, 39.25 + _RZ * 8,
                      56.4 + _RZ * 8, 25.55 + _RZ * 8
@@ -173,10 +207,9 @@ UCCSD_DATA = {
     "BeH2": {
         "INFO": {
             "NUM_QUBITS": 6,
-            "NUM_SLICES": 26,
         },
         "THETA": UCCSD_BEH2_THETA,
-        "GRAPE_CONFIG": GRAPE_6QUBIT_CONFIG,
+        "GRAPE_CONFIG": GRAPE_QUBIT6_CONFIG,
         "CIRCUIT": UCCSD_BEH2_FULL_CIRCUIT,
         "SLICES": UCCSD_BEH2_SLICES,
         # TODO: full hpo, time, qoc
