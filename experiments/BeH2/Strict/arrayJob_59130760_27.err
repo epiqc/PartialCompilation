@@ -1,0 +1,13 @@
+2019-04-01 22:03:43.608004: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2019-04-01 22:03:43.608175: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2019-04-01 22:03:43.608189: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2019-04-01 22:03:43.608196: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2019-04-01 22:03:43.608204: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+Traceback (most recent call last):
+  File "beh2.py", line 151, in <module>
+    slice_circuit.iden(slice_circuit.qregs[0][index])
+  File "/home/pranavgokhale/vqe/qiskit-terra/qiskit/circuit/register.py", line 83, in __getitem__
+    self.check_range(key)
+  File "/home/pranavgokhale/vqe/qiskit-terra/qiskit/circuit/register.py", line 61, in check_range
+    raise QiskitIndexError("register index out of range")
+qiskit.exceptions.QiskitIndexError: 'register index out of range'
