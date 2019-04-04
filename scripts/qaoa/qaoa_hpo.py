@@ -74,9 +74,9 @@ LR_UB = 1
 DECAY_LB = 1
 DECAY_UB = 1e3
 
-# Ray parameters, preallocate 0.1gb to obj store and redis shard respectively.
-OBJECT_STORE_MEMORY = int(1e8)
-REDIS_MAX_MEMORY = int(1e8)
+# Ray parameters, preallocate 1gb to obj store and redis shard respectively.
+OBJECT_STORE_MEMORY = int(1e9)
+REDIS_MAX_MEMORY = int(1e9)
 
 
 ### OBJECTS ###
@@ -182,7 +182,7 @@ def main():
     log_file = "{}.log".format(state.file_name)
     log_file_path = os.path.join(state.data_path, log_file)
     with open(log_file_path, "a+") as log:
-        # sys.stdout = sys.stderr = log
+        sys.stdout = sys.stderr = log
 
         # Display run characteristics.
         print("PID={}\nWALL_TIME={}\nSLICE_INDEX={}\nRZ_INDEX={}\nPULSE_TIME={}\n"
@@ -220,7 +220,6 @@ def main():
                                                                reporter)
         
         # Start ray and run HPO.
-        exit()
         ray.init(num_cpus=core_count, object_store_memory=OBJECT_STORE_MEMORY,
                  redis_max_memory=REDIS_MAX_MEMORY)
         ray.tune.register_trainable("lambda_id", objective_wrapper)

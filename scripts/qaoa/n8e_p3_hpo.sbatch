@@ -5,7 +5,8 @@
 #SBATCH --partition=broadwl
 #SBATCH --ntasks=5
 #SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu=10000
+#SBATCH --mem-per-cpu=1000
+#SBATCH --mem=20000
 
 # Run hyperparameter optimization on all of the blocked n8e slices.
 

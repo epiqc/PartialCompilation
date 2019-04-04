@@ -73,9 +73,9 @@ LR_UB = 1
 DECAY_LB = 1
 DECAY_UB = 1e3
 
-# Ray parameters, preallocate 0.1gb to obj store and redis shard respectively.
-OBJECT_STORE_MEMORY = int(1e8)
-REDIS_MAX_MEMORY = int(1e8)
+# Ray parameters, preallocate 1gb to obj store and redis shard respectively.
+OBJECT_STORE_MEMORY = int(1e9)
+REDIS_MAX_MEMORY = int(1e9)
 
 
 ### OBJECTS ###

@@ -5,7 +5,8 @@
 #SBATCH --partition=broadwl
 #SBATCH --ntasks=5
 #SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu=3000
+#SBATCH --mem-per-cpu=1000
+#SBATCH --mem=20000
 
 # Run hyperparameter optimization on all of the blocked UCCSD BeH2 slices.
 
