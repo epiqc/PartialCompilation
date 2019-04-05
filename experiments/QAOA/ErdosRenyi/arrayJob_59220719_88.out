@@ -1,0 +1,28 @@
+Running Array Job:  88
+Experiment FlexibleErdosRenyi N=6 p=7 slice=15
+
+
+trying total_time: 231.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00000_04_flexErdosRenyiN6p7_slice_15.h5
+Using 8 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.99e-01; Runtime: 8.8s; Iterations = 0, grads =   5.313e-04, unitary_metric = 1.00061
+Error = :9.98e-01; Runtime: 129.8s; Iterations = 20, grads =   1.021e-02, unitary_metric = 1.00008
+Error = :1.00e+00; Runtime: 236.2s; Iterations = 40, grads =   1.209e-04, unitary_metric = 1.00003
+Error = :9.47e-01; Runtime: 342.8s; Iterations = 60, grads =   2.288e+00, unitary_metric = 0.99999
+Error = :9.49e-01; Runtime: 449.4s; Iterations = 80, grads =   6.138e-01, unitary_metric = 0.99997
+Error = :9.97e-01; Runtime: 556.1s; Iterations = 100, grads =   1.497e-02, unitary_metric = 0.99996
+Error = :9.96e-01; Runtime: 669.2s; Iterations = 120, grads =   4.163e-02, unitary_metric = 0.99993
+Error = :9.93e-01; Runtime: 776.0s; Iterations = 140, grads =   9.761e-02, unitary_metric = 0.99993
+Error = :9.75e-01; Runtime: 883.0s; Iterations = 160, grads =   1.655e-01, unitary_metric = 0.99993
+Error = :9.49e-01; Runtime: 990.1s; Iterations = 180, grads =   2.197e+00, unitary_metric = 0.99991
