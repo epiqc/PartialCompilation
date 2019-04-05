@@ -1,0 +1,22 @@
+Running Array Job:  9
+Experiment 3Reg N=6 p=2 slice=2
+
+
+trying total_time: 30.0 for unitary of size (4, 4)
+data saved at: /project/ftchong/qoc/yongshan/00017_31_3regN6p2_slice_2.h5
+Using 4 Taylor terms and 3 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :4.08e-02; Runtime: 0.9s; Iterations = 0, grads =   2.261e+00, unitary_metric = 1.00004
+Error = :1.12e-01; Runtime: 6.1s; Iterations = 20, grads =   6.012e+00, unitary_metric = 1.00003
+Error = :3.66e-02; Runtime: 10.0s; Iterations = 40, grads =   2.213e+00, unitary_metric = 1.00003
+Error = :2.57e-04; Runtime: 12.3s; Iterations = 52, grads =   1.342e-02, unitary_metric = 1.00003

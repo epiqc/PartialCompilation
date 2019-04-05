@@ -1,0 +1,41 @@
+Running Array Job:  16
+Experiment 3Reg N=6 p=2 slice=9
+
+
+trying total_time: 60.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00018_31_3regN6p2_slice_9.h5
+Using 5 Taylor terms and 4 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :6.22e-01; Runtime: 2.2s; Iterations = 0, grads =   1.050e+01, unitary_metric = 1.00069
+Error = :7.04e-01; Runtime: 29.3s; Iterations = 20, grads =   1.881e+01, unitary_metric = 1.00041
+Error = :1.26e-01; Runtime: 52.7s; Iterations = 40, grads =   1.166e+01, unitary_metric = 1.00038
+Error = :3.37e-03; Runtime: 76.0s; Iterations = 60, grads =   2.182e-01, unitary_metric = 1.00039
+Error = :2.48e-03; Runtime: 99.4s; Iterations = 80, grads =   2.929e-01, unitary_metric = 1.00039
+Error = :2.92e-04; Runtime: 106.4s; Iterations = 86, grads =   5.405e-02, unitary_metric = 1.00039
+data saved at: /project/ftchong/qoc/yongshan/00018_31_3regN6p2_slice_9.h5
+
+
+trying total_time: 30.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00019_31_3regN6p2_slice_9.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized

@@ -1,0 +1,2139 @@
+Running Array Job:  283
+Experiment 3Reg N=8 p=8 slice=19
+
+
+trying total_time: 240.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00000_01_3regN8p8_slice_19.h5
+Using 8 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.52e-01; Runtime: 10.0s; Iterations = 0, grads =   7.402e-01, unitary_metric = 1.00057
+Error = :9.89e-01; Runtime: 143.9s; Iterations = 20, grads =   3.075e-01, unitary_metric = 1.00015
+Error = :9.32e-01; Runtime: 263.2s; Iterations = 40, grads =   1.806e+00, unitary_metric = 1.00009
+Error = :9.85e-01; Runtime: 382.0s; Iterations = 60, grads =   1.535e-01, unitary_metric = 1.00009
+Error = :1.00e+00; Runtime: 500.5s; Iterations = 80, grads =   1.380e-03, unitary_metric = 1.00004
+Error = :9.78e-01; Runtime: 619.2s; Iterations = 100, grads =   1.978e-01, unitary_metric = 1.00005
+Error = :9.54e-01; Runtime: 745.1s; Iterations = 120, grads =   3.050e-01, unitary_metric = 1.00000
+Error = :9.31e-01; Runtime: 863.9s; Iterations = 140, grads =   8.741e-01, unitary_metric = 1.00001
+Error = :8.68e-01; Runtime: 982.8s; Iterations = 160, grads =   1.118e+00, unitary_metric = 0.99998
+Error = :8.48e-01; Runtime: 1101.8s; Iterations = 180, grads =   3.295e+00, unitary_metric = 0.99997
+Error = :8.71e-01; Runtime: 1220.7s; Iterations = 200, grads =   1.402e+00, unitary_metric = 0.99995
+Error = :7.37e-01; Runtime: 1346.5s; Iterations = 220, grads =   3.784e+00, unitary_metric = 0.99996
+Error = :9.73e-01; Runtime: 1465.6s; Iterations = 240, grads =   5.508e-01, unitary_metric = 0.99995
+Error = :9.79e-01; Runtime: 1584.7s; Iterations = 260, grads =   1.573e-01, unitary_metric = 0.99993
+Error = :9.65e-01; Runtime: 1703.9s; Iterations = 280, grads =   8.503e-01, unitary_metric = 0.99991
+Error = :9.85e-01; Runtime: 1822.8s; Iterations = 300, grads =   1.348e-01, unitary_metric = 0.99991
+Error = :7.48e-01; Runtime: 1948.5s; Iterations = 320, grads =   4.268e+00, unitary_metric = 0.99991
+Error = :8.62e-01; Runtime: 2067.5s; Iterations = 340, grads =   8.815e+00, unitary_metric = 0.99991
+Error = :6.87e-01; Runtime: 2186.6s; Iterations = 360, grads =   2.599e+00, unitary_metric = 0.99986
+Error = :8.23e-01; Runtime: 2305.8s; Iterations = 380, grads =   6.641e+00, unitary_metric = 0.99989
+Error = :7.11e-01; Runtime: 2424.8s; Iterations = 400, grads =   8.061e+00, unitary_metric = 0.99988
+Error = :7.91e-01; Runtime: 2550.3s; Iterations = 420, grads =   3.644e+00, unitary_metric = 0.99986
+Error = :7.94e-01; Runtime: 2669.3s; Iterations = 440, grads =   1.983e+01, unitary_metric = 0.99987
+Error = :7.55e-01; Runtime: 2788.5s; Iterations = 460, grads =   7.144e+00, unitary_metric = 0.99985
+Error = :9.83e-01; Runtime: 2907.8s; Iterations = 480, grads =   1.690e-01, unitary_metric = 0.99985
+Error = :9.99e-01; Runtime: 3026.9s; Iterations = 500, grads =   1.843e-03, unitary_metric = 0.99990
+Error = :7.55e-01; Runtime: 3152.7s; Iterations = 520, grads =   1.146e+01, unitary_metric = 0.99984
+Error = :9.96e-01; Runtime: 3272.1s; Iterations = 540, grads =   5.798e-03, unitary_metric = 0.99984
+Error = :5.93e-01; Runtime: 3391.4s; Iterations = 560, grads =   1.012e+01, unitary_metric = 0.99985
+Error = :9.57e-01; Runtime: 3510.6s; Iterations = 580, grads =   6.590e-01, unitary_metric = 0.99984
+Error = :9.64e-01; Runtime: 3629.7s; Iterations = 600, grads =   6.272e-01, unitary_metric = 0.99982
+Error = :9.82e-01; Runtime: 3754.0s; Iterations = 620, grads =   1.138e-01, unitary_metric = 0.99982
+Error = :8.93e-01; Runtime: 3873.3s; Iterations = 640, grads =   2.600e+00, unitary_metric = 0.99985
+Error = :9.96e-01; Runtime: 3992.4s; Iterations = 660, grads =   1.042e-02, unitary_metric = 0.99984
+Error = :9.99e-01; Runtime: 4111.8s; Iterations = 680, grads =   2.550e-03, unitary_metric = 0.99983
+Error = :6.31e-01; Runtime: 4231.2s; Iterations = 700, grads =   2.084e+01, unitary_metric = 0.99985
+Error = :8.13e-01; Runtime: 4356.9s; Iterations = 720, grads =   1.267e+01, unitary_metric = 0.99985
+Error = :9.13e-01; Runtime: 4475.8s; Iterations = 740, grads =   2.581e-01, unitary_metric = 0.99985
+Error = :9.97e-01; Runtime: 4595.0s; Iterations = 760, grads =   7.613e-03, unitary_metric = 0.99982
+Error = :4.87e-01; Runtime: 4714.0s; Iterations = 780, grads =   1.889e+01, unitary_metric = 0.99986
+Error = :5.33e-01; Runtime: 4833.1s; Iterations = 800, grads =   1.576e+01, unitary_metric = 0.99986
+Error = :8.42e-01; Runtime: 4958.5s; Iterations = 820, grads =   4.388e+00, unitary_metric = 0.99983
+Error = :7.44e-01; Runtime: 5077.5s; Iterations = 840, grads =   1.979e+01, unitary_metric = 0.99986
+Error = :6.54e-01; Runtime: 5196.7s; Iterations = 860, grads =   1.414e+01, unitary_metric = 0.99984
+Error = :9.32e-01; Runtime: 5315.7s; Iterations = 880, grads =   9.067e-01, unitary_metric = 0.99983
+Error = :2.52e-01; Runtime: 5434.8s; Iterations = 900, grads =   1.265e+01, unitary_metric = 0.99982
+Error = :3.75e-01; Runtime: 5560.6s; Iterations = 920, grads =   2.765e+01, unitary_metric = 0.99982
+Error = :8.62e-02; Runtime: 5679.7s; Iterations = 940, grads =   8.367e+00, unitary_metric = 0.99983
+Error = :5.13e-02; Runtime: 5798.6s; Iterations = 960, grads =   5.256e+00, unitary_metric = 0.99982
+Error = :2.95e-02; Runtime: 5917.8s; Iterations = 980, grads =   3.243e+00, unitary_metric = 0.99981
+Error = :1.21e-02; Runtime: 6036.8s; Iterations = 1000, grads =   1.479e+00, unitary_metric = 0.99982
+Error = :4.20e-03; Runtime: 6162.4s; Iterations = 1020, grads =   3.731e-01, unitary_metric = 0.99982
+Error = :4.02e-03; Runtime: 6281.6s; Iterations = 1040, grads =   3.519e-01, unitary_metric = 0.99982
+Error = :4.20e-03; Runtime: 6400.8s; Iterations = 1060, grads =   4.563e-01, unitary_metric = 0.99982
+Error = :9.36e-04; Runtime: 6496.0s; Iterations = 1076, grads =   3.259e-02, unitary_metric = 0.99983
+data saved at: /project/ftchong/qoc/yongshan/00000_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 120.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00001_01_3regN8p8_slice_19.h5
+Using 8 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.43e-01; Runtime: 4.6s; Iterations = 0, grads =   3.047e-01, unitary_metric = 1.00019
+Error = :9.83e-01; Runtime: 63.2s; Iterations = 20, grads =   2.309e-01, unitary_metric = 1.00000
+Error = :9.65e-01; Runtime: 114.5s; Iterations = 40, grads =   1.006e+00, unitary_metric = 0.99995
+Error = :9.96e-01; Runtime: 165.7s; Iterations = 60, grads =   1.364e-03, unitary_metric = 0.99997
+Error = :1.00e+00; Runtime: 217.1s; Iterations = 80, grads =   3.412e-04, unitary_metric = 0.99994
+Error = :9.97e-01; Runtime: 268.4s; Iterations = 100, grads =   8.558e-03, unitary_metric = 0.99993
+Error = :9.96e-01; Runtime: 323.2s; Iterations = 120, grads =   2.300e-02, unitary_metric = 0.99988
+Error = :4.40e-01; Runtime: 374.5s; Iterations = 140, grads =   1.734e+01, unitary_metric = 0.99989
+Error = :9.90e-02; Runtime: 425.8s; Iterations = 160, grads =   7.730e+00, unitary_metric = 0.99988
+Error = :5.18e-02; Runtime: 477.2s; Iterations = 180, grads =   6.139e+00, unitary_metric = 0.99988
+Error = :1.12e-02; Runtime: 528.5s; Iterations = 200, grads =   1.239e+00, unitary_metric = 0.99989
+Error = :1.13e-02; Runtime: 583.4s; Iterations = 220, grads =   1.433e+00, unitary_metric = 0.99989
+Error = :8.44e-04; Runtime: 611.6s; Iterations = 231, grads =   8.567e-02, unitary_metric = 0.99989
+data saved at: /project/ftchong/qoc/yongshan/00001_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 60.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00002_01_3regN8p8_slice_19.h5
+Using 5 Taylor terms and 4 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.44e-01; Runtime: 2.3s; Iterations = 0, grads =   5.186e-01, unitary_metric = 1.00040
+Error = :6.47e-01; Runtime: 28.3s; Iterations = 20, grads =   5.500e-01, unitary_metric = 1.00046
+Error = :5.54e-01; Runtime: 50.6s; Iterations = 40, grads =   1.852e+00, unitary_metric = 1.00040
+Error = :5.31e-01; Runtime: 72.8s; Iterations = 60, grads =   6.891e-01, unitary_metric = 1.00038
+Error = :5.17e-01; Runtime: 95.0s; Iterations = 80, grads =   2.690e-01, unitary_metric = 1.00027
+Error = :5.17e-01; Runtime: 117.3s; Iterations = 100, grads =   1.890e-01, unitary_metric = 1.00021
+Error = :5.24e-01; Runtime: 142.0s; Iterations = 120, grads =   2.455e-01, unitary_metric = 1.00026
+Error = :5.43e-01; Runtime: 164.2s; Iterations = 140, grads =   4.204e-01, unitary_metric = 1.00013
+Error = :7.60e-01; Runtime: 186.5s; Iterations = 160, grads =   4.278e-01, unitary_metric = 1.00007
+Error = :5.78e-01; Runtime: 208.7s; Iterations = 180, grads =   7.883e-01, unitary_metric = 0.99999
+Error = :1.61e-01; Runtime: 230.9s; Iterations = 200, grads =   9.490e+00, unitary_metric = 0.99981
+Error = :5.16e-02; Runtime: 255.4s; Iterations = 220, grads =   2.792e+00, unitary_metric = 0.99981
+Error = :5.40e-03; Runtime: 277.6s; Iterations = 240, grads =   5.500e-02, unitary_metric = 0.99980
+Error = :4.64e-03; Runtime: 299.8s; Iterations = 260, grads =   1.469e-02, unitary_metric = 0.99979
+Error = :4.79e-03; Runtime: 322.0s; Iterations = 280, grads =   2.896e-03, unitary_metric = 0.99981
+Error = :6.31e-03; Runtime: 344.3s; Iterations = 300, grads =   2.308e-03, unitary_metric = 0.99979
+Error = :5.57e-03; Runtime: 368.2s; Iterations = 320, grads =   1.871e-03, unitary_metric = 0.99979
+Error = :8.96e-03; Runtime: 390.4s; Iterations = 340, grads =   2.630e-03, unitary_metric = 0.99980
+Error = :8.00e-03; Runtime: 412.6s; Iterations = 360, grads =   2.562e-03, unitary_metric = 0.99978
+Error = :8.43e-03; Runtime: 434.9s; Iterations = 380, grads =   1.442e-01, unitary_metric = 0.99979
+Error = :8.31e-03; Runtime: 457.1s; Iterations = 400, grads =   5.422e-02, unitary_metric = 0.99980
+Error = :7.70e-03; Runtime: 481.1s; Iterations = 420, grads =   2.991e-03, unitary_metric = 0.99980
+Error = :6.60e-03; Runtime: 503.3s; Iterations = 440, grads =   2.264e-03, unitary_metric = 0.99978
+Error = :4.92e-03; Runtime: 525.6s; Iterations = 460, grads =   1.172e-03, unitary_metric = 0.99979
+Error = :3.81e-03; Runtime: 548.0s; Iterations = 480, grads =   8.375e-04, unitary_metric = 0.99979
+Error = :3.27e-03; Runtime: 570.2s; Iterations = 500, grads =   6.647e-04, unitary_metric = 0.99979
+Error = :3.23e-03; Runtime: 594.1s; Iterations = 520, grads =   5.753e-04, unitary_metric = 0.99980
+Error = :2.75e-03; Runtime: 616.4s; Iterations = 540, grads =   4.388e-04, unitary_metric = 0.99980
+Error = :2.06e-03; Runtime: 638.5s; Iterations = 560, grads =   3.108e-04, unitary_metric = 0.99979
+Error = :3.83e-03; Runtime: 660.8s; Iterations = 580, grads =   1.363e-01, unitary_metric = 0.99976
+Error = :2.88e-03; Runtime: 683.0s; Iterations = 600, grads =   9.028e-02, unitary_metric = 0.99980
+Error = :1.18e-03; Runtime: 706.9s; Iterations = 620, grads =   1.334e-03, unitary_metric = 0.99979
+Error = :9.29e-04; Runtime: 714.7s; Iterations = 627, grads =   1.107e-03, unitary_metric = 0.99979
+data saved at: /project/ftchong/qoc/yongshan/00002_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 30.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00003_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.42e-01; Runtime: 1.0s; Iterations = 0, grads =   3.781e-02, unitary_metric = 1.00003
+Error = :4.61e-01; Runtime: 13.8s; Iterations = 20, grads =   3.030e-01, unitary_metric = 1.00001
+Error = :3.80e-02; Runtime: 24.7s; Iterations = 40, grads =   4.024e-01, unitary_metric = 1.00001
+Error = :6.21e-03; Runtime: 35.6s; Iterations = 60, grads =   6.562e-02, unitary_metric = 1.00001
+Error = :7.27e-04; Runtime: 43.2s; Iterations = 74, grads =   1.383e-02, unitary_metric = 1.00001
+data saved at: /project/ftchong/qoc/yongshan/00003_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 15.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00004_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.59e-01; Runtime: 0.5s; Iterations = 0, grads =   5.374e-02, unitary_metric = 1.00001
+Error = :7.58e-01; Runtime: 6.7s; Iterations = 20, grads =   9.698e-02, unitary_metric = 1.00000
+Error = :5.96e-01; Runtime: 12.0s; Iterations = 40, grads =   5.193e-02, unitary_metric = 1.00000
+Error = :4.30e-01; Runtime: 17.3s; Iterations = 60, grads =   1.641e-02, unitary_metric = 0.99999
+Error = :7.50e-02; Runtime: 22.6s; Iterations = 80, grads =   3.106e-02, unitary_metric = 0.99999
+Error = :2.63e-03; Runtime: 27.9s; Iterations = 100, grads =   7.657e-03, unitary_metric = 0.99999
+Error = :7.84e-04; Runtime: 33.3s; Iterations = 119, grads =   6.365e-03, unitary_metric = 0.99999
+data saved at: /project/ftchong/qoc/yongshan/00004_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 7.5 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00005_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.45e-01; Runtime: 0.3s; Iterations = 0, grads =   1.772e-02, unitary_metric = 1.00000
+Error = :7.51e-01; Runtime: 3.4s; Iterations = 20, grads =   1.890e-03, unitary_metric = 1.00000
+Error = :7.32e-01; Runtime: 5.9s; Iterations = 40, grads =   4.131e-03, unitary_metric = 1.00000
+Error = :5.46e-01; Runtime: 8.5s; Iterations = 60, grads =   1.849e-03, unitary_metric = 1.00000
+Error = :4.46e-01; Runtime: 11.1s; Iterations = 80, grads =   1.528e-03, unitary_metric = 0.99999
+Error = :2.97e-01; Runtime: 13.7s; Iterations = 100, grads =   3.402e-03, unitary_metric = 0.99999
+Error = :8.67e-02; Runtime: 16.5s; Iterations = 120, grads =   1.763e-02, unitary_metric = 0.99999
+Error = :2.98e-02; Runtime: 19.1s; Iterations = 140, grads =   5.109e-03, unitary_metric = 0.99999
+Error = :1.73e-02; Runtime: 21.7s; Iterations = 160, grads =   8.914e-04, unitary_metric = 0.99999
+Error = :1.26e-02; Runtime: 24.3s; Iterations = 180, grads =   5.321e-05, unitary_metric = 0.99999
+Error = :1.01e-02; Runtime: 26.9s; Iterations = 200, grads =   2.470e-05, unitary_metric = 0.99999
+Error = :8.51e-03; Runtime: 29.7s; Iterations = 220, grads =   1.103e-05, unitary_metric = 0.99999
+Error = :7.35e-03; Runtime: 32.3s; Iterations = 240, grads =   8.419e-06, unitary_metric = 0.99999
+Error = :6.45e-03; Runtime: 34.9s; Iterations = 260, grads =   6.445e-06, unitary_metric = 0.99999
+Error = :5.78e-03; Runtime: 37.5s; Iterations = 280, grads =   7.865e-04, unitary_metric = 0.99998
+Error = :5.45e-03; Runtime: 40.1s; Iterations = 300, grads =   5.197e-03, unitary_metric = 0.99999
+Error = :4.68e-03; Runtime: 43.0s; Iterations = 320, grads =   5.962e-04, unitary_metric = 0.99999
+Error = :4.23e-03; Runtime: 45.5s; Iterations = 340, grads =   8.644e-05, unitary_metric = 0.99998
+Error = :3.86e-03; Runtime: 48.1s; Iterations = 360, grads =   1.091e-05, unitary_metric = 0.99998
+Error = :3.57e-03; Runtime: 50.7s; Iterations = 380, grads =   1.858e-04, unitary_metric = 0.99998
+Error = :3.36e-03; Runtime: 53.3s; Iterations = 400, grads =   9.279e-04, unitary_metric = 0.99998
+Error = :3.08e-03; Runtime: 56.2s; Iterations = 420, grads =   3.051e-04, unitary_metric = 0.99998
+Error = :2.87e-03; Runtime: 58.8s; Iterations = 440, grads =   1.016e-04, unitary_metric = 0.99998
+Error = :2.67e-03; Runtime: 61.3s; Iterations = 460, grads =   1.633e-06, unitary_metric = 0.99999
+Error = :2.60e-03; Runtime: 63.9s; Iterations = 480, grads =   1.651e-03, unitary_metric = 0.99998
+Error = :2.41e-03; Runtime: 66.5s; Iterations = 500, grads =   1.050e-03, unitary_metric = 0.99998
+Error = :2.23e-03; Runtime: 69.3s; Iterations = 520, grads =   5.499e-04, unitary_metric = 0.99999
+Error = :2.06e-03; Runtime: 71.9s; Iterations = 540, grads =   6.657e-05, unitary_metric = 0.99998
+Error = :1.93e-03; Runtime: 74.5s; Iterations = 560, grads =   9.417e-06, unitary_metric = 0.99999
+Error = :1.81e-03; Runtime: 77.1s; Iterations = 580, grads =   1.056e-06, unitary_metric = 0.99998
+Error = :1.71e-03; Runtime: 79.7s; Iterations = 600, grads =   6.590e-07, unitary_metric = 0.99998
+Error = :1.62e-03; Runtime: 82.5s; Iterations = 620, grads =   5.615e-05, unitary_metric = 0.99998
+Error = :1.61e-03; Runtime: 85.1s; Iterations = 640, grads =   8.136e-04, unitary_metric = 0.99999
+Error = :1.46e-03; Runtime: 87.7s; Iterations = 660, grads =   4.707e-05, unitary_metric = 0.99998
+Error = :1.39e-03; Runtime: 90.3s; Iterations = 680, grads =   5.022e-05, unitary_metric = 0.99999
+Error = :1.33e-03; Runtime: 92.9s; Iterations = 700, grads =   4.319e-06, unitary_metric = 0.99998
+Error = :2.45e-03; Runtime: 95.7s; Iterations = 720, grads =   1.933e-02, unitary_metric = 0.99999
+Error = :1.25e-03; Runtime: 98.3s; Iterations = 740, grads =   1.929e-04, unitary_metric = 0.99998
+Error = :1.21e-03; Runtime: 100.9s; Iterations = 760, grads =   2.577e-04, unitary_metric = 0.99999
+Error = :1.16e-03; Runtime: 103.5s; Iterations = 780, grads =   4.204e-05, unitary_metric = 0.99999
+Error = :1.13e-03; Runtime: 106.1s; Iterations = 800, grads =   4.267e-06, unitary_metric = 0.99999
+Error = :1.10e-03; Runtime: 108.9s; Iterations = 820, grads =   1.963e-07, unitary_metric = 0.99999
+Error = :1.07e-03; Runtime: 111.5s; Iterations = 840, grads =   2.799e-07, unitary_metric = 0.99999
+Error = :1.04e-03; Runtime: 114.1s; Iterations = 860, grads =   1.694e-07, unitary_metric = 0.99999
+Error = :1.02e-03; Runtime: 116.7s; Iterations = 880, grads =   4.478e-07, unitary_metric = 0.99999
+Error = :1.15e-03; Runtime: 119.3s; Iterations = 900, grads =   2.237e-03, unitary_metric = 0.99999
+Error = :1.05e-03; Runtime: 122.2s; Iterations = 920, grads =   1.004e-03, unitary_metric = 0.99998
+Error = :9.86e-04; Runtime: 122.3s; Iterations = 921, grads =   3.867e-05, unitary_metric = 0.99998
+data saved at: /project/ftchong/qoc/yongshan/00005_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 3.75 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00006_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.47e-01; Runtime: 0.2s; Iterations = 0, grads =   1.221e-02, unitary_metric = 1.00000
+Error = :7.57e-01; Runtime: 1.8s; Iterations = 20, grads =   4.360e-03, unitary_metric = 1.00000
+Error = :7.42e-01; Runtime: 3.1s; Iterations = 40, grads =   9.822e-04, unitary_metric = 1.00000
+Error = :7.05e-01; Runtime: 4.4s; Iterations = 60, grads =   6.843e-04, unitary_metric = 1.00000
+Error = :6.21e-01; Runtime: 5.7s; Iterations = 80, grads =   4.228e-04, unitary_metric = 1.00000
+Error = :5.74e-01; Runtime: 7.0s; Iterations = 100, grads =   1.464e-04, unitary_metric = 0.99999
+Error = :5.56e-01; Runtime: 8.5s; Iterations = 120, grads =   7.319e-05, unitary_metric = 1.00000
+Error = :5.46e-01; Runtime: 9.8s; Iterations = 140, grads =   7.413e-05, unitary_metric = 0.99999
+Error = :5.36e-01; Runtime: 11.1s; Iterations = 160, grads =   9.000e-05, unitary_metric = 0.99999
+Error = :5.24e-01; Runtime: 12.4s; Iterations = 180, grads =   9.839e-05, unitary_metric = 0.99999
+Error = :5.10e-01; Runtime: 13.7s; Iterations = 200, grads =   9.825e-05, unitary_metric = 0.99999
+Error = :4.92e-01; Runtime: 15.2s; Iterations = 220, grads =   9.913e-05, unitary_metric = 0.99999
+Error = :4.73e-01; Runtime: 16.5s; Iterations = 240, grads =   8.695e-05, unitary_metric = 0.99999
+Error = :4.56e-01; Runtime: 17.8s; Iterations = 260, grads =   6.257e-05, unitary_metric = 0.99999
+Error = :4.44e-01; Runtime: 19.1s; Iterations = 280, grads =   4.367e-05, unitary_metric = 0.99999
+Error = :4.35e-01; Runtime: 20.4s; Iterations = 300, grads =   3.370e-05, unitary_metric = 0.99999
+Error = :4.29e-01; Runtime: 21.8s; Iterations = 320, grads =   2.761e-05, unitary_metric = 0.99999
+Error = :4.24e-01; Runtime: 23.1s; Iterations = 340, grads =   1.986e-05, unitary_metric = 0.99999
+Error = :4.21e-01; Runtime: 24.4s; Iterations = 360, grads =   1.590e-05, unitary_metric = 0.99999
+Error = :4.18e-01; Runtime: 25.8s; Iterations = 380, grads =   1.653e-05, unitary_metric = 0.99999
+Error = :4.15e-01; Runtime: 27.1s; Iterations = 400, grads =   1.687e-05, unitary_metric = 0.99999
+Error = :4.13e-01; Runtime: 28.5s; Iterations = 420, grads =   1.264e-05, unitary_metric = 0.99999
+Error = :4.11e-01; Runtime: 29.9s; Iterations = 440, grads =   8.115e-06, unitary_metric = 0.99999
+Error = :4.09e-01; Runtime: 31.2s; Iterations = 460, grads =   5.825e-06, unitary_metric = 0.99999
+Error = :4.08e-01; Runtime: 32.5s; Iterations = 480, grads =   4.612e-06, unitary_metric = 0.99999
+Error = :4.07e-01; Runtime: 33.8s; Iterations = 500, grads =   3.774e-06, unitary_metric = 0.99999
+Error = :4.06e-01; Runtime: 35.3s; Iterations = 520, grads =   3.134e-06, unitary_metric = 0.99999
+Error = :4.05e-01; Runtime: 36.6s; Iterations = 540, grads =   2.625e-06, unitary_metric = 0.99999
+Error = :4.04e-01; Runtime: 37.8s; Iterations = 560, grads =   2.214e-06, unitary_metric = 0.99999
+Error = :4.04e-01; Runtime: 39.1s; Iterations = 580, grads =   1.876e-06, unitary_metric = 0.99999
+Error = :4.03e-01; Runtime: 40.5s; Iterations = 600, grads =   1.599e-06, unitary_metric = 0.99999
+Error = :4.03e-01; Runtime: 41.9s; Iterations = 620, grads =   1.368e-06, unitary_metric = 0.99999
+Error = :4.03e-01; Runtime: 43.2s; Iterations = 640, grads =   1.176e-06, unitary_metric = 0.99999
+Error = :4.03e-01; Runtime: 44.5s; Iterations = 660, grads =   1.017e-06, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 45.8s; Iterations = 680, grads =   9.021e-07, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 47.1s; Iterations = 700, grads =   7.722e-07, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 48.6s; Iterations = 720, grads =   6.789e-07, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 49.9s; Iterations = 740, grads =   5.995e-07, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 51.2s; Iterations = 760, grads =   5.334e-07, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 52.5s; Iterations = 780, grads =   4.776e-07, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 53.8s; Iterations = 800, grads =   4.301e-07, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 55.4s; Iterations = 820, grads =   3.894e-07, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 56.7s; Iterations = 840, grads =   3.544e-07, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 58.0s; Iterations = 860, grads =   3.239e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 59.3s; Iterations = 880, grads =   2.973e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 60.6s; Iterations = 900, grads =   2.741e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 62.0s; Iterations = 920, grads =   2.535e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 63.3s; Iterations = 940, grads =   2.500e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 64.6s; Iterations = 960, grads =   2.210e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 65.9s; Iterations = 980, grads =   2.081e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 67.2s; Iterations = 1000, grads =   1.917e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 68.7s; Iterations = 1020, grads =   1.802e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 70.0s; Iterations = 1040, grads =   1.700e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 71.3s; Iterations = 1060, grads =   1.612e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 72.6s; Iterations = 1080, grads =   1.527e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 73.9s; Iterations = 1100, grads =   1.462e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 75.3s; Iterations = 1120, grads =   1.632e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 76.6s; Iterations = 1140, grads =   1.338e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 78.0s; Iterations = 1160, grads =   1.285e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 79.3s; Iterations = 1180, grads =   1.228e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 80.6s; Iterations = 1200, grads =   1.183e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 82.0s; Iterations = 1220, grads =   1.143e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 83.3s; Iterations = 1240, grads =   1.108e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 84.6s; Iterations = 1260, grads =   1.072e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 85.9s; Iterations = 1280, grads =   2.129e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 87.2s; Iterations = 1300, grads =   8.553e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 88.6s; Iterations = 1320, grads =   2.440e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 90.0s; Iterations = 1340, grads =   6.729e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 91.3s; Iterations = 1360, grads =   2.296e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 92.6s; Iterations = 1380, grads =   9.373e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 93.9s; Iterations = 1400, grads =   3.118e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 95.3s; Iterations = 1420, grads =   2.176e-04, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 96.6s; Iterations = 1440, grads =   2.580e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 97.9s; Iterations = 1460, grads =   3.934e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 99.2s; Iterations = 1480, grads =   1.322e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 100.5s; Iterations = 1500, grads =   8.672e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 101.9s; Iterations = 1520, grads =   1.008e-04, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 103.2s; Iterations = 1540, grads =   9.678e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 104.5s; Iterations = 1560, grads =   9.771e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 105.8s; Iterations = 1580, grads =   1.548e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 107.1s; Iterations = 1600, grads =   8.954e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 108.6s; Iterations = 1620, grads =   6.230e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 109.9s; Iterations = 1640, grads =   1.329e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 111.2s; Iterations = 1660, grads =   6.529e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 112.5s; Iterations = 1680, grads =   6.160e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 113.8s; Iterations = 1700, grads =   3.140e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 115.4s; Iterations = 1720, grads =   3.923e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 116.7s; Iterations = 1740, grads =   2.298e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 118.0s; Iterations = 1760, grads =   7.553e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 119.3s; Iterations = 1780, grads =   4.478e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 120.6s; Iterations = 1800, grads =   1.834e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 122.0s; Iterations = 1820, grads =   1.012e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 123.3s; Iterations = 1840, grads =   7.284e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 124.6s; Iterations = 1860, grads =   3.865e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 125.9s; Iterations = 1880, grads =   3.744e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 127.2s; Iterations = 1900, grads =   5.841e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 128.7s; Iterations = 1920, grads =   2.176e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 130.0s; Iterations = 1940, grads =   1.834e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 131.3s; Iterations = 1960, grads =   1.433e-04, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 132.6s; Iterations = 1980, grads =   2.148e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 133.9s; Iterations = 2000, grads =   1.722e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 135.3s; Iterations = 2020, grads =   3.932e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 136.6s; Iterations = 2040, grads =   4.293e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 137.9s; Iterations = 2060, grads =   3.016e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 139.2s; Iterations = 2080, grads =   3.005e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 140.5s; Iterations = 2100, grads =   2.860e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 141.9s; Iterations = 2120, grads =   2.803e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 143.2s; Iterations = 2140, grads =   2.760e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 144.5s; Iterations = 2160, grads =   2.850e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 145.8s; Iterations = 2180, grads =   4.693e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 147.1s; Iterations = 2200, grads =   5.374e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 148.6s; Iterations = 2220, grads =   2.514e-05, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 149.9s; Iterations = 2240, grads =   4.061e-05, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 151.2s; Iterations = 2260, grads =   5.755e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 152.5s; Iterations = 2280, grads =   7.029e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 153.8s; Iterations = 2300, grads =   1.281e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 155.3s; Iterations = 2320, grads =   2.560e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 156.6s; Iterations = 2340, grads =   2.376e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 157.8s; Iterations = 2360, grads =   2.294e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 159.1s; Iterations = 2380, grads =   2.258e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 160.4s; Iterations = 2400, grads =   2.209e-08, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 161.9s; Iterations = 2420, grads =   2.211e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 163.2s; Iterations = 2440, grads =   6.627e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 164.5s; Iterations = 2460, grads =   2.264e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 165.8s; Iterations = 2480, grads =   2.147e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 167.1s; Iterations = 2500, grads =   1.002e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 168.6s; Iterations = 2520, grads =   4.972e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 169.9s; Iterations = 2540, grads =   4.862e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 171.2s; Iterations = 2560, grads =   9.073e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 172.5s; Iterations = 2580, grads =   2.420e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 173.8s; Iterations = 2600, grads =   1.956e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 175.2s; Iterations = 2620, grads =   2.393e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 176.5s; Iterations = 2640, grads =   2.026e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 177.8s; Iterations = 2660, grads =   1.930e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 179.1s; Iterations = 2680, grads =   1.903e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 180.4s; Iterations = 2700, grads =   2.688e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 181.8s; Iterations = 2720, grads =   1.026e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 183.1s; Iterations = 2740, grads =   5.794e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 184.4s; Iterations = 2760, grads =   4.629e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 185.7s; Iterations = 2780, grads =   1.824e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 187.0s; Iterations = 2800, grads =   7.536e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 188.5s; Iterations = 2820, grads =   2.375e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 189.8s; Iterations = 2840, grads =   4.967e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 191.1s; Iterations = 2860, grads =   6.223e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 192.4s; Iterations = 2880, grads =   3.141e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 193.7s; Iterations = 2900, grads =   5.295e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 195.1s; Iterations = 2920, grads =   2.063e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 196.4s; Iterations = 2940, grads =   1.824e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 197.7s; Iterations = 2960, grads =   1.085e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 199.0s; Iterations = 2980, grads =   2.117e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 200.3s; Iterations = 3000, grads =   1.308e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 201.7s; Iterations = 3020, grads =   1.504e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 203.0s; Iterations = 3040, grads =   2.477e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 204.3s; Iterations = 3060, grads =   4.809e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 205.6s; Iterations = 3080, grads =   7.379e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 206.9s; Iterations = 3100, grads =   1.553e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 208.4s; Iterations = 3120, grads =   1.193e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 209.7s; Iterations = 3140, grads =   8.388e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 211.0s; Iterations = 3160, grads =   8.480e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 212.3s; Iterations = 3180, grads =   3.493e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 213.6s; Iterations = 3200, grads =   5.572e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 215.0s; Iterations = 3220, grads =   1.297e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 216.3s; Iterations = 3240, grads =   1.662e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 217.6s; Iterations = 3260, grads =   1.079e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 218.9s; Iterations = 3280, grads =   6.185e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 220.2s; Iterations = 3300, grads =   1.963e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 221.7s; Iterations = 3320, grads =   3.055e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 223.0s; Iterations = 3340, grads =   1.156e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 224.3s; Iterations = 3360, grads =   1.654e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 225.6s; Iterations = 3380, grads =   3.047e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 226.9s; Iterations = 3400, grads =   3.995e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 228.3s; Iterations = 3420, grads =   2.341e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 229.6s; Iterations = 3440, grads =   1.576e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 230.9s; Iterations = 3460, grads =   1.102e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 232.2s; Iterations = 3480, grads =   1.625e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 233.5s; Iterations = 3500, grads =   4.623e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 235.0s; Iterations = 3520, grads =   2.507e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 236.3s; Iterations = 3540, grads =   1.554e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 237.6s; Iterations = 3560, grads =   5.226e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 238.9s; Iterations = 3580, grads =   1.403e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 240.1s; Iterations = 3600, grads =   5.210e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 241.6s; Iterations = 3620, grads =   1.324e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 242.9s; Iterations = 3640, grads =   2.601e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 244.2s; Iterations = 3660, grads =   1.019e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 245.5s; Iterations = 3680, grads =   9.001e-09, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 246.8s; Iterations = 3700, grads =   8.908e-09, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 248.3s; Iterations = 3720, grads =   8.844e-09, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 249.6s; Iterations = 3740, grads =   1.205e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 250.9s; Iterations = 3760, grads =   9.198e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 252.2s; Iterations = 3780, grads =   2.684e-06, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 253.5s; Iterations = 3800, grads =   2.672e-07, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 254.9s; Iterations = 3820, grads =   2.897e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 256.2s; Iterations = 3840, grads =   1.561e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 257.5s; Iterations = 3860, grads =   1.869e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 258.8s; Iterations = 3880, grads =   2.762e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 260.1s; Iterations = 3900, grads =   1.643e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 261.5s; Iterations = 3920, grads =   7.909e-09, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 262.8s; Iterations = 3940, grads =   8.980e-09, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 264.1s; Iterations = 3960, grads =   7.217e-09, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 265.4s; Iterations = 3980, grads =   7.048e-09, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 266.7s; Iterations = 4000, grads =   7.769e-09, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 268.2s; Iterations = 4020, grads =   1.745e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 269.5s; Iterations = 4040, grads =   7.086e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 270.8s; Iterations = 4060, grads =   1.242e-05, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 272.1s; Iterations = 4080, grads =   1.924e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 273.4s; Iterations = 4100, grads =   1.298e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 274.8s; Iterations = 4120, grads =   2.724e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 276.1s; Iterations = 4140, grads =   1.127e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 277.4s; Iterations = 4160, grads =   6.773e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 278.7s; Iterations = 4180, grads =   1.674e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 280.0s; Iterations = 4200, grads =   8.474e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 281.4s; Iterations = 4220, grads =   2.209e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 282.7s; Iterations = 4240, grads =   1.778e-08, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 284.0s; Iterations = 4260, grads =   7.147e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 285.3s; Iterations = 4280, grads =   2.437e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 286.7s; Iterations = 4300, grads =   1.494e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 288.2s; Iterations = 4320, grads =   1.776e-07, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 289.5s; Iterations = 4340, grads =   1.491e-07, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 290.8s; Iterations = 4360, grads =   1.624e-05, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 292.1s; Iterations = 4380, grads =   9.389e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 293.4s; Iterations = 4400, grads =   3.984e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 294.8s; Iterations = 4420, grads =   4.515e-08, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 296.1s; Iterations = 4440, grads =   9.025e-09, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 297.4s; Iterations = 4460, grads =   8.855e-09, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 298.7s; Iterations = 4480, grads =   1.486e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 300.0s; Iterations = 4500, grads =   3.966e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 301.4s; Iterations = 4520, grads =   1.208e-05, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 302.7s; Iterations = 4540, grads =   1.081e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 304.0s; Iterations = 4560, grads =   3.857e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 305.3s; Iterations = 4580, grads =   9.516e-06, unitary_metric = 1.00000
+Error = :4.01e-01; Runtime: 306.6s; Iterations = 4600, grads =   3.014e-06, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 308.1s; Iterations = 4620, grads =   3.835e-07, unitary_metric = 0.99999
+Error = :4.01e-01; Runtime: 309.4s; Iterations = 4640, grads =   6.887e-08, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 310.7s; Iterations = 4660, grads =   1.463e-08, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 312.0s; Iterations = 4680, grads =   8.716e-09, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 313.3s; Iterations = 4700, grads =   1.080e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 314.7s; Iterations = 4720, grads =   3.164e-06, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 316.0s; Iterations = 4740, grads =   1.755e-05, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 317.3s; Iterations = 4760, grads =   1.597e-06, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 318.6s; Iterations = 4780, grads =   2.133e-07, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 319.8s; Iterations = 4800, grads =   2.115e-08, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 321.3s; Iterations = 4820, grads =   4.693e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 322.6s; Iterations = 4840, grads =   1.262e-05, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 323.9s; Iterations = 4860, grads =   6.377e-08, unitary_metric = 0.99999
+Error = :4.02e-01; Runtime: 325.2s; Iterations = 4880, grads =   5.247e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 326.5s; Iterations = 4900, grads =   1.379e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 328.0s; Iterations = 4920, grads =   2.383e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 329.3s; Iterations = 4940, grads =   1.727e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 330.6s; Iterations = 4960, grads =   3.181e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 331.9s; Iterations = 4980, grads =   8.170e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 333.2s; Iterations = 5000, grads =   2.542e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 334.7s; Iterations = 5020, grads =   1.329e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 336.0s; Iterations = 5040, grads =   1.449e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 337.2s; Iterations = 5060, grads =   6.119e-09, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 338.5s; Iterations = 5080, grads =   9.448e-09, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 339.8s; Iterations = 5100, grads =   2.565e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 341.3s; Iterations = 5120, grads =   1.058e-05, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 342.6s; Iterations = 5140, grads =   1.294e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 343.9s; Iterations = 5160, grads =   8.278e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 345.2s; Iterations = 5180, grads =   4.944e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 346.5s; Iterations = 5200, grads =   1.380e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 347.9s; Iterations = 5220, grads =   8.950e-09, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 349.2s; Iterations = 5240, grads =   6.168e-09, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 350.5s; Iterations = 5260, grads =   5.586e-09, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 351.8s; Iterations = 5280, grads =   7.045e-09, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 353.1s; Iterations = 5300, grads =   2.397e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 354.6s; Iterations = 5320, grads =   9.288e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 355.9s; Iterations = 5340, grads =   1.863e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 357.2s; Iterations = 5360, grads =   1.148e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 358.5s; Iterations = 5380, grads =   5.573e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 359.8s; Iterations = 5400, grads =   1.685e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 361.2s; Iterations = 5420, grads =   1.086e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 362.5s; Iterations = 5440, grads =   2.173e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 363.8s; Iterations = 5460, grads =   5.927e-09, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 365.1s; Iterations = 5480, grads =   7.498e-09, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 366.4s; Iterations = 5500, grads =   1.118e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 367.8s; Iterations = 5520, grads =   8.970e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 369.1s; Iterations = 5540, grads =   2.092e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 370.5s; Iterations = 5560, grads =   2.178e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 371.8s; Iterations = 5580, grads =   7.602e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 373.1s; Iterations = 5600, grads =   3.307e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 374.5s; Iterations = 5620, grads =   1.552e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 375.8s; Iterations = 5640, grads =   2.752e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 377.1s; Iterations = 5660, grads =   7.750e-09, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 378.4s; Iterations = 5680, grads =   6.590e-09, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 379.7s; Iterations = 5700, grads =   9.450e-09, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 381.1s; Iterations = 5720, grads =   1.802e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 382.4s; Iterations = 5740, grads =   5.218e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 383.7s; Iterations = 5760, grads =   1.074e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 385.0s; Iterations = 5780, grads =   9.238e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 386.3s; Iterations = 5800, grads =   2.528e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 387.8s; Iterations = 5820, grads =   4.984e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 389.1s; Iterations = 5840, grads =   3.413e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 390.4s; Iterations = 5860, grads =   6.562e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 391.7s; Iterations = 5880, grads =   1.597e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 393.0s; Iterations = 5900, grads =   8.262e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 394.4s; Iterations = 5920, grads =   5.206e-06, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 395.7s; Iterations = 5940, grads =   1.555e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 397.0s; Iterations = 5960, grads =   1.102e-07, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 398.3s; Iterations = 5980, grads =   1.039e-08, unitary_metric = 1.00000
+Error = :4.02e-01; Runtime: 399.6s; Iterations = 6000, grads =   3.518e-07, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00006_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 5.6 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00007_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.40e-01; Runtime: 0.2s; Iterations = 0, grads =   2.050e-02, unitary_metric = 1.00000
+Error = :7.58e-01; Runtime: 2.5s; Iterations = 20, grads =   5.009e-03, unitary_metric = 1.00000
+Error = :7.50e-01; Runtime: 4.5s; Iterations = 40, grads =   6.372e-04, unitary_metric = 1.00000
+Error = :7.45e-01; Runtime: 6.4s; Iterations = 60, grads =   4.963e-04, unitary_metric = 1.00000
+Error = :6.00e-01; Runtime: 8.4s; Iterations = 80, grads =   1.516e-03, unitary_metric = 1.00000
+Error = :5.04e-01; Runtime: 10.3s; Iterations = 100, grads =   9.539e-04, unitary_metric = 0.99999
+Error = :4.34e-01; Runtime: 12.5s; Iterations = 120, grads =   1.444e-03, unitary_metric = 0.99999
+Error = :2.70e-01; Runtime: 14.4s; Iterations = 140, grads =   9.464e-03, unitary_metric = 0.99999
+Error = :1.69e-01; Runtime: 16.4s; Iterations = 160, grads =   3.073e-03, unitary_metric = 0.99999
+Error = :1.49e-01; Runtime: 18.3s; Iterations = 180, grads =   5.606e-04, unitary_metric = 0.99999
+Error = :1.43e-01; Runtime: 20.3s; Iterations = 200, grads =   2.450e-04, unitary_metric = 0.99999
+Error = :1.40e-01; Runtime: 22.4s; Iterations = 220, grads =   5.031e-05, unitary_metric = 0.99999
+Error = :1.38e-01; Runtime: 24.3s; Iterations = 240, grads =   1.981e-05, unitary_metric = 0.99999
+Error = :1.37e-01; Runtime: 26.3s; Iterations = 260, grads =   1.602e-05, unitary_metric = 0.99999
+Error = :1.35e-01; Runtime: 28.2s; Iterations = 280, grads =   1.397e-05, unitary_metric = 0.99999
+Error = :1.34e-01; Runtime: 30.1s; Iterations = 300, grads =   1.103e-05, unitary_metric = 0.99999
+Error = :1.33e-01; Runtime: 32.3s; Iterations = 320, grads =   7.853e-06, unitary_metric = 0.99999
+Error = :1.33e-01; Runtime: 34.3s; Iterations = 340, grads =   6.251e-06, unitary_metric = 0.99999
+Error = :1.32e-01; Runtime: 36.2s; Iterations = 360, grads =   4.319e-06, unitary_metric = 0.99999
+Error = :1.32e-01; Runtime: 38.2s; Iterations = 380, grads =   3.428e-06, unitary_metric = 0.99999
+Error = :1.31e-01; Runtime: 40.1s; Iterations = 400, grads =   2.785e-06, unitary_metric = 0.99999
+Error = :1.31e-01; Runtime: 42.2s; Iterations = 420, grads =   3.361e-06, unitary_metric = 0.99999
+Error = :1.31e-01; Runtime: 44.2s; Iterations = 440, grads =   2.869e-04, unitary_metric = 0.99999
+Error = :1.31e-01; Runtime: 46.1s; Iterations = 460, grads =   5.667e-04, unitary_metric = 0.99999
+Error = :1.31e-01; Runtime: 48.1s; Iterations = 480, grads =   7.060e-06, unitary_metric = 0.99999
+Error = :1.31e-01; Runtime: 50.0s; Iterations = 500, grads =   9.555e-06, unitary_metric = 0.99999
+Error = :1.31e-01; Runtime: 52.1s; Iterations = 520, grads =   2.949e-06, unitary_metric = 0.99999
+Error = :1.31e-01; Runtime: 54.1s; Iterations = 540, grads =   7.882e-04, unitary_metric = 0.99999
+Error = :1.31e-01; Runtime: 56.0s; Iterations = 560, grads =   6.069e-04, unitary_metric = 0.99999
+Error = :1.31e-01; Runtime: 57.9s; Iterations = 580, grads =   1.374e-04, unitary_metric = 0.99999
+Error = :1.30e-01; Runtime: 59.9s; Iterations = 600, grads =   2.113e-05, unitary_metric = 0.99999
+Error = :1.30e-01; Runtime: 62.0s; Iterations = 620, grads =   3.715e-06, unitary_metric = 0.99999
+Error = :1.30e-01; Runtime: 64.0s; Iterations = 640, grads =   2.234e-06, unitary_metric = 0.99999
+Error = :1.29e-01; Runtime: 65.9s; Iterations = 660, grads =   6.297e-05, unitary_metric = 0.99999
+Error = :1.29e-01; Runtime: 67.9s; Iterations = 680, grads =   5.107e-05, unitary_metric = 0.99999
+Error = :1.29e-01; Runtime: 69.8s; Iterations = 700, grads =   1.933e-05, unitary_metric = 0.99999
+Error = :1.29e-01; Runtime: 71.9s; Iterations = 720, grads =   2.128e-05, unitary_metric = 0.99999
+Error = :1.29e-01; Runtime: 73.9s; Iterations = 740, grads =   1.857e-06, unitary_metric = 0.99999
+Error = :1.29e-01; Runtime: 75.8s; Iterations = 760, grads =   3.027e-06, unitary_metric = 0.99999
+Error = :1.29e-01; Runtime: 77.8s; Iterations = 780, grads =   2.903e-03, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 79.7s; Iterations = 800, grads =   5.281e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 81.8s; Iterations = 820, grads =   3.082e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 83.8s; Iterations = 840, grads =   6.629e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 85.7s; Iterations = 860, grads =   1.187e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 87.7s; Iterations = 880, grads =   3.624e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 89.6s; Iterations = 900, grads =   4.664e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 91.7s; Iterations = 920, grads =   2.486e-04, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 93.7s; Iterations = 940, grads =   2.491e-04, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 95.6s; Iterations = 960, grads =   8.991e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 97.5s; Iterations = 980, grads =   2.034e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 99.5s; Iterations = 1000, grads =   4.002e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 101.6s; Iterations = 1020, grads =   1.560e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 103.5s; Iterations = 1040, grads =   3.072e-04, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 105.4s; Iterations = 1060, grads =   1.796e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 107.4s; Iterations = 1080, grads =   2.151e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 109.3s; Iterations = 1100, grads =   3.442e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 111.4s; Iterations = 1120, grads =   2.613e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 113.4s; Iterations = 1140, grads =   1.981e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 115.3s; Iterations = 1160, grads =   4.193e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 117.2s; Iterations = 1180, grads =   5.096e-04, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 119.1s; Iterations = 1200, grads =   4.048e-04, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 121.2s; Iterations = 1220, grads =   5.995e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 123.2s; Iterations = 1240, grads =   6.021e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 125.1s; Iterations = 1260, grads =   1.437e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 127.0s; Iterations = 1280, grads =   3.176e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 129.0s; Iterations = 1300, grads =   2.983e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 131.1s; Iterations = 1320, grads =   1.928e-04, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 133.0s; Iterations = 1340, grads =   6.372e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 135.0s; Iterations = 1360, grads =   4.037e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 136.9s; Iterations = 1380, grads =   9.450e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 138.8s; Iterations = 1400, grads =   1.361e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 141.0s; Iterations = 1420, grads =   3.490e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 142.9s; Iterations = 1440, grads =   1.932e-04, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 144.8s; Iterations = 1460, grads =   3.132e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 146.7s; Iterations = 1480, grads =   6.901e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 148.7s; Iterations = 1500, grads =   3.027e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 150.8s; Iterations = 1520, grads =   1.407e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 152.7s; Iterations = 1540, grads =   1.853e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 154.6s; Iterations = 1560, grads =   1.533e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 156.6s; Iterations = 1580, grads =   1.411e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 158.5s; Iterations = 1600, grads =   6.580e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 160.6s; Iterations = 1620, grads =   7.394e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 162.5s; Iterations = 1640, grads =   5.245e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 164.4s; Iterations = 1660, grads =   6.283e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 166.4s; Iterations = 1680, grads =   4.767e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 168.3s; Iterations = 1700, grads =   6.084e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 170.4s; Iterations = 1720, grads =   5.817e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 172.3s; Iterations = 1740, grads =   1.095e-03, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 174.3s; Iterations = 1760, grads =   9.137e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 176.2s; Iterations = 1780, grads =   1.216e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 178.1s; Iterations = 1800, grads =   3.414e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 180.2s; Iterations = 1820, grads =   3.222e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 182.2s; Iterations = 1840, grads =   8.894e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 184.1s; Iterations = 1860, grads =   9.879e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 186.0s; Iterations = 1880, grads =   4.764e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 187.9s; Iterations = 1900, grads =   1.691e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 190.1s; Iterations = 1920, grads =   5.119e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 192.0s; Iterations = 1940, grads =   3.004e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 194.0s; Iterations = 1960, grads =   2.651e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 195.9s; Iterations = 1980, grads =   2.676e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 197.8s; Iterations = 2000, grads =   3.490e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 200.0s; Iterations = 2020, grads =   4.141e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 201.9s; Iterations = 2040, grads =   5.353e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 203.8s; Iterations = 2060, grads =   1.089e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 205.7s; Iterations = 2080, grads =   2.514e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 207.7s; Iterations = 2100, grads =   9.365e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 209.8s; Iterations = 2120, grads =   1.210e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 211.7s; Iterations = 2140, grads =   8.947e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 213.6s; Iterations = 2160, grads =   4.875e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 215.5s; Iterations = 2180, grads =   6.351e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 217.5s; Iterations = 2200, grads =   1.063e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 219.6s; Iterations = 2220, grads =   1.792e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 221.6s; Iterations = 2240, grads =   2.369e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 223.5s; Iterations = 2260, grads =   2.595e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 225.4s; Iterations = 2280, grads =   5.368e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 227.3s; Iterations = 2300, grads =   3.606e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 229.4s; Iterations = 2320, grads =   9.648e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 231.4s; Iterations = 2340, grads =   1.083e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 233.3s; Iterations = 2360, grads =   4.506e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 235.2s; Iterations = 2380, grads =   1.554e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 237.1s; Iterations = 2400, grads =   1.557e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 239.2s; Iterations = 2420, grads =   1.588e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 241.2s; Iterations = 2440, grads =   3.363e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 243.1s; Iterations = 2460, grads =   2.815e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 245.0s; Iterations = 2480, grads =   2.031e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 247.0s; Iterations = 2500, grads =   1.474e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 249.1s; Iterations = 2520, grads =   3.238e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 251.0s; Iterations = 2540, grads =   2.486e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 252.9s; Iterations = 2560, grads =   7.958e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 254.9s; Iterations = 2580, grads =   1.016e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 256.8s; Iterations = 2600, grads =   5.384e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 258.9s; Iterations = 2620, grads =   4.817e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 260.8s; Iterations = 2640, grads =   4.386e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 262.8s; Iterations = 2660, grads =   1.585e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 264.7s; Iterations = 2680, grads =   2.756e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 266.6s; Iterations = 2700, grads =   1.213e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 268.8s; Iterations = 2720, grads =   5.062e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 270.7s; Iterations = 2740, grads =   2.558e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 272.6s; Iterations = 2760, grads =   1.880e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 274.5s; Iterations = 2780, grads =   1.236e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 276.4s; Iterations = 2800, grads =   1.277e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 278.5s; Iterations = 2820, grads =   4.095e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 280.5s; Iterations = 2840, grads =   1.423e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 282.4s; Iterations = 2860, grads =   1.114e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 284.3s; Iterations = 2880, grads =   6.173e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 286.3s; Iterations = 2900, grads =   4.143e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 288.4s; Iterations = 2920, grads =   4.330e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 290.3s; Iterations = 2940, grads =   4.384e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 292.3s; Iterations = 2960, grads =   2.806e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 294.2s; Iterations = 2980, grads =   2.459e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 296.1s; Iterations = 3000, grads =   7.008e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 298.2s; Iterations = 3020, grads =   2.417e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 300.1s; Iterations = 3040, grads =   1.022e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 302.1s; Iterations = 3060, grads =   1.348e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 304.0s; Iterations = 3080, grads =   2.881e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 305.9s; Iterations = 3100, grads =   1.050e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 308.0s; Iterations = 3120, grads =   1.406e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 310.0s; Iterations = 3140, grads =   6.447e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 311.9s; Iterations = 3160, grads =   3.374e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 313.8s; Iterations = 3180, grads =   4.175e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 315.7s; Iterations = 3200, grads =   4.693e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 317.9s; Iterations = 3220, grads =   4.792e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 319.8s; Iterations = 3240, grads =   4.845e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 321.7s; Iterations = 3260, grads =   9.430e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 323.7s; Iterations = 3280, grads =   2.219e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 325.6s; Iterations = 3300, grads =   1.177e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 327.7s; Iterations = 3320, grads =   1.893e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 329.6s; Iterations = 3340, grads =   2.429e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 331.5s; Iterations = 3360, grads =   2.203e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 333.4s; Iterations = 3380, grads =   2.506e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 335.3s; Iterations = 3400, grads =   7.267e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 337.4s; Iterations = 3420, grads =   2.361e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 339.4s; Iterations = 3440, grads =   2.017e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 341.3s; Iterations = 3460, grads =   1.961e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 343.2s; Iterations = 3480, grads =   1.736e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 345.2s; Iterations = 3500, grads =   1.684e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 347.3s; Iterations = 3520, grads =   1.052e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 349.2s; Iterations = 3540, grads =   3.163e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 351.1s; Iterations = 3560, grads =   2.599e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 353.0s; Iterations = 3580, grads =   2.493e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 355.0s; Iterations = 3600, grads =   4.048e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 357.1s; Iterations = 3620, grads =   6.275e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 359.0s; Iterations = 3640, grads =   1.378e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 361.0s; Iterations = 3660, grads =   2.681e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 362.9s; Iterations = 3680, grads =   3.008e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 364.8s; Iterations = 3700, grads =   4.415e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 367.1s; Iterations = 3720, grads =   1.458e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 369.0s; Iterations = 3740, grads =   5.419e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 371.0s; Iterations = 3760, grads =   2.092e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 372.9s; Iterations = 3780, grads =   1.963e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 374.8s; Iterations = 3800, grads =   7.821e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 376.9s; Iterations = 3820, grads =   6.825e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 378.9s; Iterations = 3840, grads =   3.259e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 380.8s; Iterations = 3860, grads =   1.770e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 382.7s; Iterations = 3880, grads =   5.792e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 384.7s; Iterations = 3900, grads =   6.240e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 386.8s; Iterations = 3920, grads =   7.453e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 388.7s; Iterations = 3940, grads =   2.805e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 390.6s; Iterations = 3960, grads =   3.086e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 392.6s; Iterations = 3980, grads =   5.213e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 394.5s; Iterations = 4000, grads =   2.901e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 396.6s; Iterations = 4020, grads =   2.749e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 398.5s; Iterations = 4040, grads =   2.150e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 400.4s; Iterations = 4060, grads =   1.482e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 402.4s; Iterations = 4080, grads =   2.074e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 404.3s; Iterations = 4100, grads =   2.330e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 406.4s; Iterations = 4120, grads =   3.588e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 408.3s; Iterations = 4140, grads =   9.692e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 410.3s; Iterations = 4160, grads =   1.048e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 412.2s; Iterations = 4180, grads =   1.760e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 414.1s; Iterations = 4200, grads =   7.771e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 416.2s; Iterations = 4220, grads =   1.025e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 418.2s; Iterations = 4240, grads =   1.960e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 420.1s; Iterations = 4260, grads =   1.322e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 422.0s; Iterations = 4280, grads =   4.957e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 424.0s; Iterations = 4300, grads =   1.924e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 426.1s; Iterations = 4320, grads =   2.233e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 428.0s; Iterations = 4340, grads =   8.345e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 429.9s; Iterations = 4360, grads =   5.555e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 431.9s; Iterations = 4380, grads =   3.946e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 433.8s; Iterations = 4400, grads =   6.140e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 436.0s; Iterations = 4420, grads =   6.940e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 437.9s; Iterations = 4440, grads =   6.953e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 439.8s; Iterations = 4460, grads =   8.831e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 441.7s; Iterations = 4480, grads =   4.473e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 443.7s; Iterations = 4500, grads =   3.589e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 445.8s; Iterations = 4520, grads =   1.031e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 447.7s; Iterations = 4540, grads =   1.338e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 449.6s; Iterations = 4560, grads =   6.834e-09, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 451.6s; Iterations = 4580, grads =   1.430e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 453.5s; Iterations = 4600, grads =   1.962e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 455.8s; Iterations = 4620, grads =   3.485e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 457.7s; Iterations = 4640, grads =   3.411e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 459.6s; Iterations = 4660, grads =   3.132e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 461.6s; Iterations = 4680, grads =   1.679e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 463.5s; Iterations = 4700, grads =   1.111e-06, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 465.6s; Iterations = 4720, grads =   2.013e-04, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 467.5s; Iterations = 4740, grads =   2.180e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 469.5s; Iterations = 4760, grads =   4.364e-07, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 471.4s; Iterations = 4780, grads =   3.718e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 473.3s; Iterations = 4800, grads =   2.400e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 475.4s; Iterations = 4820, grads =   1.285e-08, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 477.4s; Iterations = 4840, grads =   4.451e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 479.3s; Iterations = 4860, grads =   6.107e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 481.2s; Iterations = 4880, grads =   2.573e-05, unitary_metric = 0.99999
+Error = :1.27e-01; Runtime: 483.2s; Iterations = 4900, grads =   1.803e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 485.3s; Iterations = 4920, grads =   1.103e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 487.2s; Iterations = 4940, grads =   5.012e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 489.1s; Iterations = 4960, grads =   1.104e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 491.1s; Iterations = 4980, grads =   1.096e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 493.0s; Iterations = 5000, grads =   2.754e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 495.1s; Iterations = 5020, grads =   5.988e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 497.1s; Iterations = 5040, grads =   9.536e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 499.0s; Iterations = 5060, grads =   1.211e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 500.9s; Iterations = 5080, grads =   5.265e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 502.9s; Iterations = 5100, grads =   1.753e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 505.0s; Iterations = 5120, grads =   7.322e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 506.9s; Iterations = 5140, grads =   5.433e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 508.8s; Iterations = 5160, grads =   1.166e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 510.8s; Iterations = 5180, grads =   2.544e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 512.7s; Iterations = 5200, grads =   6.355e-09, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 514.8s; Iterations = 5220, grads =   6.328e-09, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 516.8s; Iterations = 5240, grads =   7.322e-09, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 518.7s; Iterations = 5260, grads =   1.553e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 520.6s; Iterations = 5280, grads =   4.420e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 522.5s; Iterations = 5300, grads =   3.394e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 524.7s; Iterations = 5320, grads =   1.420e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 526.6s; Iterations = 5340, grads =   4.130e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 528.5s; Iterations = 5360, grads =   6.236e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 530.4s; Iterations = 5380, grads =   8.629e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 532.4s; Iterations = 5400, grads =   1.431e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 534.5s; Iterations = 5420, grads =   3.159e-09, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 536.5s; Iterations = 5440, grads =   1.347e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 538.4s; Iterations = 5460, grads =   9.454e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 540.3s; Iterations = 5480, grads =   4.444e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 542.3s; Iterations = 5500, grads =   1.076e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 544.4s; Iterations = 5520, grads =   4.671e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 546.3s; Iterations = 5540, grads =   5.003e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 548.2s; Iterations = 5560, grads =   6.160e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 550.2s; Iterations = 5580, grads =   1.846e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 552.1s; Iterations = 5600, grads =   1.501e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 554.2s; Iterations = 5620, grads =   1.065e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 556.1s; Iterations = 5640, grads =   9.338e-09, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 558.0s; Iterations = 5660, grads =   5.836e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 560.0s; Iterations = 5680, grads =   3.077e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 561.9s; Iterations = 5700, grads =   4.508e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 564.0s; Iterations = 5720, grads =   4.692e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 566.0s; Iterations = 5740, grads =   3.638e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 567.9s; Iterations = 5760, grads =   8.660e-09, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 569.8s; Iterations = 5780, grads =   2.378e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 571.8s; Iterations = 5800, grads =   4.798e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 573.9s; Iterations = 5820, grads =   1.837e-05, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 575.8s; Iterations = 5840, grads =   9.542e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 577.7s; Iterations = 5860, grads =   2.168e-07, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 579.6s; Iterations = 5880, grads =   6.523e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 581.6s; Iterations = 5900, grads =   1.127e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 583.7s; Iterations = 5920, grads =   3.740e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 585.6s; Iterations = 5940, grads =   3.247e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 587.6s; Iterations = 5960, grads =   1.853e-06, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 589.5s; Iterations = 5980, grads =   5.073e-08, unitary_metric = 0.99999
+Error = :1.28e-01; Runtime: 591.4s; Iterations = 6000, grads =   4.160e-07, unitary_metric = 0.99999
+data saved at: /project/ftchong/qoc/yongshan/00007_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 6.55 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00008_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.57e-01; Runtime: 0.3s; Iterations = 0, grads =   1.504e-02, unitary_metric = 1.00000
+Error = :7.52e-01; Runtime: 3.0s; Iterations = 20, grads =   4.273e-03, unitary_metric = 1.00000
+Error = :7.01e-01; Runtime: 5.2s; Iterations = 40, grads =   3.891e-03, unitary_metric = 1.00000
+Error = :5.50e-01; Runtime: 7.5s; Iterations = 60, grads =   9.766e-04, unitary_metric = 1.00000
+Error = :4.79e-01; Runtime: 9.8s; Iterations = 80, grads =   8.938e-04, unitary_metric = 1.00000
+Error = :3.64e-01; Runtime: 12.0s; Iterations = 100, grads =   1.102e-03, unitary_metric = 1.00000
+Error = :2.25e-01; Runtime: 14.5s; Iterations = 120, grads =   1.475e-03, unitary_metric = 1.00000
+Error = :1.04e-01; Runtime: 16.8s; Iterations = 140, grads =   5.747e-03, unitary_metric = 0.99999
+Error = :7.28e-02; Runtime: 19.0s; Iterations = 160, grads =   9.770e-04, unitary_metric = 0.99999
+Error = :6.28e-02; Runtime: 21.3s; Iterations = 180, grads =   3.347e-04, unitary_metric = 0.99999
+Error = :5.83e-02; Runtime: 23.5s; Iterations = 200, grads =   2.878e-05, unitary_metric = 0.99999
+Error = :5.53e-02; Runtime: 26.0s; Iterations = 220, grads =   2.328e-05, unitary_metric = 0.99999
+Error = :5.30e-02; Runtime: 28.3s; Iterations = 240, grads =   1.502e-05, unitary_metric = 0.99999
+Error = :5.11e-02; Runtime: 30.5s; Iterations = 260, grads =   1.196e-05, unitary_metric = 0.99999
+Error = :4.94e-02; Runtime: 32.8s; Iterations = 280, grads =   9.685e-06, unitary_metric = 0.99999
+Error = :4.80e-02; Runtime: 35.0s; Iterations = 300, grads =   8.050e-06, unitary_metric = 0.99999
+Error = :4.67e-02; Runtime: 37.5s; Iterations = 320, grads =   6.824e-06, unitary_metric = 0.99999
+Error = :4.56e-02; Runtime: 39.8s; Iterations = 340, grads =   8.170e-04, unitary_metric = 0.99999
+Error = :4.47e-02; Runtime: 42.0s; Iterations = 360, grads =   1.083e-03, unitary_metric = 0.99999
+Error = :4.37e-02; Runtime: 44.3s; Iterations = 380, grads =   3.405e-05, unitary_metric = 0.99999
+Error = :4.29e-02; Runtime: 46.5s; Iterations = 400, grads =   7.605e-05, unitary_metric = 0.99998
+Error = :4.21e-02; Runtime: 49.0s; Iterations = 420, grads =   9.647e-06, unitary_metric = 0.99999
+Error = :4.14e-02; Runtime: 51.3s; Iterations = 440, grads =   5.894e-06, unitary_metric = 0.99999
+Error = :4.20e-02; Runtime: 53.5s; Iterations = 460, grads =   1.671e-02, unitary_metric = 0.99999
+Error = :4.01e-02; Runtime: 55.8s; Iterations = 480, grads =   1.054e-04, unitary_metric = 0.99999
+Error = :3.96e-02; Runtime: 58.0s; Iterations = 500, grads =   4.229e-05, unitary_metric = 0.99998
+Error = :3.93e-02; Runtime: 60.5s; Iterations = 520, grads =   1.808e-06, unitary_metric = 0.99999
+Error = :3.90e-02; Runtime: 62.8s; Iterations = 540, grads =   5.014e-06, unitary_metric = 0.99999
+Error = :3.89e-02; Runtime: 65.1s; Iterations = 560, grads =   3.128e-06, unitary_metric = 0.99999
+Error = :3.87e-02; Runtime: 67.3s; Iterations = 580, grads =   2.346e-06, unitary_metric = 0.99998
+Error = :3.86e-02; Runtime: 69.6s; Iterations = 600, grads =   9.762e-05, unitary_metric = 0.99998
+Error = :3.85e-02; Runtime: 72.0s; Iterations = 620, grads =   3.825e-05, unitary_metric = 0.99999
+Error = :3.87e-02; Runtime: 74.3s; Iterations = 640, grads =   4.268e-03, unitary_metric = 0.99999
+Error = :3.83e-02; Runtime: 76.5s; Iterations = 660, grads =   1.439e-04, unitary_metric = 0.99999
+Error = :3.83e-02; Runtime: 78.8s; Iterations = 680, grads =   7.824e-07, unitary_metric = 0.99999
+Error = :3.82e-02; Runtime: 81.1s; Iterations = 700, grads =   1.175e-05, unitary_metric = 0.99999
+Error = :3.81e-02; Runtime: 83.6s; Iterations = 720, grads =   8.041e-07, unitary_metric = 0.99999
+Error = :3.81e-02; Runtime: 85.8s; Iterations = 740, grads =   1.001e-04, unitary_metric = 0.99999
+Error = :3.81e-02; Runtime: 88.1s; Iterations = 760, grads =   7.005e-07, unitary_metric = 0.99999
+Error = :3.81e-02; Runtime: 90.3s; Iterations = 780, grads =   1.358e-04, unitary_metric = 0.99999
+Error = :3.80e-02; Runtime: 92.6s; Iterations = 800, grads =   4.732e-05, unitary_metric = 0.99999
+Error = :3.81e-02; Runtime: 95.1s; Iterations = 820, grads =   2.395e-04, unitary_metric = 0.99999
+Error = :3.81e-02; Runtime: 97.3s; Iterations = 840, grads =   5.761e-04, unitary_metric = 0.99999
+Error = :3.81e-02; Runtime: 99.6s; Iterations = 860, grads =   2.005e-04, unitary_metric = 0.99999
+Error = :3.83e-02; Runtime: 101.9s; Iterations = 880, grads =   1.248e-03, unitary_metric = 0.99999
+Error = :3.83e-02; Runtime: 104.1s; Iterations = 900, grads =   9.607e-05, unitary_metric = 0.99999
+Error = :3.84e-02; Runtime: 106.6s; Iterations = 920, grads =   4.661e-05, unitary_metric = 0.99998
+Error = :3.86e-02; Runtime: 108.9s; Iterations = 940, grads =   5.808e-06, unitary_metric = 0.99999
+Error = :3.88e-02; Runtime: 111.1s; Iterations = 960, grads =   2.125e-06, unitary_metric = 0.99999
+Error = :3.87e-02; Runtime: 113.4s; Iterations = 980, grads =   1.638e-06, unitary_metric = 0.99999
+Error = :3.86e-02; Runtime: 115.7s; Iterations = 1000, grads =   2.512e-05, unitary_metric = 0.99999
+Error = :3.85e-02; Runtime: 118.1s; Iterations = 1020, grads =   1.071e-03, unitary_metric = 0.99999
+Error = :3.83e-02; Runtime: 120.4s; Iterations = 1040, grads =   3.789e-04, unitary_metric = 0.99999
+Error = :3.81e-02; Runtime: 122.6s; Iterations = 1060, grads =   3.225e-05, unitary_metric = 0.99999
+Error = :3.81e-02; Runtime: 124.9s; Iterations = 1080, grads =   1.337e-04, unitary_metric = 0.99999
+Error = :3.80e-02; Runtime: 127.2s; Iterations = 1100, grads =   1.296e-04, unitary_metric = 0.99999
+Error = :3.80e-02; Runtime: 129.7s; Iterations = 1120, grads =   2.338e-04, unitary_metric = 0.99999
+Error = :3.79e-02; Runtime: 131.9s; Iterations = 1140, grads =   5.968e-04, unitary_metric = 0.99999
+Error = :3.79e-02; Runtime: 134.2s; Iterations = 1160, grads =   7.567e-05, unitary_metric = 0.99999
+Error = :3.78e-02; Runtime: 136.4s; Iterations = 1180, grads =   4.166e-05, unitary_metric = 0.99999
+Error = :3.78e-02; Runtime: 138.7s; Iterations = 1200, grads =   2.528e-07, unitary_metric = 0.99999
+Error = :3.78e-02; Runtime: 141.3s; Iterations = 1220, grads =   7.585e-07, unitary_metric = 0.99999
+Error = :3.77e-02; Runtime: 143.5s; Iterations = 1240, grads =   2.973e-07, unitary_metric = 0.99999
+Error = :3.77e-02; Runtime: 145.8s; Iterations = 1260, grads =   5.932e-06, unitary_metric = 0.99998
+Error = :3.80e-02; Runtime: 148.0s; Iterations = 1280, grads =   3.776e-03, unitary_metric = 0.99999
+Error = :3.77e-02; Runtime: 150.3s; Iterations = 1300, grads =   4.654e-04, unitary_metric = 0.99999
+Error = :3.77e-02; Runtime: 152.7s; Iterations = 1320, grads =   5.832e-05, unitary_metric = 0.99999
+Error = :3.77e-02; Runtime: 155.0s; Iterations = 1340, grads =   8.873e-05, unitary_metric = 0.99998
+Error = :3.77e-02; Runtime: 157.3s; Iterations = 1360, grads =   7.040e-04, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 159.5s; Iterations = 1380, grads =   3.970e-05, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 161.8s; Iterations = 1400, grads =   1.261e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 164.3s; Iterations = 1420, grads =   1.429e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 166.6s; Iterations = 1440, grads =   2.683e-07, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 168.8s; Iterations = 1460, grads =   8.229e-06, unitary_metric = 0.99998
+Error = :3.77e-02; Runtime: 171.1s; Iterations = 1480, grads =   1.931e-03, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 173.3s; Iterations = 1500, grads =   1.847e-04, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 175.8s; Iterations = 1520, grads =   1.226e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 178.1s; Iterations = 1540, grads =   1.282e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 180.4s; Iterations = 1560, grads =   8.525e-04, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 182.6s; Iterations = 1580, grads =   2.856e-04, unitary_metric = 0.99999
+Error = :3.78e-02; Runtime: 184.9s; Iterations = 1600, grads =   1.530e-03, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 187.4s; Iterations = 1620, grads =   1.089e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 189.6s; Iterations = 1640, grads =   8.072e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 191.9s; Iterations = 1660, grads =   2.929e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 194.2s; Iterations = 1680, grads =   3.100e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 196.4s; Iterations = 1700, grads =   1.163e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 198.9s; Iterations = 1720, grads =   7.520e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 201.2s; Iterations = 1740, grads =   2.282e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 203.4s; Iterations = 1760, grads =   1.157e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 205.7s; Iterations = 1780, grads =   4.954e-07, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 208.0s; Iterations = 1800, grads =   9.126e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 210.4s; Iterations = 1820, grads =   4.325e-04, unitary_metric = 0.99998
+Error = :3.77e-02; Runtime: 212.7s; Iterations = 1840, grads =   2.017e-03, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 214.9s; Iterations = 1860, grads =   3.880e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 217.2s; Iterations = 1880, grads =   2.306e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 219.5s; Iterations = 1900, grads =   1.063e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 222.0s; Iterations = 1920, grads =   7.800e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 224.2s; Iterations = 1940, grads =   1.199e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 226.5s; Iterations = 1960, grads =   5.550e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 228.8s; Iterations = 1980, grads =   4.659e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 231.0s; Iterations = 2000, grads =   4.566e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 233.5s; Iterations = 2020, grads =   3.140e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 235.7s; Iterations = 2040, grads =   1.209e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 238.0s; Iterations = 2060, grads =   1.902e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 240.3s; Iterations = 2080, grads =   3.028e-05, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 242.5s; Iterations = 2100, grads =   2.269e-04, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 245.0s; Iterations = 2120, grads =   1.909e-03, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 247.3s; Iterations = 2140, grads =   2.309e-04, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 249.6s; Iterations = 2160, grads =   2.942e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 251.8s; Iterations = 2180, grads =   9.908e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 254.1s; Iterations = 2200, grads =   6.434e-07, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 256.5s; Iterations = 2220, grads =   1.407e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 258.8s; Iterations = 2240, grads =   3.534e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 261.1s; Iterations = 2260, grads =   2.766e-08, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 263.3s; Iterations = 2280, grads =   2.648e-08, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 265.6s; Iterations = 2300, grads =   3.466e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 268.0s; Iterations = 2320, grads =   3.672e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 270.3s; Iterations = 2340, grads =   2.361e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 272.5s; Iterations = 2360, grads =   2.077e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 274.8s; Iterations = 2380, grads =   3.953e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 277.1s; Iterations = 2400, grads =   1.825e-03, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 279.5s; Iterations = 2420, grads =   6.457e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 281.8s; Iterations = 2440, grads =   1.238e-05, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 284.1s; Iterations = 2460, grads =   3.168e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 286.3s; Iterations = 2480, grads =   2.592e-07, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 288.6s; Iterations = 2500, grads =   5.128e-08, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 291.1s; Iterations = 2520, grads =   2.419e-08, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 293.3s; Iterations = 2540, grads =   1.984e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 295.6s; Iterations = 2560, grads =   5.063e-08, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 297.9s; Iterations = 2580, grads =   2.102e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 300.1s; Iterations = 2600, grads =   6.278e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 302.6s; Iterations = 2620, grads =   2.533e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 304.9s; Iterations = 2640, grads =   2.956e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 307.1s; Iterations = 2660, grads =   1.516e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 309.4s; Iterations = 2680, grads =   1.244e-03, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 311.6s; Iterations = 2700, grads =   1.361e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 314.1s; Iterations = 2720, grads =   1.082e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 316.4s; Iterations = 2740, grads =   1.085e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 318.6s; Iterations = 2760, grads =   2.594e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 320.9s; Iterations = 2780, grads =   5.216e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 323.2s; Iterations = 2800, grads =   1.554e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 325.6s; Iterations = 2820, grads =   5.116e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 327.9s; Iterations = 2840, grads =   1.114e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 330.2s; Iterations = 2860, grads =   4.219e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 332.5s; Iterations = 2880, grads =   1.586e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 334.7s; Iterations = 2900, grads =   1.382e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 337.2s; Iterations = 2920, grads =   4.164e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 339.5s; Iterations = 2940, grads =   1.274e-03, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 341.8s; Iterations = 2960, grads =   1.895e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 344.0s; Iterations = 2980, grads =   5.809e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 346.3s; Iterations = 3000, grads =   2.218e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 348.8s; Iterations = 3020, grads =   3.985e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 351.1s; Iterations = 3040, grads =   5.335e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 353.3s; Iterations = 3060, grads =   1.757e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 355.6s; Iterations = 3080, grads =   1.270e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 357.9s; Iterations = 3100, grads =   2.014e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 360.3s; Iterations = 3120, grads =   7.499e-07, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 362.6s; Iterations = 3140, grads =   2.996e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 364.9s; Iterations = 3160, grads =   4.673e-05, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 367.1s; Iterations = 3180, grads =   7.924e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 369.4s; Iterations = 3200, grads =   2.994e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 371.9s; Iterations = 3220, grads =   5.326e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 374.2s; Iterations = 3240, grads =   4.059e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 376.4s; Iterations = 3260, grads =   8.521e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 378.7s; Iterations = 3280, grads =   4.998e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 381.0s; Iterations = 3300, grads =   4.591e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 383.4s; Iterations = 3320, grads =   1.681e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 385.7s; Iterations = 3340, grads =   2.680e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 388.0s; Iterations = 3360, grads =   2.541e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 390.2s; Iterations = 3380, grads =   7.802e-08, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 392.5s; Iterations = 3400, grads =   9.333e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 395.0s; Iterations = 3420, grads =   7.039e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 397.3s; Iterations = 3440, grads =   5.638e-05, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 399.6s; Iterations = 3460, grads =   8.075e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 401.8s; Iterations = 3480, grads =   1.474e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 404.1s; Iterations = 3500, grads =   1.344e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 406.6s; Iterations = 3520, grads =   8.581e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 408.9s; Iterations = 3540, grads =   3.477e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 411.1s; Iterations = 3560, grads =   6.975e-06, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 413.4s; Iterations = 3580, grads =   5.034e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 415.7s; Iterations = 3600, grads =   1.900e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 418.1s; Iterations = 3620, grads =   1.077e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 420.4s; Iterations = 3640, grads =   1.490e-04, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 422.7s; Iterations = 3660, grads =   3.898e-05, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 424.9s; Iterations = 3680, grads =   3.708e-06, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 427.2s; Iterations = 3700, grads =   8.286e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 429.8s; Iterations = 3720, grads =   9.527e-08, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 432.0s; Iterations = 3740, grads =   1.220e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 434.3s; Iterations = 3760, grads =   1.195e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 436.6s; Iterations = 3780, grads =   1.040e-07, unitary_metric = 0.99999
+Error = :3.75e-02; Runtime: 438.8s; Iterations = 3800, grads =   3.917e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 441.3s; Iterations = 3820, grads =   4.531e-04, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 443.6s; Iterations = 3840, grads =   6.665e-06, unitary_metric = 0.99998
+Error = :3.75e-02; Runtime: 445.9s; Iterations = 3860, grads =   1.506e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 448.1s; Iterations = 3880, grads =   3.585e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 450.4s; Iterations = 3900, grads =   6.667e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 452.9s; Iterations = 3920, grads =   2.856e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 455.2s; Iterations = 3940, grads =   2.818e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 457.4s; Iterations = 3960, grads =   2.703e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 459.7s; Iterations = 3980, grads =   2.800e-06, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 462.0s; Iterations = 4000, grads =   1.046e-07, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 464.4s; Iterations = 4020, grads =   1.446e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 466.7s; Iterations = 4040, grads =   2.374e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 469.0s; Iterations = 4060, grads =   1.584e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 471.3s; Iterations = 4080, grads =   1.250e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 473.5s; Iterations = 4100, grads =   1.879e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 476.0s; Iterations = 4120, grads =   5.874e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 478.3s; Iterations = 4140, grads =   9.411e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 480.5s; Iterations = 4160, grads =   2.164e-04, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 482.8s; Iterations = 4180, grads =   2.005e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 485.1s; Iterations = 4200, grads =   3.615e-06, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 487.6s; Iterations = 4220, grads =   5.185e-07, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 489.8s; Iterations = 4240, grads =   3.174e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 492.1s; Iterations = 4260, grads =   1.757e-04, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 494.4s; Iterations = 4280, grads =   2.839e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 496.6s; Iterations = 4300, grads =   1.063e-04, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 499.1s; Iterations = 4320, grads =   9.471e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 501.4s; Iterations = 4340, grads =   1.168e-05, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 503.6s; Iterations = 4360, grads =   1.593e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 505.9s; Iterations = 4380, grads =   1.522e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 508.2s; Iterations = 4400, grads =   6.309e-09, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 510.7s; Iterations = 4420, grads =   3.136e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 512.9s; Iterations = 4440, grads =   8.146e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 515.2s; Iterations = 4460, grads =   6.141e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 517.5s; Iterations = 4480, grads =   6.041e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 519.8s; Iterations = 4500, grads =   1.351e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 522.3s; Iterations = 4520, grads =   2.383e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 524.5s; Iterations = 4540, grads =   2.885e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 526.8s; Iterations = 4560, grads =   3.187e-04, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 529.1s; Iterations = 4580, grads =   1.107e-04, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 531.4s; Iterations = 4600, grads =   6.198e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 533.8s; Iterations = 4620, grads =   7.210e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 536.1s; Iterations = 4640, grads =   1.035e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 538.4s; Iterations = 4660, grads =   1.475e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 540.6s; Iterations = 4680, grads =   7.057e-09, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 542.9s; Iterations = 4700, grads =   7.303e-09, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 545.4s; Iterations = 4720, grads =   1.053e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 547.6s; Iterations = 4740, grads =   2.151e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 549.9s; Iterations = 4760, grads =   3.395e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 552.2s; Iterations = 4780, grads =   4.390e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 554.4s; Iterations = 4800, grads =   1.561e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 556.9s; Iterations = 4820, grads =   1.318e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 559.2s; Iterations = 4840, grads =   1.902e-04, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 561.5s; Iterations = 4860, grads =   1.035e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 563.8s; Iterations = 4880, grads =   1.760e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 566.0s; Iterations = 4900, grads =   6.637e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 568.5s; Iterations = 4920, grads =   6.121e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 570.8s; Iterations = 4940, grads =   1.578e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 573.0s; Iterations = 4960, grads =   6.641e-09, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 575.3s; Iterations = 4980, grads =   5.381e-09, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 577.6s; Iterations = 5000, grads =   3.618e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 580.0s; Iterations = 5020, grads =   1.293e-04, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 582.3s; Iterations = 5040, grads =   1.505e-05, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 584.6s; Iterations = 5060, grads =   8.069e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 586.9s; Iterations = 5080, grads =   4.981e-05, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 589.1s; Iterations = 5100, grads =   6.103e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 591.6s; Iterations = 5120, grads =   6.759e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 593.9s; Iterations = 5140, grads =   3.511e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 596.2s; Iterations = 5160, grads =   1.512e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 598.4s; Iterations = 5180, grads =   7.972e-09, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 600.7s; Iterations = 5200, grads =   6.793e-09, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 603.2s; Iterations = 5220, grads =   5.126e-09, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 605.5s; Iterations = 5240, grads =   6.300e-09, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 607.7s; Iterations = 5260, grads =   1.432e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 610.0s; Iterations = 5280, grads =   2.358e-08, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 612.3s; Iterations = 5300, grads =   4.945e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 614.7s; Iterations = 5320, grads =   6.586e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 617.0s; Iterations = 5340, grads =   4.414e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 619.3s; Iterations = 5360, grads =   4.160e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 621.5s; Iterations = 5380, grads =   6.372e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 623.8s; Iterations = 5400, grads =   5.059e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 626.3s; Iterations = 5420, grads =   2.238e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 628.5s; Iterations = 5440, grads =   2.534e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 630.8s; Iterations = 5460, grads =   1.315e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 633.1s; Iterations = 5480, grads =   5.974e-09, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 635.4s; Iterations = 5500, grads =   6.155e-09, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 637.9s; Iterations = 5520, grads =   4.881e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 640.1s; Iterations = 5540, grads =   4.682e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 642.4s; Iterations = 5560, grads =   2.667e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 644.7s; Iterations = 5580, grads =   5.043e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 647.0s; Iterations = 5600, grads =   5.036e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 649.4s; Iterations = 5620, grads =   8.479e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 651.7s; Iterations = 5640, grads =   5.728e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 654.0s; Iterations = 5660, grads =   2.431e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 656.2s; Iterations = 5680, grads =   1.798e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 658.5s; Iterations = 5700, grads =   5.051e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 661.0s; Iterations = 5720, grads =   4.361e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 663.3s; Iterations = 5740, grads =   1.789e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 665.5s; Iterations = 5760, grads =   3.391e-07, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 667.8s; Iterations = 5780, grads =   4.275e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 670.1s; Iterations = 5800, grads =   1.601e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 672.6s; Iterations = 5820, grads =   3.271e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 674.9s; Iterations = 5840, grads =   6.333e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 677.2s; Iterations = 5860, grads =   8.887e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 679.4s; Iterations = 5880, grads =   1.192e-05, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 681.7s; Iterations = 5900, grads =   1.201e-06, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 684.2s; Iterations = 5920, grads =   2.948e-08, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 686.4s; Iterations = 5940, grads =   1.803e-08, unitary_metric = 0.99999
+Error = :3.76e-02; Runtime: 688.7s; Iterations = 5960, grads =   6.767e-09, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 691.0s; Iterations = 5980, grads =   1.226e-08, unitary_metric = 0.99998
+Error = :3.76e-02; Runtime: 693.3s; Iterations = 6000, grads =   5.957e-07, unitary_metric = 0.99999
+data saved at: /project/ftchong/qoc/yongshan/00008_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 7.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00009_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.60e-01; Runtime: 0.3s; Iterations = 0, grads =   2.320e-02, unitary_metric = 1.00000
+Error = :7.56e-01; Runtime: 3.2s; Iterations = 20, grads =   6.982e-03, unitary_metric = 1.00000
+Error = :7.49e-01; Runtime: 5.6s; Iterations = 40, grads =   1.272e-03, unitary_metric = 1.00000
+Error = :6.65e-01; Runtime: 8.0s; Iterations = 60, grads =   7.778e-03, unitary_metric = 1.00000
+Error = :5.04e-01; Runtime: 10.4s; Iterations = 80, grads =   2.478e-03, unitary_metric = 0.99999
+Error = :4.14e-01; Runtime: 12.8s; Iterations = 100, grads =   1.626e-03, unitary_metric = 0.99999
+Error = :2.44e-01; Runtime: 15.4s; Iterations = 120, grads =   1.677e-03, unitary_metric = 0.99999
+Error = :1.12e-01; Runtime: 17.9s; Iterations = 140, grads =   4.140e-02, unitary_metric = 0.99999
+Error = :5.23e-02; Runtime: 20.3s; Iterations = 160, grads =   4.295e-03, unitary_metric = 0.99999
+Error = :3.40e-02; Runtime: 22.7s; Iterations = 180, grads =   1.140e-03, unitary_metric = 0.99999
+Error = :2.73e-02; Runtime: 25.1s; Iterations = 200, grads =   2.999e-04, unitary_metric = 0.99999
+Error = :2.35e-02; Runtime: 27.7s; Iterations = 220, grads =   3.217e-05, unitary_metric = 0.99999
+Error = :2.12e-02; Runtime: 30.2s; Iterations = 240, grads =   1.391e-05, unitary_metric = 0.99999
+Error = :1.97e-02; Runtime: 32.6s; Iterations = 260, grads =   1.047e-05, unitary_metric = 0.99999
+Error = :1.87e-02; Runtime: 35.0s; Iterations = 280, grads =   7.152e-06, unitary_metric = 0.99999
+Error = :1.79e-02; Runtime: 37.4s; Iterations = 300, grads =   5.557e-06, unitary_metric = 0.99999
+Error = :1.73e-02; Runtime: 40.0s; Iterations = 320, grads =   4.612e-06, unitary_metric = 0.99999
+Error = :1.68e-02; Runtime: 42.5s; Iterations = 340, grads =   4.021e-06, unitary_metric = 0.99999
+Error = :1.64e-02; Runtime: 44.9s; Iterations = 360, grads =   3.549e-06, unitary_metric = 0.99999
+Error = :1.60e-02; Runtime: 47.3s; Iterations = 380, grads =   1.110e-05, unitary_metric = 0.99999
+Error = :1.71e-02; Runtime: 49.7s; Iterations = 400, grads =   2.167e-02, unitary_metric = 0.99999
+Error = :1.54e-02; Runtime: 52.3s; Iterations = 420, grads =   2.563e-03, unitary_metric = 0.99999
+Error = :1.51e-02; Runtime: 54.7s; Iterations = 440, grads =   4.099e-04, unitary_metric = 0.99999
+Error = :1.48e-02; Runtime: 57.1s; Iterations = 460, grads =   4.081e-05, unitary_metric = 0.99999
+Error = :1.47e-02; Runtime: 59.6s; Iterations = 480, grads =   5.562e-06, unitary_metric = 0.99999
+Error = :1.45e-02; Runtime: 62.0s; Iterations = 500, grads =   1.397e-06, unitary_metric = 0.99999
+Error = :1.44e-02; Runtime: 64.6s; Iterations = 520, grads =   8.733e-07, unitary_metric = 0.99999
+Error = :1.43e-02; Runtime: 67.0s; Iterations = 540, grads =   7.808e-07, unitary_metric = 0.99999
+Error = :1.42e-02; Runtime: 69.4s; Iterations = 560, grads =   6.715e-07, unitary_metric = 0.99999
+Error = :1.42e-02; Runtime: 71.8s; Iterations = 580, grads =   6.178e-07, unitary_metric = 0.99999
+Error = :1.42e-02; Runtime: 74.2s; Iterations = 600, grads =   5.898e-07, unitary_metric = 0.99999
+Error = :1.42e-02; Runtime: 77.0s; Iterations = 620, grads =   8.381e-06, unitary_metric = 0.99999
+Error = :1.48e-02; Runtime: 79.4s; Iterations = 640, grads =   9.066e-03, unitary_metric = 0.99999
+Error = :1.42e-02; Runtime: 81.8s; Iterations = 660, grads =   6.749e-04, unitary_metric = 0.99999
+Error = :1.42e-02; Runtime: 84.2s; Iterations = 680, grads =   1.480e-04, unitary_metric = 0.99999
+Error = :1.42e-02; Runtime: 86.6s; Iterations = 700, grads =   1.638e-04, unitary_metric = 0.99999
+Error = :1.40e-02; Runtime: 89.3s; Iterations = 720, grads =   4.029e-05, unitary_metric = 0.99999
+Error = :1.39e-02; Runtime: 91.7s; Iterations = 740, grads =   1.979e-06, unitary_metric = 0.99999
+Error = :1.37e-02; Runtime: 94.1s; Iterations = 760, grads =   1.679e-06, unitary_metric = 0.99999
+Error = :1.36e-02; Runtime: 96.5s; Iterations = 780, grads =   6.118e-07, unitary_metric = 0.99999
+Error = :1.35e-02; Runtime: 98.9s; Iterations = 800, grads =   5.125e-07, unitary_metric = 0.99999
+Error = :1.35e-02; Runtime: 101.5s; Iterations = 820, grads =   1.738e-06, unitary_metric = 0.99999
+Error = :1.34e-02; Runtime: 103.9s; Iterations = 840, grads =   3.763e-07, unitary_metric = 0.99999
+Error = :1.34e-02; Runtime: 106.3s; Iterations = 860, grads =   3.471e-07, unitary_metric = 0.99999
+Error = :1.33e-02; Runtime: 108.8s; Iterations = 880, grads =   2.865e-07, unitary_metric = 0.99999
+Error = :1.33e-02; Runtime: 111.2s; Iterations = 900, grads =   2.888e-07, unitary_metric = 0.99999
+Error = :1.32e-02; Runtime: 113.8s; Iterations = 920, grads =   3.974e-05, unitary_metric = 0.99999
+Error = :1.34e-02; Runtime: 116.2s; Iterations = 940, grads =   3.283e-03, unitary_metric = 0.99999
+Error = :1.33e-02; Runtime: 118.7s; Iterations = 960, grads =   1.451e-03, unitary_metric = 0.99999
+Error = :1.32e-02; Runtime: 121.1s; Iterations = 980, grads =   1.676e-04, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 123.5s; Iterations = 1000, grads =   1.942e-05, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 126.1s; Iterations = 1020, grads =   5.556e-06, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 128.5s; Iterations = 1040, grads =   9.399e-07, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 131.0s; Iterations = 1060, grads =   2.112e-07, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 133.4s; Iterations = 1080, grads =   3.385e-07, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 135.8s; Iterations = 1100, grads =   5.618e-07, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 138.5s; Iterations = 1120, grads =   1.219e-04, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 140.9s; Iterations = 1140, grads =   2.839e-04, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 143.3s; Iterations = 1160, grads =   6.745e-05, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 145.7s; Iterations = 1180, grads =   2.127e-04, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 148.1s; Iterations = 1200, grads =   1.985e-03, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 150.7s; Iterations = 1220, grads =   2.012e-04, unitary_metric = 0.99999
+Error = :1.33e-02; Runtime: 153.2s; Iterations = 1240, grads =   4.580e-03, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 155.6s; Iterations = 1260, grads =   5.744e-04, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 158.0s; Iterations = 1280, grads =   1.374e-05, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 160.4s; Iterations = 1300, grads =   2.270e-05, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 163.0s; Iterations = 1320, grads =   6.605e-08, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 165.4s; Iterations = 1340, grads =   1.167e-06, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 167.9s; Iterations = 1360, grads =   1.432e-03, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 170.3s; Iterations = 1380, grads =   1.066e-04, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 172.7s; Iterations = 1400, grads =   2.708e-05, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 175.3s; Iterations = 1420, grads =   3.790e-06, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 177.7s; Iterations = 1440, grads =   2.673e-04, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 180.2s; Iterations = 1460, grads =   1.667e-03, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 182.6s; Iterations = 1480, grads =   1.423e-04, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 185.0s; Iterations = 1500, grads =   7.592e-07, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 187.7s; Iterations = 1520, grads =   3.559e-06, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 190.2s; Iterations = 1540, grads =   3.678e-07, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 192.6s; Iterations = 1560, grads =   6.767e-08, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 195.0s; Iterations = 1580, grads =   7.629e-08, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 197.4s; Iterations = 1600, grads =   5.458e-05, unitary_metric = 0.99998
+Error = :1.30e-02; Runtime: 200.0s; Iterations = 1620, grads =   1.533e-03, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 202.4s; Iterations = 1640, grads =   2.142e-04, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 204.8s; Iterations = 1660, grads =   1.170e-04, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 207.2s; Iterations = 1680, grads =   5.340e-05, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 209.7s; Iterations = 1700, grads =   3.480e-04, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 212.3s; Iterations = 1720, grads =   5.799e-05, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 214.7s; Iterations = 1740, grads =   3.191e-05, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 217.1s; Iterations = 1760, grads =   4.085e-06, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 219.5s; Iterations = 1780, grads =   5.958e-07, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 222.0s; Iterations = 1800, grads =   6.429e-08, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 224.7s; Iterations = 1820, grads =   7.471e-08, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 227.1s; Iterations = 1840, grads =   8.440e-08, unitary_metric = 0.99999
+Error = :1.32e-02; Runtime: 229.5s; Iterations = 1860, grads =   1.340e-07, unitary_metric = 0.99999
+Error = :1.33e-02; Runtime: 231.9s; Iterations = 1880, grads =   1.175e-06, unitary_metric = 0.99999
+Error = :1.34e-02; Runtime: 234.4s; Iterations = 1900, grads =   5.264e-04, unitary_metric = 0.99999
+Error = :1.37e-02; Runtime: 237.0s; Iterations = 1920, grads =   4.161e-03, unitary_metric = 0.99999
+Error = :1.35e-02; Runtime: 239.4s; Iterations = 1940, grads =   3.934e-04, unitary_metric = 0.99999
+Error = :1.34e-02; Runtime: 241.8s; Iterations = 1960, grads =   3.411e-05, unitary_metric = 0.99999
+Error = :1.34e-02; Runtime: 244.3s; Iterations = 1980, grads =   1.065e-05, unitary_metric = 0.99999
+Error = :1.33e-02; Runtime: 246.7s; Iterations = 2000, grads =   1.965e-06, unitary_metric = 0.99999
+Error = :1.33e-02; Runtime: 249.3s; Iterations = 2020, grads =   4.393e-07, unitary_metric = 0.99999
+Error = :1.32e-02; Runtime: 251.7s; Iterations = 2040, grads =   2.992e-07, unitary_metric = 0.99999
+Error = :1.32e-02; Runtime: 254.1s; Iterations = 2060, grads =   2.306e-07, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 256.5s; Iterations = 2080, grads =   1.970e-07, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 258.9s; Iterations = 2100, grads =   1.672e-07, unitary_metric = 0.99998
+Error = :1.31e-02; Runtime: 261.6s; Iterations = 2120, grads =   1.870e-07, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 264.1s; Iterations = 2140, grads =   9.851e-06, unitary_metric = 0.99999
+Error = :1.33e-02; Runtime: 266.5s; Iterations = 2160, grads =   2.630e-03, unitary_metric = 0.99999
+Error = :1.31e-02; Runtime: 268.9s; Iterations = 2180, grads =   6.142e-04, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 271.3s; Iterations = 2200, grads =   1.238e-04, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 273.9s; Iterations = 2220, grads =   2.452e-05, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 276.4s; Iterations = 2240, grads =   1.741e-06, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 278.8s; Iterations = 2260, grads =   3.045e-07, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 281.2s; Iterations = 2280, grads =   1.320e-07, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 283.6s; Iterations = 2300, grads =   7.557e-08, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 286.3s; Iterations = 2320, grads =   6.554e-08, unitary_metric = 0.99998
+Error = :1.29e-02; Runtime: 288.7s; Iterations = 2340, grads =   6.169e-08, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 291.1s; Iterations = 2360, grads =   6.270e-08, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 293.5s; Iterations = 2380, grads =   1.238e-07, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 295.9s; Iterations = 2400, grads =   1.117e-05, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 298.5s; Iterations = 2420, grads =   1.383e-04, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 301.0s; Iterations = 2440, grads =   1.012e-03, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 303.4s; Iterations = 2460, grads =   9.794e-06, unitary_metric = 0.99999
+Error = :1.30e-02; Runtime: 305.8s; Iterations = 2480, grads =   2.389e-03, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 308.2s; Iterations = 2500, grads =   2.952e-04, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 310.8s; Iterations = 2520, grads =   2.061e-06, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 313.3s; Iterations = 2540, grads =   5.069e-06, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 315.7s; Iterations = 2560, grads =   4.799e-07, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 318.1s; Iterations = 2580, grads =   7.173e-08, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 320.5s; Iterations = 2600, grads =   4.251e-08, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 323.2s; Iterations = 2620, grads =   4.374e-08, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 325.6s; Iterations = 2640, grads =   1.153e-06, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 328.0s; Iterations = 2660, grads =   3.341e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 330.5s; Iterations = 2680, grads =   1.159e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 332.9s; Iterations = 2700, grads =   2.977e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 335.5s; Iterations = 2720, grads =   1.093e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 337.9s; Iterations = 2740, grads =   9.318e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 340.4s; Iterations = 2760, grads =   4.611e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 342.8s; Iterations = 2780, grads =   2.671e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 345.2s; Iterations = 2800, grads =   2.436e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 347.8s; Iterations = 2820, grads =   1.213e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 350.2s; Iterations = 2840, grads =   1.868e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 352.6s; Iterations = 2860, grads =   2.814e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 355.0s; Iterations = 2880, grads =   1.498e-06, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 357.5s; Iterations = 2900, grads =   2.597e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 360.1s; Iterations = 2920, grads =   1.441e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 362.5s; Iterations = 2940, grads =   1.302e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 364.9s; Iterations = 2960, grads =   6.090e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 367.3s; Iterations = 2980, grads =   5.666e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 369.8s; Iterations = 3000, grads =   1.131e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 372.4s; Iterations = 3020, grads =   2.630e-04, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 374.8s; Iterations = 3040, grads =   1.276e-03, unitary_metric = 0.99998
+Error = :1.28e-02; Runtime: 377.2s; Iterations = 3060, grads =   1.348e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 379.6s; Iterations = 3080, grads =   1.898e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 382.0s; Iterations = 3100, grads =   2.384e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 384.7s; Iterations = 3120, grads =   2.237e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 387.1s; Iterations = 3140, grads =   3.443e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 389.5s; Iterations = 3160, grads =   1.434e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 391.9s; Iterations = 3180, grads =   1.085e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 394.4s; Iterations = 3200, grads =   1.412e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 397.0s; Iterations = 3220, grads =   2.652e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 399.4s; Iterations = 3240, grads =   6.637e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 401.8s; Iterations = 3260, grads =   1.626e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 404.2s; Iterations = 3280, grads =   2.981e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 406.7s; Iterations = 3300, grads =   5.325e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 409.3s; Iterations = 3320, grads =   1.780e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 411.7s; Iterations = 3340, grads =   9.002e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 414.1s; Iterations = 3360, grads =   1.568e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 416.6s; Iterations = 3380, grads =   4.341e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 419.0s; Iterations = 3400, grads =   8.212e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 421.6s; Iterations = 3420, grads =   2.049e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 424.0s; Iterations = 3440, grads =   2.432e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 426.5s; Iterations = 3460, grads =   1.950e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 428.9s; Iterations = 3480, grads =   3.155e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 431.3s; Iterations = 3500, grads =   1.011e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 434.0s; Iterations = 3520, grads =   1.629e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 436.6s; Iterations = 3540, grads =   1.257e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 439.0s; Iterations = 3560, grads =   2.461e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 441.4s; Iterations = 3580, grads =   1.798e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 443.9s; Iterations = 3600, grads =   2.852e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 446.5s; Iterations = 3620, grads =   5.510e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 448.9s; Iterations = 3640, grads =   1.000e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 451.3s; Iterations = 3660, grads =   3.919e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 453.8s; Iterations = 3680, grads =   7.764e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 456.2s; Iterations = 3700, grads =   1.395e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 458.8s; Iterations = 3720, grads =   8.702e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 461.3s; Iterations = 3740, grads =   4.274e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 463.7s; Iterations = 3760, grads =   1.463e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 466.1s; Iterations = 3780, grads =   5.766e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 468.5s; Iterations = 3800, grads =   2.200e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 471.3s; Iterations = 3820, grads =   4.528e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 473.7s; Iterations = 3840, grads =   1.175e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 476.1s; Iterations = 3860, grads =   1.324e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 478.5s; Iterations = 3880, grads =   2.301e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 480.9s; Iterations = 3900, grads =   9.826e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 483.6s; Iterations = 3920, grads =   2.923e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 486.0s; Iterations = 3940, grads =   1.309e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 488.4s; Iterations = 3960, grads =   2.382e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 490.8s; Iterations = 3980, grads =   2.447e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 493.3s; Iterations = 4000, grads =   1.592e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 495.9s; Iterations = 4020, grads =   5.577e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 498.3s; Iterations = 4040, grads =   8.784e-08, unitary_metric = 0.99998
+Error = :1.28e-02; Runtime: 500.7s; Iterations = 4060, grads =   1.241e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 503.2s; Iterations = 4080, grads =   1.430e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 505.6s; Iterations = 4100, grads =   2.088e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 508.3s; Iterations = 4120, grads =   1.303e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 510.7s; Iterations = 4140, grads =   9.105e-06, unitary_metric = 0.99998
+Error = :1.28e-02; Runtime: 513.1s; Iterations = 4160, grads =   4.834e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 515.5s; Iterations = 4180, grads =   1.190e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 518.0s; Iterations = 4200, grads =   3.271e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 520.6s; Iterations = 4220, grads =   2.786e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 523.0s; Iterations = 4240, grads =   2.172e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 525.4s; Iterations = 4260, grads =   2.830e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 527.9s; Iterations = 4280, grads =   1.069e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 530.3s; Iterations = 4300, grads =   5.169e-06, unitary_metric = 0.99998
+Error = :1.28e-02; Runtime: 533.0s; Iterations = 4320, grads =   1.160e-04, unitary_metric = 0.99998
+Error = :1.28e-02; Runtime: 535.4s; Iterations = 4340, grads =   9.963e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 537.8s; Iterations = 4360, grads =   1.881e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 540.2s; Iterations = 4380, grads =   2.864e-05, unitary_metric = 0.99998
+Error = :1.28e-02; Runtime: 542.6s; Iterations = 4400, grads =   4.632e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 545.3s; Iterations = 4420, grads =   8.014e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 547.7s; Iterations = 4440, grads =   5.815e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 550.1s; Iterations = 4460, grads =   1.306e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 552.6s; Iterations = 4480, grads =   1.035e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 555.0s; Iterations = 4500, grads =   4.387e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 557.6s; Iterations = 4520, grads =   1.825e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 560.0s; Iterations = 4540, grads =   1.952e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 562.4s; Iterations = 4560, grads =   1.375e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 564.9s; Iterations = 4580, grads =   5.772e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 567.3s; Iterations = 4600, grads =   1.169e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 569.9s; Iterations = 4620, grads =   1.382e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 572.3s; Iterations = 4640, grads =   1.318e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 574.8s; Iterations = 4660, grads =   2.090e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 577.2s; Iterations = 4680, grads =   4.496e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 579.6s; Iterations = 4700, grads =   6.263e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 582.3s; Iterations = 4720, grads =   6.775e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 584.7s; Iterations = 4740, grads =   7.394e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 587.2s; Iterations = 4760, grads =   5.139e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 589.6s; Iterations = 4780, grads =   2.948e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 592.0s; Iterations = 4800, grads =   1.353e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 594.7s; Iterations = 4820, grads =   7.806e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 597.1s; Iterations = 4840, grads =   3.143e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 599.5s; Iterations = 4860, grads =   2.362e-04, unitary_metric = 0.99998
+Error = :1.28e-02; Runtime: 601.9s; Iterations = 4880, grads =   1.016e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 604.4s; Iterations = 4900, grads =   1.977e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 607.0s; Iterations = 4920, grads =   3.816e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 609.4s; Iterations = 4940, grads =   6.119e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 611.9s; Iterations = 4960, grads =   1.860e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 614.3s; Iterations = 4980, grads =   1.678e-06, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 616.7s; Iterations = 5000, grads =   4.103e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 619.3s; Iterations = 5020, grads =   2.664e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 621.7s; Iterations = 5040, grads =   4.628e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 624.2s; Iterations = 5060, grads =   6.781e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 626.6s; Iterations = 5080, grads =   4.292e-05, unitary_metric = 0.99998
+Error = :1.28e-02; Runtime: 629.0s; Iterations = 5100, grads =   6.671e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 631.6s; Iterations = 5120, grads =   8.505e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 634.0s; Iterations = 5140, grads =   2.821e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 636.4s; Iterations = 5160, grads =   3.162e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 638.8s; Iterations = 5180, grads =   8.176e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 641.3s; Iterations = 5200, grads =   2.260e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 643.9s; Iterations = 5220, grads =   4.948e-09, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 646.3s; Iterations = 5240, grads =   9.177e-09, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 648.7s; Iterations = 5260, grads =   2.179e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 651.2s; Iterations = 5280, grads =   1.338e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 653.6s; Iterations = 5300, grads =   1.489e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 656.3s; Iterations = 5320, grads =   4.859e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 658.8s; Iterations = 5340, grads =   1.129e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 661.2s; Iterations = 5360, grads =   1.265e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 663.6s; Iterations = 5380, grads =   1.237e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 666.0s; Iterations = 5400, grads =   2.742e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 668.7s; Iterations = 5420, grads =   6.801e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 671.1s; Iterations = 5440, grads =   3.656e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 673.5s; Iterations = 5460, grads =   3.652e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 675.9s; Iterations = 5480, grads =   1.594e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 678.3s; Iterations = 5500, grads =   9.908e-09, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 680.9s; Iterations = 5520, grads =   6.550e-09, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 683.3s; Iterations = 5540, grads =   5.169e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 685.8s; Iterations = 5560, grads =   3.428e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 688.2s; Iterations = 5580, grads =   7.629e-05, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 690.6s; Iterations = 5600, grads =   1.415e-04, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 693.2s; Iterations = 5620, grads =   1.260e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 695.7s; Iterations = 5640, grads =   7.013e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 698.1s; Iterations = 5660, grads =   1.001e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 700.5s; Iterations = 5680, grads =   2.957e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 702.9s; Iterations = 5700, grads =   8.658e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 705.6s; Iterations = 5720, grads =   4.337e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 708.0s; Iterations = 5740, grads =   1.469e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 710.5s; Iterations = 5760, grads =   5.569e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 712.9s; Iterations = 5780, grads =   9.900e-09, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 715.3s; Iterations = 5800, grads =   3.975e-09, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 717.9s; Iterations = 5820, grads =   2.877e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 720.4s; Iterations = 5840, grads =   6.626e-07, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 722.8s; Iterations = 5860, grads =   8.245e-05, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 725.2s; Iterations = 5880, grads =   5.836e-05, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 727.6s; Iterations = 5900, grads =   2.438e-05, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 730.2s; Iterations = 5920, grads =   1.597e-06, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 732.7s; Iterations = 5940, grads =   2.205e-07, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 735.1s; Iterations = 5960, grads =   3.287e-08, unitary_metric = 0.99999
+Error = :1.28e-02; Runtime: 737.5s; Iterations = 5980, grads =   1.339e-08, unitary_metric = 0.99999
+Error = :1.29e-02; Runtime: 739.9s; Iterations = 6000, grads =   1.130e-08, unitary_metric = 0.99999
+data saved at: /project/ftchong/qoc/yongshan/00009_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 7.25 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00010_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.38e-01; Runtime: 0.3s; Iterations = 0, grads =   7.336e-03, unitary_metric = 1.00000
+Error = :7.65e-01; Runtime: 3.2s; Iterations = 20, grads =   2.739e-02, unitary_metric = 1.00000
+Error = :7.51e-01; Runtime: 5.7s; Iterations = 40, grads =   3.945e-03, unitary_metric = 1.00000
+Error = :7.48e-01; Runtime: 8.2s; Iterations = 60, grads =   3.709e-04, unitary_metric = 1.00000
+Error = :6.15e-01; Runtime: 10.7s; Iterations = 80, grads =   9.988e-03, unitary_metric = 1.00000
+Error = :4.23e-01; Runtime: 13.2s; Iterations = 100, grads =   5.434e-03, unitary_metric = 0.99999
+Error = :1.83e-01; Runtime: 15.9s; Iterations = 120, grads =   6.038e-03, unitary_metric = 0.99999
+Error = :3.65e-02; Runtime: 18.4s; Iterations = 140, grads =   8.575e-03, unitary_metric = 0.99999
+Error = :1.89e-02; Runtime: 20.9s; Iterations = 160, grads =   2.577e-03, unitary_metric = 0.99999
+Error = :1.43e-02; Runtime: 23.4s; Iterations = 180, grads =   4.175e-04, unitary_metric = 0.99999
+Error = :1.22e-02; Runtime: 25.9s; Iterations = 200, grads =   1.767e-05, unitary_metric = 0.99999
+Error = :1.10e-02; Runtime: 28.7s; Iterations = 220, grads =   2.079e-05, unitary_metric = 0.99999
+Error = :1.01e-02; Runtime: 31.1s; Iterations = 240, grads =   1.054e-05, unitary_metric = 0.99999
+Error = :9.46e-03; Runtime: 33.6s; Iterations = 260, grads =   7.528e-06, unitary_metric = 0.99999
+Error = :8.98e-03; Runtime: 36.1s; Iterations = 280, grads =   5.567e-06, unitary_metric = 0.99999
+Error = :8.60e-03; Runtime: 38.6s; Iterations = 300, grads =   4.629e-06, unitary_metric = 0.99999
+Error = :8.30e-03; Runtime: 41.3s; Iterations = 320, grads =   3.980e-06, unitary_metric = 0.99999
+Error = :8.05e-03; Runtime: 43.8s; Iterations = 340, grads =   3.536e-06, unitary_metric = 0.99999
+Error = :7.83e-03; Runtime: 46.4s; Iterations = 360, grads =   3.222e-06, unitary_metric = 0.99999
+Error = :7.62e-03; Runtime: 48.8s; Iterations = 380, grads =   4.728e-05, unitary_metric = 0.99999
+Error = :7.54e-03; Runtime: 51.4s; Iterations = 400, grads =   1.859e-03, unitary_metric = 0.99999
+Error = :7.25e-03; Runtime: 54.1s; Iterations = 420, grads =   3.399e-04, unitary_metric = 0.99999
+Error = :7.05e-03; Runtime: 56.6s; Iterations = 440, grads =   8.893e-05, unitary_metric = 0.99999
+Error = :6.87e-03; Runtime: 59.1s; Iterations = 460, grads =   1.908e-05, unitary_metric = 0.99999
+Error = :6.70e-03; Runtime: 61.5s; Iterations = 480, grads =   3.154e-06, unitary_metric = 0.99999
+Error = :6.54e-03; Runtime: 64.0s; Iterations = 500, grads =   2.224e-06, unitary_metric = 0.99999
+Error = :6.39e-03; Runtime: 66.7s; Iterations = 520, grads =   1.743e-06, unitary_metric = 0.99999
+Error = :6.27e-03; Runtime: 69.2s; Iterations = 540, grads =   2.268e-06, unitary_metric = 0.99999
+Error = :6.15e-03; Runtime: 71.7s; Iterations = 560, grads =   1.961e-06, unitary_metric = 0.99999
+Error = :6.04e-03; Runtime: 74.2s; Iterations = 580, grads =   1.823e-06, unitary_metric = 0.99999
+Error = :6.05e-03; Runtime: 76.6s; Iterations = 600, grads =   1.567e-03, unitary_metric = 0.99999
+Error = :5.98e-03; Runtime: 79.4s; Iterations = 620, grads =   1.799e-03, unitary_metric = 0.99999
+Error = :5.81e-03; Runtime: 81.9s; Iterations = 640, grads =   2.911e-04, unitary_metric = 0.99999
+Error = :5.72e-03; Runtime: 84.4s; Iterations = 660, grads =   2.025e-05, unitary_metric = 0.99999
+Error = :5.66e-03; Runtime: 86.9s; Iterations = 680, grads =   1.417e-06, unitary_metric = 0.99999
+Error = :5.60e-03; Runtime: 89.4s; Iterations = 700, grads =   1.399e-06, unitary_metric = 0.99999
+Error = :5.55e-03; Runtime: 92.1s; Iterations = 720, grads =   6.007e-07, unitary_metric = 0.99999
+Error = :5.50e-03; Runtime: 94.6s; Iterations = 740, grads =   5.544e-07, unitary_metric = 0.99999
+Error = :5.45e-03; Runtime: 97.1s; Iterations = 760, grads =   5.074e-07, unitary_metric = 0.99999
+Error = :5.42e-03; Runtime: 99.5s; Iterations = 780, grads =   8.344e-05, unitary_metric = 0.99999
+Error = :5.41e-03; Runtime: 102.0s; Iterations = 800, grads =   3.107e-04, unitary_metric = 0.99999
+Error = :5.71e-03; Runtime: 104.7s; Iterations = 820, grads =   5.889e-03, unitary_metric = 0.99999
+Error = :5.31e-03; Runtime: 107.2s; Iterations = 840, grads =   2.228e-05, unitary_metric = 0.99999
+Error = :5.28e-03; Runtime: 109.7s; Iterations = 860, grads =   9.245e-05, unitary_metric = 0.99999
+Error = :5.24e-03; Runtime: 112.2s; Iterations = 880, grads =   2.696e-06, unitary_metric = 0.99999
+Error = :5.22e-03; Runtime: 114.6s; Iterations = 900, grads =   4.990e-07, unitary_metric = 0.99999
+Error = :5.20e-03; Runtime: 117.4s; Iterations = 920, grads =   4.123e-07, unitary_metric = 0.99999
+Error = :5.17e-03; Runtime: 119.8s; Iterations = 940, grads =   2.419e-07, unitary_metric = 0.99999
+Error = :5.15e-03; Runtime: 122.3s; Iterations = 960, grads =   2.201e-07, unitary_metric = 0.99999
+Error = :5.13e-03; Runtime: 124.8s; Iterations = 980, grads =   2.013e-07, unitary_metric = 0.99999
+Error = :5.12e-03; Runtime: 127.3s; Iterations = 1000, grads =   1.872e-07, unitary_metric = 0.99999
+Error = :5.10e-03; Runtime: 130.1s; Iterations = 1020, grads =   1.748e-07, unitary_metric = 0.99999
+Error = :5.09e-03; Runtime: 132.5s; Iterations = 1040, grads =   2.785e-07, unitary_metric = 0.99999
+Error = :5.10e-03; Runtime: 135.0s; Iterations = 1060, grads =   4.758e-04, unitary_metric = 0.99999
+Error = :5.09e-03; Runtime: 137.5s; Iterations = 1080, grads =   3.322e-04, unitary_metric = 0.99999
+Error = :5.13e-03; Runtime: 140.0s; Iterations = 1100, grads =   1.214e-03, unitary_metric = 0.99999
+Error = :5.09e-03; Runtime: 142.7s; Iterations = 1120, grads =   6.295e-04, unitary_metric = 0.99999
+Error = :5.04e-03; Runtime: 145.2s; Iterations = 1140, grads =   1.343e-05, unitary_metric = 0.99999
+Error = :5.03e-03; Runtime: 147.7s; Iterations = 1160, grads =   1.530e-06, unitary_metric = 0.99999
+Error = :5.03e-03; Runtime: 150.2s; Iterations = 1180, grads =   5.712e-07, unitary_metric = 0.99999
+Error = :5.03e-03; Runtime: 152.7s; Iterations = 1200, grads =   1.088e-07, unitary_metric = 0.99999
+Error = :5.03e-03; Runtime: 155.4s; Iterations = 1220, grads =   1.214e-07, unitary_metric = 0.99999
+Error = :5.04e-03; Runtime: 157.9s; Iterations = 1240, grads =   1.035e-07, unitary_metric = 0.99999
+Error = :5.05e-03; Runtime: 160.4s; Iterations = 1260, grads =   1.070e-07, unitary_metric = 0.99999
+Error = :5.07e-03; Runtime: 162.9s; Iterations = 1280, grads =   1.156e-07, unitary_metric = 0.99999
+Error = :5.09e-03; Runtime: 165.4s; Iterations = 1300, grads =   1.276e-07, unitary_metric = 0.99999
+Error = :5.12e-03; Runtime: 168.1s; Iterations = 1320, grads =   1.517e-07, unitary_metric = 0.99999
+Error = :5.15e-03; Runtime: 170.6s; Iterations = 1340, grads =   3.673e-06, unitary_metric = 0.99999
+Error = :5.75e-03; Runtime: 173.1s; Iterations = 1360, grads =   9.125e-03, unitary_metric = 0.99999
+Error = :5.29e-03; Runtime: 175.6s; Iterations = 1380, grads =   1.359e-03, unitary_metric = 0.99999
+Error = :5.22e-03; Runtime: 178.1s; Iterations = 1400, grads =   1.671e-04, unitary_metric = 0.99999
+Error = :5.21e-03; Runtime: 180.8s; Iterations = 1420, grads =   9.704e-05, unitary_metric = 0.99999
+Error = :5.18e-03; Runtime: 183.3s; Iterations = 1440, grads =   2.599e-05, unitary_metric = 0.99999
+Error = :5.14e-03; Runtime: 185.8s; Iterations = 1460, grads =   6.392e-07, unitary_metric = 0.99999
+Error = :5.10e-03; Runtime: 188.3s; Iterations = 1480, grads =   7.770e-07, unitary_metric = 0.99999
+Error = :5.06e-03; Runtime: 190.8s; Iterations = 1500, grads =   3.748e-07, unitary_metric = 0.99999
+Error = :5.02e-03; Runtime: 193.5s; Iterations = 1520, grads =   2.878e-07, unitary_metric = 0.99999
+Error = :4.99e-03; Runtime: 196.0s; Iterations = 1540, grads =   2.453e-07, unitary_metric = 0.99999
+Error = :4.96e-03; Runtime: 198.5s; Iterations = 1560, grads =   2.201e-07, unitary_metric = 0.99999
+Error = :4.94e-03; Runtime: 201.0s; Iterations = 1580, grads =   1.957e-07, unitary_metric = 0.99999
+Error = :4.91e-03; Runtime: 203.5s; Iterations = 1600, grads =   1.813e-07, unitary_metric = 0.99999
+Error = :4.90e-03; Runtime: 206.3s; Iterations = 1620, grads =   6.863e-07, unitary_metric = 0.99999
+Error = :4.92e-03; Runtime: 208.8s; Iterations = 1640, grads =   6.542e-04, unitary_metric = 0.99999
+Error = :4.87e-03; Runtime: 211.3s; Iterations = 1660, grads =   2.039e-04, unitary_metric = 0.99999
+Error = :4.99e-03; Runtime: 213.8s; Iterations = 1680, grads =   2.266e-03, unitary_metric = 0.99999
+Error = :4.85e-03; Runtime: 216.3s; Iterations = 1700, grads =   2.667e-04, unitary_metric = 0.99999
+Error = :4.82e-03; Runtime: 219.0s; Iterations = 1720, grads =   1.944e-05, unitary_metric = 0.99999
+Error = :4.81e-03; Runtime: 221.4s; Iterations = 1740, grads =   3.709e-07, unitary_metric = 0.99999
+Error = :4.80e-03; Runtime: 223.9s; Iterations = 1760, grads =   6.994e-07, unitary_metric = 0.99999
+Error = :4.79e-03; Runtime: 226.4s; Iterations = 1780, grads =   9.117e-08, unitary_metric = 0.99999
+Error = :4.78e-03; Runtime: 228.9s; Iterations = 1800, grads =   7.935e-08, unitary_metric = 0.99999
+Error = :4.78e-03; Runtime: 231.6s; Iterations = 1820, grads =   7.279e-08, unitary_metric = 0.99999
+Error = :4.77e-03; Runtime: 234.0s; Iterations = 1840, grads =   6.806e-08, unitary_metric = 0.99999
+Error = :4.76e-03; Runtime: 236.5s; Iterations = 1860, grads =   6.331e-08, unitary_metric = 0.99999
+Error = :4.75e-03; Runtime: 239.0s; Iterations = 1880, grads =   5.947e-08, unitary_metric = 0.99999
+Error = :4.75e-03; Runtime: 241.5s; Iterations = 1900, grads =   5.987e-08, unitary_metric = 0.99999
+Error = :4.74e-03; Runtime: 244.2s; Iterations = 1920, grads =   7.452e-07, unitary_metric = 0.99999
+Error = :4.89e-03; Runtime: 246.7s; Iterations = 1940, grads =   2.132e-03, unitary_metric = 0.99999
+Error = :4.85e-03; Runtime: 249.2s; Iterations = 1960, grads =   1.326e-03, unitary_metric = 0.99999
+Error = :4.75e-03; Runtime: 251.7s; Iterations = 1980, grads =   1.869e-04, unitary_metric = 0.99999
+Error = :4.75e-03; Runtime: 254.1s; Iterations = 2000, grads =   2.989e-04, unitary_metric = 0.99999
+Error = :4.73e-03; Runtime: 256.9s; Iterations = 2020, grads =   6.882e-06, unitary_metric = 0.99999
+Error = :4.72e-03; Runtime: 259.3s; Iterations = 2040, grads =   4.566e-06, unitary_metric = 0.99999
+Error = :4.72e-03; Runtime: 261.8s; Iterations = 2060, grads =   1.097e-07, unitary_metric = 0.99999
+Error = :4.72e-03; Runtime: 264.3s; Iterations = 2080, grads =   4.618e-08, unitary_metric = 0.99999
+Error = :4.73e-03; Runtime: 266.8s; Iterations = 2100, grads =   3.605e-08, unitary_metric = 0.99999
+Error = :4.73e-03; Runtime: 269.5s; Iterations = 2120, grads =   3.445e-08, unitary_metric = 0.99999
+Error = :4.74e-03; Runtime: 272.0s; Iterations = 2140, grads =   3.373e-08, unitary_metric = 0.99999
+Error = :4.75e-03; Runtime: 274.5s; Iterations = 2160, grads =   3.448e-08, unitary_metric = 0.99999
+Error = :4.76e-03; Runtime: 277.0s; Iterations = 2180, grads =   3.635e-08, unitary_metric = 0.99999
+Error = :4.79e-03; Runtime: 279.5s; Iterations = 2200, grads =   1.120e-07, unitary_metric = 0.99999
+Error = :4.82e-03; Runtime: 282.2s; Iterations = 2220, grads =   5.445e-05, unitary_metric = 0.99999
+Error = :4.93e-03; Runtime: 284.7s; Iterations = 2240, grads =   5.851e-04, unitary_metric = 0.99999
+Error = :5.08e-03; Runtime: 287.1s; Iterations = 2260, grads =   2.580e-03, unitary_metric = 0.99999
+Error = :4.99e-03; Runtime: 289.6s; Iterations = 2280, grads =   3.774e-04, unitary_metric = 0.99999
+Error = :5.13e-03; Runtime: 292.1s; Iterations = 2300, grads =   1.515e-03, unitary_metric = 0.99999
+Error = :5.07e-03; Runtime: 294.8s; Iterations = 2320, grads =   1.128e-04, unitary_metric = 0.99999
+Error = :5.07e-03; Runtime: 297.3s; Iterations = 2340, grads =   4.667e-05, unitary_metric = 0.99999
+Error = :5.06e-03; Runtime: 299.8s; Iterations = 2360, grads =   4.344e-06, unitary_metric = 0.99999
+Error = :5.02e-03; Runtime: 302.3s; Iterations = 2380, grads =   7.577e-07, unitary_metric = 0.99999
+Error = :4.98e-03; Runtime: 304.8s; Iterations = 2400, grads =   3.918e-07, unitary_metric = 0.99999
+Error = :4.94e-03; Runtime: 307.6s; Iterations = 2420, grads =   2.407e-07, unitary_metric = 0.99999
+Error = :4.91e-03; Runtime: 310.1s; Iterations = 2440, grads =   1.979e-07, unitary_metric = 0.99999
+Error = :4.88e-03; Runtime: 312.6s; Iterations = 2460, grads =   1.700e-07, unitary_metric = 0.99998
+Error = :4.86e-03; Runtime: 315.1s; Iterations = 2480, grads =   1.590e-07, unitary_metric = 0.99999
+Error = :4.84e-03; Runtime: 317.6s; Iterations = 2500, grads =   1.693e-06, unitary_metric = 0.99999
+Error = :4.88e-03; Runtime: 320.3s; Iterations = 2520, grads =   8.083e-04, unitary_metric = 0.99999
+Error = :4.93e-03; Runtime: 322.8s; Iterations = 2540, grads =   9.818e-04, unitary_metric = 0.99999
+Error = :4.90e-03; Runtime: 325.2s; Iterations = 2560, grads =   1.507e-03, unitary_metric = 0.99999
+Error = :4.80e-03; Runtime: 327.7s; Iterations = 2580, grads =   1.797e-04, unitary_metric = 0.99999
+Error = :4.78e-03; Runtime: 330.2s; Iterations = 2600, grads =   3.425e-05, unitary_metric = 0.99999
+Error = :4.77e-03; Runtime: 332.9s; Iterations = 2620, grads =   3.988e-07, unitary_metric = 0.99998
+Error = :4.76e-03; Runtime: 335.4s; Iterations = 2640, grads =   1.680e-07, unitary_metric = 0.99999
+Error = :4.75e-03; Runtime: 337.9s; Iterations = 2660, grads =   6.910e-08, unitary_metric = 0.99999
+Error = :4.75e-03; Runtime: 340.4s; Iterations = 2680, grads =   6.043e-08, unitary_metric = 0.99999
+Error = :4.74e-03; Runtime: 342.8s; Iterations = 2700, grads =   5.658e-08, unitary_metric = 0.99999
+Error = :4.73e-03; Runtime: 345.6s; Iterations = 2720, grads =   6.043e-08, unitary_metric = 0.99999
+Error = :4.73e-03; Runtime: 348.0s; Iterations = 2740, grads =   7.847e-08, unitary_metric = 0.99999
+Error = :4.72e-03; Runtime: 350.5s; Iterations = 2760, grads =   6.014e-07, unitary_metric = 0.99999
+Error = :4.73e-03; Runtime: 353.0s; Iterations = 2780, grads =   9.427e-05, unitary_metric = 0.99999
+Error = :4.85e-03; Runtime: 355.5s; Iterations = 2800, grads =   2.009e-03, unitary_metric = 0.99999
+Error = :4.73e-03; Runtime: 358.2s; Iterations = 2820, grads =   2.589e-04, unitary_metric = 0.99999
+Error = :4.71e-03; Runtime: 360.7s; Iterations = 2840, grads =   2.438e-05, unitary_metric = 0.99999
+Error = :4.82e-03; Runtime: 363.2s; Iterations = 2860, grads =   1.816e-03, unitary_metric = 0.99999
+Error = :4.70e-03; Runtime: 365.7s; Iterations = 2880, grads =   8.368e-06, unitary_metric = 0.99999
+Error = :4.70e-03; Runtime: 368.2s; Iterations = 2900, grads =   1.523e-05, unitary_metric = 0.99999
+Error = :4.69e-03; Runtime: 370.9s; Iterations = 2920, grads =   2.151e-06, unitary_metric = 0.99999
+Error = :4.69e-03; Runtime: 373.4s; Iterations = 2940, grads =   2.386e-07, unitary_metric = 0.99999
+Error = :4.68e-03; Runtime: 375.9s; Iterations = 2960, grads =   3.389e-08, unitary_metric = 0.99999
+Error = :4.68e-03; Runtime: 378.4s; Iterations = 2980, grads =   3.347e-08, unitary_metric = 0.99999
+Error = :4.68e-03; Runtime: 380.9s; Iterations = 3000, grads =   4.006e-08, unitary_metric = 0.99999
+Error = :4.68e-03; Runtime: 383.6s; Iterations = 3020, grads =   6.207e-06, unitary_metric = 0.99999
+Error = :4.74e-03; Runtime: 386.1s; Iterations = 3040, grads =   5.367e-04, unitary_metric = 0.99999
+Error = :4.68e-03; Runtime: 388.5s; Iterations = 3060, grads =   5.762e-05, unitary_metric = 0.99999
+Error = :4.69e-03; Runtime: 391.0s; Iterations = 3080, grads =   2.574e-04, unitary_metric = 0.99999
+Error = :4.67e-03; Runtime: 393.5s; Iterations = 3100, grads =   3.236e-05, unitary_metric = 0.99999
+Error = :4.66e-03; Runtime: 396.2s; Iterations = 3120, grads =   4.595e-06, unitary_metric = 0.99999
+Error = :4.66e-03; Runtime: 398.7s; Iterations = 3140, grads =   1.308e-06, unitary_metric = 0.99999
+Error = :4.66e-03; Runtime: 401.2s; Iterations = 3160, grads =   3.002e-07, unitary_metric = 0.99999
+Error = :4.66e-03; Runtime: 403.7s; Iterations = 3180, grads =   1.882e-05, unitary_metric = 0.99999
+Error = :4.69e-03; Runtime: 406.2s; Iterations = 3200, grads =   4.225e-04, unitary_metric = 0.99999
+Error = :4.66e-03; Runtime: 409.0s; Iterations = 3220, grads =   3.209e-05, unitary_metric = 0.99998
+Error = :4.65e-03; Runtime: 411.5s; Iterations = 3240, grads =   1.214e-06, unitary_metric = 0.99999
+Error = :4.65e-03; Runtime: 414.0s; Iterations = 3260, grads =   2.386e-07, unitary_metric = 0.99999
+Error = :4.65e-03; Runtime: 416.5s; Iterations = 3280, grads =   3.485e-07, unitary_metric = 0.99999
+Error = :4.65e-03; Runtime: 418.9s; Iterations = 3300, grads =   3.372e-05, unitary_metric = 0.99999
+Error = :4.66e-03; Runtime: 421.6s; Iterations = 3320, grads =   1.140e-04, unitary_metric = 0.99999
+Error = :4.65e-03; Runtime: 424.1s; Iterations = 3340, grads =   1.230e-05, unitary_metric = 0.99999
+Error = :4.71e-03; Runtime: 426.6s; Iterations = 3360, grads =   4.941e-04, unitary_metric = 0.99999
+Error = :4.65e-03; Runtime: 429.1s; Iterations = 3380, grads =   6.734e-06, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 431.6s; Iterations = 3400, grads =   2.247e-07, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 434.3s; Iterations = 3420, grads =   3.933e-07, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 436.8s; Iterations = 3440, grads =   2.595e-06, unitary_metric = 0.99999
+Error = :4.71e-03; Runtime: 439.3s; Iterations = 3460, grads =   9.775e-04, unitary_metric = 0.99999
+Error = :4.65e-03; Runtime: 441.8s; Iterations = 3480, grads =   1.256e-04, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 444.3s; Iterations = 3500, grads =   1.295e-05, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 447.0s; Iterations = 3520, grads =   1.389e-07, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 449.5s; Iterations = 3540, grads =   7.125e-07, unitary_metric = 0.99999
+Error = :4.65e-03; Runtime: 452.0s; Iterations = 3560, grads =   2.248e-04, unitary_metric = 0.99999
+Error = :4.65e-03; Runtime: 454.5s; Iterations = 3580, grads =   2.575e-04, unitary_metric = 0.99999
+Error = :4.68e-03; Runtime: 457.0s; Iterations = 3600, grads =   3.930e-04, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 459.7s; Iterations = 3620, grads =   3.461e-05, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 462.2s; Iterations = 3640, grads =   1.760e-06, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 464.7s; Iterations = 3660, grads =   2.471e-07, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 467.2s; Iterations = 3680, grads =   6.914e-08, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 469.6s; Iterations = 3700, grads =   2.861e-08, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 472.4s; Iterations = 3720, grads =   1.315e-08, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 474.8s; Iterations = 3740, grads =   5.870e-08, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 477.3s; Iterations = 3760, grads =   3.133e-05, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 479.8s; Iterations = 3780, grads =   1.687e-04, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 482.3s; Iterations = 3800, grads =   3.901e-05, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 485.1s; Iterations = 3820, grads =   3.132e-06, unitary_metric = 0.99999
+Error = :4.66e-03; Runtime: 487.6s; Iterations = 3840, grads =   5.123e-04, unitary_metric = 0.99999
+Error = :4.66e-03; Runtime: 490.1s; Iterations = 3860, grads =   2.478e-04, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 492.6s; Iterations = 3880, grads =   3.584e-05, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 495.1s; Iterations = 3900, grads =   5.471e-06, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 497.8s; Iterations = 3920, grads =   1.022e-06, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 500.3s; Iterations = 3940, grads =   1.465e-07, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 502.8s; Iterations = 3960, grads =   1.944e-08, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 505.3s; Iterations = 3980, grads =   1.284e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 507.8s; Iterations = 4000, grads =   1.028e-08, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 510.5s; Iterations = 4020, grads =   9.667e-09, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 513.0s; Iterations = 4040, grads =   1.135e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 515.5s; Iterations = 4060, grads =   2.898e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 517.9s; Iterations = 4080, grads =   1.220e-06, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 520.4s; Iterations = 4100, grads =   2.810e-04, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 523.2s; Iterations = 4120, grads =   1.877e-04, unitary_metric = 0.99999
+Error = :4.65e-03; Runtime: 525.7s; Iterations = 4140, grads =   4.259e-04, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 528.2s; Iterations = 4160, grads =   1.152e-05, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 530.6s; Iterations = 4180, grads =   1.803e-06, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 533.1s; Iterations = 4200, grads =   7.136e-07, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 536.1s; Iterations = 4220, grads =   2.700e-07, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 538.6s; Iterations = 4240, grads =   1.143e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 541.1s; Iterations = 4260, grads =   1.235e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 543.6s; Iterations = 4280, grads =   1.300e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 546.0s; Iterations = 4300, grads =   1.719e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 548.7s; Iterations = 4320, grads =   2.018e-07, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 551.2s; Iterations = 4340, grads =   2.607e-05, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 553.7s; Iterations = 4360, grads =   1.856e-06, unitary_metric = 0.99999
+Error = :4.66e-03; Runtime: 556.2s; Iterations = 4380, grads =   3.436e-04, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 558.7s; Iterations = 4400, grads =   1.722e-04, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 561.5s; Iterations = 4420, grads =   1.377e-05, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 563.9s; Iterations = 4440, grads =   7.420e-07, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 566.4s; Iterations = 4460, grads =   1.207e-07, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 568.9s; Iterations = 4480, grads =   6.461e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 571.4s; Iterations = 4500, grads =   2.003e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 574.1s; Iterations = 4520, grads =   7.423e-09, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 576.6s; Iterations = 4540, grads =   1.651e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 579.1s; Iterations = 4560, grads =   2.177e-07, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 581.6s; Iterations = 4580, grads =   2.944e-05, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 584.1s; Iterations = 4600, grads =   7.503e-06, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 586.8s; Iterations = 4620, grads =   2.808e-07, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 589.3s; Iterations = 4640, grads =   3.233e-05, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 591.8s; Iterations = 4660, grads =   6.086e-05, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 594.3s; Iterations = 4680, grads =   1.509e-05, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 596.8s; Iterations = 4700, grads =   1.276e-05, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 599.6s; Iterations = 4720, grads =   3.320e-06, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 602.1s; Iterations = 4740, grads =   4.665e-07, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 604.6s; Iterations = 4760, grads =   5.483e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 607.1s; Iterations = 4780, grads =   7.363e-09, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 609.6s; Iterations = 4800, grads =   7.769e-09, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 612.3s; Iterations = 4820, grads =   1.060e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 614.8s; Iterations = 4840, grads =   2.732e-06, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 617.3s; Iterations = 4860, grads =   2.574e-04, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 619.8s; Iterations = 4880, grads =   7.166e-05, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 622.3s; Iterations = 4900, grads =   5.036e-05, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 625.0s; Iterations = 4920, grads =   6.388e-06, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 627.5s; Iterations = 4940, grads =   6.805e-05, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 630.0s; Iterations = 4960, grads =   5.793e-05, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 632.5s; Iterations = 4980, grads =   7.548e-07, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 635.0s; Iterations = 5000, grads =   6.229e-07, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 637.7s; Iterations = 5020, grads =   1.275e-07, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 640.2s; Iterations = 5040, grads =   3.020e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 642.7s; Iterations = 5060, grads =   6.860e-09, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 645.2s; Iterations = 5080, grads =   6.289e-09, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 647.7s; Iterations = 5100, grads =   1.663e-07, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 650.4s; Iterations = 5120, grads =   3.975e-05, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 652.9s; Iterations = 5140, grads =   5.369e-05, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 655.4s; Iterations = 5160, grads =   1.829e-04, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 657.9s; Iterations = 5180, grads =   1.895e-05, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 660.4s; Iterations = 5200, grads =   9.032e-06, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 663.1s; Iterations = 5220, grads =   1.833e-04, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 665.6s; Iterations = 5240, grads =   8.664e-06, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 668.1s; Iterations = 5260, grads =   2.282e-08, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 670.6s; Iterations = 5280, grads =   3.285e-07, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 673.0s; Iterations = 5300, grads =   6.205e-09, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 675.8s; Iterations = 5320, grads =   8.084e-09, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 678.3s; Iterations = 5340, grads =   7.701e-09, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 680.7s; Iterations = 5360, grads =   2.164e-07, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 683.2s; Iterations = 5380, grads =   3.153e-05, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 685.7s; Iterations = 5400, grads =   2.463e-04, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 688.5s; Iterations = 5420, grads =   8.211e-06, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 690.9s; Iterations = 5440, grads =   1.713e-04, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 693.4s; Iterations = 5460, grads =   1.625e-05, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 695.9s; Iterations = 5480, grads =   1.121e-06, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 698.4s; Iterations = 5500, grads =   9.453e-09, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 701.1s; Iterations = 5520, grads =   4.974e-08, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 703.6s; Iterations = 5540, grads =   3.817e-09, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 706.1s; Iterations = 5560, grads =   3.262e-09, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 708.6s; Iterations = 5580, grads =   1.353e-08, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 711.1s; Iterations = 5600, grads =   9.417e-07, unitary_metric = 0.99999
+Error = :4.64e-03; Runtime: 713.8s; Iterations = 5620, grads =   1.063e-04, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 716.3s; Iterations = 5640, grads =   2.934e-07, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 718.8s; Iterations = 5660, grads =   8.517e-06, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 721.3s; Iterations = 5680, grads =   4.553e-05, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 723.8s; Iterations = 5700, grads =   6.278e-05, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 726.6s; Iterations = 5720, grads =   8.968e-06, unitary_metric = 0.99999
+Error = :4.62e-03; Runtime: 729.0s; Iterations = 5740, grads =   1.099e-06, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 731.6s; Iterations = 5760, grads =   6.734e-08, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 734.1s; Iterations = 5780, grads =   6.326e-09, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 736.5s; Iterations = 5800, grads =   9.006e-09, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 739.2s; Iterations = 5820, grads =   8.311e-08, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 741.7s; Iterations = 5840, grads =   8.780e-06, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 744.2s; Iterations = 5860, grads =   5.139e-07, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 746.7s; Iterations = 5880, grads =   9.476e-07, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 749.2s; Iterations = 5900, grads =   5.371e-07, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 752.0s; Iterations = 5920, grads =   6.022e-06, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 754.5s; Iterations = 5940, grads =   1.468e-05, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 757.0s; Iterations = 5960, grads =   1.083e-04, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 759.5s; Iterations = 5980, grads =   7.432e-06, unitary_metric = 0.99999
+Error = :4.63e-03; Runtime: 762.0s; Iterations = 6000, grads =   4.102e-07, unitary_metric = 0.99999
+data saved at: /project/ftchong/qoc/yongshan/00010_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 240.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00011_01_3regN8p8_slice_19.h5
+Using 8 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :2.40e-01; Runtime: 9.9s; Iterations = 0, grads =   8.694e+01, unitary_metric = 1.00054
+Error = :1.00e+00; Runtime: 143.6s; Iterations = 20, grads =   7.247e-04, unitary_metric = 1.00003
+Error = :9.49e-01; Runtime: 262.1s; Iterations = 40, grads =   7.223e+00, unitary_metric = 0.99998
+Error = :1.00e+00; Runtime: 380.7s; Iterations = 60, grads =   1.496e-05, unitary_metric = 0.99998
+Error = :9.97e-01; Runtime: 499.6s; Iterations = 80, grads =   7.461e-02, unitary_metric = 1.00005
+Error = :9.90e-01; Runtime: 618.7s; Iterations = 100, grads =   4.282e-02, unitary_metric = 0.99992
+Error = :1.00e+00; Runtime: 744.7s; Iterations = 120, grads =   4.480e-06, unitary_metric = 0.99996
+Error = :6.25e-01; Runtime: 864.6s; Iterations = 140, grads =   3.807e+01, unitary_metric = 0.99997
+Error = :9.44e-01; Runtime: 984.7s; Iterations = 160, grads =   1.501e+00, unitary_metric = 0.99989
+Error = :9.78e-01; Runtime: 1103.5s; Iterations = 180, grads =   2.878e+00, unitary_metric = 0.99996
+Error = :9.64e-01; Runtime: 1222.0s; Iterations = 200, grads =   4.948e+00, unitary_metric = 0.99999
+Error = :9.81e-01; Runtime: 1348.2s; Iterations = 220, grads =   3.252e-01, unitary_metric = 1.00001
+Error = :6.52e-01; Runtime: 1468.2s; Iterations = 240, grads =   1.185e+01, unitary_metric = 0.99998
+Error = :1.00e+00; Runtime: 1588.3s; Iterations = 260, grads =   7.260e-04, unitary_metric = 0.99992
+Error = :9.87e-01; Runtime: 1708.1s; Iterations = 280, grads =   7.777e-02, unitary_metric = 0.99993
+Error = :1.00e+00; Runtime: 1828.2s; Iterations = 300, grads =   3.724e-04, unitary_metric = 0.99991
+Error = :9.95e-01; Runtime: 1954.9s; Iterations = 320, grads =   1.205e-02, unitary_metric = 0.99994
+Error = :8.62e-01; Runtime: 2074.9s; Iterations = 340, grads =   7.238e+00, unitary_metric = 0.99991
+Error = :9.95e-01; Runtime: 2195.1s; Iterations = 360, grads =   1.255e-01, unitary_metric = 0.99989
+Error = :5.54e-01; Runtime: 2316.9s; Iterations = 380, grads =   8.596e+00, unitary_metric = 0.99990
+Error = :7.22e-01; Runtime: 2437.6s; Iterations = 400, grads =   7.248e+00, unitary_metric = 0.99990
+Error = :9.10e-01; Runtime: 2565.2s; Iterations = 420, grads =   6.816e-01, unitary_metric = 0.99990
+Error = :8.68e-01; Runtime: 2686.1s; Iterations = 440, grads =   3.663e+00, unitary_metric = 0.99987
+Error = :9.98e-01; Runtime: 2807.1s; Iterations = 460, grads =   1.267e-03, unitary_metric = 0.99986
+Error = :6.39e-01; Runtime: 2927.9s; Iterations = 480, grads =   2.804e+01, unitary_metric = 0.99989
+Error = :9.97e-01; Runtime: 3048.7s; Iterations = 500, grads =   8.702e-03, unitary_metric = 0.99986
+Error = :5.21e-01; Runtime: 3176.4s; Iterations = 520, grads =   1.201e+01, unitary_metric = 0.99988
+Error = :8.02e-01; Runtime: 3297.2s; Iterations = 540, grads =   8.570e+00, unitary_metric = 0.99989
+Error = :7.36e-01; Runtime: 3418.0s; Iterations = 560, grads =   1.495e+01, unitary_metric = 0.99987
+Error = :8.07e-01; Runtime: 3538.9s; Iterations = 580, grads =   2.624e+01, unitary_metric = 0.99987
+Error = :7.45e-01; Runtime: 3659.9s; Iterations = 600, grads =   3.865e+00, unitary_metric = 0.99988
+Error = :3.52e-01; Runtime: 3787.7s; Iterations = 620, grads =   2.045e+01, unitary_metric = 0.99986
+Error = :2.07e-01; Runtime: 3908.7s; Iterations = 640, grads =   2.783e+01, unitary_metric = 0.99987
+Error = :1.27e-01; Runtime: 4029.8s; Iterations = 660, grads =   1.352e+01, unitary_metric = 0.99988
+Error = :7.75e-02; Runtime: 4150.9s; Iterations = 680, grads =   1.183e+01, unitary_metric = 0.99987
+Error = :4.82e-02; Runtime: 4271.9s; Iterations = 700, grads =   5.011e+00, unitary_metric = 0.99986
+Error = :7.82e-02; Runtime: 4399.5s; Iterations = 720, grads =   1.452e+01, unitary_metric = 0.99987
+Error = :1.83e-02; Runtime: 4520.6s; Iterations = 740, grads =   3.209e+00, unitary_metric = 0.99987
+Error = :7.20e-03; Runtime: 4641.3s; Iterations = 760, grads =   7.973e-01, unitary_metric = 0.99989
+Error = :6.75e-03; Runtime: 4762.1s; Iterations = 780, grads =   1.022e+00, unitary_metric = 0.99987
+Error = :3.54e-03; Runtime: 4883.0s; Iterations = 800, grads =   3.511e-01, unitary_metric = 0.99987
+Error = :1.11e-02; Runtime: 5010.1s; Iterations = 820, grads =   1.029e+00, unitary_metric = 0.99988
+Error = :2.29e-03; Runtime: 5131.2s; Iterations = 840, grads =   1.791e-01, unitary_metric = 0.99988
+Error = :8.15e-04; Runtime: 5179.7s; Iterations = 848, grads =   4.630e-02, unitary_metric = 0.99989
+data saved at: /project/ftchong/qoc/yongshan/00011_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 120.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00012_01_3regN8p8_slice_19.h5
+Using 8 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :3.28e-01; Runtime: 4.6s; Iterations = 0, grads =   5.397e+01, unitary_metric = 1.00026
+Error = :9.49e-01; Runtime: 63.7s; Iterations = 20, grads =   3.165e+00, unitary_metric = 0.99999
+Error = :9.87e-01; Runtime: 115.5s; Iterations = 40, grads =   1.437e+00, unitary_metric = 0.99994
+Error = :8.91e-01; Runtime: 167.2s; Iterations = 60, grads =   1.094e+01, unitary_metric = 0.99992
+Error = :1.72e-01; Runtime: 218.9s; Iterations = 80, grads =   2.125e+01, unitary_metric = 0.99992
+Error = :8.76e-02; Runtime: 270.5s; Iterations = 100, grads =   1.472e+01, unitary_metric = 0.99991
+Error = :1.31e-02; Runtime: 325.7s; Iterations = 120, grads =   2.332e+00, unitary_metric = 0.99991
+Error = :1.15e-02; Runtime: 377.6s; Iterations = 140, grads =   2.409e+00, unitary_metric = 0.99992
+Error = :2.05e-02; Runtime: 429.3s; Iterations = 160, grads =   4.405e+00, unitary_metric = 0.99992
+Error = :1.58e-02; Runtime: 481.2s; Iterations = 180, grads =   3.416e+00, unitary_metric = 0.99992
+Error = :1.60e-02; Runtime: 532.9s; Iterations = 200, grads =   2.218e+00, unitary_metric = 0.99991
+Error = :2.19e-02; Runtime: 588.0s; Iterations = 220, grads =   3.030e+00, unitary_metric = 0.99991
+Error = :1.36e-03; Runtime: 639.8s; Iterations = 240, grads =   1.525e-01, unitary_metric = 0.99990
+Error = :4.93e-03; Runtime: 691.6s; Iterations = 260, grads =   5.239e-01, unitary_metric = 0.99990
+Error = :2.28e-02; Runtime: 743.4s; Iterations = 280, grads =   3.636e+00, unitary_metric = 0.99991
+Error = :9.32e-04; Runtime: 761.4s; Iterations = 287, grads =   8.670e-02, unitary_metric = 0.99991
+data saved at: /project/ftchong/qoc/yongshan/00012_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 60.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00013_01_3regN8p8_slice_19.h5
+Using 5 Taylor terms and 4 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :3.04e-02; Runtime: 2.3s; Iterations = 0, grads =   3.713e+00, unitary_metric = 1.00031
+Error = :2.35e-01; Runtime: 28.4s; Iterations = 20, grads =   2.096e+01, unitary_metric = 1.00040
+Error = :7.02e-03; Runtime: 50.9s; Iterations = 40, grads =   8.211e-01, unitary_metric = 1.00037
+Error = :4.75e-03; Runtime: 73.2s; Iterations = 60, grads =   6.245e-01, unitary_metric = 1.00036
+Error = :7.08e-04; Runtime: 84.3s; Iterations = 70, grads =   1.310e-01, unitary_metric = 1.00036
+data saved at: /project/ftchong/qoc/yongshan/00013_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 30.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00014_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.59e-01; Runtime: 1.1s; Iterations = 0, grads =   8.480e+00, unitary_metric = 1.00003
+Error = :2.19e-01; Runtime: 13.8s; Iterations = 20, grads =   1.059e+01, unitary_metric = 1.00002
+Error = :2.53e-02; Runtime: 24.7s; Iterations = 40, grads =   1.493e+00, unitary_metric = 1.00001
+Error = :1.97e-03; Runtime: 35.6s; Iterations = 60, grads =   1.178e-01, unitary_metric = 1.00002
+Error = :8.37e-04; Runtime: 36.2s; Iterations = 61, grads =   4.448e-02, unitary_metric = 1.00002
+data saved at: /project/ftchong/qoc/yongshan/00014_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 15.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00015_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :5.75e-02; Runtime: 0.6s; Iterations = 0, grads =   1.674e+00, unitary_metric = 1.00000
+Error = :6.42e-02; Runtime: 6.9s; Iterations = 20, grads =   1.926e+00, unitary_metric = 1.00000
+Error = :4.10e-03; Runtime: 12.2s; Iterations = 40, grads =   1.309e-01, unitary_metric = 1.00000
+Error = :6.28e-04; Runtime: 14.9s; Iterations = 50, grads =   1.888e-02, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00015_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 7.5 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00016_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.42e-01; Runtime: 0.5s; Iterations = 0, grads =   1.893e+00, unitary_metric = 1.00000
+Error = :6.41e-04; Runtime: 3.0s; Iterations = 15, grads =   5.297e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00016_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 3.75 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00017_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :2.39e-02; Runtime: 0.2s; Iterations = 0, grads =   1.266e-01, unitary_metric = 1.00000
+Error = :8.01e-04; Runtime: 1.2s; Iterations = 11, grads =   1.303e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00017_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 1.85 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00018_01_3regN8p8_slice_19.h5
+Using 8 Taylor terms and 1 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :3.57e-01; Runtime: 0.1s; Iterations = 0, grads =   8.145e-01, unitary_metric = 1.00000
+Error = :2.80e-03; Runtime: 0.9s; Iterations = 20, grads =   1.028e-02, unitary_metric = 1.00000
+Error = :7.45e-04; Runtime: 1.4s; Iterations = 33, grads =   2.671e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00018_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 0.9 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00019_01_3regN8p8_slice_19.h5
+Using 6 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.95e-01; Runtime: 0.1s; Iterations = 0, grads =   2.676e-01, unitary_metric = 1.00000
+Error = :1.11e-02; Runtime: 0.5s; Iterations = 20, grads =   1.922e-02, unitary_metric = 1.00000
+Error = :8.18e-04; Runtime: 0.7s; Iterations = 30, grads =   1.188e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00019_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 0.45 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00020_01_3regN8p8_slice_19.h5
+Using 6 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.19e-01; Runtime: 0.1s; Iterations = 0, grads =   8.480e-02, unitary_metric = 1.00000
+Error = :4.06e-03; Runtime: 0.3s; Iterations = 20, grads =   3.434e-03, unitary_metric = 1.00000
+Error = :7.90e-04; Runtime: 0.5s; Iterations = 36, grads =   6.003e-04, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00020_01_3regN8p8_slice_19.h5
+
+
+trying total_time: 0.2 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00021_01_3regN8p8_slice_19.h5
+Using 7 Taylor terms and 1 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :4.31e-02; Runtime: 0.1s; Iterations = 0, grads =   1.290e-02, unitary_metric = 1.00000
+Error = :1.46e-03; Runtime: 0.3s; Iterations = 20, grads =   1.413e-04, unitary_metric = 1.00000
+Error = :9.74e-04; Runtime: 0.3s; Iterations = 35, grads =   2.457e-04, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00021_01_3regN8p8_slice_19.h5
+
+
+
+
+[7.25, 0.2]
+TIME FOR SLICE IS:
+7.25

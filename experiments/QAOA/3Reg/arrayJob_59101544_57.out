@@ -1,0 +1,45 @@
+Running Array Job:  57
+Experiment 3Reg N=6 p=5 slice=11
+
+
+trying total_time: 75.0 for unitary of size (4, 4)
+data saved at: /project/ftchong/qoc/yongshan/00020_31_3regN6p5_slice_11.h5
+Using 4 Taylor terms and 3 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :2.46e-01; Runtime: 2.4s; Iterations = 0, grads =   4.228e+00, unitary_metric = 1.00021
+Error = :4.10e-01; Runtime: 18.2s; Iterations = 20, grads =   1.756e+01, unitary_metric = 1.00014
+Error = :3.41e-02; Runtime: 30.0s; Iterations = 40, grads =   2.545e+00, unitary_metric = 1.00006
+Error = :1.20e-02; Runtime: 41.6s; Iterations = 60, grads =   1.054e+00, unitary_metric = 1.00007
+Error = :8.47e-04; Runtime: 51.5s; Iterations = 77, grads =   1.080e-01, unitary_metric = 1.00006
+data saved at: /project/ftchong/qoc/yongshan/00020_31_3regN6p5_slice_11.h5
+
+
+trying total_time: 37.5 for unitary of size (4, 4)
+data saved at: /project/ftchong/qoc/yongshan/00021_31_3regN6p5_slice_11.h5
+Using 4 Taylor terms and 3 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :2.55e-01; Runtime: 1.2s; Iterations = 0, grads =   2.899e+00, unitary_metric = 1.00009
+Error = :2.29e-01; Runtime: 8.5s; Iterations = 20, grads =   1.544e+00, unitary_metric = 1.00006
+Error = :2.07e-01; Runtime: 13.9s; Iterations = 40, grads =   1.518e+00, unitary_metric = 1.00004
+Error = :9.62e-03; Runtime: 19.2s; Iterations = 60, grads =   2.262e-01, unitary_metric = 1.00000
+Error = :2.94e-04; Runtime: 24.6s; Iterations = 80, grads =   4.745e-03, unitary_metric = 1.00002

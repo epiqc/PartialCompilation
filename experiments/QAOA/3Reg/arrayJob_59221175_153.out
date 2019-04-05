@@ -1,0 +1,512 @@
+Running Array Job:  153
+Experiment Flexible 3Reg N=8 p=6 slice=10
+
+
+trying total_time: 180.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00000_04_flex3regN8p6_slice_10.h5
+Using 8 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.11e-01; Runtime: 7.3s; Iterations = 0, grads =   3.654e+01, unitary_metric = 1.00038
+Error = :9.28e-01; Runtime: 103.3s; Iterations = 20, grads =   3.943e+00, unitary_metric = 1.00003
+Error = :9.99e-01; Runtime: 186.9s; Iterations = 40, grads =   4.180e-03, unitary_metric = 0.99994
+Error = :9.89e-01; Runtime: 270.4s; Iterations = 60, grads =   1.679e-01, unitary_metric = 0.99996
+Error = :9.12e-01; Runtime: 354.0s; Iterations = 80, grads =   5.927e+00, unitary_metric = 0.99997
+Error = :1.00e+00; Runtime: 437.7s; Iterations = 100, grads =   2.236e-04, unitary_metric = 1.00002
+Error = :9.99e-01; Runtime: 526.7s; Iterations = 120, grads =   7.056e-04, unitary_metric = 0.99997
+Error = :9.87e-01; Runtime: 610.5s; Iterations = 140, grads =   6.508e-02, unitary_metric = 0.99997
+Error = :7.90e-01; Runtime: 694.3s; Iterations = 160, grads =   8.504e+00, unitary_metric = 0.99999
+Error = :6.58e-01; Runtime: 778.1s; Iterations = 180, grads =   1.605e+01, unitary_metric = 0.99996
+Error = :9.94e-01; Runtime: 862.2s; Iterations = 200, grads =   4.179e-02, unitary_metric = 1.00001
+Error = :1.00e+00; Runtime: 951.4s; Iterations = 220, grads =   3.302e-05, unitary_metric = 1.00001
+Error = :5.87e-01; Runtime: 1035.7s; Iterations = 240, grads =   1.150e+01, unitary_metric = 0.99998
+Error = :7.13e-01; Runtime: 1119.8s; Iterations = 260, grads =   1.247e+01, unitary_metric = 0.99995
+Error = :2.32e-01; Runtime: 1203.8s; Iterations = 280, grads =   1.647e+01, unitary_metric = 0.99997
+Error = :2.07e-01; Runtime: 1287.6s; Iterations = 300, grads =   2.391e+01, unitary_metric = 0.99995
+Error = :1.29e-01; Runtime: 1376.9s; Iterations = 320, grads =   1.648e+01, unitary_metric = 0.99997
+Error = :2.53e-02; Runtime: 1461.2s; Iterations = 340, grads =   3.284e+00, unitary_metric = 0.99997
+Error = :2.93e-03; Runtime: 1545.5s; Iterations = 360, grads =   2.557e-01, unitary_metric = 0.99999
+Error = :9.04e-04; Runtime: 1595.9s; Iterations = 372, grads =   4.356e-02, unitary_metric = 0.99999
+data saved at: /project/ftchong/qoc/yongshan/00000_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 90.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00001_04_flex3regN8p6_slice_10.h5
+Using 5 Taylor terms and 4 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :8.67e-02; Runtime: 3.4s; Iterations = 0, grads =   1.523e+01, unitary_metric = 1.00032
+Error = :1.00e+00; Runtime: 44.6s; Iterations = 20, grads =   1.868e-05, unitary_metric = 1.00043
+Error = :9.28e-01; Runtime: 79.9s; Iterations = 40, grads =   5.631e+00, unitary_metric = 1.00041
+Error = :1.83e-01; Runtime: 115.1s; Iterations = 60, grads =   1.862e+01, unitary_metric = 1.00043
+Error = :2.96e-02; Runtime: 150.3s; Iterations = 80, grads =   3.333e+00, unitary_metric = 1.00043
+Error = :2.15e-03; Runtime: 185.5s; Iterations = 100, grads =   3.788e-01, unitary_metric = 1.00040
+Error = :8.60e-04; Runtime: 207.2s; Iterations = 111, grads =   1.231e-01, unitary_metric = 1.00038
+data saved at: /project/ftchong/qoc/yongshan/00001_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 45.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00002_04_flex3regN8p6_slice_10.h5
+Using 5 Taylor terms and 4 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :9.98e-02; Runtime: 1.6s; Iterations = 0, grads =   8.191e+00, unitary_metric = 1.00015
+Error = :3.63e-02; Runtime: 20.9s; Iterations = 20, grads =   2.785e+00, unitary_metric = 1.00028
+Error = :1.32e-02; Runtime: 37.5s; Iterations = 40, grads =   1.050e+00, unitary_metric = 1.00028
+Error = :1.37e-02; Runtime: 54.1s; Iterations = 60, grads =   1.256e+00, unitary_metric = 1.00028
+Error = :1.52e-04; Runtime: 55.7s; Iterations = 62, grads =   4.634e-02, unitary_metric = 1.00029
+data saved at: /project/ftchong/qoc/yongshan/00002_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 22.5 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00003_04_flex3regN8p6_slice_10.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :2.69e-01; Runtime: 0.8s; Iterations = 0, grads =   9.081e+00, unitary_metric = 1.00002
+Error = :8.28e-02; Runtime: 10.5s; Iterations = 20, grads =   3.551e+00, unitary_metric = 1.00002
+Error = :1.67e-02; Runtime: 18.7s; Iterations = 40, grads =   7.977e-01, unitary_metric = 1.00001
+Error = :1.19e-03; Runtime: 26.9s; Iterations = 60, grads =   5.469e-02, unitary_metric = 1.00001
+Error = :9.37e-04; Runtime: 27.3s; Iterations = 61, grads =   4.376e-02, unitary_metric = 1.00001
+data saved at: /project/ftchong/qoc/yongshan/00003_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 11.25 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00004_04_flex3regN8p6_slice_10.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :2.88e-01; Runtime: 0.4s; Iterations = 0, grads =   4.594e+00, unitary_metric = 1.00000
+Error = :5.07e-03; Runtime: 5.2s; Iterations = 20, grads =   1.097e-01, unitary_metric = 1.00000
+Error = :1.88e-03; Runtime: 9.1s; Iterations = 40, grads =   4.457e-02, unitary_metric = 1.00000
+Error = :9.69e-04; Runtime: 9.9s; Iterations = 44, grads =   2.256e-02, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00004_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 5.6 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00005_04_flex3regN8p6_slice_10.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.06e-01; Runtime: 0.3s; Iterations = 0, grads =   1.102e+00, unitary_metric = 1.00000
+Error = :6.08e-03; Runtime: 2.7s; Iterations = 20, grads =   7.177e-02, unitary_metric = 1.00000
+Error = :8.41e-04; Runtime: 3.8s; Iterations = 31, grads =   9.413e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00005_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 2.8 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00006_04_flex3regN8p6_slice_10.h5
+Using 8 Taylor terms and 1 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :2.35e-01; Runtime: 0.1s; Iterations = 0, grads =   9.749e-01, unitary_metric = 1.00000
+Error = :8.10e-03; Runtime: 1.4s; Iterations = 20, grads =   4.699e-02, unitary_metric = 1.00000
+Error = :8.50e-04; Runtime: 2.2s; Iterations = 36, grads =   4.715e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00006_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 1.4 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00007_04_flex3regN8p6_slice_10.h5
+Using 6 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :2.84e-01; Runtime: 0.1s; Iterations = 0, grads =   5.847e-01, unitary_metric = 1.00000
+Error = :1.29e-02; Runtime: 0.7s; Iterations = 20, grads =   3.831e-02, unitary_metric = 1.00000
+Error = :8.84e-04; Runtime: 1.2s; Iterations = 38, grads =   2.644e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00007_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 0.7 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00008_04_flex3regN8p6_slice_10.h5
+Using 6 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :3.17e-01; Runtime: 0.1s; Iterations = 0, grads =   2.783e-01, unitary_metric = 1.00000
+Error = :1.48e-02; Runtime: 0.5s; Iterations = 20, grads =   2.164e-02, unitary_metric = 1.00000
+Error = :1.92e-03; Runtime: 0.7s; Iterations = 40, grads =   2.811e-03, unitary_metric = 1.00000
+Error = :9.19e-04; Runtime: 0.8s; Iterations = 48, grads =   1.348e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00008_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 0.35 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00009_04_flex3regN8p6_slice_10.h5
+Using 7 Taylor terms and 1 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :2.27e-01; Runtime: 0.1s; Iterations = 0, grads =   1.053e-01, unitary_metric = 1.00000
+Error = :2.31e-03; Runtime: 0.3s; Iterations = 20, grads =   1.626e-03, unitary_metric = 1.00000
+Error = :1.42e-03; Runtime: 0.5s; Iterations = 40, grads =   9.106e-04, unitary_metric = 1.00000
+Error = :9.22e-04; Runtime: 0.5s; Iterations = 42, grads =   5.962e-04, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00009_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 0.15 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00010_04_flex3regN8p6_slice_10.h5
+Using 7 Taylor terms and 1 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :8.12e-02; Runtime: 0.1s; Iterations = 0, grads =   1.691e-02, unitary_metric = 1.00000
+Error = :1.53e-02; Runtime: 0.2s; Iterations = 20, grads =   3.441e-03, unitary_metric = 1.00000
+Error = :9.01e-04; Runtime: 0.3s; Iterations = 39, grads =   1.510e-04, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00010_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 180.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00011_04_flex3regN8p6_slice_10.h5
+Using 8 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :7.60e-01; Runtime: 7.5s; Iterations = 0, grads =   4.313e+01, unitary_metric = 1.00040
+Error = :9.99e-01; Runtime: 103.7s; Iterations = 20, grads =   2.223e-02, unitary_metric = 1.00009
+Error = :8.60e-01; Runtime: 188.6s; Iterations = 40, grads =   8.939e+00, unitary_metric = 1.00011
+Error = :9.84e-01; Runtime: 273.9s; Iterations = 60, grads =   3.421e-01, unitary_metric = 0.99998
+Error = :6.89e-01; Runtime: 359.2s; Iterations = 80, grads =   2.197e+01, unitary_metric = 0.99994
+Error = :9.72e-01; Runtime: 444.6s; Iterations = 100, grads =   1.265e+00, unitary_metric = 0.99994
+Error = :8.52e-01; Runtime: 535.1s; Iterations = 120, grads =   8.249e+00, unitary_metric = 0.99991
+Error = :1.00e+00; Runtime: 620.5s; Iterations = 140, grads =   1.723e-04, unitary_metric = 0.99991
+Error = :9.93e-01; Runtime: 705.9s; Iterations = 160, grads =   2.293e-01, unitary_metric = 0.99992
+Error = :9.67e-01; Runtime: 791.3s; Iterations = 180, grads =   1.268e+00, unitary_metric = 0.99989
+Error = :9.99e-01; Runtime: 876.7s; Iterations = 200, grads =   3.110e-03, unitary_metric = 0.99989
+Error = :9.93e-01; Runtime: 967.3s; Iterations = 220, grads =   3.644e-02, unitary_metric = 0.99987
+Error = :9.87e-01; Runtime: 1052.8s; Iterations = 240, grads =   1.426e-01, unitary_metric = 0.99990
+Error = :9.35e-01; Runtime: 1137.9s; Iterations = 260, grads =   1.987e+00, unitary_metric = 0.99986
+Error = :7.53e-01; Runtime: 1222.9s; Iterations = 280, grads =   1.229e+01, unitary_metric = 0.99989
+Error = :5.93e-01; Runtime: 1308.2s; Iterations = 300, grads =   1.636e+01, unitary_metric = 0.99986
+Error = :2.64e-01; Runtime: 1398.6s; Iterations = 320, grads =   1.574e+01, unitary_metric = 0.99990
+Error = :2.79e-01; Runtime: 1483.8s; Iterations = 340, grads =   1.890e+01, unitary_metric = 0.99989
+Error = :6.95e-02; Runtime: 1569.0s; Iterations = 360, grads =   6.387e+00, unitary_metric = 0.99988
+Error = :2.56e-02; Runtime: 1654.2s; Iterations = 380, grads =   2.394e+00, unitary_metric = 0.99987
+Error = :7.27e-02; Runtime: 1739.2s; Iterations = 400, grads =   6.995e+00, unitary_metric = 0.99988
+Error = :1.03e-02; Runtime: 1830.0s; Iterations = 420, grads =   1.033e+00, unitary_metric = 0.99988
+Error = :1.23e-02; Runtime: 1914.9s; Iterations = 440, grads =   1.207e+00, unitary_metric = 0.99988
+Error = :6.06e-03; Runtime: 2000.1s; Iterations = 460, grads =   5.966e-01, unitary_metric = 0.99988
+Error = :2.83e-03; Runtime: 2085.1s; Iterations = 480, grads =   2.629e-01, unitary_metric = 0.99989
+Error = :9.51e-04; Runtime: 2118.9s; Iterations = 488, grads =   7.034e-02, unitary_metric = 0.99988
+data saved at: /project/ftchong/qoc/yongshan/00011_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 90.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00012_04_flex3regN8p6_slice_10.h5
+Using 5 Taylor terms and 4 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.08e-01; Runtime: 3.8s; Iterations = 0, grads =   1.845e+01, unitary_metric = 1.00076
+Error = :8.31e-01; Runtime: 46.3s; Iterations = 20, grads =   1.559e+01, unitary_metric = 1.00058
+Error = :9.80e-01; Runtime: 82.2s; Iterations = 40, grads =   6.744e-01, unitary_metric = 1.00033
+Error = :1.00e+00; Runtime: 118.2s; Iterations = 60, grads =   1.611e-03, unitary_metric = 1.00036
+Error = :9.70e-01; Runtime: 154.1s; Iterations = 80, grads =   4.749e+00, unitary_metric = 1.00035
+Error = :9.75e-01; Runtime: 190.1s; Iterations = 100, grads =   1.717e+00, unitary_metric = 1.00032
+Error = :4.70e-01; Runtime: 228.7s; Iterations = 120, grads =   3.495e+01, unitary_metric = 1.00038
+Error = :6.84e-01; Runtime: 265.1s; Iterations = 140, grads =   2.145e+01, unitary_metric = 1.00039
+Error = :9.37e-01; Runtime: 301.1s; Iterations = 160, grads =   5.449e+00, unitary_metric = 1.00038
+Error = :6.27e-02; Runtime: 337.2s; Iterations = 180, grads =   4.119e+00, unitary_metric = 1.00044
+Error = :1.47e-02; Runtime: 373.2s; Iterations = 200, grads =   1.677e+00, unitary_metric = 1.00043
+Error = :9.51e-04; Runtime: 404.8s; Iterations = 216, grads =   9.819e-02, unitary_metric = 1.00043
+data saved at: /project/ftchong/qoc/yongshan/00012_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 45.0 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00013_04_flex3regN8p6_slice_10.h5
+Using 5 Taylor terms and 4 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.89e-01; Runtime: 2.0s; Iterations = 0, grads =   1.441e+01, unitary_metric = 1.00035
+Error = :1.32e-01; Runtime: 22.3s; Iterations = 20, grads =   1.033e+01, unitary_metric = 1.00032
+Error = :2.23e-02; Runtime: 39.0s; Iterations = 40, grads =   2.045e+00, unitary_metric = 1.00035
+Error = :6.20e-04; Runtime: 55.8s; Iterations = 60, grads =   7.714e-02, unitary_metric = 1.00034
+data saved at: /project/ftchong/qoc/yongshan/00013_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 22.5 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00014_04_flex3regN8p6_slice_10.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.48e-01; Runtime: 1.0s; Iterations = 0, grads =   5.898e+00, unitary_metric = 1.00000
+Error = :3.26e-02; Runtime: 11.1s; Iterations = 20, grads =   9.624e-01, unitary_metric = 1.00001
+Error = :1.21e-02; Runtime: 19.4s; Iterations = 40, grads =   4.884e-01, unitary_metric = 1.00001
+Error = :1.07e-03; Runtime: 27.7s; Iterations = 60, grads =   4.731e-02, unitary_metric = 1.00001
+Error = :6.83e-04; Runtime: 29.4s; Iterations = 64, grads =   2.492e-02, unitary_metric = 1.00001
+data saved at: /project/ftchong/qoc/yongshan/00014_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 11.25 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00015_04_flex3regN8p6_slice_10.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :6.54e-02; Runtime: 0.5s; Iterations = 0, grads =   1.272e+00, unitary_metric = 1.00000
+Error = :1.31e-02; Runtime: 5.5s; Iterations = 20, grads =   3.075e-01, unitary_metric = 1.00000
+Error = :3.54e-04; Runtime: 9.1s; Iterations = 38, grads =   6.941e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00015_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 5.6 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00016_04_flex3regN8p6_slice_10.h5
+Using 7 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.32e-01; Runtime: 0.3s; Iterations = 0, grads =   1.305e+00, unitary_metric = 1.00000
+Error = :4.26e-04; Runtime: 1.9s; Iterations = 11, grads =   1.802e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00016_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 2.8 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00017_04_flex3regN8p6_slice_10.h5
+Using 8 Taylor terms and 1 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :3.11e-01; Runtime: 0.2s; Iterations = 0, grads =   1.151e+00, unitary_metric = 1.00000
+Error = :1.14e-02; Runtime: 1.5s; Iterations = 20, grads =   6.844e-02, unitary_metric = 1.00000
+Error = :7.32e-04; Runtime: 2.1s; Iterations = 32, grads =   4.194e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00017_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 1.4 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00018_04_flex3regN8p6_slice_10.h5
+Using 6 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :2.92e-02; Runtime: 0.1s; Iterations = 0, grads =   7.283e-02, unitary_metric = 1.00000
+Error = :1.42e-03; Runtime: 0.8s; Iterations = 20, grads =   3.662e-03, unitary_metric = 1.00000
+Error = :7.50e-04; Runtime: 0.9s; Iterations = 22, grads =   1.774e-03, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00018_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 0.7 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00019_04_flex3regN8p6_slice_10.h5
+Using 6 Taylor terms and 2 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :5.17e-01; Runtime: 0.1s; Iterations = 0, grads =   3.456e-01, unitary_metric = 1.00000
+Error = :2.98e-02; Runtime: 0.5s; Iterations = 20, grads =   4.362e-02, unitary_metric = 1.00000
+Error = :4.66e-04; Runtime: 0.6s; Iterations = 27, grads =   6.320e-04, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00019_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 0.35 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00020_04_flex3regN8p6_slice_10.h5
+Using 7 Taylor terms and 1 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.18e-01; Runtime: 0.1s; Iterations = 0, grads =   6.593e-02, unitary_metric = 1.00000
+Error = :4.03e-03; Runtime: 0.4s; Iterations = 20, grads =   2.764e-03, unitary_metric = 1.00000
+Error = :9.14e-04; Runtime: 0.5s; Iterations = 40, grads =   5.692e-04, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00020_04_flex3regN8p6_slice_10.h5
+
+
+trying total_time: 0.15 for unitary of size (16, 16)
+data saved at: /project/ftchong/qoc/yongshan/00021_04_flex3regN8p6_slice_10.h5
+Using 7 Taylor terms and 1 Scaling & Squaring terms
+Building graph:
+Propagators initialized.
+Operators weight initialized.
+Intermediate propagation variables initialized.
+Intermediate propagators initialized.
+Vectors initialized.
+Training loss initialized.
+Optimizer initialized.
+Utilities initialized.
+Graph built!
+Initialized
+Error = :1.78e-01; Runtime: 0.1s; Iterations = 0, grads =   3.438e-02, unitary_metric = 1.00000
+Error = :4.91e-02; Runtime: 0.3s; Iterations = 20, grads =   1.309e-02, unitary_metric = 1.00000
+Error = :6.22e-03; Runtime: 0.4s; Iterations = 40, grads =   1.834e-03, unitary_metric = 1.00000
+Error = :9.88e-04; Runtime: 0.4s; Iterations = 51, grads =   2.902e-04, unitary_metric = 1.00000
+data saved at: /project/ftchong/qoc/yongshan/00021_04_flex3regN8p6_slice_10.h5
+
+
+
+
+[0.15, 0.15]
+TIME FOR SLICE IS:
+0.15
