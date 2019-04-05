@@ -3,7 +3,7 @@
 #SBATCH --job-name=ErdosRenyin6
 #SBATCH --output=ErdosRenyi/arrayJob_%A_%a.out
 #SBATCH --error=ErdosRenyi/arrayJob_%A_%a.err
-#SBATCH --array=0-121
+#SBATCH --array=89-121
 #SBATCH --time=16:00:00
 #SBATCH --partition=broadwl
 #SBATCH --ntasks=1
