@@ -16,8 +16,10 @@ from qiskit.transpiler.passes import (BasicSwap, CXCancellation, HCancellation)
 # NOTICE: GATE_TO_PULSE_TIME is kept here for dependency reasons, but all
 # future references to this dict and any other experimental constants
 # should be kept in fqc/data/data.py.
-# See Gate_Times.ipnyb for determination of these pulse times
+# See Gate_Times.ipynb or Realistic_Pulses.ipynb for determination of these pulse times
 GATE_TO_PULSE_TIME = {'h': 1.4, 'cx': 3.8, 'rz': 0.4, 'rx': 2.5, 'x': 2.5, 'swap': 7.4, 'id': 0.0}
+GATE_TO_PULSE_TIME_REALISTIC = {'h': 20, 'cx': 45, 'rz': 1, 'rx': 31, 'x': 31, 'swap': 59, 'id': 0.0}
+
 
 unitary_backend = BasicAer.get_backend('unitary_simulator')
 state_backend = Aer.get_backend('statevector_simulator')
@@ -86,21 +88,24 @@ def optimize_circuit(circuit, coupling_list=None):
 
     return optimized_circuit
 
-def get_max_pulse_time(circuit):
+def get_max_pulse_time(circuit, more_realistic=False):
     """Returns the maximum possible pulse duration (in ns) for this circuit.
 
-    This value is based on the pulse times in GATE_TO_PULSE_TIME. In principle,
-    applying optimal control to the full circuit unitary should allow shorter
-    pulses than this maximum duration.
+    This value is based on the pulse times in GATE_TO_PULSE_TIME (or in
+    GATE_TO_PULSE_TIME_REALISTIC if more_realistic is True).
+
+    In principle, applying optimal control to the full circuit unitary should
+    allow shorter pulses than this maximum duration.
 
     """
     total_time = 0.0
+    gate_to_time = GATE_TO_PULSE_TIME_REALISTIC if more_realistic else GATE_TO_PULSE_TIME
 
     dag = circuit_to_dag(circuit)
     for layer in dag.layers():
         slice_circuit = dag_to_circuit(layer['graph'])
         gates = slice_circuit.data
-        layer_time = max([GATE_TO_PULSE_TIME[gate.name] for gate in gates])
+        layer_time = max([gate_to_time[gate.name] for gate in gates])
         total_time += layer_time
 
     return total_time
